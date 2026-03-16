@@ -296,6 +296,13 @@ const TREND_ROUTES = [
   {route:'Marrakech → Essaouira', meta:'Comunidade sugere tour fechado em grupo', risk:'🟠 Evite guias na rua'},
 ];
 
+const PRICE_ALERTS = [
+  {id:'pa1', route:'São Paulo → Lisboa', price:'R$ 3.450', drop:'-18%', crowd:'Lotação baixa', crowdLevel:'low', window:'mai/26', source:'Voos', note:'Queda monitorada 48h'},
+  {id:'pa2', route:'Rio → Buenos Aires', price:'R$ 1.180', drop:'-12%', crowd:'Lotação alta', crowdLevel:'high', window:'Páscoa', source:'Voos', note:'Feriado empurrando demanda'},
+  {id:'pa3', route:'Porto → Algarve · hotel', price:'€ 88/noite', drop:'-22%', crowd:'Lotação moderada', crowdLevel:'mid', window:'jun/26', source:'Hotéis', note:'Fora de pico de verão'},
+  {id:'pa4', route:'Medellín · cowork', price:'US$ 21/dia', drop:'-9%', crowd:'Lotação baixa', crowdLevel:'low', window:'abr/26', source:'Cowork', note:'Inclui cadeira dedicada'},
+];
+
 const TRAVEL_DASH = {
   stats: [
     {num:'34', lab:'Países'},
@@ -401,6 +408,11 @@ let crisisCheckinLeft = 180;
 let crisisTimer = null;
 let locOn = true;
 
+function syncVueState(partial) {
+  if (!window.azimuteVue?.store) return;
+  Object.assign(window.azimuteVue.store, partial);
+}
+
 function themeIcon(mode) {
   if (mode === 'light') {
     return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
@@ -410,6 +422,7 @@ function themeIcon(mode) {
 
 function applyTheme(mode) {
   document.body.setAttribute('data-theme', mode);
+  syncVueState({ currentTheme: mode });
   const btn = document.getElementById('themeBtn');
   if (btn) {
     btn.innerHTML = themeIcon(mode);
@@ -443,6 +456,7 @@ window.addEventListener('load', () => {
       renderPulse();
       renderStories();
       renderTrendingRoutes();
+      renderPriceAlerts();
       renderTravelDashboard();
       renderFeed();
       renderFriends();
@@ -494,6 +508,30 @@ function renderTrendingRoutes() {
       <div class="trip-risk">${r.risk}</div>
     </div>
   `).join('');
+}
+
+function renderPriceAlerts() {
+  const wrap = document.getElementById('priceAlertList');
+  if (!wrap) return;
+  wrap.innerHTML = PRICE_ALERTS.map(a => `
+    <div class="price-row">
+      <div class="price-info">
+        <div class="price-route">${a.route}</div>
+        <div class="price-meta">${a.source} · janela ${a.window} · ${a.note}</div>
+      </div>
+      <div class="price-right">
+        <div class="price-val">${a.price}</div>
+        <div class="price-drop">${a.drop}</div>
+        <span class="crowd-pill lvl-${a.crowdLevel}">${a.crowd}</span>
+        <button class="mini-btn" onclick="savePriceAlert('${a.id}')">Salvar</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function savePriceAlert(id) {
+  const alert = PRICE_ALERTS.find(a => a.id === id);
+  showToast(alert ? `🔔 Alerta salvo: ${alert.route}` : '🔔 Alerta salvo','ts');
 }
 
 function renderFeedSideNews() {
@@ -574,12 +612,48 @@ function renderTravelDashboard() {
 }
 
 function renderStories() {
-  document.getElementById('storiesRow').innerHTML = STORIES.map(s =>
+  const addStoryBtn = `
+    <button type="button" class="story story-add" onclick="openStoryComposer()" aria-label="Publicar um novo story">
+      <div class="story-ring"><div class="story-add-circle">+</div></div>
+    </button>`;
+
+  const stories = STORIES.map(s =>
     `<div class="story" onclick="showToast('📍 Story de ${s.name} · ${s.status}','ts')">
       <div class="story-ring ${s.ring}"><img class="story-img" src="${s.img}" alt=""></div>
       <div class="story-name">${s.name} · ${s.status}</div>
     </div>`
   ).join('');
+
+  document.getElementById('storiesRow').innerHTML = addStoryBtn + stories;
+}
+
+function openStoryComposer() {
+  const form = document.getElementById('storyComposer');
+  const nameInput = document.getElementById('storyNameInput');
+  if (!form) return;
+  form.scrollIntoView({behavior:'smooth', block:'center'});
+  setTimeout(() => nameInput?.focus({preventScroll:true}), 200);
+}
+
+function createStory() {
+  const nameInput = document.getElementById('storyNameInput');
+  const imgInput = document.getElementById('storyImgInput');
+  const statusInput = document.getElementById('storyStatusInput');
+  if (!nameInput) return;
+  const name = nameInput.value.trim();
+  if (!name) {
+    showToast('Digite o @ do usuário do story','');
+    return;
+  }
+  const img = (imgInput?.value.trim()) || `https://i.pravatar.cc/80?u=${encodeURIComponent(name)}`;
+  const status = (statusInput?.value.trim()) || 'agora';
+  STORIES.unshift({img, name, ring:'cr', status});
+  if (STORIES.length > 20) STORIES.length = 20;
+  renderStories();
+  nameInput.value = '';
+  if (imgInput) imgInput.value = '';
+  if (statusInput) statusInput.value = '';
+  showToast('📸 Story publicado!','ts');
 }
 
 // ════════════════════════════════
@@ -1203,6 +1277,7 @@ function showPage(pg) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('act'));
   document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('act'));
   document.getElementById('page-'+pg).classList.add('act');
+  syncVueState({ currentPage: pg });
   const bn = document.getElementById('bn-'+pg);
   if (bn) bn.classList.add('act');
   if (pg==='map') setTimeout(initMap, 120);

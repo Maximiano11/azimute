@@ -50,6 +50,7 @@
         <section class="feed-main">
           <div class="ph"><div class="ph-title">Feed Global</div><div class="ph-sub">Atualizações de viajantes em tempo real</div></div>
           <div class="stories-row" id="storiesRow"></div>
+          <input id="storyFileInput" type="file" accept="image/*" capture="environment" style="display:none" onchange="handleStoryMedia(event)">
           <div class="feed-composer">
             <img class="composer-avatar" src="https://i.pravatar.cc/80?img=47" alt="">
             <button class="composer-input" onclick="openPost()">O que está acontecendo na sua viagem?</button>
@@ -58,12 +59,21 @@
           <div class="feed" id="feedCards"></div>
         </section>
         <aside class="feed-side">
-          <div class="feed-side-news">
-            <div class="feed-side-head">
-              Notícias no radar
-              <span class="feed-side-live">Ao vivo</span>
-            </div>
-            <div class="feed-side-list" id="feedSideNews"></div>
+          <div class="side-stack">
+            <section class="card feature-card">
+              <div class="feature-head">
+                <div>
+                  <div class="feature-title">Alertas de preços & lotação</div>
+                  <div class="feature-sub">Quedas de tarifa e nível de crowd em tempo real</div>
+                </div>
+                <span class="live-pill">Ao vivo</span>
+              </div>
+              <div id="priceAlertList" class="price-list"></div>
+              <div class="feature-actions">
+                <button class="btn btn-p btn-sm" onclick="showToast('🔔 Alertas criados para suas rotas','ts')">Criar alerta</button>
+                <button class="btn btn-g btn-sm" onclick="showToast('📧 Enviaremos por e-mail','')">Exportar</button>
+              </div>
+            </section>
           </div>
         </aside>
       </div>
@@ -351,7 +361,10 @@
 </button>
 
 <div class="toast" id="toast"></div>
+<div id="vue-bootstrap" hidden aria-hidden="true"></div>
 
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="vue-app.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
