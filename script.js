@@ -1,125 +1,245 @@
-﻿// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  DATA
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 const PLACES = [
   {
-    id:'p1', type:'restaurant', name:'Pad Thai Nana', city:'Bangkok', country:'TailÃ¢ndia', flag:'ðŸ‡¹ðŸ‡­',
-    emoji:'ðŸœ', lat:13.740, lng:100.555, risk:'caution',
+    id:'p1', type:'restaurant', name:'Pad Thai Nana', city:'Bangkok', country:'Tailândia', flag:'🇹🇭',
+    state:null, emoji:'🍜', photo:null, lat:13.740, lng:100.555, risk:'caution',
     address:'Soi 4, Sukhumvit Road, Bangkok', score:3.8, reviews:47,
-    tags:['Comida Tailandesa','Street Food','TurÃ­stico'],
+    tags:['Comida Tailandesa','Street Food','Turístico'],
     scores:{precos:2.5, qualidade:4.2, atendimento:3.1, seguranca:3.8},
-    tips:['Negocie o preÃ§o ANTES de sentar. CardÃ¡pio para turistas tem preÃ§o 3x maior.','Melhor pedir o que estÃ¡ no carrinho da rua, mais barato e autÃªntico.'],
-    photos:['ðŸœ','ðŸŒ¶ï¸','ðŸ§†'],
+    tips:['Negocie o preço ANTES de sentar. Cardápio para turistas tem preço 3x maior.','Melhor pedir o que está no carrinho da rua, mais barato e autêntico.'],
+    photos:['🍜','🌶️','🧆'],
     reviews_list:[
       {user:'Carlos M.', avatar:'https://i.pravatar.cc/40?img=12', stars:2, date:'2 dias',
-       text:'Cobrou 800 baht por um pad thai que custa 80 em qualquer lugar. Quando perguntei o preÃ§o antes ficou irritado. Cuidado!', risk:'caution', verified:true},
+       text:'Cobrou 800 baht por um pad thai que custa 80 em qualquer lugar. Quando perguntei o preço antes ficou irritado. Cuidado!', risk:'caution', verified:true},
       {user:'Ana Lima', avatar:'https://i.pravatar.cc/40?img=25', stars:4, date:'1 sem',
-       text:'Se vocÃª negocia antes Ã© ok. A comida Ã© gostosa, sÃ³ nÃ£o caia no cardÃ¡pio turÃ­stico. Pedi pelo Google Translate o preÃ§o local.', risk:'safe', verified:true},
+       text:'Se você negocia antes é ok. A comida é gostosa, só não caia no cardápio turístico. Pedi pelo Google Translate o preço local.', risk:'safe', verified:true},
       {user:'Raquel F.', avatar:'https://i.pravatar.cc/40?img=35', stars:3, date:'2 sem',
        text:'Lugar ok, barulhento e lotado de turistas. Comida mediana. Prefira procurar mais dentro dos becos.', risk:'caution', verified:false},
     ]
   },
   {
-    id:'p2', type:'hostel', name:'The Lub.d Bangkok', city:'Bangkok', country:'TailÃ¢ndia', flag:'ðŸ‡¹ðŸ‡­',
-    emoji:'ðŸ›', lat:13.744, lng:100.534, risk:'safe',
+    id:'p2', type:'hostel', name:'The Lub.d Bangkok', city:'Bangkok', country:'Tailândia', flag:'🇹🇭',
+    state:null, emoji:'🛏', photo:null, lat:13.744, lng:100.534, risk:'safe',
     address:'925/9 Rama 1 Rd, Pathumwan, Bangkok', score:4.6, reviews:213,
     tags:['Hostel','Centro','Seguro','Recomendado'],
     scores:{localizacao:4.8, seguranca:4.7, limpeza:4.5, preco_justo:4.4},
-    tips:['Deixe seus documentos no cofre. FuncionÃ¡rios muito atenciosos.','Ã“timo cafÃ© da manhÃ£ incluso. Ãrea social excelente para conhecer viajantes.'],
-    photos:['ðŸ›','ðŸŠ','â˜•'],
+    tips:['Deixe seus documentos no cofre. Funcionários muito atenciosos.','Ótimo café da manhã incluso. Área social excelente para conhecer viajantes.'],
+    photos:['🛏','🏊','☕'],
     reviews_list:[
       {user:'Pedro A.', avatar:'https://i.pravatar.cc/40?img=33', stars:5, date:'3 dias',
-       text:'Melhor hostel que fiquei em Bangkok. LocalizaÃ§Ã£o perfeita, perto do BTS Skytrain. Seguros, boa recepÃ§Ã£o 24h. Super recomendo!', risk:'safe', verified:true},
+       text:'Melhor hostel que fiquei em Bangkok. Localização perfeita, perto do BTS Skytrain. Seguros, boa recepção 24h. Super recomendo!', risk:'safe', verified:true},
       {user:'Julia S.', avatar:'https://i.pravatar.cc/40?img=23', stars:4, date:'1 sem',
-       text:'SÃ³ paguei 15 USD por noite em dorm de 8. Muito limpo, cofres em cada cama. Vi outros hostels na Ã¡rea com problemas de furto. Fique aqui!', risk:'safe', verified:true},
+       text:'Só paguei 15 USD por noite em dorm de 8. Muito limpo, cofres em cada cama. Vi outros hostels na área com problemas de furto. Fique aqui!', risk:'safe', verified:true},
     ]
   },
   {
-    id:'p3', type:'tourspot', name:'Templo Wat Pho', city:'Bangkok', country:'TailÃ¢ndia', flag:'ðŸ‡¹ðŸ‡­',
-    emoji:'ðŸ›•', lat:13.7474, lng:100.4929, risk:'safe',
+    id:'p3', type:'tourspot', name:'Templo Wat Pho', city:'Bangkok', country:'Tailândia', flag:'🇹🇭',
+    state:null, emoji:'🛕', photo:null, lat:13.7474, lng:100.4929, risk:'safe',
     address:'2 Sanam Chai Rd, Phra Nakhon, Bangkok', score:4.9, reviews:891,
-    tags:['PatrimÃ´nio','Cultural','Budismo','Fotografia'],
+    tags:['Patrimônio','Cultural','Budismo','Fotografia'],
     scores:{beleza:5.0, seguranca:4.8, acessibilidade:4.2, custo_beneficio:4.5},
-    tips:['Leve roupas que cubram joelhos e ombros - exigido na entrada.','Chegue antes das 8h para menos turistas e fotos incrÃ­veis.','Guias freelance na porta NÃƒO sÃ£o oficiais. Evite.'],
-    photos:['ðŸ›•','â­','ðŸ™'],
+    tips:['Leve roupas que cubram joelhos e ombros - exigido na entrada.','Chegue antes das 8h para menos turistas e fotos incríveis.','Guias freelance na porta NÃO são oficiais. Evite.'],
+    photos:['🛕','⭐','🙏'],
     reviews_list:[
       {user:'Marcos V.', avatar:'https://i.pravatar.cc/40?img=57', stars:5, date:'1 dia',
-       text:'Absolutamente incrÃ­vel. O Buda reclinado Ã© de tirar o fÃ´lego. Lugar muito seguro, muitos visitantes. SÃ³ atenÃ§Ã£o aos vendedores na saÃ­da.', risk:'safe', verified:true},
+       text:'Absolutamente incrível. O Buda reclinado é de tirar o fôlego. Lugar muito seguro, muitos visitantes. Só atenção aos vendedores na saída.', risk:'safe', verified:true},
       {user:'Sofia R.', avatar:'https://i.pravatar.cc/40?img=44', stars:5, date:'4 dias',
-       text:'Um dos lugares mais bonitos que jÃ¡ vi na vida. Fui sozinha sem problema nenhum. Policiais turÃ­sticos presentes o tempo todo.', risk:'safe', verified:true},
+       text:'Um dos lugares mais bonitos que já vi na vida. Fui sozinha sem problema nenhum. Policiais turísticos presentes o tempo todo.', risk:'safe', verified:true},
       {user:'Diego L.', avatar:'https://i.pravatar.cc/40?img=60', stars:4, date:'2 sem',
-       text:'Lindo demais. SÃ³ tome cuidado: homens na porta dizem que o templo estÃ¡ fechado e oferecem tour "especial". Ã‰ golpe! O templo funciona normalmente.', risk:'caution', verified:true},
+       text:'Lindo demais. Só tome cuidado: homens na porta dizem que o templo está fechado e oferecem tour "especial". É golpe! O templo funciona normalmente.', risk:'caution', verified:true},
     ]
   },
   {
-    id:'p4', type:'restaurant', name:'La Boca Parilla', city:'Buenos Aires', country:'Argentina', flag:'ðŸ‡¦ðŸ‡·',
-    emoji:'ðŸ¥©', lat:-34.6345, lng:-58.3630, risk:'suspicious',
+    id:'p4', type:'restaurant', name:'La Boca Parilla', city:'Buenos Aires', country:'Argentina', flag:'🇦🇷',
+    state:null, emoji:'🥩', photo:null, lat:-34.6345, lng:-58.3630, risk:'suspicious',
     address:'Av. Pedro de Mendoza 1800, La Boca, BA', score:2.1, reviews:34,
-    tags:['Churrasco','TurÃ­stico','PreÃ§o Abusivo','La Boca'],
+    tags:['Churrasco','Turístico','Preço Abusivo','La Boca'],
     scores:{precos:1.2, qualidade:3.0, atendimento:2.1, seguranca:2.0},
-    tips:['CardÃ¡pio sem preÃ§os visÃ­veis â€” golpe clÃ¡ssico para turistas.','RegiÃ£o perigosa apÃ³s 18h. Visite La Boca somente de dia e em grupo.'],
-    photos:['ðŸ¥©','ðŸ·','âš ï¸'],
+    tips:['Cardápio sem preços visíveis — golpe clássico para turistas.','Região perigosa após 18h. Visite La Boca somente de dia e em grupo.'],
+    photos:['🥩','🍷','⚠️'],
     reviews_list:[
       {user:'Fernanda C.', avatar:'https://i.pravatar.cc/40?img=44', stars:1, date:'3 dias',
-       text:'ARMADILHA. Sentamos sem ver preÃ§o, conta veio 5x mais cara que o normal. Quando reclamamos ameaÃ§aram chamar "seguranÃ§a". Absurdo total.', risk:'danger', verified:true},
+       text:'ARMADILHA. Sentamos sem ver preço, conta veio 5x mais cara que o normal. Quando reclamamos ameaçaram chamar "segurança". Absurdo total.', risk:'danger', verified:true},
       {user:'Roberto M.', avatar:'https://i.pravatar.cc/40?img=55', stars:2, date:'1 sem',
-       text:'Comida atÃ© razoÃ¡vel mas cobranÃ§a obscura. CartÃ£o nÃ£o funcionava "por coincidÃªncia". Fuja daqui.', risk:'suspicious', verified:false},
+       text:'Comida até razoável mas cobrança obscura. Cartão não funcionava "por coincidência". Fuja daqui.', risk:'suspicious', verified:false},
     ]
   },
   {
-    id:'p5', type:'hostel', name:'Selina Gold Dust', city:'MedellÃ­n', country:'ColÃ´mbia', flag:'ðŸ‡¨ðŸ‡´',
-    emoji:'ðŸ›', lat:6.2086, lng:-75.5659, risk:'safe',
-    address:'Calle 10 #43D-5, El Poblado, MedellÃ­n', score:4.7, reviews:328,
+    id:'p5', type:'hostel', name:'Selina Gold Dust', city:'Medellín', country:'Colômbia', flag:'🇨🇴',
+    state:null, emoji:'🛏', photo:null, lat:6.2086, lng:-75.5659, risk:'safe',
+    address:'Calle 10 #43D-5, El Poblado, Medellín', score:4.7, reviews:328,
     tags:['Hostel Premium','El Poblado','Coworking','Seguro'],
     scores:{localizacao:4.9, seguranca:4.8, limpeza:4.6, preco_justo:4.2},
-    tips:['El Poblado Ã© o bairro mais seguro de MedellÃ­n. Ã“tima escolha.','Hostel tem app prÃ³prio para reportar qualquer problema. Muito responsivos.'],
-    photos:['ðŸ›','ðŸ’»','ðŸŒ´'],
+    tips:['El Poblado é o bairro mais seguro de Medellín. Ótima escolha.','Hostel tem app próprio para reportar qualquer problema. Muito responsivos.'],
+    photos:['🛏','💻','🌴'],
     reviews_list:[
       {user:'Larissa F.', avatar:'https://i.pravatar.cc/40?img=26', stars:5, date:'5 dias',
-       text:'Fui sozinha, mulher, sem nenhum problema. Staff incrÃ­vel, me deram dicas valiosas de seguranÃ§a e o que evitar. El Poblado Ã© super turÃ­stico e seguro.', risk:'safe', verified:true},
+       text:'Fui sozinha, mulher, sem nenhum problema. Staff incrível, me deram dicas valiosas de segurança e o que evitar. El Poblado é super turístico e seguro.', risk:'safe', verified:true},
     ]
   },
   {
-    id:'p6', type:'tourspot', name:'Medina de Marrakech', city:'Marrakech', country:'Marrocos', flag:'ðŸ‡²ðŸ‡¦',
-    emoji:'ðŸ›ï¸', lat:31.6295, lng:-7.9811, risk:'suspicious',
+    id:'p6', type:'tourspot', name:'Medina de Marrakech', city:'Marrakech', country:'Marrocos', flag:'🇲🇦',
+    state:null, emoji:'🏛️', photo:null, lat:31.6295, lng:-7.9811, risk:'suspicious',
     address:'Medina, Marrakech, Marrocos', score:3.2, reviews:156,
-    tags:['HistÃ³rico','Labirinto','Golpes Frequentes','Fotografia'],
+    tags:['Histórico','Labirinto','Golpes Frequentes','Fotografia'],
     scores:{beleza:4.8, seguranca:2.5, acessibilidade:2.8, custo_beneficio:3.1},
-    tips:['NUNCA siga "guias" nÃ£o solicitados. SÃ£o todos golpistas.','Negocie TUDO antes. PreÃ§o inicial para turista Ã© 10x o real.','Use roupas conservadoras. Respeite a cultura local.'],
-    photos:['ðŸ›ï¸','ðŸ§¿','ðŸª'],
+    tips:['NUNCA siga "guias" não solicitados. São todos golpistas.','Negocie TUDO antes. Preço inicial para turista é 10x o real.','Use roupas conservadoras. Respeite a cultura local.'],
+    photos:['🏛️','🧿','🐪'],
     reviews_list:[
       {user:'Ana Lima', avatar:'https://i.pravatar.cc/40?img=25', stars:3, date:'1 sem',
-       text:'A Medina Ã© linda mas exaustiva. Em 2h tive 15 abordagens de "guias" e vendedores. Diga nÃ£o com firmeza e siga em frente. NÃ£o faÃ§a contato visual.', risk:'suspicious', verified:true},
+       text:'A Medina é linda mas exaustiva. Em 2h tive 15 abordagens de "guias" e vendedores. Diga não com firmeza e siga em frente. Não faça contato visual.', risk:'suspicious', verified:true},
       {user:'Thiago B.', avatar:'https://i.pravatar.cc/40?img=48', stars:4, date:'3 sem',
-       text:'Apesar do caos, vale muito a pena. Contrate guia PELO SEU HOTEL, com preÃ§o combinado antes. AÃ­ a experiÃªncia Ã© incrÃ­vel.', risk:'caution', verified:true},
+       text:'Apesar do caos, vale muito a pena. Contrate guia PELO SEU HOTEL, com preço combinado antes. Aí a experiência é incrível.', risk:'caution', verified:true},
     ]
   },
   {
-    id:'p7', type:'restaurant', name:'Ichiran Ramen Shibuya', city:'TÃ³quio', country:'JapÃ£o', flag:'ðŸ‡¯ðŸ‡µ',
-    emoji:'ðŸœ', lat:35.6595, lng:139.7004, risk:'safe',
+    id:'p7', type:'restaurant', name:'Ichiran Ramen Shibuya', city:'Tóquio', country:'Japão', flag:'🇯🇵',
+    state:null, emoji:'🍜', photo:null, lat:35.6595, lng:139.7004, risk:'safe',
     address:'B1F Dogenzaka Building, 1-22-7 Dogenzaka, Shibuya, Tokyo', score:4.8, reviews:1240,
-    tags:['Ramen','Shibuya','Seguro','ImperdÃ­vel'],
+    tags:['Ramen','Shibuya','Seguro','Imperdível'],
     scores:{precos:4.3, qualidade:5.0, atendimento:4.9, seguranca:5.0},
-    tips:['Cada pessoa come em cabine individual â€” perfeito para quem viaja solo!','Pede tudo por formulÃ¡rio escrito. Tem em portuguÃªs no site.','Fila pode ser longa â€” vÃ¡ antes das 11h ou apÃ³s 15h.'],
-    photos:['ðŸœ','ðŸ¥¢','â­'],
+    tips:['Cada pessoa come em cabine individual — perfeito para quem viaja solo!','Pede tudo por formulário escrito. Tem em português no site.','Fila pode ser longa — vá antes das 11h ou após 15h.'],
+    photos:['🍜','🥢','⭐'],
     reviews_list:[
       {user:'Pedro A.', avatar:'https://i.pravatar.cc/40?img=33', stars:5, date:'1 mes',
-       text:'O melhor ramen da minha vida. TÃ³quio Ã© a cidade mais segura que jÃ¡ visitei. Zero problemas, culinÃ¡ria impecÃ¡vel. VÃÃÃ!', risk:'safe', verified:true},
+       text:'O melhor ramen da minha vida. Tóquio é a cidade mais segura que já visitei. Zero problemas, culinária impecável. VÁÁÁ!', risk:'safe', verified:true},
       {user:'Camila R.', avatar:'https://i.pravatar.cc/40?img=38', stars:5, date:'2 mes',
-       text:'Fui Ã s 10:30 e nÃ£o tinha fila. IncrÃ­vel. JapÃ£o em geral: pode deixar a mochila na mesa, ninguÃ©m toca.', risk:'safe', verified:true},
+       text:'Fui às 10:30 e não tinha fila. Incrível. Japão em geral: pode deixar a mochila na mesa, ninguém toca.', risk:'safe', verified:true},
     ]
   },
   {
-    id:'p8', type:'tourspot', name:'Castillo Miramare', city:'Trieste', country:'ItÃ¡lia', flag:'ðŸ‡®ðŸ‡¹',
-    emoji:'ðŸ°', lat:45.7073, lng:13.7068, risk:'safe',
-    address:'Viale Miramare, 34151 Trieste TS, ItÃ¡lia', score:4.6, reviews:412,
+    id:'p8', type:'tourspot', name:'Castillo Miramare', city:'Trieste', country:'Itália', flag:'🇮🇹',
+    state:null, emoji:'🏰', photo:null, lat:45.7073, lng:13.7068, risk:'safe',
+    address:'Viale Miramare, 34151 Trieste TS, Itália', score:4.6, reviews:412,
     tags:['Castelo','Vista Mar','Jardins','Seguro'],
     scores:{beleza:5.0, seguranca:4.9, acessibilidade:4.0, custo_beneficio:4.6},
-    tips:['Entrada custa 8â‚¬. Reserve online para evitar fila.','Os jardins ao redor sÃ£o de acesso gratuito â€” igualmente lindos.'],
-    photos:['ðŸ°','ðŸŒŠ','ðŸŒº'],
+    tips:['Entrada custa 8€. Reserve online para evitar fila.','Os jardins ao redor são de acesso gratuito — igualmente lindos.'],
+    photos:['🏰','🌊','🌺'],
     reviews_list:[
       {user:'Marcos V.', avatar:'https://i.pravatar.cc/40?img=57', stars:5, date:'2 mes',
-       text:'Um dos lugares mais bonitos da ItÃ¡lia e super desconhecido. Trieste em geral Ã© muito segura e autÃªntica, sem turismo de massa.', risk:'safe', verified:true},
+       text:'Um dos lugares mais bonitos da Itália e super desconhecido. Trieste em geral é muito segura e autêntica, sem turismo de massa.', risk:'safe', verified:true},
+    ]
+  },
+  {
+    id:'p9', type:'hostel', name:'Lisbon Chill Hub', city:'Lisboa', country:'Portugal', flag:'🇵🇹',
+    state:null, emoji:'🛏', photo:null, lat:38.7223, lng:-9.1393, risk:'safe',
+    address:'Rua da Alegria 45, Lisboa', score:4.5, reviews:210,
+    tags:['Hostel','Centro','Seguro'],
+    scores:{localizacao:4.9, seguranca:4.7, limpeza:4.5, preco_justo:4.1},
+    tips:['Chegue cedo para conseguir cama de baixo no dorm.','Use o elétrico 28 apenas fora do pico para evitar furtos.'],
+    photos:['🛏','☕','🏙️'],
+    reviews_list:[
+      {user:'Marina G.', avatar:'https://i.pravatar.cc/40?img=5', stars:5, date:'4 dias', text:'Equipe ótima, lockers grandes e localização excelente perto do Rossio.', risk:'safe', verified:true},
+    ]
+  },
+  {
+    id:'p10', type:'restaurant', name:'Mama Jollof', city:'Lagos', country:'Nigéria', flag:'🇳🇬',
+    state:null, emoji:'🍛', photo:null, lat:6.4654, lng:3.4064, risk:'caution',
+    address:'Ikeja, Lagos', score:3.4, reviews:58,
+    tags:['Comida Nigeriana','Popular','Movimentado'],
+    scores:{precos:3.5, qualidade:3.8, atendimento:3.0, seguranca:2.6},
+    tips:['Prefira pagar em cartão ou transfer, evite notas grandes.','Peça preço antes de sentar. Região movimentada à noite.'],
+    photos:['🍛','🌶️','🥤'],
+    reviews_list:[
+      {user:'Chinedu O.', avatar:'https://i.pravatar.cc/40?img=62', stars:3, date:'1 sem', text:'Comida boa, atendimento lento. Guardem celular à vista.', risk:'caution', verified:false},
+    ]
+  },
+  {
+    id:'p11', type:'tourspot', name:'Cristo Redentor', city:'Rio de Janeiro', country:'Brasil', flag:'🇧🇷',
+    state:'RJ', emoji:'⛰️', photo:null, lat:-22.9519, lng:-43.2105, risk:'safe',
+    address:'Parque Nacional da Tijuca, Rio de Janeiro', score:4.8, reviews:2200,
+    tags:['Iconico','Vista','Familiar'],
+    scores:{beleza:5.0, seguranca:4.2, acessibilidade:3.8, custo_beneficio:4.5},
+    tips:['Compre ingresso online para evitar filas no trem do Corcovado.','Evite chegar de carro particular, prefira vans oficiais.'],
+    photos:['⛰️','☀️','📸'],
+    reviews_list:[
+      {user:'Luana S.', avatar:'https://i.pravatar.cc/40?img=30', stars:5, date:'3 dias', text:'Vista absurda e segurança ok dentro do parque. Só cuidado no acesso do Cosme Velho.', risk:'safe', verified:true},
+    ]
+  },
+  {
+    id:'p12', type:'restaurant', name:'Trattoria Turistica Centro', city:'Roma', country:'Itália', flag:'🇮🇹',
+    state:null, emoji:'🍝', photo:null, lat:41.9028, lng:12.4964, risk:'caution',
+    address:'Via Nazionale 120, Roma', score:3.0, reviews:95,
+    tags:['Turístico','Preço alto','Massas'],
+    scores:{precos:2.1, qualidade:3.4, atendimento:3.0, seguranca:3.5},
+    tips:['Peça menu com preços visíveis. Evite taxa de “coperto” abusiva.','Fique atento a garçons oferecendo vinho “casa” sem preço.'],
+    photos:['🍝','🍷','💳'],
+    reviews_list:[
+      {user:'Simone P.', avatar:'https://i.pravatar.cc/40?img=9', stars:2, date:'2 sem', text:'Conta veio com itens que não pedi. Só resolveu depois de insistir.', risk:'caution', verified:true},
+    ]
+  },
+  {
+    id:'p13', type:'hostel', name:'Berlin Makers Hostel', city:'Berlim', country:'Alemanha', flag:'🇩🇪',
+    state:null, emoji:'🛏', photo:null, lat:52.5200, lng:13.4050, risk:'safe',
+    address:'Kreuzberg, Berlin', score:4.4, reviews:310,
+    tags:['Hostel','Cowork','Seguro'],
+    scores:{localizacao:4.7, seguranca:4.6, limpeza:4.3, preco_justo:4.0},
+    tips:['Lockers eletrônicos, leve adaptador europeu.','Mercados 24h por perto, região movimentada mas segura.'],
+    photos:['🛏','💻','🍺'],
+    reviews_list:[
+      {user:'Jonas K.', avatar:'https://i.pravatar.cc/40?img=15', stars:4, date:'1 mes', text:'Bom para trabalhar e fazer amigos. Segurança ok.', risk:'safe', verified:false},
+    ]
+  },
+  {
+    id:'p14', type:'tourspot', name:'Central Park', city:'Nova York', country:'EUA', flag:'🇺🇸',
+    state:'NY', emoji:'🌳', photo:null, lat:40.7829, lng:-73.9654, risk:'safe',
+    address:'Central Park, New York', score:4.7, reviews:3400,
+    tags:['Parque','Caminhada','Fotografia'],
+    scores:{beleza:4.8, seguranca:4.3, acessibilidade:4.4, custo_beneficio:4.6},
+    tips:['Evite áreas menos movimentadas à noite.','Bike-sharing é barato, mas prenda a bike com trava boa.'],
+    photos:['🌳','🚴','🗽'],
+    reviews_list:[
+      {user:'Amy L.', avatar:'https://i.pravatar.cc/40?img=19', stars:5, date:'5 dias', text:'Lindo no pôr do sol. Me senti segura nas trilhas principais.', risk:'safe', verified:true},
+    ]
+  },
+  {
+    id:'p15', type:'restaurant', name:'Taqueria Doña Luz', city:'Cidade do México', country:'México', flag:'🇲🇽',
+    state:'CDMX', emoji:'🌮', photo:null, lat:19.4326, lng:-99.1332, risk:'safe',
+    address:'Roma Norte, CDMX', score:4.6, reviews:180,
+    tags:['Tacos','Local','Barato'],
+    scores:{precos:4.8, qualidade:4.7, atendimento:4.2, seguranca:4.0},
+    tips:['Pago só em dinheiro. Não aceite “taco especial” sem preço.','Pimenta forte, peça salsas separadas.'],
+    photos:['🌮','🌶️','🥤'],
+    reviews_list:[
+      {user:'Bruno H.', avatar:'https://i.pravatar.cc/40?img=70', stars:5, date:'1 semana', text:'Taco al pastor perfeito e barato. Rua movimentada e segura.', risk:'safe', verified:false},
+    ]
+  },
+  {
+    id:'p16', type:'tourspot', name:'Table Mountain', city:'Cape Town', country:'África do Sul', flag:'🇿🇦',
+    state:null, emoji:'⛰️', photo:null, lat:-33.9628, lng:18.4098, risk:'caution',
+    address:'Table Mountain National Park, Cape Town', score:4.7, reviews:950,
+    tags:['Trilha','Vista','Natureza'],
+    scores:{beleza:5.0, seguranca:3.5, acessibilidade:3.6, custo_beneficio:4.4},
+    tips:['Suba de manhã cedo, leve casaco.','Evite trilhas isoladas sozinho; use grupos ou teleférico.'],
+    photos:['⛰️','🚠','🌤️'],
+    reviews_list:[
+      {user:'Zanele M.', avatar:'https://i.pravatar.cc/40?img=71', stars:4, date:'9 dias', text:'Vista incrível, mas vi relatos de furtos em trilhas vazias. Vá acompanhado.', risk:'caution', verified:true},
+    ]
+  },
+  {
+    id:'p17', type:'hostel', name:'Nairobi Transit Hub', city:'Nairobi', country:'Quênia', flag:'🇰🇪',
+    state:null, emoji:'🛏', photo:null, lat:-1.2921, lng:36.8219, risk:'suspicious',
+    address:'Westlands, Nairobi', score:3.6, reviews:140,
+    tags:['Hostel','Próximo ao aeroporto','Básico'],
+    scores:{localizacao:4.0, seguranca:3.1, limpeza:3.5, preco_justo:3.8},
+    tips:['Use somente taxistas indicados pelo hostel.','Guarde passaporte no cofre da recepção.'],
+    photos:['🛏','✈️','☕'],
+    reviews_list:[
+      {user:'Aisha K.', avatar:'https://i.pravatar.cc/40?img=77', stars:3, date:'2 semanas', text:'Bom para uma noite. Regiao movimentada, fique atento a pickpockets.', risk:'suspicious', verified:false},
+    ]
+  },
+  {
+    id:'p18', type:'restaurant', name:'Bistro Marais', city:'Paris', country:'França', flag:'🇫🇷',
+    state:null, emoji:'🥖', photo:null, lat:48.8566, lng:2.3522, risk:'safe',
+    address:'Rue Vieille du Temple, Paris', score:4.2, reviews:260,
+    tags:['Bistrô','Vinho','Clássico'],
+    scores:{precos:3.5, qualidade:4.5, atendimento:4.0, seguranca:4.4},
+    tips:['Evite mesas externas com bolsa à mostra.','Gorjeta não é obrigatória, mas 5-10% é bem-vindo.'],
+    photos:['🥖','🍷','🧀'],
+    reviews_list:[
+      {user:'Claire D.', avatar:'https://i.pravatar.cc/40?img=11', stars:4, date:'3 dias', text:'Comida ótima, preço ok para Paris. Rua segura e movimentada.', risk:'safe', verified:true},
     ]
   },
 ];
@@ -131,9 +251,9 @@ const FRIENDS = [
 ];
 
 const SENIOR_GROUPS = [
-  {name:'Portugal 60+ Primavera', pace:'Ritmo leve', members:18, safety:'Hospedagens centrais e acessÃ­veis', action:'Entrar no grupo'},
-  {name:'Buenos Aires Cultural 65+', pace:'Passeios curtos', members:11, safety:'Pequenos grupos com apoio mÃºtuo', action:'Ver roteiro'},
-  {name:'Serra GaÃºcha com Companhia', pace:'Ã”nibus e caminhadas curtas', members:24, safety:'Check-in diÃ¡rio e roteiro tranquilo', action:'Pedir convite'},
+  {name:'Portugal 60+ Primavera', pace:'Ritmo leve', members:18, safety:'Hospedagens centrais e acessíveis', action:'Entrar no grupo'},
+  {name:'Buenos Aires Cultural 65+', pace:'Passeios curtos', members:11, safety:'Pequenos grupos com apoio mútuo', action:'Ver roteiro'},
+  {name:'Serra Gaúcha com Companhia', pace:'Ônibus e caminhadas curtas', members:24, safety:'Check-in diário e roteiro tranquilo', action:'Pedir convite'},
 ];
 
 const POSTS = [
@@ -178,12 +298,12 @@ const POSTS = [
 const NOTIFS = [
   {type:'info', text:'Seu relato sobre <strong>Cairo</strong> entrou entre os mais salvos da comunidade hoje.', time:'18min', unread:true, city:'Cairo'},
   {type:'danger', text:'<strong>Perigo em La Boca</strong> - 3 novos relatos de assalto. Voce indicou interesse na Argentina.', time:'5min', unread:true, placeId:'p4', city:'Buenos Aires'},
-  {type:'info', text:'<strong>Carlos Menezes</strong> comeÃ§ou a te seguir.', time:'12min', unread:true, page:'profile'},
-  {type:'caution', text:'Ãrea de <strong>atenÃ§Ã£o detectada</strong> prÃ³xima Ã  Khaosan Road. VocÃª estÃ¡ a 1.2km.', time:'45min', unread:true, placeId:'p1', city:'Bangkok'},
-  {type:'safe', text:'Seu relato sobre MedellÃ­n recebeu <strong>178 curtidas</strong> ðŸ”¥', time:'2h', unread:false, placeId:'p5', city:'MedellÃ­n'},
-  {type:'friend', text:'<strong>Ana Lima</strong> estÃ¡ a 8km de vocÃª em Bangkok. Toque para ver no mapa.', time:'3h', unread:false, city:'Bangkok'},
-  {type:'danger', text:'<strong>Novo alerta</strong> de cobranÃ§a abusiva no distrito de Nana, Bangkok.', time:'6h', unread:false, placeId:'p1', city:'Bangkok'},
-  {type:'info', text:'<strong>Pedro Alves</strong> e <strong>+5 pessoas</strong> curtiram seu relato sobre Selina MedellÃ­n.', time:'1d', unread:false, placeId:'p5', city:'MedellÃ­n'},
+  {type:'info', text:'<strong>Carlos Menezes</strong> começou a te seguir.', time:'12min', unread:true, page:'profile'},
+  {type:'caution', text:'Área de <strong>atenção detectada</strong> próxima à Khaosan Road. Você está a 1.2km.', time:'45min', unread:true, placeId:'p1', city:'Bangkok'},
+  {type:'safe', text:'Seu relato sobre Medellín recebeu <strong>178 curtidas</strong> 🔥', time:'2h', unread:false, placeId:'p5', city:'Medellín'},
+  {type:'friend', text:'<strong>Ana Lima</strong> está a 8km de você em Bangkok. Toque para ver no mapa.', time:'3h', unread:false, city:'Bangkok'},
+  {type:'danger', text:'<strong>Novo alerta</strong> de cobrança abusiva no distrito de Nana, Bangkok.', time:'6h', unread:false, placeId:'p1', city:'Bangkok'},
+  {type:'info', text:'<strong>Pedro Alves</strong> e <strong>+5 pessoas</strong> curtiram seu relato sobre Selina Medellín.', time:'1d', unread:false, placeId:'p5', city:'Medellín'},
 ];
 
 const NEWS_POSTS = [
@@ -260,29 +380,29 @@ const CHATS = [
     status:'Online agora',
     time:'2min',
     unread:2,
-    last:'VocÃª viu o alerta novo de Marrakech?',
+    last:'Você viu o alerta novo de Marrakech?',
     messages:[
-      {from:'them', text:'Mari, vocÃª ainda estÃ¡ em Bangkok?', time:'09:12'},
-      {from:'me', text:'Sim, fico atÃ© domingo. E vocÃª?', time:'09:14'},
-      {from:'them', text:'Estou indo para Marrakech amanhÃ£.', time:'09:15'},
-      {from:'them', text:'VocÃª viu o alerta novo de Marrakech?', time:'09:16'}
+      {from:'them', text:'Mari, você ainda está em Bangkok?', time:'09:12'},
+      {from:'me', text:'Sim, fico até domingo. E você?', time:'09:14'},
+      {from:'them', text:'Estou indo para Marrakech amanhã.', time:'09:15'},
+      {from:'them', text:'Você viu o alerta novo de Marrakech?', time:'09:16'}
     ]
   },
   {
     id:'c2',
     type:'group',
-    name:'Backpackers Sudeste AsiÃ¡tico',
-    avatar:'ðŸŒ',
+    name:'Backpackers Sudeste Asiático',
+    avatar:'🌏',
     online:false,
     typing:false,
     status:'14 membros',
     time:'18min',
     unread:5,
-    last:'Carlos: tÃ¡xi sem taxÃ­metro no aeroporto de DMK.',
+    last:'Carlos: táxi sem taxímetro no aeroporto de DMK.',
     messages:[
       {from:'them', text:'Carlos: pessoal, cheguei em Bangkok agora.', time:'08:51'},
-      {from:'them', text:'Carlos: tÃ¡xi sem taxÃ­metro no aeroporto de DMK.', time:'08:56'},
-      {from:'me', text:'Valeu pelo aviso. Melhor usar app entÃ£o.', time:'08:59'}
+      {from:'them', text:'Carlos: táxi sem taxímetro no aeroporto de DMK.', time:'08:56'},
+      {from:'me', text:'Valeu pelo aviso. Melhor usar app então.', time:'08:59'}
     ]
   },
   {
@@ -292,27 +412,108 @@ const CHATS = [
     avatar:'https://i.pravatar.cc/80?img=33',
     online:false,
     typing:false,
-    status:'Visto hÃ¡ 1h',
+    status:'Visto há 1h',
     time:'1h',
     unread:0,
-    last:'Fechou! Te mando os hostels de TÃ³quio.',
+    last:'Fechou! Te mando os hostels de Tóquio.',
     messages:[
-      {from:'me', text:'PedrÃ£o, recomenda hostel em Shibuya?', time:'07:10'},
-      {from:'them', text:'Fechou! Te mando os hostels de TÃ³quio.', time:'07:16'}
+      {from:'me', text:'Pedrão, recomenda hostel em Shibuya?', time:'07:10'},
+      {from:'them', text:'Fechou! Te mando os hostels de Tóquio.', time:'07:16'}
+    ]
+  },
+  {
+    id:'c4',
+    type:'group',
+    name:'Mulheres Solo América do Sul',
+    avatar:'👭',
+    online:false,
+    typing:false,
+    status:'27 membros',
+    time:'12min',
+    unread:6,
+    last:'Bruna: taxi seguro em Medellin?',
+    messages:[
+      {from:'them', text:'Marina: hostel seguro em Lima - Pariwana.', time:'11:55'},
+      {from:'them', text:'Bruna: taxi seguro em Medellin?', time:'11:58'},
+      {from:'me', text:'Use inDriver/Uber, evitar street taxi de noite.', time:'12:00'}
+    ]
+  },
+  {
+    id:'c5',
+    type:'group',
+    name:'Europa Rail Friends',
+    avatar:'🚆',
+    online:false,
+    typing:false,
+    status:'18 membros',
+    time:'35min',
+    unread:2,
+    last:'Leo: greve parcial em Paris amanhã.',
+    messages:[
+      {from:'them', text:'Leo: greve parcial em Paris amanhã.', time:'35min'},
+      {from:'them', text:'Sara: reservar Flixbus backup?', time:'33min'}
+    ]
+  },
+  {
+    id:'c6',
+    type:'direct',
+    name:'Guia Cairo (Hassan)',
+    avatar:'https://i.pravatar.cc/80?img=41',
+    online:true,
+    typing:false,
+    status:'Online agora',
+    time:'agora',
+    unread:1,
+    last:'Consigo te pegar no aeroporto.',
+    messages:[
+      {from:'them', text:'Consigo te pegar no aeroporto. Envie horario.', time:'agora'}
+    ]
+  },
+  {
+    id:'c7',
+    type:'group',
+    name:'Trilha Table Mountain',
+    avatar:'⛰️',
+    online:false,
+    typing:false,
+    status:'9 membros',
+    time:'1h',
+    unread:3,
+    last:'Sibusiso: subir 7h ok?',
+    messages:[
+      {from:'them', text:'Sibusiso: subir 7h ok?', time:'1h'},
+      {from:'them', text:'Lara: levar jaqueta corta-vento', time:'58min'},
+      {from:'me', text:'Estarei lá 6:50. Vamos juntos.', time:'55min'}
+    ]
+  },
+  {
+    id:'c8',
+    type:'direct',
+    name:'Host Lisboa',
+    avatar:'https://i.pravatar.cc/80?img=52',
+    online:false,
+    typing:false,
+    status:'Visto há 2h',
+    time:'2h',
+    unread:0,
+    last:'Check-in confirmado para amanhã',
+    messages:[
+      {from:'them', text:'Check-in confirmado para amanhã 14h.', time:'2h'},
+      {from:'me', text:'Obrigado! Alguma dica de restaurante local?', time:'2h'}
     ]
   }
 ];
 
 const COMMUNITY_PULSE = [
   {num:'128', lab:'Relatos hoje'},
-  {num:'43', lab:'Alertas Ãºteis'},
-  {num:'17', lab:'Amigos prÃ³ximos'},
+  {num:'43', lab:'Alertas úteis'},
+  {num:'17', lab:'Amigos próximos'},
 ];
 
 const IMPACT_PILLARS = [
-  {icon:'ðŸ¤', title:'Combate ao isolamento', text:'Grupos e conversas ajudam viajantes a encontrar companhia segura e rede de apoio real durante a viagem.'},
-  {icon:'ðŸ›¡ï¸', title:'Seguranca compartilhada', text:'Relatos confiaveis da comunidade reduzem golpes, desinformacao e decisao no escuro em destinos desconhecidos.'},
-  {icon:'ðŸŒ', title:'Valor social local', text:'O app estimula troca com moradores, economia local e deslocamentos mais conscientes com base em experiencia real.'},
+  {icon:'🤝', title:'Combate ao isolamento', text:'Grupos e conversas ajudam viajantes a encontrar companhia segura e rede de apoio real durante a viagem.'},
+  {icon:'🛡️', title:'Seguranca compartilhada', text:'Relatos confiaveis da comunidade reduzem golpes, desinformacao e decisao no escuro em destinos desconhecidos.'},
+  {icon:'🌍', title:'Valor social local', text:'O app estimula troca com moradores, economia local e deslocamentos mais conscientes com base em experiencia real.'},
 ];
 
 const IMPACT_STATS = {
@@ -323,37 +524,62 @@ const IMPACT_STATS = {
 };
 
 const IMPACT_REQUESTS = [
-  {id:'ir1', icon:'ðŸ§­', title:'Companhia para explorar o centro', text:'Julia quer companhia verificada para caminhar no centro de MedellÃ­n no fim da tarde.', city:'MedellÃ­n', responses:3},
-  {id:'ir2', icon:'ðŸ†˜', title:'Ajuda com traduÃ§Ã£o e deslocamento', text:'Hassan precisa de apoio rÃ¡pido para chegar a um hostel seguro no Cairo.', city:'Cairo', responses:5},
-  {id:'ir3', icon:'â˜•', title:'Encontro com viajantes e moradores', text:'Grupo local abriu roda de conversa com viajantes em San Salvador.', city:'San Salvador', responses:8},
+  {id:'ir1', icon:'🧭', title:'Companhia para explorar o centro', text:'Julia quer companhia verificada para caminhar no centro de Medellín no fim da tarde.', city:'Medellín', responses:3},
+  {id:'ir2', icon:'🆘', title:'Ajuda com tradução e deslocamento', text:'Hassan precisa de apoio rápido para chegar a um hostel seguro no Cairo.', city:'Cairo', responses:5},
+  {id:'ir3', icon:'☕', title:'Encontro com viajantes e moradores', text:'Grupo local abriu roda de conversa com viajantes em San Salvador.', city:'San Salvador', responses:8},
 ];
 
 const TREND_ROUTES = [
-  {route:'Bangkok â†’ Chiang Mai', meta:'Alta troca de dicas para transporte noturno', risk:'âš ï¸ AtenÃ§Ã£o em tÃ¡xis sem taxÃ­metro'},
-  {route:'MedellÃ­n â†’ GuatapÃ©', meta:'Subiu 62% em relatos positivos esta semana', risk:'âœ… Rota considerada segura de dia'},
-  {route:'Marrakech â†’ Essaouira', meta:'Comunidade sugere tour fechado em grupo', risk:'ðŸŸ  Evite guias na rua'},
+  {route:'Bangkok → Chiang Mai', meta:'Alta troca de dicas para transporte noturno', risk:'⚠️ Atenção em táxis sem taxímetro'},
+  {route:'Medellín → Guatapé', meta:'Subiu 62% em relatos positivos esta semana', risk:'✅ Rota considerada segura de dia'},
+  {route:'Marrakech → Essaouira', meta:'Comunidade sugere tour fechado em grupo', risk:'🟠 Evite guias na rua'},
 ];
 
+// Países (lista simplificada ISO/UN)
+const COUNTRY_LIST = [
+  'Afeganistão','África do Sul','Albânia','Alemanha','Andorra','Angola','Antígua e Barbuda','Arábia Saudita','Argélia','Argentina','Armênia','Austrália','Áustria','Azerbaijão',
+  'Bahamas','Bahrein','Bangladesh','Barbados','Bélgica','Belize','Benim','Bielorrússia','Bolívia','Bósnia e Herzegovina','Botsuana','Brasil','Brunei','Bulgária','Burkina Faso','Burundi',
+  'Butão','Cabo Verde','Camarões','Camboja','Canadá','Catar','Cazaquistão','Chade','Chile','China','Chipre','Colômbia','Comores','Congo','Coreia do Norte','Coreia do Sul','Costa do Marfim','Costa Rica','Croácia','Cuba',
+  'Dinamarca','Djibuti','Dominica','Egito','El Salvador','Emirados Árabes Unidos','Equador','Eritreia','Eslováquia','Eslovênia','Espanha','Estados Unidos','Estônia','Eswatini','Etiópia',
+  'Fiji','Filipinas','Finlândia','França','Gabão','Gâmbia','Gana','Geórgia','Granada','Grécia','Guatemala','Guiana','Guiné','Guiné-Bissau','Guiné Equatorial',
+  'Haiti','Honduras','Hungria','Iêmen','Ilhas Marshall','Ilhas Maurício','Ilhas Salomão','Índia','Indonésia','Irã','Iraque','Irlanda','Islândia','Israel','Itália',
+  'Jamaica','Japão','Jordânia','Kiribati','Kosovo','Kuwait','Laos','Lesoto','Letônia','Líbano','Libéria','Líbia','Liechtenstein','Lituânia','Luxemburgo',
+  'Macedônia do Norte','Madagáscar','Malásia','Malawi','Maldivas','Mali','Malta','Marrocos','Mauritânia','México','Mianmar','Micronésia','Moçambique','Moldávia','Mônaco','Mongólia','Montenegro',
+  'Namíbia','Nauru','Nepal','Nicarágua','Níger','Nigéria','Noruega','Nova Zelândia','Omã','Países Baixos','Palau','Panamá','Papua-Nova Guiné','Paquistão','Paraguai','Peru','Polônia','Portugal',
+  'Quênia','Quirguistão','Reino Unido','República Centro-Africana','República Dominicana','República Tcheca','Romênia','Ruanda','Rússia',
+  'Samoa','San Marino','Santa Lúcia','São Cristóvão e Nevis','São Tomé e Príncipe','São Vicente e Granadinas','Seicheles','Senegal','Serra Leoa','Sérvia','Singapura','Síria','Somália','Sri Lanka','Sudão','Sudão do Sul','Suécia','Suíça','Suriname',
+  'Tailândia','Taiwan','Tanzânia','Togo','Tonga','Trinidad e Tobago','Tunísia','Turcomenistão','Turquia','Tuvalu',
+  'Ucrânia','Uganda','Uruguai','Uzbequistão',
+  'Vanuatu','Vaticano','Venezuela','Vietnã','Zâmbia','Zimbábue'
+].sort((a,b)=>a.localeCompare(b,'pt',{sensitivity:'base'}));
+
+const STATE_MAP = {
+  'brasil': ['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO'],
+  'estados unidos': ['CA','NY','FL','TX','WA','MA','IL','NV','CO'],
+  'méxico': ['CDMX','JAL','NLE','BCN'],
+  'canadá': ['ON','BC','QC'],
+};
+
 const PRICE_ALERTS = [
-  {id:'pa1', route:'SÃ£o Paulo â†’ Lisboa', price:'R$ 3.450', drop:'-18%', crowd:'LotaÃ§Ã£o baixa', crowdLevel:'low', window:'mai/26', source:'Voos', note:'Queda monitorada 48h'},
-  {id:'pa2', route:'Rio â†’ Buenos Aires', price:'R$ 1.180', drop:'-12%', crowd:'LotaÃ§Ã£o alta', crowdLevel:'high', window:'PÃ¡scoa', source:'Voos', note:'Feriado empurrando demanda'},
-  {id:'pa3', route:'Porto â†’ Algarve Â· hotel', price:'â‚¬ 88/noite', drop:'-22%', crowd:'LotaÃ§Ã£o moderada', crowdLevel:'mid', window:'jun/26', source:'HotÃ©is', note:'Fora de pico de verÃ£o'},
-  {id:'pa4', route:'MedellÃ­n Â· cowork', price:'US$ 21/dia', drop:'-9%', crowd:'LotaÃ§Ã£o baixa', crowdLevel:'low', window:'abr/26', source:'Cowork', note:'Inclui cadeira dedicada'},
+  {id:'pa1', route:'São Paulo → Lisboa', price:'R$ 3.450', drop:'-18%', crowd:'Lotação baixa', crowdLevel:'low', window:'mai/26', source:'Voos', note:'Queda monitorada 48h'},
+  {id:'pa2', route:'Rio → Buenos Aires', price:'R$ 1.180', drop:'-12%', crowd:'Lotação alta', crowdLevel:'high', window:'Páscoa', source:'Voos', note:'Feriado empurrando demanda'},
+  {id:'pa3', route:'Porto → Algarve · hotel', price:'€ 88/noite', drop:'-22%', crowd:'Lotação moderada', crowdLevel:'mid', window:'jun/26', source:'Hotéis', note:'Fora de pico de verão'},
+  {id:'pa4', route:'Medellín · cowork', price:'US$ 21/dia', drop:'-9%', crowd:'Lotação baixa', crowdLevel:'low', window:'abr/26', source:'Cowork', note:'Inclui cadeira dedicada'},
 ];
 
 const TRAVEL_DASH = {
   stats: [
-    {num:'41', lab:'PaÃ­ses'},
+    {num:'41', lab:'Países'},
     {num:'167', lab:'Cidades'},
     {num:'420', lab:'Dias na estrada'},
   ],
   countries: [
-    {name:'Venezuela', visits:8, flag:'ðŸ‡»ðŸ‡ª'},
-    {name:'El Salvador', visits:7, flag:'ðŸ‡¸ðŸ‡»'},
-    {name:'Egito', visits:6, flag:'ðŸ‡ªðŸ‡¬'},
-    {name:'ColÃ´mbia', visits:6, flag:'ðŸ‡¨ðŸ‡´'},
-    {name:'JapÃ£o', visits:5, flag:'ðŸ‡¯ðŸ‡µ'},
-    {name:'China', visits:4, flag:'ðŸ‡¨ðŸ‡³'},
+    {name:'Venezuela', visits:8, flag:'🇻🇪'},
+    {name:'El Salvador', visits:7, flag:'🇸🇻'},
+    {name:'Egito', visits:6, flag:'🇪🇬'},
+    {name:'Colômbia', visits:6, flag:'🇨🇴'},
+    {name:'Japão', visits:5, flag:'🇯🇵'},
+    {name:'China', visits:4, flag:'🇨🇳'},
   ]
 };
 
@@ -414,38 +640,40 @@ const GLOBAL_HEAT_ZONES = [
 ];
 
 const CRISIS_ZONES = [
-  {lat:35.68,lng:51.41,risk:'danger',radius:330000,label:'TeerÃ£ e entorno'},
-  {lat:33.31,lng:44.36,risk:'danger',radius:300000,label:'BagdÃ¡ e corredor central'},
+  {lat:35.68,lng:51.41,risk:'danger',radius:330000,label:'Teerã e entorno'},
+  {lat:33.31,lng:44.36,risk:'danger',radius:300000,label:'Bagdá e corredor central'},
   {lat:33.89,lng:35.50,risk:'suspicious',radius:240000,label:'Beirute e costa'},
-  {lat:31.77,lng:35.21,risk:'suspicious',radius:220000,label:'JerusalÃ©m e cinturÃ£o'},
-  {lat:24.71,lng:46.67,risk:'caution',radius:260000,label:'Riad e conexÃµes'},
+  {lat:31.77,lng:35.21,risk:'suspicious',radius:220000,label:'Jerusalém e cinturão'},
+  {lat:24.71,lng:46.67,risk:'caution',radius:260000,label:'Riad e conexões'},
   {lat:25.20,lng:55.27,risk:'safe',radius:200000,label:'Eixo Dubai-Abu Dhabi'}
 ];
 
 const CRISIS_CORRIDORS = [
-  {route:'AmÃ£ (JOR) â†’ Doha (QAT)', status:'OperaÃ§Ã£o parcial', window:'06:00-18:00 UTC'},
-  {route:'Riad (SAU) â†’ Dubai (UAE)', status:'Aberto', window:'24h com triagem'},
-  {route:'Beirute (LBN) â†’ Larnaca (CYP)', status:'Janela curta', window:'08:00-14:00 UTC'},
-  {route:'Erbil (IRQ) â†’ Istambul (TUR)', status:'Aberto', window:'Voos variÃ¡veis'}
+  {route:'Amã (JOR) → Doha (QAT)', status:'Operação parcial', window:'06:00-18:00 UTC'},
+  {route:'Riad (SAU) → Dubai (UAE)', status:'Aberto', window:'24h com triagem'},
+  {route:'Beirute (LBN) → Larnaca (CYP)', status:'Janela curta', window:'08:00-14:00 UTC'},
+  {route:'Erbil (IRQ) → Istambul (TUR)', status:'Aberto', window:'Voos variáveis'}
 ];
 
 const WAR_ZONES = [
-  {lat:48.6,lng:37.8,risk:'danger',radius:380000,label:'Leste da UcrÃ¢nia',note:'Frente ativa ampla na regiÃ£o do Donbas e arredores',source:'CFR / ICRC'},
+  {lat:48.6,lng:37.8,risk:'danger',radius:380000,label:'Leste da Ucrânia',note:'Frente ativa ampla na região do Donbas e arredores',source:'CFR / ICRC'},
   {lat:31.45,lng:34.45,risk:'danger',radius:150000,label:'Gaza e entorno imediato',note:'Conflito ativo e risco extremo de deslocamento',source:'ICRC / CFR'},
-  {lat:15.5,lng:32.5,risk:'danger',radius:320000,label:'SudÃ£o central (Khartoum)',note:'Guerra em curso com impacto urbano severo',source:'ACLED / CFR'},
-  {lat:13.9,lng:25.4,risk:'danger',radius:300000,label:'Darfur',note:'Combates e crise humanitÃ¡ria persistente',source:'ACLED / ICRC'},
-  {lat:23.8,lng:95.9,risk:'danger',radius:420000,label:'Myanmar central e norte',note:'MÃºltiplas frentes armadas e deslocamento interno',source:'CFR / ACLED'},
-  {lat:-1.7,lng:29.2,risk:'danger',radius:260000,label:'Leste da RDC',note:'Confrontos recorrentes na regiÃ£o de Goma e Kivu',source:'ICRC / CFR'},
-  {lat:15.6,lng:47.8,risk:'danger',radius:420000,label:'IÃªmen',note:'Conflito prolongado e ambiente de seguranÃ§a altamente volÃ¡til',source:'CFR / ICRC'}
+  {lat:15.5,lng:32.5,risk:'danger',radius:320000,label:'Sudão central (Khartoum)',note:'Guerra em curso com impacto urbano severo',source:'ACLED / CFR'},
+  {lat:13.9,lng:25.4,risk:'danger',radius:300000,label:'Darfur',note:'Combates e crise humanitária persistente',source:'ACLED / ICRC'},
+  {lat:23.8,lng:95.9,risk:'danger',radius:420000,label:'Myanmar central e norte',note:'Múltiplas frentes armadas e deslocamento interno',source:'CFR / ACLED'},
+  {lat:-1.7,lng:29.2,risk:'danger',radius:260000,label:'Leste da RDC',note:'Confrontos recorrentes na região de Goma e Kivu',source:'ICRC / CFR'},
+  {lat:15.6,lng:47.8,risk:'danger',radius:420000,label:'Iêmen',note:'Conflito prolongado e ambiente de segurança altamente volátil',source:'CFR / ICRC'}
 ];
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  STATE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 let loggedIn = false;
 let mapInit = false;
-let map, allMarkers = [], allLayers = [];
+let map, allMarkers = [], clusterMarkers = [], allLayers = [];
 let currentFilter = 'all';
+let clusterMode = true;
+let heatVisible = true;
 let currentCat = 'all';
 let currentNewsFilter = 'all';
 let currentTheme = 'dark';
@@ -462,13 +690,13 @@ let selectedStars = 4;
 let mapFocusPlaceId = 'p1';
 
 const CURRENT_USER = {
-  name:'AndrÃ© NÃ´made Raiz',
+  name:'André Nômade Raiz',
   handle:'@nomaderaizofc',
   avatar:'https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp',
   verified:true,
   trustScore:98,
   trustLabel:'Nomade raiz confiavel',
-  loc:'ðŸŒŽ no mundo',
+  loc:'🌎 no mundo',
   age:41,
   mode:'explorador',
 };
@@ -476,68 +704,68 @@ const CURRENT_USER = {
 const EXPERIENCE_MODES = {
   explorador: {
     label:'Explorador',
-    journeyTitle:'Ritmo dinÃ¢mico, social e urbano',
-    contextCopy:'O Azimute vai priorizar mobilidade, grupos rÃ¡pidos e alertas urbanos para esse destino.',
+    journeyTitle:'Ritmo dinâmico, social e urbano',
+    contextCopy:'O Azimute vai priorizar mobilidade, grupos rápidos e alertas urbanos para esse destino.',
     groupsTitle:'Grupos e companhia',
     groupsSub:'Conecte-se com pessoas do mesmo ritmo e interesse para viajar junto.',
     profileBio:'Viajante independente | Gosta de descobrir lugares novos, socializar e circular com autonomia',
-    verifyTitle:'Perfil explorador verificado âœ“',
-    verifySub:'Identidade validada e preferÃªncias de mobilidade social confirmadas para grupos, alertas e relatos.',
+    verifyTitle:'Perfil explorador verificado ✓',
+    verifySub:'Identidade validada e preferências de mobilidade social confirmadas para grupos, alertas e relatos.',
     dashTitle:'Painel de Viagens Explorador',
-    dashSub:'Resumo de destinos, encontros sociais e experiÃªncias dinÃ¢micas dos Ãºltimos 24 meses',
+    dashSub:'Resumo de destinos, encontros sociais e experiências dinâmicas dos últimos 24 meses',
     badges:[
-      {text:'ðŸŒ† Social ativo', color:'var(--accent)'},
-      {text:'ðŸ›¡ Relatos confiÃ¡veis', color:'var(--safe)'},
-      {text:'âš¡ Ritmo urbano', color:'var(--caution)'},
+      {text:'🌆 Social ativo', color:'var(--accent)'},
+      {text:'🛡 Relatos confiáveis', color:'var(--safe)'},
+      {text:'⚡ Ritmo urbano', color:'var(--caution)'},
     ],
     groups:[
       {name:'Cidade sem roteiro fixo', pace:'Mais livre', members:26, safety:'Encontros em pontos centrais e movimentados', action:'Entrar no grupo'},
-      {name:'Hostels e cafÃ©s culturais', pace:'Social', members:19, safety:'Pontos pÃºblicos e verificados', action:'Ver roteiro'},
+      {name:'Hostels e cafés culturais', pace:'Social', members:19, safety:'Pontos públicos e verificados', action:'Ver roteiro'},
       {name:'Exploradores de fim de tarde', pace:'Passeios curtos', members:14, safety:'Check-in de retorno combinado', action:'Pedir convite'},
     ],
   },
   equilibrado: {
     label:'Equilibrado',
-    journeyTitle:'SeguranÃ§a, planejamento e flexibilidade',
-    contextCopy:'O Azimute vai priorizar equilÃ­brio entre seguranÃ§a, conforto e vida social nesse destino.',
+    journeyTitle:'Segurança, planejamento e flexibilidade',
+    contextCopy:'O Azimute vai priorizar equilíbrio entre segurança, conforto e vida social nesse destino.',
     groupsTitle:'Grupos e companhia',
-    groupsSub:'Encontre grupos de viagem e companhia com interesses e ritmo compatÃ­veis.',
-    profileBio:'Viajante que equilibra seguranÃ§a, planejamento e liberdade | Prefere boas recomendaÃ§Ãµes e grupo confiÃ¡vel',
-    verifyTitle:'Perfil equilibrado verificado âœ“',
-    verifySub:'Identidade validada e preferÃªncias de viagem confirmadas para grupos, alertas e relatos.',
+    groupsSub:'Encontre grupos de viagem e companhia com interesses e ritmo compatíveis.',
+    profileBio:'Viajante que equilibra segurança, planejamento e liberdade | Prefere boas recomendações e grupo confiável',
+    verifyTitle:'Perfil equilibrado verificado ✓',
+    verifySub:'Identidade validada e preferências de viagem confirmadas para grupos, alertas e relatos.',
     dashTitle:'Painel de Viagens',
-    dashSub:'Resumo de destinos, grupos e experiÃªncias relevantes dos Ãºltimos 24 meses',
+    dashSub:'Resumo de destinos, grupos e experiências relevantes dos últimos 24 meses',
     badges:[
-      {text:'ðŸ¤ Companhia ativa', color:'var(--accent)'},
-      {text:'ðŸ›¡ Relatos confiÃ¡veis', color:'var(--safe)'},
-      {text:'ðŸ§­ Boa organizaÃ§Ã£o', color:'var(--caution)'},
+      {text:'🤝 Companhia ativa', color:'var(--accent)'},
+      {text:'🛡 Relatos confiáveis', color:'var(--safe)'},
+      {text:'🧭 Boa organização', color:'var(--caution)'},
     ],
     groups:[
       {name:'Portugal com ritmo leve', pace:'Equilibrado', members:18, safety:'Hospedagens centrais e roteiros claros', action:'Entrar no grupo'},
-      {name:'Buenos Aires cultural', pace:'Passeios mÃ©dios', members:13, safety:'Planejamento com pontos seguros', action:'Ver roteiro'},
-      {name:'Serra GaÃºcha com companhia', pace:'ConfortÃ¡vel', members:17, safety:'Check-in diÃ¡rio e apoio mÃºtuo', action:'Pedir convite'},
+      {name:'Buenos Aires cultural', pace:'Passeios médios', members:13, safety:'Planejamento com pontos seguros', action:'Ver roteiro'},
+      {name:'Serra Gaúcha com companhia', pace:'Confortável', members:17, safety:'Check-in diário e apoio mútuo', action:'Pedir convite'},
     ],
   },
   conforto: {
     label:'Conforto e apoio',
     journeyTitle:'Mais clareza, conforto e suporte social',
-    contextCopy:'O Azimute vai priorizar seguranÃ§a, acessibilidade e grupos de companhia para esse destino.',
+    contextCopy:'O Azimute vai priorizar segurança, acessibilidade e grupos de companhia para esse destino.',
     groupsTitle:'Grupos e companhia',
     groupsSub:'Encontre grupos de viagem e pessoas com perfil parecido com o seu.',
     profileBio:'Viajante que valoriza conforto, clareza e companhia segura | Prefere roteiros tranquilos e boa acessibilidade',
-    verifyTitle:'Perfil conforto e apoio verificado âœ“',
-    verifySub:'Identidade validada e preferÃªncias de viagem confirmadas para grupos, alertas e relatos.',
+    verifyTitle:'Perfil conforto e apoio verificado ✓',
+    verifySub:'Identidade validada e preferências de viagem confirmadas para grupos, alertas e relatos.',
     dashTitle:'Painel de Viagens Conforto',
-    dashSub:'Resumo de destinos, grupos e experiÃªncias mais confortÃ¡veis dos Ãºltimos 24 meses',
+    dashSub:'Resumo de destinos, grupos e experiências mais confortáveis dos últimos 24 meses',
     badges:[
-      {text:'ðŸ¤ Companhia ativa', color:'var(--accent)'},
-      {text:'ðŸ›¡ Relatos confiÃ¡veis', color:'var(--safe)'},
-      {text:'ðŸ§­ Roteiros tranquilos', color:'var(--caution)'},
+      {text:'🤝 Companhia ativa', color:'var(--accent)'},
+      {text:'🛡 Relatos confiáveis', color:'var(--safe)'},
+      {text:'🧭 Roteiros tranquilos', color:'var(--caution)'},
     ],
     groups:[
-      {name:'Portugal conforto e apoio', pace:'Ritmo leve', members:18, safety:'Hospedagens centrais e acessÃ­veis', action:'Entrar no grupo'},
-      {name:'Buenos Aires 60+ cultural', pace:'Passeios curtos', members:11, safety:'Pequenos grupos com apoio mÃºtuo', action:'Ver roteiro'},
-      {name:'Serra GaÃºcha com companhia', pace:'Ã”nibus e caminhadas curtas', members:24, safety:'Check-in diÃ¡rio e roteiro tranquilo', action:'Pedir convite'},
+      {name:'Portugal conforto e apoio', pace:'Ritmo leve', members:18, safety:'Hospedagens centrais e acessíveis', action:'Entrar no grupo'},
+      {name:'Buenos Aires 60+ cultural', pace:'Passeios curtos', members:11, safety:'Pequenos grupos com apoio mútuo', action:'Ver roteiro'},
+      {name:'Serra Gaúcha com companhia', pace:'Ônibus e caminhadas curtas', members:24, safety:'Check-in diário e roteiro tranquilo', action:'Pedir convite'},
     ],
   },
 };
@@ -564,7 +792,7 @@ Object.assign(EXPERIENCE_MODES.explorador, {
   ],
 });
 
-const DESTINATIONS = ['Bangkok', 'Buenos Aires', 'MedellÃ­n', 'Marrakech', 'TÃ³quio', 'Trieste'];
+const DESTINATIONS = ['Bangkok', 'Buenos Aires', 'Medellín', 'Marrakech', 'Tóquio', 'Trieste'];
 let currentDestination = 'Bangkok';
 
 function syncVueState(partial) {
@@ -664,18 +892,18 @@ function modePlaceScore(place) {
 
 function modePlaceHint(place) {
   if (CURRENT_USER.mode === 'explorador') {
-    return place.risk === 'safe' ? 'Bom para quem quer explorar com autonomia e mobilidade.' : 'Vale ir com atenÃ§Ã£o ao entorno e horÃ¡rios.';
+    return place.risk === 'safe' ? 'Bom para quem quer explorar com autonomia e mobilidade.' : 'Vale ir com atenção ao entorno e horários.';
   }
   if (CURRENT_USER.mode === 'conforto') {
     const acess = place.scores.acessibilidade ?? 3;
     const segur = place.scores.seguranca ?? 3;
     return (acess >= 4 && segur >= 4)
-      ? 'Boa opÃ§Ã£o para viagens mais confortÃ¡veis, com acessibilidade e ambiente seguro.'
-      : 'Confira acessibilidade, deslocamento e horÃ¡rio antes de incluir no roteiro.';
+      ? 'Boa opção para viagens mais confortáveis, com acessibilidade e ambiente seguro.'
+      : 'Confira acessibilidade, deslocamento e horário antes de incluir no roteiro.';
   }
   return place.risk === 'safe'
-    ? 'Boa combinaÃ§Ã£o entre seguranÃ§a, conforto e experiÃªncia.'
-    : 'Melhor visitar com planejamento e atenÃ§Ã£o ao contexto local.';
+    ? 'Boa combinação entre segurança, conforto e experiência.'
+    : 'Melhor visitar com planejamento e atenção ao contexto local.';
 }
 
 function placeDecisionCopy(place) {
@@ -722,7 +950,7 @@ function applyAdaptiveExperience() {
     profileName.innerHTML = `${CURRENT_USER.name} <span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>`;
   }
   if (profileHandle) {
-    profileHandle.textContent = `${CURRENT_USER.handle} Â· ${CURRENT_USER.age} anos Â· ${mode.label}`;
+    profileHandle.textContent = `${CURRENT_USER.handle} · ${CURRENT_USER.age} anos · ${mode.label}`;
   }
   if (profileBio) profileBio.textContent = mode.profileBio;
   if (verifyTitle) verifyTitle.textContent = mode.verifyTitle;
@@ -740,15 +968,20 @@ applyAdaptiveExperience = function() {
   originalApplyAdaptiveExperience();
   const profileHandle = document.getElementById('profileHandle');
   if (profileHandle) {
-    profileHandle.textContent = `${CURRENT_USER.handle} Â· ${CURRENT_USER.age} anos Â· ${CURRENT_USER.loc}`;
+    profileHandle.textContent = `${CURRENT_USER.handle} · ${CURRENT_USER.age} anos · ${CURRENT_USER.loc}`;
   }
 };
 
 function centerMapOnPlace(placeId, zoom = 12, openPopup = true) {
   if (!map) return;
+  clusterMode = false;
+  const toggle = document.getElementById('clusterToggle');
+  if (toggle) toggle.checked = false;
+  applyMapVisibility();
   const marker = allMarkers.find(item => item.placeId === placeId);
   const place = PLACES.find(item => item.id === placeId);
   if (!marker || !place) return;
+  marker.addTo(map);
   map.flyTo([place.lat, place.lng], zoom, { duration: 1.1 });
   if (openPopup) {
     setTimeout(() => marker.openPopup(), 950);
@@ -804,10 +1037,10 @@ function previewPostPlace(rawValue) {
     return;
   }
   if (matchedPlace) {
-    hint.textContent = `Local reconhecido: ${matchedPlace.name}, ${matchedPlace.city}. Seu relato tambÃ©m reforÃ§arÃ¡ esse ponto no mapa.`;
+    hint.textContent = `Local reconhecido: ${matchedPlace.name}, ${matchedPlace.city}. Seu relato também reforçará esse ponto no mapa.`;
     return;
   }
-  hint.textContent = 'Novo local: seu relato serÃ¡ publicado no feed, mas sem vÃ­nculo com um ponto jÃ¡ existente.';
+  hint.textContent = 'Novo local: seu relato será publicado no feed, mas sem vínculo com um ponto já existente.';
 }
 
 function destinationPrimaryPlace(city) {
@@ -1029,6 +1262,35 @@ function renderTrustHub() {
   `;
 }
 
+function renderTransparency() {
+  const wrap = document.getElementById('transparencyCard');
+  if (!wrap) return;
+  const metrics = [
+    {label:'Tempo médio de resposta', value:'7 min', sub:'Alertas críticos comunidade + moderação'},
+    {label:'Taxa de falsos positivos', value:'3%', sub:'Base últimos 30 dias'},
+    {label:'Alertas verificados', value:'82%', sub:'Com identidade confirmada'},
+    {label:'Incidentes evitados', value:`${IMPACT_STATS.avoidedRisks}%`, sub:'Relatos que evitaram risco'},
+  ];
+  wrap.innerHTML = `
+    <div class="trust-head">
+      <div>
+        <div class="trust-title">Transparência e segurança</div>
+        <div class="trust-sub">Métricas públicas reforçam confiança na rede.</div>
+      </div>
+      <span class="crowd-pill lvl-low">Aberto</span>
+    </div>
+    <div class="transparency-metrics">
+      ${metrics.map(m => `
+        <div class="trans-item">
+          <strong>${m.value}</strong>
+          <span>${m.label}</span>
+          <span style="color:var(--muted2);display:block;margin-top:3px">${m.sub}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 function ensureMoreLogoutCard() {
   const grid = document.querySelector('#page-more .more-grid');
   if (!grid || document.getElementById('logoutMoreCard')) return;
@@ -1053,29 +1315,29 @@ function repairMojibakeText(value) {
   } catch {}
 
   return value
-    .replace(/Â·/g, '·')
-    .replace(/AtenÃ§Ã£o/g, 'Atencao')
-    .replace(/SeguranÃ§a/g, 'Seguranca')
-    .replace(/ExperiÃªncia/g, 'Experiencia')
-    .replace(/AtualizaÃ§Ãµes/g, 'Atualizacoes')
-    .replace(/NotÃ­cias/g, 'Noticias')
-    .replace(/PaÃ­ses/g, 'Paises')
-    .replace(/ConfianÃ§a/g, 'Confianca')
-    .replace(/NÃ­vel/g, 'Nivel')
-    .replace(/AvaliaÃ§Ã£o/g, 'Avaliacao')
-    .replace(/LocalizaÃ§Ã£o/g, 'Localizacao')
-    .replace(/PÃºblico/g, 'Publico')
-    .replace(/usuÃ¡rios/g, 'usuarios')
-    .replace(/vocÃª/g, 'voce')
-    .replace(/estÃ¡/g, 'esta')
-    .replace(/SÃ‰RIO/g, 'SERIO')
-    .replace(/tambÃ©m/g, 'tambem')
-    .replace(/preÃ§os/g, 'precos')
+    .replace(/·/g, '·')
+    .replace(/Atenção/g, 'Atencao')
+    .replace(/Segurança/g, 'Seguranca')
+    .replace(/Experiência/g, 'Experiencia')
+    .replace(/Atualizações/g, 'Atualizacoes')
+    .replace(/Notícias/g, 'Noticias')
+    .replace(/Países/g, 'Paises')
+    .replace(/Confiança/g, 'Confianca')
+    .replace(/Nível/g, 'Nivel')
+    .replace(/Avaliação/g, 'Avaliacao')
+    .replace(/Localização/g, 'Localizacao')
+    .replace(/Público/g, 'Publico')
+    .replace(/usuários/g, 'usuarios')
+    .replace(/você/g, 'voce')
+    .replace(/está/g, 'esta')
+    .replace(/SÉRIO/g, 'SERIO')
+    .replace(/também/g, 'tambem')
+    .replace(/preços/g, 'precos')
     .replace(/as 19h/g, 'as 19h')
-    .replace(/âœ“/g, '')
-    .replace(/â­/g, '★')
-    .replace(/â˜†/g, '☆')
-    .replace(/â—/g, '●')
+    .replace(/✓/g, '')
+    .replace(/⭐/g, '★')
+    .replace(/☆/g, '☆')
+    .replace(/●/g, '●')
     .replace(/�/g, '')
     .replace(/ðŸ[^ ]*/g, '')
     .replace(/\s{2,}/g, ' ')
@@ -1184,13 +1446,16 @@ function setCurrentDestination(city) {
   renderSeniorHome();
   renderObjectiveModule();
   renderTrustHub();
+  renderTransparency();
   renderMapFocus();
+  renderFeedFilters();
+  renderFeed();
   applyAdaptiveExperience();
   renderNotifs();
   if (document.getElementById('page-map').classList.contains('act')) {
     centerMapOnPlace(mapFocusPlaceId, 11, false);
   }
-  showToast(`ðŸ“ Destino atualizado para ${city}`,'ts');
+  showToast(`📍 Destino atualizado para ${city}`,'ts');
 }
 
 function notifActions(notif, index) {
@@ -1240,7 +1505,7 @@ function handleNotifAction(index, action) {
     return;
   }
   renderNotifs();
-  showToast('âœ… Alerta atualizado','ts');
+  showToast('✅ Alerta atualizado','ts');
 }
 
 function themeIcon(mode) {
@@ -1271,12 +1536,12 @@ function toggleTheme() {
   currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
   localStorage.setItem('azimute-theme', currentTheme);
   applyTheme(currentTheme);
-  showToast(currentTheme === 'light' ? 'â˜€ï¸ Modo claro ativado' : 'ðŸŒ™ Modo escuro ativado','');
+  showToast(currentTheme === 'light' ? '☀️ Modo claro ativado' : '🌙 Modo escuro ativado','');
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  BOOT
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 window.addEventListener('load', () => {
   initTheme();
   currentDestination = localStorage.getItem('azimute-destination') || currentDestination;
@@ -1298,9 +1563,12 @@ window.addEventListener('load', () => {
       renderTrendingRoutes();
       renderPriceAlerts();
       renderImpactModule();
+      renderTransparency();
       renderTravelDashboard();
+      renderFeedFilters();
       renderFeed();
       renderFriends();
+      populateExploreFilters();
       renderExplore();
       renderNotifs();
       renderNews();
@@ -1318,9 +1586,9 @@ window.addEventListener('load', () => {
   }, 2700);
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  STORIES
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 const STORIES = [
   {img:'https://i.pravatar.cc/80?img=12', name:'@carlos.w', ring:'cr', status:'agora'},
   {img:'https://i.pravatar.cc/80?img=25', name:'@ana.trips', ring:'dr', status:'5min'},
@@ -1330,6 +1598,17 @@ const STORIES = [
   {img:'https://i.pravatar.cc/80?img=23', name:'@julia.m', ring:'cr', status:'41min'},
   {img:'https://i.pravatar.cc/80?img=60', name:'@rafa.go', ring:'dr', status:'1h'},
 ];
+
+function quickAddStory() {
+  const name = prompt('Usuário do story (@exemplo):', '@voce');
+  if (!name) return;
+  const status = prompt('Quando foi publicado?', 'agora') || 'agora';
+  const img = `https://i.pravatar.cc/80?u=${encodeURIComponent(name)}`;
+  STORIES.unshift({img, name, ring:'cr', status});
+  if (STORIES.length > 20) STORIES.length = 20;
+  renderStories();
+  showToast('📸 Story publicado!','ts');
+}
 
 function renderPulse() {
   const el = document.getElementById('pulseGrid');
@@ -1346,7 +1625,7 @@ function renderTrendingRoutes() {
   const el = document.getElementById('tripRow');
   if (!el) return;
   el.innerHTML = TREND_ROUTES.map(r => `
-    <div class="trip-card" onclick="showToast('ðŸ—ºï¸ Rota salva para acompanhar','ts')">
+    <div class="trip-card" onclick="showToast('🗺️ Rota salva para acompanhar','ts')">
       <div class="trip-route">${r.route}</div>
       <div class="trip-meta">${r.meta}</div>
       <div class="trip-risk">${r.risk}</div>
@@ -1362,11 +1641,11 @@ function renderPriceAlerts() {
     <div class="price-row">
       <div class="price-info">
         <div class="price-route">${g.name}</div>
-        <div class="price-meta">${g.members} membros Â· ${g.pace}</div>
+        <div class="price-meta">${g.members} membros · ${g.pace}</div>
       </div>
       <div class="price-right">
         <span class="crowd-pill lvl-low">Verificado</span>
-        <button class="mini-btn" onclick="showToast('ðŸ¤ ${g.action}: ${g.name}','ts')">${g.action}</button>
+        <button class="mini-btn" onclick="showToast('🤝 ${g.action}: ${g.name}','ts')">${g.action}</button>
       </div>
     </div>
   `).join('');
@@ -1428,15 +1707,15 @@ function ensureImpactChat() {
     id:'impact-support',
     type:'group',
     name:'Rede de Apoio Azimute',
-    avatar:'ðŸ¤',
+    avatar:'🤝',
     online:false,
     typing:false,
     status:'Comunidade ativa',
     time:'agora',
     unread:1,
-    last:'Azimute: bem-vindo Ã  rede de apoio.',
+    last:'Azimute: bem-vindo à rede de apoio.',
     messages:[
-      {from:'them', text:'Azimute: bem-vindo Ã  rede de apoio. Aqui a comunidade combina companhia, ajuda local e suporte rÃ¡pido.', time:getTimeNow()},
+      {from:'them', text:'Azimute: bem-vindo à rede de apoio. Aqui a comunidade combina companhia, ajuda local e suporte rápido.', time:getTimeNow()},
     ]
   };
   CHATS.unshift(chat);
@@ -1456,7 +1735,7 @@ function joinSupportNetwork() {
   currentChatId = chat.id;
   NOTIFS.unshift({
     type:'info',
-    text:'VocÃª entrou na <strong>Rede de Apoio Azimute</strong> e jÃ¡ pode ajudar ou pedir companhia em viagem.',
+    text:'Você entrou na <strong>Rede de Apoio Azimute</strong> e já pode ajudar ou pedir companhia em viagem.',
     time:'agora',
     unread:true,
     page:'messages',
@@ -1466,13 +1745,13 @@ function joinSupportNetwork() {
   renderDesktopRail();
   renderNotifs();
   renderChats();
-  showToast('ðŸ¤ VocÃª entrou na rede de apoio','ts');
+  showToast('🤝 Você entrou na rede de apoio','ts');
 }
 
 function createImpactRequest(kind) {
   const request = kind === 'ajuda'
-    ? {id:`ir${Date.now()}`, icon:'ðŸ™‹', title:'Ajuda oferecida por AndrÃ©', text:'AndrÃ© se disponibilizou para orientar viajantes sobre deslocamento seguro e leitura de contexto local.', city:'Online', responses:1}
-    : {id:`ir${Date.now()}`, icon:'ðŸ§­', title:'AndrÃ© pediu companhia verificada', text:'Pedido de companhia para explorar a cidade com mais seguranca e trocar experiencia com a comunidade.', city:currentDestination, responses:0};
+    ? {id:`ir${Date.now()}`, icon:'🙋', title:'Ajuda oferecida por André', text:'André se disponibilizou para orientar viajantes sobre deslocamento seguro e leitura de contexto local.', city:'Online', responses:1}
+    : {id:`ir${Date.now()}`, icon:'🧭', title:'André pediu companhia verificada', text:'Pedido de companhia para explorar a cidade com mais seguranca e trocar experiencia com a comunidade.', city:currentDestination, responses:0};
   IMPACT_REQUESTS.unshift(request);
   if (kind === 'companhia') IMPACT_STATS.safeMeetups += 1;
   const chat = ensureImpactChat();
@@ -1484,7 +1763,7 @@ function createImpactRequest(kind) {
   renderTrustHub();
   renderDesktopRail();
   renderChats();
-  showToast(kind === 'ajuda' ? 'ðŸ™‹ Ajuda oferecida para a comunidade' : 'ðŸ§­ Pedido de companhia publicado','ts');
+  showToast(kind === 'ajuda' ? '🙋 Ajuda oferecida para a comunidade' : '🧭 Pedido de companhia publicado','ts');
 }
 
 function answerImpactRequest(id) {
@@ -1501,12 +1780,12 @@ function answerImpactRequest(id) {
   renderTrustHub();
   renderDesktopRail();
   renderChats();
-  showToast('ðŸ¤ VocÃª respondeu a um pedido de apoio','ts');
+  showToast('🤝 Você respondeu a um pedido de apoio','ts');
 }
 
 function savePriceAlert(id) {
   const alert = PRICE_ALERTS.find(a => a.id === id);
-  showToast(alert ? `ðŸ”” Alerta salvo: ${alert.route}` : 'ðŸ”” Alerta salvo','ts');
+  showToast(alert ? `🔔 Alerta salvo: ${alert.route}` : '🔔 Alerta salvo','ts');
 }
 
 function renderFeedSideNews() {
@@ -1528,7 +1807,7 @@ function renderCrisisCorridors() {
   list.innerHTML = CRISIS_CORRIDORS.map(c => `
     <article class="corridor-item">
       <div class="corridor-route">${c.route}</div>
-      <div class="corridor-meta">${c.status} Â· ${c.window}</div>
+      <div class="corridor-meta">${c.status} · ${c.window}</div>
     </article>
   `).join('');
 }
@@ -1538,7 +1817,7 @@ function renderCrisisTimer() {
   if (!t) return;
   const mm = String(Math.floor(crisisCheckinLeft / 60)).padStart(2,'0');
   const ss = String(crisisCheckinLeft % 60).padStart(2,'0');
-  t.textContent = `Check-in seguranÃ§a em ${mm}:${ss}`;
+  t.textContent = `Check-in segurança em ${mm}:${ss}`;
 }
 
 function startCrisisTimer() {
@@ -1548,7 +1827,7 @@ function startCrisisTimer() {
     crisisCheckinLeft--;
     if (crisisCheckinLeft <= 0) {
       crisisCheckinLeft = 180;
-      showToast('âš ï¸ FaÃ§a check-in de seguranÃ§a com seus contatos','tw');
+      showToast('⚠️ Faça check-in de segurança com seus contatos','tw');
     }
     renderCrisisTimer();
   }, 1000);
@@ -1557,7 +1836,7 @@ function startCrisisTimer() {
 function ackCrisisCheckin() {
   crisisCheckinLeft = 180;
   renderCrisisTimer();
-  showToast('âœ… Check-in enviado para seus contatos','ts');
+  showToast('✅ Check-in enviado para seus contatos','ts');
 }
 
 function cycleFeedSideNews() {
@@ -1590,14 +1869,14 @@ function renderStories() {
   const row = document.getElementById('storiesRow');
   if (!row) return;
   const addStoryBtn = `
-    <button type="button" class="story story-add" onclick="openStoryComposer()" aria-label="Publicar um novo story">
+    <button type="button" class="story story-add" onclick="quickAddStory()" aria-label="Publicar um novo story">
       <div class="story-ring"><div class="story-add-circle">+</div></div>
     </button>`;
 
   const stories = STORIES.map(s =>
-    `<div class="story" onclick="showToast('ðŸ“ Story de ${s.name} Â· ${s.status}','ts')">
+    `<div class="story" onclick="showToast('📍 Story de ${s.name} · ${s.status}','ts')">
       <div class="story-ring ${s.ring}"><img class="story-img" src="${s.img}" alt=""></div>
-      <div class="story-name">${s.name} Â· ${s.status}</div>
+      <div class="story-name">${s.name} · ${s.status}</div>
     </div>`
   ).join('');
 
@@ -1606,6 +1885,7 @@ function renderStories() {
 
 function openStoryComposer() {
   const form = document.getElementById('storyComposer');
+  if (!form) { quickAddStory(); return; }
   const nameInput = document.getElementById('storyNameInput');
   if (!form) return;
   form.scrollIntoView({behavior:'smooth', block:'center'});
@@ -1619,7 +1899,7 @@ function createStory() {
   if (!nameInput) return;
   const name = nameInput.value.trim();
   if (!name) {
-    showToast('Digite o @ do usuÃ¡rio do story','');
+    showToast('Digite o @ do usuário do story','');
     return;
   }
   const img = (imgInput?.value.trim()) || `https://i.pravatar.cc/80?u=${encodeURIComponent(name)}`;
@@ -1630,12 +1910,12 @@ function createStory() {
   nameInput.value = '';
   if (imgInput) imgInput.value = '';
   if (statusInput) statusInput.value = '';
-  showToast('ðŸ“¸ Story publicado!','ts');
+  showToast('📸 Story publicado!','ts');
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  FRIENDS (Location)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 function renderFriends() {
   const av = document.getElementById('friendsAvatars');
   const list = document.getElementById('friendsOnline');
@@ -1648,7 +1928,7 @@ function renderFriends() {
       <img class="lfl-avatar" src="${f.avatar}" alt="">
       <div class="lfl-info">
         <div class="lfl-name">${f.name}</div>
-        <div class="lfl-loc">ðŸ“ ${f.loc}</div>
+        <div class="lfl-loc">📍 ${f.loc}</div>
       </div>
       <div style="text-align:right">
         <div class="lfl-dist" style="margin-bottom:4px">${f.dist}</div>
@@ -1662,18 +1942,50 @@ function toggleLocation() {
   locOn = !locOn;
   const t = document.getElementById('locToggle');
   t.classList.toggle('on', locOn);
-  showToast(locOn ? 'ðŸ“ LocalizaÃ§Ã£o compartilhada com amigos' : 'ðŸ”’ LocalizaÃ§Ã£o ocultada', locOn?'ts':'');
+  showToast(locOn ? '📍 Localização compartilhada com amigos' : '🔒 Localização ocultada', locOn?'ts':'');
   document.getElementById('friendsOnline').style.display = locOn ? '' : 'none';
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  FEED
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
+let currentFeedCityFilter = 'all';
+let currentFeedRiskFilter = 'all';
 const riskLabel = r => ({safe:'Seguro', caution:'Atencao', suspicious:'Suspeito', danger:'Perigo'}[r]);
 const riskCls = r => `rp-${r}`;
 
+function postCity(post) {
+  if (post.placeId) {
+    const place = PLACES.find(pl => pl.id === post.placeId);
+    return place?.city || '';
+  }
+  const loc = (post.loc || '').split(',')[0].trim();
+  return loc || 'Local não informado';
+}
+
+function renderFeedFilters() {
+  // filtros removidos do feed
+}
+
+function setFeedCityFilter(value, btn) {
+  // filtros removidos
+}
+
+function setFeedRiskFilter(value, btn) {
+  // filtros removidos
+}
+
 function renderFeed(container='feedCards', posts=POSTS) {
-  document.getElementById(container).innerHTML = posts.map((p, i) => `
+  if (container === 'feedCards') {
+    const sk = document.getElementById('feedSkeleton');
+    if (sk) sk.classList.add('hide');
+  }
+
+  const filtered = posts.filter(p => {
+    return true; // filtros removidos
+  });
+
+  document.getElementById(container).innerHTML = filtered.map((p, i) => `
     <div class="card" style="animation:cardIn .4s ${i*.07}s ease both">
       <div class="tweet">
         <img class="fc-avatar" src="${p.avatar}" alt="">
@@ -1682,7 +1994,7 @@ function renderFeed(container='feedCards', posts=POSTS) {
             <span class="tweet-name">${p.user}</span>
             ${p.verified?`<span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>`:''}
             <span class="tweet-handle">${p.handle}</span>
-            <span class="tweet-dot">Â·</span>
+            <span class="tweet-dot">·</span>
             <span class="tweet-time">${p.time}</span>
             <span class="risk-pill ${riskCls(p.risk)}">${riskLabel(p.risk)}</span>
           </div>
@@ -1706,6 +2018,7 @@ function renderFeed(container='feedCards', posts=POSTS) {
             <button class="fc-act" onclick="likeFc(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>${p.likes}</button>
             <button class="fc-act" onclick="showToast('Comentarios em breve!','')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.comments}</button>
             ${p.placeId ? `<button class="fc-act" onclick="openPlace('${p.placeId}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-9.3-8-14a8 8 0 0 1 16 0c0 4.7-8 14-8 14z"/><circle cx="12" cy="8" r="3"/></svg>Local</button>` : ''}
+            <button class="fc-act" onclick="openReportModal('${p.placeId || ''}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Reportar</button>
           </div>
         </div>
       </div>
@@ -1720,12 +2033,30 @@ function likeFc(btn) {
   btn.innerHTML = btn.innerHTML.replace(/\d+/, btn.classList.contains('liked') ? n+1 : n-1);
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  EXPLORE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 let explorePlaces = [...PLACES];
+let currentCountryFilter = 'all'; // stored em minúsculas
+let currentStateFilter = 'all';   // minúsculas
+let currentCityFilter = 'all';    // minúsculas
 function renderExplore(places=PLACES) {
-  const rankedPlaces = [...places].sort((a, b) => modePlaceScore(b) - modePlaceScore(a));
+  const sk = document.getElementById('exploreSkeleton');
+  if (sk) sk.classList.add('hide');
+  const rankedPlaces = [...places]
+    .filter(p => currentCountryFilter === 'all' || p.country.toLowerCase() === currentCountryFilter)
+    .filter(p => currentStateFilter === 'all' || (p.state || '').toLowerCase() === currentStateFilter)
+    .filter(p => currentCityFilter === 'all' || p.city.toLowerCase() === currentCityFilter)
+    .sort((a, b) => modePlaceScore(b) - modePlaceScore(a));
+  if (!rankedPlaces.length) {
+    document.getElementById('exploreList').innerHTML = `
+      <div class="card" style="margin:0 14px;padding:14px">
+        <div style="font-family:var(--font-d);font-weight:700;font-size:.96rem;margin-bottom:4px">Nenhum resultado</div>
+        <div style="color:var(--muted2);font-size:.82rem;margin-bottom:10px">Tente outra categoria ou remova filtros para ver mais locais.</div>
+        <button class="btn btn-g btn-sm" onclick="setCat('all', this); filterExplore('')">Limpar filtros</button>
+      </div>`;
+    return;
+  }
   document.getElementById('exploreList').innerHTML = rankedPlaces.map(p => `
     <div class="place-card-h" onclick="openPlace('${p.id}')">
       <div class="pch-icon">${p.emoji}</div>
@@ -1758,6 +2089,78 @@ function filterExplore(q) {
   renderExplore(f);
 }
 
+function populateExploreFilters() {
+  const countrySel = document.getElementById('countryFilter');
+  const citySel = document.getElementById('cityFilter');
+  if (countrySel) {
+    countrySel.innerHTML = `<option value="all">Todos os países</option>` +
+      COUNTRY_LIST.map(c => {
+        const val = c.toLowerCase();
+        return `<option value="${val}" ${val===currentCountryFilter?'selected':''}>${c}</option>`;
+      }).join('');
+  }
+  const states = STATE_MAP[currentCountryFilter] || [];
+  const stateSel = document.getElementById('stateFilter');
+  if (stateSel) {
+    if (states.length) {
+      stateSel.disabled = false;
+      stateSel.innerHTML = `<option value="all">Todos os estados</option>` + states.map(s=>`<option value="${s.toLowerCase()}" ${s.toLowerCase()===currentStateFilter?'selected':''}>${s}</option>`).join('');
+    } else {
+      stateSel.disabled = true;
+      stateSel.innerHTML = `<option value="all">Sem estados</option>`;
+      currentStateFilter = 'all';
+    }
+  }
+
+  const cities = PLACES
+    .filter(p => currentCountryFilter==='all' || p.country.toLowerCase()===currentCountryFilter)
+    .filter(p => currentStateFilter==='all' || (p.state||'').toLowerCase()===currentStateFilter)
+    .map(p => p.city.toLowerCase());
+  const cityOptions = Array.from(new Set(cities)).sort();
+  if (citySel) {
+    citySel.innerHTML = `<option value="all">Todas as cidades</option>` +
+      cityOptions.map(c => `<option value="${c}" ${c===currentCityFilter?'selected':''}>${c}</option>`).join('');
+  }
+}
+
+function setCountryFilter(val) {
+  currentCountryFilter = val.toLowerCase();
+  currentStateFilter = 'all';
+  currentCityFilter = 'all';
+  populateExploreFilters();
+  renderExplore();
+}
+
+function setCityFilter(val) {
+  currentCityFilter = val.toLowerCase();
+  renderExplore();
+}
+
+function setStateFilter(val) {
+  currentStateFilter = val.toLowerCase();
+  currentCityFilter = 'all';
+  populateExploreFilters();
+  renderExplore();
+}
+
+function useBrowserLocation() {
+  if (!navigator.geolocation) { showToast('Geolocalização não suportada',''); return; }
+  navigator.geolocation.getCurrentPosition(pos => {
+    const here = {lat:pos.coords.latitude, lng:pos.coords.longitude};
+    const closest = PLACES
+      .map(p => ({p, d: distanceKm({lat:p.lat,lng:p.lng}, here)}))
+      .sort((a,b)=>a.d-b.d)[0];
+    if (closest) {
+      currentCountryFilter = closest.p.country.toLowerCase();
+      currentStateFilter = (closest.p.state || 'all').toLowerCase();
+      currentCityFilter = closest.p.city.toLowerCase();
+      populateExploreFilters();
+      renderExplore();
+      showToast(`📍 Filtrado para ${closest.p.city}, ${closest.p.country}`,'ts');
+    }
+  }, () => showToast('Não foi possível obter localização',''));
+}
+
 function setCat(cat, el) {
   currentCat = cat;
   document.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('act'));
@@ -1765,21 +2168,22 @@ function setCat(cat, el) {
   filterExplore('');
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  PLACE DRAWER
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-const starStr = n => 'â­'.repeat(Math.round(n)) + 'â˜†'.repeat(5-Math.round(n));
+// ════════════════════════════════
+const starStr = n => '⭐'.repeat(Math.round(n)) + '☆'.repeat(5-Math.round(n));
 const barColor = s => s >= 4 ? 'var(--safe)' : s >= 3 ? 'var(--caution)' : 'var(--danger)';
 const pct = s => Math.round((s/5)*100)+'%';
 
 function openPlace(id) {
+  mapFocusPlaceId = id;
   const p = PLACES.find(pl=>pl.id===id);
   if (!p) return;
   const trust = placeTrust(p);
 
   const scoreLabels = {
-    precos:'PreÃ§os', qualidade:'Qualidade', atendimento:'Atendimento', seguranca:'SeguranÃ§a',
-    localizacao:'LocalizaÃ§Ã£o', limpeza:'Limpeza', preco_justo:'PreÃ§o Justo',
+    precos:'Preços', qualidade:'Qualidade', atendimento:'Atendimento', seguranca:'Segurança',
+    localizacao:'Localização', limpeza:'Limpeza', preco_justo:'Preço Justo',
     beleza:'Beleza', acessibilidade:'Acesso', custo_beneficio:'Custo/Ben.',
   };
 
@@ -1797,10 +2201,10 @@ function openPlace(id) {
         <img class="review-avatar" src="${r.avatar}" alt="">
         <div style="flex:1">
           <div class="review-name">${r.user}${r.verified?`<span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>`:''}</div>
-          <div style="font-size:.7rem;color:var(--muted2);margin-top:2px">${'â­'.repeat(r.stars)}${'â˜†'.repeat(5-r.stars)}</div>
+          <div style="font-size:.7rem;color:var(--muted2);margin-top:2px">${'⭐'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-          <div class="review-date">${r.date} atrÃ¡s</div>
+          <div class="review-date">${r.date} atrás</div>
           <span class="risk-pill ${riskCls(r.risk)}" style="font-size:.62rem">${riskLabel(r.risk)}</span>
         </div>
       </div>
@@ -1808,10 +2212,10 @@ function openPlace(id) {
     </div>
   `).join('');
 
-  const tipsHtml = p.tips.map(t=>`<div class="tip-card"><div class="tip-icon">ðŸ’¡</div><div>${t}</div></div>`).join('');
+  const tipsHtml = p.tips.map(t=>`<div class="tip-card"><div class="tip-icon">💡</div><div>${t}</div></div>`).join('');
   const photosHtml = p.photos.map(ph=>`<div class="photo-thumb">${ph}</div>`).join('');
 
-  const typeLabel = {restaurant:'ðŸœ Restaurante', hostel:'ðŸ› Hostel', tourspot:'ðŸ“¸ Ponto TurÃ­stico', transport:'ðŸš— Transporte', market:'ðŸ› Mercado'}[p.type] || p.type;
+  const typeLabel = {restaurant:'🍜 Restaurante', hostel:'🛏 Hostel', tourspot:'📸 Ponto Turístico', transport:'🚗 Transporte', market:'🛍 Mercado'}[p.type] || p.type;
 
   document.getElementById('drawerContent').innerHTML = `
     <div class="place-header">
@@ -1821,7 +2225,7 @@ function openPlace(id) {
         <div class="place-address"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-9.3-8-14a8 8 0 0 1 16 0c0 4.7-8 14-8 14z"/><circle cx="12" cy="8" r="3"/></svg>${p.address}</div>
         <div class="place-meta-row" style="margin-top:6px">
           <span style="font-size:.75rem;color:var(--muted2)">${typeLabel}</span>
-          <span style="color:var(--muted2)">Â·</span>
+          <span style="color:var(--muted2)">·</span>
           <span style="font-size:.75rem;color:var(--muted2)">${p.flag} ${p.city}</span>
         </div>
       </div>
@@ -1830,38 +2234,38 @@ function openPlace(id) {
     <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px">
       <div>
         <div class="place-score-big">${p.score}</div>
-        <div style="font-size:.8rem;color:var(--muted2)">${p.reviews} avaliaÃ§Ãµes</div>
+        <div style="font-size:.8rem;color:var(--muted2)">${p.reviews} avaliações</div>
       </div>
       <div style="flex:1">
-        <div style="font-size:1.2rem">${'â­'.repeat(Math.round(p.score))}${'â˜†'.repeat(5-Math.round(p.score))}</div>
+        <div style="font-size:1.2rem">${'⭐'.repeat(Math.round(p.score))}${'☆'.repeat(5-Math.round(p.score))}</div>
         <span class="risk-pill ${riskCls(p.risk)}" style="margin-top:5px;display:inline-flex">${riskLabel(p.risk)}</span>
       </div>
-      <button class="btn btn-p btn-sm" onclick="closeDrawer();openPost()">âœï¸ Avaliar</button>
+      <button class="btn btn-p btn-sm" onclick="closeDrawer();openPost()">✍️ Avaliar</button>
     </div>
 
     <div class="trust-panel">
       <div class="trust-panel-score">${trust.confidence}%</div>
       <div class="trust-panel-copy">
         <div class="trust-panel-title">Indice de confianca do local</div>
-        <div class="trust-panel-sub">${trust.communityLabel} Â· ${trust.verifiedCount} de ${trust.total} relatos com identidade verificada</div>
+        <div class="trust-panel-sub">${trust.communityLabel} · ${trust.verifiedCount} de ${trust.total} relatos com identidade verificada</div>
       </div>
     </div>
 
-    <div class="section-sep">PontuaÃ§Ã£o Detalhada</div>
+    <div class="section-sep">Pontuação Detalhada</div>
     <div class="score-bars">${scoreRows}</div>
 
     <div class="section-sep">Fotos dos Viajantes</div>
     <div class="photos-row">${photosHtml}</div>
 
-    <div class="section-sep">Dicas de SeguranÃ§a</div>
+    <div class="section-sep">Dicas de Segurança</div>
     ${tipsHtml}
 
     <div class="section-sep">Relatos (${p.reviews_list.length})</div>
     ${reviewCards}
 
     <div style="margin-top:8px;display:flex;gap:8px">
-      <button class="btn btn-g" style="flex:1" onclick="closeDrawer()">Fechar</button>
-      <button class="btn btn-p" style="flex:1" onclick="closeDrawer();showPage('map')">Ver no Mapa</button>
+      <button class="btn btn-danger" style="flex:1" onclick="openReportModal('${p.id}')">🚨 Reportar golpe</button>
+      <button class="btn btn-p" style="flex:1" onclick="goToMap('${p.id}')">Ver no Mapa</button>
     </div>
   `;
 
@@ -1879,11 +2283,46 @@ document.getElementById('placeDrawer').addEventListener('click', e => {
   if (e.target === document.getElementById('placeDrawer')) closeDrawer();
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+function goToMap(placeId) {
+  mapFocusPlaceId = placeId;
+  closeDrawer();
+  showPage('map');
+  setTimeout(() => centerMapOnPlace(placeId, 13, true), 200);
+}
+
+// ════════════════════════════════
 //  MAP
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 const RISK_COLORS = {safe:'#22c55e', caution:'#f59e0b', suspicious:'#f97316', danger:'#ef4444'};
 const TYPE_COLORS = {restaurant:'#a855f7', hostel:'#3b82f6', tourspot:'#ec4899', transport:'#06b6d4', market:'#84cc16'};
+const RISK_ORDER = {danger:4, suspicious:3, caution:2, safe:1};
+
+function distanceKm(a, b) {
+  const toRad = d => d * Math.PI / 180;
+  const R = 6371;
+  const dLat = toRad(b.lat - a.lat);
+  const dLon = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h = Math.sin(dLat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+function clusterPlaces(list, radiusKm = 8) {
+  const clusters = [];
+  list.forEach(p => {
+    let target = clusters.find(c => distanceKm(c, p) <= radiusKm);
+    if (!target) {
+      clusters.push({lat:p.lat, lng:p.lng, members:[p]});
+      return;
+    }
+    target.members.push(p);
+    // recompute centroid
+    target.lat = target.members.reduce((s, m) => s + m.lat, 0) / target.members.length;
+    target.lng = target.members.reduce((s, m) => s + m.lng, 0) / target.members.length;
+  });
+  return clusters;
+}
 
 function initMap() {
   if (mapInit) return;
@@ -1891,34 +2330,35 @@ function initMap() {
 
   map = L.map('map', {center:[20,12], zoom:2, zoomControl:true});
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:'Â© OpenStreetMap contributors', maxZoom:18
+    attribution:'© OpenStreetMap contributors', maxZoom:18
   }).addTo(map);
 
-  // Place markers
+  // Place markers (individual)
   PLACES.forEach(p => {
     const col = RISK_COLORS[p.risk];
     const typeCol = TYPE_COLORS[p.type] || col;
+    const bgImg = p.photo ? `background-image:url('${p.photo}');background-size:cover;background-position:center;` : '';
 
     const icon = L.divIcon({
       html: `<div style="
         position:relative;width:34px;height:34px;border-radius:50%;
-        background:${col};border:3px solid rgba(255,255,255,.9);
-        box-shadow:0 2px 14px ${col}88,0 0 0 5px ${col}22;
+        ${bgImg || `background:${col};`}
+        border:3px solid rgba(255,255,255,.9);
+        box-shadow:0 6px 14px rgba(0,0,0,.28);
         display:flex;align-items:center;justify-content:center;
-        font-size:15px;cursor:pointer;
-      ">${p.emoji}</div>`,
+        font-size:15px;cursor:pointer;color:#000;
+      ">${bgImg ? '' : p.emoji}</div>`,
       className:'', iconSize:[34,34], iconAnchor:[17,17]
     });
 
     const marker = L.marker([p.lat, p.lng], {icon})
-      .addTo(map)
       .bindPopup(`
         <div style="min-width:190px;font-family:'DM Sans',sans-serif">
           <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:2px">${p.emoji} ${p.name}</div>
-          <div style="font-size:.73rem;color:#5a6478;margin-bottom:6px">ðŸ“ ${p.city}, ${p.country} ${p.flag}</div>
+          <div style="font-size:.73rem;color:#5a6478;margin-bottom:6px">📍 ${p.city}, ${p.country} ${p.flag}</div>
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
             <span style="background:${col}22;color:${col};padding:2px 7px;border-radius:50px;font-size:.68rem;font-weight:700">${riskLabel(p.risk)}</span>
-            <span style="font-size:.72rem;color:#8892a4">${p.score}â­ Â· ${p.reviews} relatos</span>
+            <span style="font-size:.72rem;color:#8892a4">${p.score}⭐ · ${p.reviews} relatos</span>
           </div>
           <div style="font-size:.76rem;color:#8892a4;margin-bottom:8px">${p.reviews_list.length > 0 ? `"${p.reviews_list[0].text.substring(0,60)}..."` : ''}</div>
           <button onclick="closeDrawerIfOpen();openPlace('${p.id}')" style="
@@ -1926,7 +2366,7 @@ function initMap() {
             background:linear-gradient(135deg,#00e5b8,#0099cc);
             border:none;border-radius:8px;color:#000;font-weight:700;font-size:.78rem;
             cursor:pointer;font-family:'DM Sans',sans-serif;
-          ">Ver detalhes e avaliaÃ§Ãµes â†’</button>
+          ">Ver detalhes e avaliações →</button>
         </div>
       `, {className:'', maxWidth:240});
 
@@ -1937,14 +2377,52 @@ function initMap() {
     allMarkers.push(marker);
   });
 
+  // Cluster markers
+  const clusters = clusterPlaces(PLACES, 10);
+  clusters.forEach(c => {
+    if (!c.members || c.members.length <= 1) return;
+    const worst = c.members.reduce((worst, cur) => {
+      return (RISK_ORDER[cur.risk] || 0) > (RISK_ORDER[worst] || 0) ? cur.risk : worst;
+    }, 'safe');
+    const main = c.members[0];
+    const icon = L.divIcon({
+      html:`<div style="
+        position:relative;width:40px;height:40px;border-radius:50%;
+        background:${RISK_COLORS[worst] || '#3b82f6'};
+        border:4px solid rgba(255,255,255,.9);
+        box-shadow:0 4px 16px ${(RISK_COLORS[worst]||'#3b82f6')}66;
+        display:flex;align-items:center;justify-content:center;
+        color:#000;font-weight:800;font-family:'Syne',sans-serif;font-size:.9rem;
+      ">${c.members.length}</div>`,
+      className:'', iconSize:[40,40], iconAnchor:[20,20]
+    });
+    const clusterMarker = L.marker([c.lat, c.lng], {icon});
+    clusterMarker.riskType = worst;
+    clusterMarker.placeType = 'cluster';
+    clusterMarker.groupPlaces = c.members.map(m => m.id);
+    clusterMarker.on('click', () => {
+      clusterMode = false;
+      const toggle = document.getElementById('clusterToggle');
+      if (toggle) toggle.checked = false;
+      applyMapVisibility();
+      const target = allMarkers.find(m => clusterMarker.groupPlaces.includes(m.placeId));
+      if (target) {
+        target.addTo(map);
+        target.openPopup();
+      }
+    });
+    clusterMarkers.push(clusterMarker);
+  });
+
   // Heatmap circles
   PLACES.forEach(p => {
     const col = RISK_COLORS[p.risk];
     const circle = L.circle([p.lat, p.lng], {
       color:col, fillColor:col, fillOpacity:.07, opacity:.15, weight:1, radius:100000
-    }).addTo(map);
+    });
     circle.riskType = p.risk;
     circle.placeType = p.type;
+    circle.isHeat = true;
     allLayers.push(circle);
   });
 
@@ -1958,9 +2436,10 @@ function initMap() {
       opacity:.22,
       weight:1,
       radius:z.radius
-    }).addTo(map);
+    });
     circle.riskType = z.risk;
     circle.placeType = 'global-zone';
+    circle.isHeat = true;
     allLayers.push(circle);
   });
 
@@ -1969,7 +2448,7 @@ function initMap() {
     const col = RISK_COLORS[z.risk] || RISK_COLORS.danger;
     const circle = L.circle([z.lat, z.lng], {
       color:col, fillColor:col, fillOpacity:0, opacity:0, weight:2, radius:z.radius
-    }).addTo(map);
+    });
     circle.riskType = z.risk;
     circle.placeType = 'crisis';
     circle.isCrisis = true;
@@ -1986,14 +2465,15 @@ function initMap() {
       opacity:.45,
       weight:2,
       radius:z.radius
-    }).addTo(map);
+    });
     circle.riskType = 'danger';
     circle.placeType = 'war';
+    circle.isHeat = true;
     circle.bindPopup(`
       <div style="font-family:'DM Sans',sans-serif;min-width:210px">
-        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:4px">ðŸ”¥ ${z.label}</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:4px">🔥 ${z.label}</div>
         <div style="font-size:.75rem;color:#8892a4;line-height:1.45">${z.note}</div>
-        <div style="margin-top:8px;font-size:.7rem;color:#b91c1c;font-weight:700">Zona de guerra ativa Â· ${z.source}</div>
+        <div style="margin-top:8px;font-size:.7rem;color:#b91c1c;font-weight:700">Zona de guerra ativa · ${z.source}</div>
       </div>
     `, {className:'', maxWidth:250});
     allLayers.push(circle);
@@ -2016,13 +2496,12 @@ function initMap() {
       className:'', iconSize:[38,38], iconAnchor:[19,19]
     });
     const m = L.marker([fc.lat, fc.lng], {icon:fIcon})
-      .addTo(map)
       .bindPopup(`
         <div style="font-family:'DM Sans',sans-serif;min-width:150px">
           <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem">${fc.f.name}</div>
           <div style="font-size:.72rem;color:#5a6478">${fc.f.handle}</div>
-          <div style="font-size:.75rem;color:#8892a4;margin-top:4px">ðŸ“ ${fc.f.loc}</div>
-          <div style="font-size:.72rem;color:#22c55e;margin-top:2px">â— Online agora</div>
+          <div style="font-size:.75rem;color:#8892a4;margin-top:4px">📍 ${fc.f.loc}</div>
+          <div style="font-size:.72rem;color:#22c55e;margin-top:2px">● Online agora</div>
         </div>
       `, {className:'', maxWidth:200});
     m.riskType = 'friends';
@@ -2032,6 +2511,8 @@ function initMap() {
 
   setTimeout(() => map.invalidateSize(), 100);
   applyMapVisibility();
+  const ms = document.getElementById('mapSkeleton');
+  if (ms) ms.classList.add('hide');
 }
 
 function closeDrawerIfOpen() {
@@ -2040,14 +2521,24 @@ function closeDrawerIfOpen() {
 
 function applyMapVisibility() {
   if (!map) return;
+  const showPlaces = !clusterMode;
+  const showClusters = clusterMode;
+
   allMarkers.forEach(m => {
     const match = currentFilter==='all' || m.riskType===currentFilter || m.placeType===currentFilter;
-    match ? m.addTo(map) : m.remove();
+    if (showPlaces && match) m.addTo(map); else map.removeLayer(m);
   });
+
+  clusterMarkers.forEach(m => {
+    const match = currentFilter==='all' || m.riskType===currentFilter || m.placeType===currentFilter;
+    if (showClusters && match) m.addTo(map); else map.removeLayer(m);
+  });
+
   allLayers.forEach(l => {
     const match = currentFilter==='all' || l.riskType===currentFilter || l.placeType===currentFilter;
     const blockedByCrisis = l.isCrisis && !crisisMode;
-    const show = match && !blockedByCrisis;
+    const blockedHeat = l.isHeat && !heatVisible;
+    const show = match && !blockedByCrisis && !blockedHeat;
     if (l.isCrisis) {
       const col = RISK_COLORS[l.riskType] || RISK_COLORS.danger;
       l.setStyle({
@@ -2070,6 +2561,16 @@ function filterMap(type, el) {
   applyMapVisibility();
 }
 
+function toggleClusterMode(on=true) {
+  clusterMode = !!on;
+  applyMapVisibility();
+}
+
+function toggleHeat(on=true) {
+  heatVisible = !!on;
+  applyMapVisibility();
+}
+
 function toggleCrisisMode() {
   crisisMode = !crisisMode;
   const btn = document.getElementById('crisisToggleBtn');
@@ -2081,20 +2582,20 @@ function toggleCrisisMode() {
     toggleCrisisPanel(true);
     crisisCheckinLeft = 180;
     startCrisisTimer();
-    showToast('ðŸš¨ Modo Crise ativado: zonas e corredores priorizados','tw');
+    showToast('🚨 Modo Crise ativado: zonas e corredores priorizados','tw');
   } else {
     if (crisisTimer) clearInterval(crisisTimer);
     crisisTimer = null;
     crisisCheckinLeft = 180;
     renderCrisisTimer();
-    showToast('âœ… Modo Crise desativado','ts');
+    showToast('✅ Modo Crise desativado','ts');
   }
   applyMapVisibility();
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  NOTIFICATIONS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 const niColors = {danger:'var(--danger-bg)', caution:'var(--caution-bg)', safe:'var(--safe-bg)', info:'var(--accent-dim)', friend:'rgba(59,130,246,.1)'};
 const niTColors = {danger:'var(--danger)', caution:'var(--caution)', safe:'var(--safe)', info:'var(--accent)', friend:'#3b82f6'};
 const niIcons = {
@@ -2166,7 +2667,57 @@ function setNewsFilter(type, el) {
   renderNews(type);
 }
 
+function reportIncident(id=null, kind='post') {
+  const now = getTimeNow();
+  NOTIFS.unshift({
+    type:'danger',
+    text:`Alerta recebido${kind==='place' ? ' para o local' : ''}${id ? ` (${id})` : ''}. Equipe e comunidade vão priorizar.`,
+    time:'agora',
+    unread:true,
+    placeId: kind==='place' ? id : null,
+    city: currentDestination
+  });
+  renderNotifs();
+  showToast('🚨 Alerta enviado para moderação e apoio','ts');
+}
+
+function requestRapidHelp() {
+  const chat = ensureImpactChat();
+  chat.messages.push({from:'me', text:'Preciso de ajuda imediata neste destino.', time:getTimeNow()});
+  chat.last = 'Ajuda Já acionada';
+  chat.time = 'agora';
+  currentChatId = chat.id;
+  renderChats();
+  showToast('🤝 Rede de apoio acionada','ts');
+}
+
+function openReportModal(placeId='') {
+  const placeSelect = document.getElementById('reportPlaceInput');
+  if (placeSelect) {
+    placeSelect.innerHTML = PLACES.map(p => `<option value="${p.id}" ${p.id===placeId?'selected':''}>${p.name} · ${p.city}</option>`).join('');
+  }
+  document.getElementById('reportDescInput').value = '';
+  document.getElementById('reportModal').classList.add('open');
+}
+
+function closeReportModal() {
+  document.getElementById('reportModal').classList.remove('open');
+}
+
+function submitReport() {
+  const type = document.getElementById('reportTypeInput').value;
+  const placeId = document.getElementById('reportPlaceInput').value;
+  const desc = document.getElementById('reportDescInput').value.trim();
+  reportIncident(placeId || null, type);
+  if (desc) {
+    showToast('Descrição enviada para moderação','ts');
+  }
+  closeReportModal();
+}
+
 function renderChats() {
+  const sk = document.getElementById('chatSkeleton');
+  if (sk) sk.classList.add('hide');
   const filtered = CHATS.filter(c => {
     if (!currentChatQuery) return true;
     const q = currentChatQuery.toLowerCase();
@@ -2208,7 +2759,7 @@ function renderChatWindow() {
       <div class="chat-head-name">${chat.name}</div>
       <div class="chat-head-sub">${chat.typing ? 'digitando...' : chat.status}</div>
     </div>
-    <button class="msg-new-group" onclick="showToast('ðŸ“ž Ajuda rapida em breve','')">Ajuda</button>
+    <button class="msg-new-group" onclick="showToast('📞 Ajuda rapida em breve','')">Ajuda</button>
   `;
   document.getElementById('chatMessages').innerHTML = chat.messages.map(m => `
     <div class="chat-bubble ${m.from==='me'?'out':'in'}">
@@ -2231,12 +2782,12 @@ function attachChat(type) {
   const now = new Date();
   const hh = String(now.getHours()).padStart(2,'0');
   const mm = String(now.getMinutes()).padStart(2,'0');
-  const text = type === 'photo' ? 'ðŸ“· Foto compartilhada' : 'ðŸ“ LocalizaÃ§Ã£o compartilhada';
+  const text = type === 'photo' ? '📷 Foto compartilhada' : '📍 Localização compartilhada';
   chat.messages.push({from:'me', text, time:`${hh}:${mm}`});
   chat.last = text;
   chat.time = 'agora';
   renderChats();
-  showToast(type === 'photo' ? 'ðŸ“· Foto enviada' : 'ðŸ“ LocalizaÃ§Ã£o enviada','ts');
+  showToast(type === 'photo' ? '📷 Foto enviada' : '📍 Localização enviada','ts');
 }
 
 function sendChatMessage() {
@@ -2261,7 +2812,7 @@ function createGroupChat() {
     id,
     type:'group',
     name:'Novo Grupo de Viagem',
-    avatar:'ðŸ§­',
+    avatar:'🧭',
     status:'3 membros',
     time:'agora',
     unread:0,
@@ -2272,14 +2823,14 @@ function createGroupChat() {
   });
   currentChatId = id;
   renderChats();
-  showToast('ðŸ‘¥ Grupo criado com sucesso','ts');
+  showToast('👥 Grupo criado com sucesso','ts');
 }
 
 function simulatePresence() {
   CHATS.forEach(c => {
     if (c.type !== 'direct') return;
     if (Math.random() > 0.65) c.online = !c.online;
-    c.status = c.online ? 'Online agora' : `Visto hÃ¡ ${Math.floor(Math.random()*9)+1} min`;
+    c.status = c.online ? 'Online agora' : `Visto há ${Math.floor(Math.random()*9)+1} min`;
     if (!c.online) c.typing = false;
   });
   if (document.getElementById('page-messages').classList.contains('act')) renderChats();
@@ -2299,9 +2850,9 @@ function simulateTyping() {
   if (document.getElementById('page-messages').classList.contains('act')) renderChats();
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  NAVIGATION
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 function showPage(pg) {
   if (!loggedIn) {
     openAuth();
@@ -2334,9 +2885,17 @@ function showPage(pg) {
   sanitizeRenderedText(document.body);
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+function switchHubTab(btn) {
+  const target = btn?.dataset?.target;
+  document.querySelectorAll('.hub-tab').forEach(b => b.classList.toggle('act', b === btn));
+  document.querySelectorAll('.hub-pane').forEach(p => p.classList.remove('act'));
+  const pane = document.getElementById(target);
+  if (pane) pane.classList.add('act');
+}
+
+// ════════════════════════════════
 //  AUTH
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 function updateAuthGate() {
   const cancelBtn = document.getElementById('authCancelBtn');
   if (cancelBtn) cancelBtn.style.display = loggedIn ? '' : 'none';
@@ -2368,6 +2927,7 @@ function doLogin() {
   renderSeniorHome();
   renderObjectiveModule();
   renderTrustHub();
+  renderTransparency();
   renderPriceAlerts();
   renderImpactModule();
   renderDesktopRail();
@@ -2394,6 +2954,7 @@ function doRegister() {
   renderSeniorHome();
   renderObjectiveModule();
   renderTrustHub();
+  renderTransparency();
   renderPriceAlerts();
   renderImpactModule();
   renderDesktopRail();
@@ -2402,9 +2963,9 @@ function doRegister() {
   showToast('Conta criada! Verifique seu e-mail para ativar.','ts');
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  POST
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 function logout() {
   loggedIn = false;
   updateAuthGate();
@@ -2462,7 +3023,7 @@ function submitPost() {
   const matchedPlace = inferPlaceFromInput(placeName);
   const mappedType = matchedPlace?.type || typeInput.value || 'restaurant';
   const locationLabel = friendsOnly
-    ? 'ðŸ“ Somente para amigos'
+    ? '📍 Somente para amigos'
     : matchedPlace
       ? `${matchedPlace.name}, ${matchedPlace.city} ${matchedPlace.flag}`
       : placeName;
@@ -2477,7 +3038,7 @@ function submitPost() {
     time: getRelativeNowLabel(),
     risk: selectedRisk,
     placeId: matchedPlace?.id || null,
-    text: friendsOnly ? `ðŸ”’ [Visivel so para amigos] ${text}` : text,
+    text: friendsOnly ? `🔒 [Visivel so para amigos] ${text}` : text,
     tags: [
       slugifyTag(placeName.split(',')[0]),
       slugifyTag(mappedType),
@@ -2516,23 +3077,23 @@ function submitPost() {
   showToast(matchedPlace ? `Relato publicado e vinculado a ${matchedPlace.name}` : 'Relato publicado no feed em tempo real','ts');
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  PROFILE TOGGLES
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 function togglePriv(){
   const t=document.getElementById('privToggle');
   t.classList.toggle('on');
-  showToast(t.classList.contains('on')?'ðŸŒ Perfil pÃºblico ativado':'ðŸ”’ Perfil privado ativado','');
+  showToast(t.classList.contains('on')?'🌐 Perfil público ativado':'🔒 Perfil privado ativado','');
 }
 function toggleLocProf(){
   const t=document.getElementById('locProfToggle');
   t.classList.toggle('on');
-  showToast(t.classList.contains('on')?'ðŸ“ LocalizaÃ§Ã£o visÃ­vel para amigos':'ðŸ”’ LocalizaÃ§Ã£o ocultada','');
+  showToast(t.classList.contains('on')?'📍 Localização visível para amigos':'🔒 Localização ocultada','');
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 //  TOAST
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════
 let toastTimer;
 function showToast(msg, type='') {
   clearTimeout(toastTimer);
@@ -2546,4 +3107,3 @@ function showToast(msg, type='') {
 const style = document.createElement('style');
 style.textContent = '@keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}';
 document.head.appendChild(style);
-

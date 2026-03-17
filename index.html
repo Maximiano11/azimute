@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Azimute - Viagem segura para cada perfil</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="style.css">
@@ -32,7 +32,7 @@
       <span class="logo-name">Azimute</span>
     </div>
     <div class="nav-right">
-      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Ativar modo claro" aria-label="Alternar tema">
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3c0 .28 0 .56.02.83A7 7 0 0 0 20.17 12c.27.01.55.02.83.02z"/></svg>
       </button>
       <button class="nav-btn" onclick="openAuth()" id="loginBtn">Entrar</button>
@@ -54,35 +54,45 @@
       </div>
       <nav class="x-nav">
         <button class="x-nav-item act" id="xnav-feed" onclick="showPage('feed')">
-          <span>Inicio</span>
+          <span>🏠 Inicio</span>
           <small>Feed da comunidade</small>
         </button>
         <button class="x-nav-item" id="xnav-explore" onclick="showPage('explore')">
-          <span>Explorar</span>
+          <span>🧭 Explorar</span>
           <small>Locais confiaveis</small>
         </button>
+        <button class="x-nav-item" id="xnav-hub" onclick="showPage('hub')">
+          <span>📊 Painéis</span>
+          <small>Resumos e apoio</small>
+        </button>
         <button class="x-nav-item" id="xnav-notifications" onclick="showPage('notifications')">
-          <span>Alertas</span>
+          <span>🚨 Alertas</span>
           <small>Golpes e riscos</small>
         </button>
         <button class="x-nav-item" id="xnav-messages" onclick="showPage('messages')">
-          <span>Bate-papo</span>
+          <span>💬 Bate-papo</span>
           <small>Rede de apoio</small>
         </button>
         <button class="x-nav-item" id="xnav-map" onclick="showPage('map')">
-          <span>Mapa</span>
+          <span>🗺️ Mapa</span>
           <small>Confianca por area</small>
         </button>
-        <button class="x-nav-item" id="xnav-profile" onclick="loggedIn ? showPage('profile') : openAuth()">
-          <span>Perfil</span>
-          <small>Seus relatos</small>
-        </button>
-        <button class="x-nav-item" id="xnav-more" onclick="showPage('more')">
-          <span>Mais</span>
-          <small>Noticias e ajustes</small>
+        <button class="x-nav-item" id="xnav-news" onclick="showPage('news')">
+          <span>📰 Noticias</span>
+          <small>Fontes oficiais</small>
         </button>
       </nav>
-      <button class="x-post-btn" onclick="openPost()">Criar relato</button>
+      <button class="x-profile-btn" onclick="loggedIn ? showPage('profile') : openAuth()">
+        <img src="https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp" alt="">
+        <div class="x-profile-meta">
+          <span class="x-profile-name">Seu perfil</span>
+          <small>Ver e editar</small>
+        </div>
+      </button>
+      <div class="x-side-actions">
+        <button class="mini-btn" onclick="showToast('Configurações em breve','')">⚙️ Configurações</button>
+        <button class="mini-btn" onclick="logout()">🚪 Sair</button>
+      </div>
       <div class="x-sidebar-card">
         <div class="x-sidebar-title">Objetivo do Azimute</div>
         <div class="x-sidebar-copy">Verificar confianca em locais, evitar golpes e fazer a comunidade se ajudar durante a viagem.</div>
@@ -95,35 +105,67 @@
       <div class="feed-layout">
         <section class="feed-main">
           <div class="ph"><div class="ph-title">Feed</div><div class="ph-sub">Relatos confiaveis da comunidade</div></div>
-          <section class="card senior-home" id="seniorHome"></section>
-          <div id="journeyCard"></div>
-          <input id="storyFileInput" type="file" accept="image/*" capture="environment" style="display:none" onchange="handleStoryMedia(event)">
-          <div class="feed-composer">
-            <img class="composer-avatar" src="https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp" alt="">
-            <button class="composer-input composer-primary" onclick="openPost()">Criar relato de viagem</button>
-          </div>
-          <section class="card community-module">
-            <div class="community-head">
-              <div>
-                <div class="community-title">Comunidade e apoio</div>
-                <div class="community-sub">Encontre companhia, grupos verificados e ajuda para viajar com mais seguranca.</div>
-              </div>
-              <button class="btn btn-g btn-sm" onclick="showPage('messages')">Ver grupos</button>
-            </div>
-            <div id="seniorGroupList" class="price-list"></div>
+          <section class="card stories-wrap">
+            <div class="stories-row" id="storiesRow"></div>
           </section>
-          <section class="card impact-module" id="impactModule"></section>
-          <section class="card objective-module" id="objectiveModule"></section>
-          <section class="card trust-hub" id="trustHub"></section>
+          <div class="feed-composer single-btn">
+            <img class="composer-avatar" src="https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp" alt="">
+            <button class="btn btn-p composer-cta" onclick="openPost()">+ Postar agora</button>
+            <button class="btn btn-danger btn-sm composer-cta" onclick="openReportModal()">🚨 Reportar golpe</button>
+          </div>
+          <div id="feedSkeleton" class="skeleton-list">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
           <div class="feed" id="feedCards"></div>
         </section>
       </div>
+    </div>
+
+    <!-- HUB / PAINEIS -->
+    <div id="page-hub" class="page">
+      <div class="ph"><div class="ph-title">Painéis</div><div class="ph-sub">Resumos, apoio e fluxos rápidos sem poluir o feed</div></div>
+      <div class="hub-tabs">
+        <button class="hub-tab act" data-target="hub-community" onclick="switchHubTab(this)">Comunidade</button>
+        <button class="hub-tab" data-target="hub-impact" onclick="switchHubTab(this)">Impacto</button>
+        <button class="hub-tab" data-target="hub-confidence" onclick="switchHubTab(this)">Fluxos & confiança</button>
+      </div>
+
+      <section class="hub-pane act" id="hub-community">
+        <div id="journeyCard"></div>
+        <section class="card senior-home" id="seniorHome"></section>
+        <section class="card community-module">
+          <div class="community-head">
+            <div>
+              <div class="community-title">Comunidade e apoio</div>
+              <div class="community-sub">Encontre companhia, grupos verificados e ajuda para viajar com mais seguranca.</div>
+            </div>
+            <button class="btn btn-g btn-sm" onclick="showPage('messages')">Ver grupos</button>
+          </div>
+          <div id="seniorGroupList" class="price-list"></div>
+        </section>
+      </section>
+
+      <section class="hub-pane" id="hub-impact">
+        <section class="card impact-module" id="impactModule"></section>
+      </section>
+
+      <section class="hub-pane" id="hub-confidence">
+        <section class="card objective-module" id="objectiveModule"></section>
+        <section class="card trust-hub" id="trustHub"></section>
+        <section class="card transparency-card" id="transparencyCard"></section>
+      </section>
     </div>
 
     <!-- MAP -->
     <div id="page-map" class="page">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px 4px">
         <div><div style="font-family:var(--font-d);font-weight:800;font-size:1.16rem">Mapa</div><div style="font-size:.74rem;color:var(--muted2)">Seguranca e apoio no destino</div></div>
+      </div>
+      <div class="map-toggles">
+        <label class="toggle-inline"><input type="checkbox" id="clusterToggle" checked onchange="toggleClusterMode(this.checked)"> Agrupar marcadores</label>
+        <label class="toggle-inline"><input type="checkbox" id="heatToggle" checked onchange="toggleHeat(this.checked)"> Calor de risco</label>
       </div>
       <div class="crisis-panel compact" id="crisisPanel">
         <div class="crisis-top">
@@ -157,12 +199,19 @@
         <div class="fpill" onclick="filterMap('tourspot',this)">Pontos turisticos</div>
         <div class="fpill" onclick="filterMap('friends',this)">Amigos</div>
       </div>
+      <div id="mapSkeleton" class="skeleton-map"></div>
       <div id="map"></div>
     </div>
 
     <!-- EXPLORE -->
     <div id="page-explore" class="page">
       <div class="ph"><div class="ph-title">Explorar</div><div class="ph-sub">Lugares confiaveis para sua viagem</div></div>
+      <div class="explore-filters">
+        <button class="btn btn-g btn-sm" onclick="useBrowserLocation()">📍 Usar localização</button>
+        <select id="countryFilter" class="minput" onchange="setCountryFilter(this.value)"></select>
+        <select id="stateFilter" class="minput" onchange="setStateFilter(this.value)" disabled></select>
+        <select id="cityFilter" class="minput" onchange="setCityFilter(this.value)"></select>
+      </div>
       <div class="search-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="text" placeholder="Restaurante, hostel, ponto turistico..." oninput="filterExplore(this.value)">
@@ -176,6 +225,10 @@
         <div class="cat-chip" onclick="setCat('market',this)">Mercados</div>
       </div>
       <div class="sec-title">Mais avaliados <span>pelos viajantes</span></div>
+      <div id="exploreSkeleton" class="skeleton-list">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
       <div id="exploreList"></div>
     </div>
 
@@ -210,6 +263,10 @@
           <div class="msg-search">
             <input class="msg-search-input" type="text" placeholder="Buscar conversa..." oninput="filterChatList(this.value)">
           </div>
+          <div id="chatSkeleton" class="skeleton-list">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
           <div class="msg-list" id="chatList"></div>
         </section>
         <section class="chat-panel">
@@ -222,32 +279,6 @@
             <button class="chat-send" onclick="sendChatMessage()">Enviar</button>
           </div>
         </section>
-      </div>
-    </div>
-
-    <div id="page-more" class="page">
-      <div class="ph"><div class="ph-title">Mais</div><div class="ph-sub">Acessos secundarios e atalhos rapidos do Azimute</div></div>
-      <div class="more-grid">
-        <button class="more-card" onclick="showPage('news')">
-          <div class="more-icon">Noticias</div>
-          <div class="more-title">Noticias oficiais</div>
-          <div class="more-sub">Atualizacoes verificadas por orgaos e fontes oficiais.</div>
-        </button>
-        <button class="more-card" onclick="showPage('messages')">
-          <div class="more-icon">Mensagens</div>
-          <div class="more-title">Mensagens</div>
-          <div class="more-sub">Participe de grupos, combine companhia e troque dicas.</div>
-        </button>
-        <button class="more-card" onclick="loggedIn ? showPage('profile') : openAuth()">
-          <div class="more-icon">Perfil</div>
-          <div class="more-title">Perfil</div>
-          <div class="more-sub">Veja reputacao, preferencias de viagem e seus relatos recentes.</div>
-        </button>
-        <button class="more-card" onclick="toggleTheme()">
-          <div class="more-icon">Tema</div>
-          <div class="more-title">Tema</div>
-          <div class="more-sub">Alternar entre modo claro e escuro.</div>
-        </button>
       </div>
     </div>
 
@@ -415,6 +446,35 @@
   </div>
 </div>
 
+<!-- THEME FLOAT -->
+<button class="global-theme-btn" onclick="toggleTheme()" aria-label="Alternar tema">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3c0 .28 0 .56.02.83A7 7 0 0 0 20.17 12c.27.01.55.02.83.02z"/></svg>
+</button>
+
+<!-- REPORT MODAL -->
+<div class="modal-ov" id="reportModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Reportar golpe</div>
+    <label class="minput-label">Tipo de golpe</label>
+    <select id="reportTypeInput" class="minput">
+      <option value="cobranca">Cobrança abusiva</option>
+      <option value="falso_guia">Falso guia</option>
+      <option value="furto">Furto/roubo</option>
+      <option value="assédio">Assédio</option>
+      <option value="outro">Outro</option>
+    </select>
+    <label class="minput-label">Local</label>
+    <select id="reportPlaceInput" class="minput"></select>
+    <label class="minput-label">Descrição</label>
+    <textarea id="reportDescInput" class="minput" rows="4" placeholder="Descreva o que aconteceu"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-g" onclick="closeReportModal()">Cancelar</button>
+      <button class="btn btn-p" onclick="submitReport()">Enviar alerta</button>
+    </div>
+  </div>
+</div>
+
 <!-- AUTH MODAL -->
 <div class="auth-ov" id="authOv">
   <div class="auth-box">
@@ -467,6 +527,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
