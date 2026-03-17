@@ -1540,6 +1540,61 @@ function toggleTheme() {
 }
 
 // ════════════════════════════════
+//  ACESSIBILIDADE / INCLUSAO
+// ════════════════════════════════
+const accessibilityPrefs = {
+  largeText: false,
+  highContrast: false,
+  seniorMode: false,
+  translateEn: false,
+};
+
+function toggleLargeText() {
+  accessibilityPrefs.largeText = !accessibilityPrefs.largeText;
+  document.body.classList.toggle('large-text', accessibilityPrefs.largeText);
+  showToast(accessibilityPrefs.largeText ? '🧓 Texto grande ativado' : '🧓 Texto normal','ts');
+}
+
+function toggleHighContrast() {
+  accessibilityPrefs.highContrast = !accessibilityPrefs.highContrast;
+  document.body.classList.toggle('high-contrast', accessibilityPrefs.highContrast);
+  showToast(accessibilityPrefs.highContrast ? '⚡ Alto contraste ativo' : '⚡ Contraste padrão','ts');
+}
+
+function toggleSeniorMode() {
+  accessibilityPrefs.seniorMode = !accessibilityPrefs.seniorMode;
+  document.body.classList.toggle('senior-mode', accessibilityPrefs.seniorMode);
+  // forca modo conforto
+  CURRENT_USER.mode = accessibilityPrefs.seniorMode ? 'conforto' : (CURRENT_USER.mode || 'equilibrado');
+  applyAdaptiveExperience();
+  showToast(accessibilityPrefs.seniorMode ? '🧭 Modo idoso simplificado' : 'Modo padrão restabelecido','ts');
+}
+
+function toggleTranslate() {
+  accessibilityPrefs.translateEn = !accessibilityPrefs.translateEn;
+  document.body.classList.toggle('lang-en', accessibilityPrefs.translateEn);
+  showToast(accessibilityPrefs.translateEn ? '🌐 Tradução simultânea simulada (PT → EN)' : '🌐 Tradução desativada','ts');
+}
+
+// Sidebar toggle (mobile)
+function toggleSidebar(force=null) {
+  const open = force === null ? !document.body.classList.contains('sidebar-open') : force;
+  document.body.classList.toggle('sidebar-open', open);
+  document.getElementById('sideOverlay')?.classList.toggle('vis', open);
+}
+
+function openAccessModal() {
+  document.getElementById('accessModal')?.classList.add('open');
+}
+function closeAccessModal() {
+  document.getElementById('accessModal')?.classList.remove('open');
+}
+const accessModalEl = document.getElementById('accessModal');
+if (accessModalEl) {
+  accessModalEl.addEventListener('click', e => { if (e.target === accessModalEl) closeAccessModal(); });
+}
+
+// ════════════════════════════════
 //  BOOT
 // ════════════════════════════════
 window.addEventListener('load', () => {
@@ -1666,6 +1721,23 @@ function renderImpactModule() {
       <div class="impact-stat"><strong>+${IMPACT_STATS.safeMeetups}</strong><span>encontros seguros facilitados entre viajantes</span></div>
       <div class="impact-stat"><strong>${IMPACT_STATS.avoidedRisks}%</strong><span>dos relatos ajudam outros usuarios a evitar risco ou golpe</span></div>
       <div class="impact-stat"><strong>${IMPACT_STATS.activeGroups}</strong><span>grupos ativos com apoio mutuo e troca de experiencia</span></div>
+    </div>
+    <div class="transparency-row">
+      <div class="transp-card">
+        <div class="transp-title">Selo Local Verificado</div>
+        <div class="transp-copy">Emitido quando ha 3+ relatos verificados nos ultimos 30 dias e risco controlado.</div>
+        <div class="transp-pill">${PLACES.filter(p=>placeTrust(p).verifiedCount>=3).length} locais elegiveis</div>
+      </div>
+      <div class="transp-card">
+        <div class="transp-title">Fontes oficiais</div>
+        <div class="transp-copy">Alertas consulares, clima, mobilidade e seguranca alimentam o painel automaticamente.</div>
+        <div class="transp-pill">Gov · Consular · Meteo · Policia</div>
+      </div>
+      <div class="transp-card">
+        <div class="transp-title">LGPD by design</div>
+        <div class="transp-copy">Localizacao so sai com consentimento e vira dado agregado apos 24h.</div>
+        <div class="transp-pill">Anonimizacao ativa</div>
+      </div>
     </div>
     <div class="impact-actions">
       <button class="impact-btn primary" onclick="joinSupportNetwork()">${IMPACT_STATS.supportNetworkJoined ? 'Na rede de apoio' : 'Entrar na rede de apoio'}</button>
@@ -2057,26 +2129,33 @@ function renderExplore(places=PLACES) {
       </div>`;
     return;
   }
-  document.getElementById('exploreList').innerHTML = rankedPlaces.map(p => `
-    <div class="place-card-h" onclick="openPlace('${p.id}')">
-      <div class="pch-icon">${p.emoji}</div>
-      <div class="pch-info">
-        <div class="pch-name">${p.name}</div>
-        <div class="pch-loc">${plainTextLocation(`${p.city}, ${p.country}`)}</div>
-        <div class="pch-meta">
-          <span class="risk-pill ${riskCls(p.risk)}">${riskLabel(p.risk)}</span>
-          ${(((p.scores.acessibilidade ?? 3) >= 4) && ((p.scores.seguranca ?? 3) >= 4)) ? `<span class="tag">Bom para 60+</span>` : ''}
-          ${p.tags.slice(0,1).map(t=>`<span class="tag">${t}</span>`).join('')}
+  document.getElementById('exploreList').innerHTML = rankedPlaces.map(p => {
+    const trust = placeTrust(p);
+    return `
+      <div class="place-card-h" onclick="openPlace('${p.id}')">
+        <div class="pch-icon">${p.emoji}</div>
+        <div class="pch-info">
+          <div class="pch-name">${p.name}</div>
+          <div class="pch-loc">${plainTextLocation(`${p.city}, ${p.country}`)}</div>
+          <div class="pch-meta">
+            <span class="risk-pill ${riskCls(p.risk)}">${riskLabel(p.risk)}</span>
+            ${(((p.scores.acessibilidade ?? 3) >= 4) && ((p.scores.seguranca ?? 3) >= 4)) ? `<span class="tag">Bom para 60+</span>` : ''}
+            ${p.tags.slice(0,1).map(t=>`<span class="tag">${t}</span>`).join('')}
+          </div>
+          <div class="place-adapt"><strong>${placeDecisionCopy(p)}</strong></div>
+          <div class="place-adapt">${modePlaceHint(p)}</div>
+          <div class="trust-mini">
+            <span class="trust-pill">${trust.confidence}% selo comunidade</span>
+            <span class="trust-note">${trust.verifiedCount}/${trust.total} relatos verificados</span>
+          </div>
         </div>
-        <div class="place-adapt"><strong>${placeDecisionCopy(p)}</strong></div>
-        <div class="place-adapt">${modePlaceHint(p)}</div>
+        <div class="pch-right">
+          <div class="pch-score">${p.score}★</div>
+          <div class="pch-reviews">${p.reviews} relatos</div>
+        </div>
       </div>
-      <div class="pch-right">
-        <div class="pch-score">${p.score}★</div>
-        <div class="pch-reviews">${p.reviews} relatos</div>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
   sanitizeRenderedText(document.getElementById('exploreList'));
 }
 
@@ -2864,7 +2943,7 @@ function showPage(pg) {
   document.querySelectorAll('.x-nav-item').forEach(b=>b.classList.remove('act'));
   document.getElementById('page-'+pg).classList.add('act');
   syncVueState({ currentPage: pg });
-  const navAlias = {news:'more'};
+  const navAlias = {};
   const bn = document.getElementById('bn-'+(navAlias[pg] || pg));
   if (bn) bn.classList.add('act');
   const xnav = document.getElementById('xnav-'+(navAlias[pg] || pg));

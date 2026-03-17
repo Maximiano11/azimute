@@ -27,6 +27,9 @@
 <!-- APP -->
 <div id="app">
   <nav class="topnav">
+    <button class="side-toggle-btn" id="sideToggleBtn" onclick="toggleSidebar()" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="logo-wrap" onclick="showPage('feed')">
       <img src="logo-mark.svg" alt="Azimute">
       <span class="logo-name">Azimute</span>
@@ -44,7 +47,7 @@
   </nav>
 
   <div class="app-shell">
-    <aside class="x-sidebar">
+    <aside class="x-sidebar" id="sidebar">
       <div class="x-brand" onclick="showPage('feed')">
         <img src="logo-mark.svg" alt="Azimute">
         <div>
@@ -54,31 +57,31 @@
       </div>
       <nav class="x-nav">
         <button class="x-nav-item act" id="xnav-feed" onclick="showPage('feed')">
-          <span>🏠 Inicio</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Início</span>
           <small>Feed da comunidade</small>
         </button>
         <button class="x-nav-item" id="xnav-explore" onclick="showPage('explore')">
-          <span>🧭 Explorar</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 10 16 8 14 14 8 16 10 10"/></svg>Explorar</span>
           <small>Locais confiaveis</small>
         </button>
         <button class="x-nav-item" id="xnav-hub" onclick="showPage('hub')">
-          <span>📊 Painéis</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Painéis</span>
           <small>Resumos e apoio</small>
         </button>
         <button class="x-nav-item" id="xnav-notifications" onclick="showPage('notifications')">
-          <span>🚨 Alertas</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Alertas</span>
           <small>Golpes e riscos</small>
         </button>
         <button class="x-nav-item" id="xnav-messages" onclick="showPage('messages')">
-          <span>💬 Bate-papo</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Bate-papo</span>
           <small>Rede de apoio</small>
         </button>
         <button class="x-nav-item" id="xnav-map" onclick="showPage('map')">
-          <span>🗺️ Mapa</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Mapa</span>
           <small>Confianca por area</small>
         </button>
         <button class="x-nav-item" id="xnav-news" onclick="showPage('news')">
-          <span>📰 Noticias</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12"/><path d="M16 3h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V3"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/><line x1="10" y1="7" x2="14" y2="7"/></svg>Noticias</span>
           <small>Fontes oficiais</small>
         </button>
       </nav>
@@ -90,7 +93,7 @@
         </div>
       </button>
       <div class="x-side-actions">
-        <button class="mini-btn" onclick="showToast('Configurações em breve','')">⚙️ Configurações</button>
+        <button class="mini-btn" onclick="openAccessModal()">⚙️ Configurações</button>
         <button class="mini-btn" onclick="logout()">🚪 Sair</button>
       </div>
       <div class="x-sidebar-card">
@@ -352,10 +355,20 @@
   <div class="botnav">
     <div class="botnav-side">
       <button class="bn-item act" id="bn-feed" onclick="showPage('feed')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Feed</span>
+      </button>
+      <button class="bn-item" id="bn-explore" onclick="showPage('explore')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 10 16 8 14 14 8 16 10 10"/></svg>
+        <span>Explorar</span>
       </button>
       <button class="bn-item" id="bn-map" onclick="showPage('map')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Mapa
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        <span>Mapa</span>
+      </button>
+      <button class="bn-item" id="bn-notifications" onclick="showPage('notifications')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span>Alertas</span>
       </button>
     </div>
     <button class="bn-item bn-fab" onclick="openPost()">
@@ -363,18 +376,28 @@
       Postar
     </button>
     <div class="botnav-side">
-      <button class="bn-item" id="bn-explore" onclick="showPage('explore')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorar
+      <button class="bn-item" id="bn-messages" onclick="showPage('messages')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Bate-papo</span>
       </button>
-      <button class="bn-item" id="bn-notifications" onclick="showPage('notifications')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Alertas
+      <button class="bn-item" id="bn-news" onclick="showPage('news')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12"/><path d="M16 3h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V3"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/><line x1="10" y1="7" x2="14" y2="7"/></svg>
+        <span>Noticias</span>
       </button>
-      <button class="bn-item" id="bn-more" onclick="showPage('more')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>Mais
+      <button class="bn-item" id="bn-settings" onclick="openAccessModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 11 4.6V4a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Opções</span>
+      </button>
+      <button class="bn-item" id="bn-hub" onclick="showPage('hub')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Painéis</span>
       </button>
     </div>
   </div>
+  </div>
 </div>
+
+<div class="side-overlay" id="sideOverlay" onclick="toggleSidebar(false)"></div>
 
 <!-- PLACE DRAWER -->
 <div class="drawer-overlay" id="placeDrawer">
@@ -471,6 +494,55 @@
     <div class="modal-actions">
       <button class="btn btn-g" onclick="closeReportModal()">Cancelar</button>
       <button class="btn btn-p" onclick="submitReport()">Enviar alerta</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESSIBILITY MODAL -->
+<div class="modal-ov" id="accessModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Configurações</div>
+    <div class="access-section-label">Acessibilidade</div>
+    <div class="access-list">
+      <div class="access-row">
+        <div>
+          <div class="access-title">Texto grande</div>
+          <div class="access-sub">Facilita leitura no feed e mapas</div>
+        </div>
+        <div class="toggle" id="toggleLargeText" onclick="toggleLargeText();this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+      </div>
+      <div class="access-row">
+        <div>
+          <div class="access-title">Alto contraste</div>
+          <div class="access-sub">Melhor visibilidade para baixa visão</div>
+        </div>
+        <div class="toggle" id="toggleHighContrast" onclick="toggleHighContrast();this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+      </div>
+      <div class="access-row">
+        <div>
+          <div class="access-title">Modo idoso</div>
+          <div class="access-sub">Fluxo simplificado, botões maiores</div>
+        </div>
+        <div class="toggle" id="toggleSeniorMode" onclick="toggleSeniorMode();this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+      </div>
+      <div class="access-row">
+        <div>
+          <div class="access-title">Traduzir PT/EN</div>
+          <div class="access-sub">Mostra interface em inglês para acompanhantes</div>
+        </div>
+        <div class="toggle" id="toggleTranslate" onclick="toggleTranslate();this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+      </div>
+      <div class="access-row">
+        <div>
+          <div class="access-title">SOS / Modo crise</div>
+          <div class="access-sub">Ativa check-in de segurança e alertas</div>
+        </div>
+        <button class="mini-btn danger" onclick="toggleCrisisMode()">Ativar agora</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button class="btn btn-g" style="flex:1" onclick="closeAccessModal()">Fechar</button>
     </div>
   </div>
 </div>
