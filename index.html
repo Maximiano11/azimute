@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Azimute - Viagem segura para cada perfil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="spl-ring">
+    <div class="spl-inner">
+      <img class="spl-logo" src="logo-mark.svg" alt="Azimute">
+    </div>
+  </div>
+  <div class="spl-title">Azimute</div>
+  <div class="spl-sub">Experiencia adaptativa de viagem</div>
+  <div class="spl-bar"><div class="spl-bar-fill"></div></div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav class="topnav">
+    <div class="logo-wrap" onclick="showPage('feed')">
+      <img src="logo-mark.svg" alt="Azimute">
+      <span class="logo-name">Azimute</span>
+    </div>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Ativar modo claro" aria-label="Alternar tema">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3c0 .28 0 .56.02.83A7 7 0 0 0 20.17 12c.27.01.55.02.83.02z"/></svg>
+      </button>
+      <button class="nav-btn" onclick="openAuth()" id="loginBtn">Entrar</button>
+      <div class="avatar-btn" onclick="showPage('profile')" id="avatarBtn" style="display:none">
+        <img src="https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp" alt="">
+        <div class="notif-dot"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="app-shell">
+    <aside class="x-sidebar">
+      <div class="x-brand" onclick="showPage('feed')">
+        <img src="logo-mark.svg" alt="Azimute">
+        <div>
+          <div class="x-brand-name">Azimute</div>
+          <div class="x-brand-sub">Viagem segura em comunidade</div>
+        </div>
+      </div>
+      <nav class="x-nav">
+        <button class="x-nav-item act" id="xnav-feed" onclick="showPage('feed')">
+          <span>Inicio</span>
+          <small>Feed da comunidade</small>
+        </button>
+        <button class="x-nav-item" id="xnav-explore" onclick="showPage('explore')">
+          <span>Explorar</span>
+          <small>Locais confiaveis</small>
+        </button>
+        <button class="x-nav-item" id="xnav-notifications" onclick="showPage('notifications')">
+          <span>Alertas</span>
+          <small>Golpes e riscos</small>
+        </button>
+        <button class="x-nav-item" id="xnav-messages" onclick="showPage('messages')">
+          <span>Bate-papo</span>
+          <small>Rede de apoio</small>
+        </button>
+        <button class="x-nav-item" id="xnav-map" onclick="showPage('map')">
+          <span>Mapa</span>
+          <small>Confianca por area</small>
+        </button>
+        <button class="x-nav-item" id="xnav-profile" onclick="loggedIn ? showPage('profile') : openAuth()">
+          <span>Perfil</span>
+          <small>Seus relatos</small>
+        </button>
+        <button class="x-nav-item" id="xnav-more" onclick="showPage('more')">
+          <span>Mais</span>
+          <small>Noticias e ajustes</small>
+        </button>
+      </nav>
+      <button class="x-post-btn" onclick="openPost()">Criar relato</button>
+      <div class="x-sidebar-card">
+        <div class="x-sidebar-title">Objetivo do Azimute</div>
+        <div class="x-sidebar-copy">Verificar confianca em locais, evitar golpes e fazer a comunidade se ajudar durante a viagem.</div>
+      </div>
+    </aside>
+
+  <main>
+    <!-- FEED -->
+    <div id="page-feed" class="page act">
+      <div class="feed-layout">
+        <section class="feed-main">
+          <div class="ph"><div class="ph-title">Feed</div><div class="ph-sub">Relatos confiaveis da comunidade</div></div>
+          <section class="card senior-home" id="seniorHome"></section>
+          <div id="journeyCard"></div>
+          <input id="storyFileInput" type="file" accept="image/*" capture="environment" style="display:none" onchange="handleStoryMedia(event)">
+          <div class="feed-composer">
+            <img class="composer-avatar" src="https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp" alt="">
+            <button class="composer-input composer-primary" onclick="openPost()">Criar relato de viagem</button>
+          </div>
+          <section class="card community-module">
+            <div class="community-head">
+              <div>
+                <div class="community-title">Comunidade e apoio</div>
+                <div class="community-sub">Encontre companhia, grupos verificados e ajuda para viajar com mais seguranca.</div>
+              </div>
+              <button class="btn btn-g btn-sm" onclick="showPage('messages')">Ver grupos</button>
+            </div>
+            <div id="seniorGroupList" class="price-list"></div>
+          </section>
+          <section class="card impact-module" id="impactModule"></section>
+          <section class="card objective-module" id="objectiveModule"></section>
+          <section class="card trust-hub" id="trustHub"></section>
+          <div class="feed" id="feedCards"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div id="page-map" class="page">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px 4px">
+        <div><div style="font-family:var(--font-d);font-weight:800;font-size:1.16rem">Mapa</div><div style="font-size:.74rem;color:var(--muted2)">Seguranca e apoio no destino</div></div>
+      </div>
+      <div class="crisis-panel compact" id="crisisPanel">
+        <div class="crisis-top">
+          <div>
+            <div class="crisis-title">Modo crise</div>
+            <div class="crisis-sub">Ative apenas se precisar de orientacao imediata.</div>
+          </div>
+          <div class="crisis-top-actions">
+            <button class="mini-btn" id="crisisPanelBtn" onclick="toggleCrisisPanel()">Detalhes</button>
+            <button class="crisis-toggle" id="crisisToggleBtn" onclick="toggleCrisisMode()">Ativar</button>
+          </div>
+        </div>
+        <div class="crisis-details" id="crisisDetails">
+          <div class="crisis-row">
+            <div class="crisis-timer" id="crisisTimerLabel">Check-in de seguranca em 03:00</div>
+            <button class="crisis-safe" onclick="ackCrisisCheckin()">Estou seguro</button>
+          </div>
+          <div class="corridor-list" id="corridorList"></div>
+        </div>
+      </div>
+      <div class="map-focus-card" id="mapFocusCard"></div>
+      <div class="map-filters" id="mapFilters">
+        <div class="fpill act-all" onclick="filterMap('all',this)">Todos</div>
+        <div class="fpill" onclick="filterMap('war',this)">Guerras ativas</div>
+        <div class="fpill" onclick="filterMap('safe',this)"><span style="color:var(--safe)">●</span> Seguro</div>
+        <div class="fpill" onclick="filterMap('caution',this)"><span style="color:var(--caution)">●</span> Atencao</div>
+        <div class="fpill" onclick="filterMap('suspicious',this)"><span style="color:var(--suspicious)">●</span> Suspeito</div>
+        <div class="fpill" onclick="filterMap('danger',this)"><span style="color:var(--danger)">●</span> Perigo</div>
+        <div class="fpill" onclick="filterMap('restaurant',this)">Restaurantes</div>
+        <div class="fpill" onclick="filterMap('hostel',this)">Hostels</div>
+        <div class="fpill" onclick="filterMap('tourspot',this)">Pontos turisticos</div>
+        <div class="fpill" onclick="filterMap('friends',this)">Amigos</div>
+      </div>
+      <div id="map"></div>
+    </div>
+
+    <!-- EXPLORE -->
+    <div id="page-explore" class="page">
+      <div class="ph"><div class="ph-title">Explorar</div><div class="ph-sub">Lugares confiaveis para sua viagem</div></div>
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Restaurante, hostel, ponto turistico..." oninput="filterExplore(this.value)">
+      </div>
+      <div class="cat-row">
+        <div class="cat-chip act" onclick="setCat('all',this)">Todos</div>
+        <div class="cat-chip" onclick="setCat('restaurant',this)">Restaurantes</div>
+        <div class="cat-chip" onclick="setCat('hostel',this)">Hostels</div>
+        <div class="cat-chip" onclick="setCat('tourspot',this)">Pontos turisticos</div>
+        <div class="cat-chip" onclick="setCat('transport',this)">Transporte</div>
+        <div class="cat-chip" onclick="setCat('market',this)">Mercados</div>
+      </div>
+      <div class="sec-title">Mais avaliados <span>pelos viajantes</span></div>
+      <div id="exploreList"></div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div id="page-notifications" class="page">
+      <div class="ph"><div class="ph-title">Alertas</div><div class="ph-sub">O que precisa da sua atencao agora</div></div>
+      <div id="notifList"></div>
+    </div>
+
+    <!-- NEWS -->
+    <div id="page-news" class="page">
+      <div class="ph"><div class="ph-title">Noticias oficiais</div><div class="ph-sub">Atualizacoes verificadas sobre paises e destinos</div></div>
+      <div class="news-filters">
+        <button class="news-chip act" onclick="setNewsFilter('all',this)">Tudo</button>
+        <button class="news-chip" onclick="setNewsFilter('safety',this)">Seguranca</button>
+        <button class="news-chip" onclick="setNewsFilter('mobility',this)">Mobilidade</button>
+        <button class="news-chip" onclick="setNewsFilter('weather',this)">Clima</button>
+        <button class="news-chip" onclick="setNewsFilter('events',this)">Eventos</button>
+      </div>
+      <div class="news-list" id="newsList"></div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div id="page-messages" class="page">
+      <div class="ph"><div class="ph-title">Mensagens</div><div class="ph-sub">Rede de apoio, grupos de viagem e ajuda entre viajantes</div></div>
+      <div class="msg-layout">
+        <section class="msg-sidebar">
+          <div class="msg-toolbar">
+            <div class="msg-toolbar-title">Conversas</div>
+            <button class="msg-new-group" onclick="createGroupChat()">Novo grupo</button>
+          </div>
+          <div class="msg-search">
+            <input class="msg-search-input" type="text" placeholder="Buscar conversa..." oninput="filterChatList(this.value)">
+          </div>
+          <div class="msg-list" id="chatList"></div>
+        </section>
+        <section class="chat-panel">
+          <div class="chat-head" id="chatHead"></div>
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-compose">
+            <button class="chat-attach" onclick="attachChat('photo')" title="Enviar foto">Foto</button>
+            <button class="chat-attach" onclick="attachChat('location')" title="Enviar localizacao">Local</button>
+            <input class="chat-input" id="chatInput" type="text" placeholder="Digite uma mensagem..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+            <button class="chat-send" onclick="sendChatMessage()">Enviar</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="page-more" class="page">
+      <div class="ph"><div class="ph-title">Mais</div><div class="ph-sub">Acessos secundarios e atalhos rapidos do Azimute</div></div>
+      <div class="more-grid">
+        <button class="more-card" onclick="showPage('news')">
+          <div class="more-icon">Noticias</div>
+          <div class="more-title">Noticias oficiais</div>
+          <div class="more-sub">Atualizacoes verificadas por orgaos e fontes oficiais.</div>
+        </button>
+        <button class="more-card" onclick="showPage('messages')">
+          <div class="more-icon">Mensagens</div>
+          <div class="more-title">Mensagens</div>
+          <div class="more-sub">Participe de grupos, combine companhia e troque dicas.</div>
+        </button>
+        <button class="more-card" onclick="loggedIn ? showPage('profile') : openAuth()">
+          <div class="more-icon">Perfil</div>
+          <div class="more-title">Perfil</div>
+          <div class="more-sub">Veja reputacao, preferencias de viagem e seus relatos recentes.</div>
+        </button>
+        <button class="more-card" onclick="toggleTheme()">
+          <div class="more-icon">Tema</div>
+          <div class="more-title">Tema</div>
+          <div class="more-sub">Alternar entre modo claro e escuro.</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="page-profile" class="page">
+      <div class="prof-hero">
+        <div class="prof-top">
+          <div class="prof-av-wrap">
+            <img class="prof-av" src="https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp" alt="">
+            <div class="prof-online"></div>
+          </div>
+          <div style="flex:1">
+            <div class="prof-name" id="profileName">Andre Nomade Raiz <span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="prof-handle" id="profileHandle">@nomaderaizofc · 41 anos · no mundo</div>
+          </div>
+          <button class="btn btn-g btn-sm" onclick="showToast('Editar perfil em breve!','')">Editar</button>
+        </div>
+        <div class="prof-bio" id="profileBio">Criador de viagem com tom direto e raiz | Explora lugares polemicos, conversa com moradores e mostra a rua como ela e</div>
+        <div class="prof-stats">
+          <div class="pstat"><div class="pstat-n" id="profileCountries">34</div><div class="pstat-l">Paises</div></div>
+          <div class="pstat"><div class="pstat-n" id="profileReports">128</div><div class="pstat-l">Relatos</div></div>
+          <div class="pstat"><div class="pstat-n" id="profileGroups">12</div><div class="pstat-l">Grupos</div></div>
+          <div class="pstat"><div class="pstat-n">98%</div><div class="pstat-l">Confianca</div></div>
+        </div>
+        <div class="badges-row" id="profileBadges"></div>
+        <div class="priv-row">
+          <div class="priv-info"><div class="priv-label">Perfil publico</div><div class="priv-sub">Relatos visiveis a todos os usuarios</div></div>
+          <div class="toggle on" id="privToggle" onclick="togglePriv()"><div class="toggle-knob"></div></div>
+        </div>
+        <div class="priv-row" style="margin-top:8px">
+          <div class="priv-info"><div class="priv-label">Localizacao para amigos</div><div class="priv-sub">Apenas amigos adicionados veem onde voce esta</div></div>
+          <div class="toggle on" id="locProfToggle" onclick="toggleLocProf()"><div class="toggle-knob"></div></div>
+        </div>
+      </div>
+      <div class="verify-box">
+        <div class="vbox-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <div style="font-family:var(--font-d);font-weight:600;font-size:.92rem" id="verifyTitle">Perfil adaptativo verificado</div>
+          <div style="font-size:.78rem;color:var(--muted2);margin-top:2px" id="verifySub">Identidade validada e preferencias de viagem confirmadas para grupos, alertas e relatos.</div>
+        </div>
+      </div>
+      <div class="travel-dash">
+        <div class="td-title" id="travelDashTitle">Painel de Viagens</div>
+        <div class="td-sub" id="travelDashSub">Resumo de destinos, grupos e experiencias relevantes dos ultimos 24 meses</div>
+        <div class="td-grid" id="travelDashGrid"></div>
+        <div class="country-strip" id="countryStrip"></div>
+        <div class="country-bars" id="countryBars"></div>
+      </div>
+      <div class="sec-title" style="padding-left:14px">Meus Relatos Recentes</div>
+      <div class="feed" id="profileFeed" style="padding-bottom:16px"></div>
+    </div>
+  </main>
+
+    <aside class="x-rail">
+      <section class="x-rail-card">
+        <div class="x-rail-title">Em destaque</div>
+        <div id="desktopRailNews" class="x-rail-list"></div>
+      </section>
+      <section class="x-rail-card">
+        <div class="x-rail-title">Contatos sugeridos</div>
+        <div id="desktopRailContacts" class="x-rail-list"></div>
+      </section>
+      <section class="x-rail-card">
+        <div class="x-rail-title">Rede de apoio</div>
+        <div id="desktopRailSupport" class="x-rail-list"></div>
+      </section>
+    </aside>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="botnav">
+    <div class="botnav-side">
+      <button class="bn-item act" id="bn-feed" onclick="showPage('feed')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed
+      </button>
+      <button class="bn-item" id="bn-map" onclick="showPage('map')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Mapa
+      </button>
+    </div>
+    <button class="bn-item bn-fab" onclick="openPost()">
+      <div class="fab-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      Postar
+    </button>
+    <div class="botnav-side">
+      <button class="bn-item" id="bn-explore" onclick="showPage('explore')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorar
+      </button>
+      <button class="bn-item" id="bn-notifications" onclick="showPage('notifications')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Alertas
+      </button>
+      <button class="bn-item" id="bn-more" onclick="showPage('more')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>Mais
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- PLACE DRAWER -->
+<div class="drawer-overlay" id="placeDrawer">
+  <div class="drawer">
+    <div class="drawer-handle"></div>
+    <div class="drawer-scroll" id="drawerContent"></div>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div class="modal-ov" id="postModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Novo relato</div>
+    <div class="mfield">
+      <div class="mlabel">Local / Estabelecimento</div>
+      <input class="minput" id="postPlaceInput" type="text" placeholder="Ex: Restaurante Pad Thai Nana, Bangkok" oninput="previewPostPlace(this.value)">
+      <div class="field-hint" id="postPlaceHint">Digite um local existente para conectar o relato ao mapa ou descreva um novo lugar.</div>
+    </div>
+    <div class="mfield">
+      <div class="mlabel">Tipo de lugar</div>
+      <select class="minput" id="postTypeInput">
+        <option value="restaurant">Restaurante / Alimentacao</option>
+        <option value="hostel">Hostel / Acomodacao</option>
+        <option value="tourspot">Ponto turistico</option>
+        <option value="transport">Transporte / Taxi</option>
+        <option value="market">Mercado / Loja</option>
+        <option value="nature">Praia / Natureza</option>
+        <option value="danger-zone">Area de risco geral</option>
+      </select>
+    </div>
+    <div class="mfield">
+      <div class="mlabel">Nivel de seguranca</div>
+      <div class="risk-grid">
+        <div class="ropt" onclick="selRisk(this,'safe')">Seguro</div>
+        <div class="ropt" onclick="selRisk(this,'caution')">Atencao</div>
+        <div class="ropt" onclick="selRisk(this,'suspicious')">Suspeito</div>
+        <div class="ropt" onclick="selRisk(this,'danger')">Perigo</div>
+      </div>
+    </div>
+    <div class="mfield">
+      <div class="mlabel">Avaliacao geral</div>
+      <div class="star-picker" id="postStars">
+        <button type="button" class="star-btn" data-stars="1" onclick="setStars(1)">*</button>
+        <button type="button" class="star-btn" data-stars="2" onclick="setStars(2)">*</button>
+        <button type="button" class="star-btn" data-stars="3" onclick="setStars(3)">*</button>
+        <button type="button" class="star-btn" data-stars="4" onclick="setStars(4)">*</button>
+        <button type="button" class="star-btn" data-stars="5" onclick="setStars(5)">*</button>
+      </div>
+    </div>
+    <div class="mfield">
+      <div class="mlabel">Relato</div>
+      <textarea class="minput" id="postTextInput" rows="4" placeholder="Descreva sua experiencia nesse lugar. Quanto mais detalhes, mais voce ajuda outros viajantes..."></textarea>
+    </div>
+    <div class="friends-only-row">
+      <div>
+        <div class="fo-label">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Somente para amigos
+        </div>
+        <div class="fo-sub">Sua localizacao ficara oculta no relato publico</div>
+      </div>
+      <div class="toggle" id="foToggle" onclick="this.classList.toggle('on');this.querySelector('.toggle-knob').style='';"><div class="toggle-knob"></div></div>
+    </div>
+    <div style="display:flex;gap:9px;margin-top:4px">
+      <button class="btn btn-g" style="flex:1" onclick="closePost()">Cancelar</button>
+      <button class="btn btn-p" style="flex:2" onclick="submitPost()">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="auth-ov" id="authOv">
+  <div class="auth-box">
+    <div class="auth-logo-row">
+      <img src="logo-mark.svg" alt="Azimute" width="28" height="28">
+      <span>Azimute</span>
+    </div>
+    <div class="auth-tabs">
+      <button class="at-btn act" onclick="authTab(this,'login')">Entrar</button>
+      <button class="at-btn" onclick="authTab(this,'reg')">Cadastrar</button>
+    </div>
+    <div id="authLogin">
+      <div class="mfield"><div class="mlabel">E-mail</div><input class="minput" type="email" placeholder="seu@email.com"></div>
+      <div class="mfield"><div class="mlabel">Senha</div><input class="minput" type="password" placeholder="********"></div>
+      <button class="btn btn-p" style="width:100%;margin-top:6px" onclick="doLogin()">Entrar na conta</button>
+    </div>
+    <div id="authReg" style="display:none">
+      <div class="mfield"><div class="mlabel">Nome</div><input class="minput" id="regNameInput" type="text" placeholder="Seu nome"></div>
+      <div class="mfield"><div class="mlabel">Idade</div><input class="minput" id="regAgeInput" type="number" min="18" max="99" placeholder="Ex: 67"></div>
+      <div class="mfield"><div class="mlabel">E-mail</div><input class="minput" id="regEmailInput" type="email" placeholder="seu@email.com"></div>
+      <div class="mfield"><div class="mlabel">Senha</div><input class="minput" id="regPasswordInput" type="password" placeholder="Minimo 8 caracteres"></div>
+      <div class="mfield">
+        <div class="mlabel">Estilo de viagem</div>
+        <select class="minput" id="regModeInput">
+          <option value="auto">Escolher automaticamente pela idade</option>
+          <option value="explorador">Explorador</option>
+          <option value="equilibrado">Equilibrado</option>
+          <option value="conforto">Conforto e apoio</option>
+        </select>
+      </div>
+      <div style="background:rgba(0,229,184,.07);border:1px solid rgba(0,229,184,.18);border-radius:9px;padding:11px;margin-bottom:12px;font-size:.78rem;color:var(--muted2)">
+        Info: <strong style="color:var(--text)">Experiencia adaptativa:</strong> o Azimute ajusta grupos, alertas e linguagem ao seu perfil de viagem.
+      </div>
+      <button class="btn btn-p" style="width:100%" onclick="doRegister()">Criar conta gratuita</button>
+    </div>
+    <button class="btn btn-g" id="authCancelBtn" style="width:100%;margin-top:9px;display:none" onclick="closeAuth()">Cancelar</button>
+  </div>
+</div>
+
+<!-- SOS BUTTON -->
+<button class="sos-btn" onclick="showToast('SOS enviado com localizacao, contatos e ultimo ponto seguro!','td')" title="SOS Emergencia">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+</button>
+
+<div class="toast" id="toast"></div>
+<div id="vue-bootstrap" hidden aria-hidden="true"></div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="vue-app.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
