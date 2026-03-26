@@ -7,7 +7,7 @@ const PLACES = [
     state:null, emoji:'🍜', photo:null, lat:13.740, lng:100.555, risk:'caution',
     address:'Soi 4, Sukhumvit Road, Bangkok', score:3.8, reviews:47,
     tags:['Comida Tailandesa','Street Food','Turístico'],
-    scores:{precos:2.5, qualidade:4.2, atendimento:3.1, seguranca:3.8},
+    scores:{precos:2.5, qualidade:4.2, atendimento:3.1, segurança:3.8},
     tips:['Negocie o preço ANTES de sentar. Cardápio para turistas tem preço 3x maior.','Melhor pedir o que está no carrinho da rua, mais barato e autêntico.'],
     photos:['🍜','🌶️','🧆'],
     reviews_list:[
@@ -24,7 +24,7 @@ const PLACES = [
     state:null, emoji:'🛏', photo:null, lat:13.744, lng:100.534, risk:'safe',
     address:'925/9 Rama 1 Rd, Pathumwan, Bangkok', score:4.6, reviews:213,
     tags:['Hostel','Centro','Seguro','Recomendado'],
-    scores:{localizacao:4.8, seguranca:4.7, limpeza:4.5, preco_justo:4.4},
+    scores:{localização:4.8, segurança:4.7, limpeza:4.5, preco_justo:4.4},
     tips:['Deixe seus documentos no cofre. Funcionários muito atenciosos.','Ótimo café da manhã incluso. Área social excelente para conhecer viajantes.'],
     photos:['🛏','🏊','☕'],
     reviews_list:[
@@ -39,7 +39,7 @@ const PLACES = [
     state:null, emoji:'🛕', photo:null, lat:13.7474, lng:100.4929, risk:'safe',
     address:'2 Sanam Chai Rd, Phra Nakhon, Bangkok', score:4.9, reviews:891,
     tags:['Patrimônio','Cultural','Budismo','Fotografia'],
-    scores:{beleza:5.0, seguranca:4.8, acessibilidade:4.2, custo_beneficio:4.5},
+    scores:{beleza:5.0, segurança:4.8, acessibilidade:4.2, custo_beneficio:4.5},
     tips:['Leve roupas que cubram joelhos e ombros - exigido na entrada.','Chegue antes das 8h para menos turistas e fotos incríveis.','Guias freelance na porta NÃO são oficiais. Evite.'],
     photos:['🛕','⭐','🙏'],
     reviews_list:[
@@ -56,7 +56,7 @@ const PLACES = [
     state:null, emoji:'🥩', photo:null, lat:-34.6345, lng:-58.3630, risk:'suspicious',
     address:'Av. Pedro de Mendoza 1800, La Boca, BA', score:2.1, reviews:34,
     tags:['Churrasco','Turístico','Preço Abusivo','La Boca'],
-    scores:{precos:1.2, qualidade:3.0, atendimento:2.1, seguranca:2.0},
+    scores:{precos:1.2, qualidade:3.0, atendimento:2.1, segurança:2.0},
     tips:['Cardápio sem preços visíveis — golpe clássico para turistas.','Região perigosa após 18h. Visite La Boca somente de dia e em grupo.'],
     photos:['🥩','🍷','⚠️'],
     reviews_list:[
@@ -71,7 +71,7 @@ const PLACES = [
     state:null, emoji:'🛏', photo:null, lat:6.2086, lng:-75.5659, risk:'safe',
     address:'Calle 10 #43D-5, El Poblado, Medellín', score:4.7, reviews:328,
     tags:['Hostel Premium','El Poblado','Coworking','Seguro'],
-    scores:{localizacao:4.9, seguranca:4.8, limpeza:4.6, preco_justo:4.2},
+    scores:{localização:4.9, segurança:4.8, limpeza:4.6, preco_justo:4.2},
     tips:['El Poblado é o bairro mais seguro de Medellín. Ótima escolha.','Hostel tem app próprio para reportar qualquer problema. Muito responsivos.'],
     photos:['🛏','💻','🌴'],
     reviews_list:[
@@ -84,7 +84,7 @@ const PLACES = [
     state:null, emoji:'🏛️', photo:null, lat:31.6295, lng:-7.9811, risk:'suspicious',
     address:'Medina, Marrakech, Marrocos', score:3.2, reviews:156,
     tags:['Histórico','Labirinto','Golpes Frequentes','Fotografia'],
-    scores:{beleza:4.8, seguranca:2.5, acessibilidade:2.8, custo_beneficio:3.1},
+    scores:{beleza:4.8, segurança:2.5, acessibilidade:2.8, custo_beneficio:3.1},
     tips:['NUNCA siga "guias" não solicitados. São todos golpistas.','Negocie TUDO antes. Preço inicial para turista é 10x o real.','Use roupas conservadoras. Respeite a cultura local.'],
     photos:['🏛️','🧿','🐪'],
     reviews_list:[
@@ -99,7 +99,7 @@ const PLACES = [
     state:null, emoji:'🍜', photo:null, lat:35.6595, lng:139.7004, risk:'safe',
     address:'B1F Dogenzaka Building, 1-22-7 Dogenzaka, Shibuya, Tokyo', score:4.8, reviews:1240,
     tags:['Ramen','Shibuya','Seguro','Imperdível'],
-    scores:{precos:4.3, qualidade:5.0, atendimento:4.9, seguranca:5.0},
+    scores:{precos:4.3, qualidade:5.0, atendimento:4.9, segurança:5.0},
     tips:['Cada pessoa come em cabine individual — perfeito para quem viaja solo!','Pede tudo por formulário escrito. Tem em português no site.','Fila pode ser longa — vá antes das 11h ou após 15h.'],
     photos:['🍜','🥢','⭐'],
     reviews_list:[
@@ -114,7 +114,7 @@ const PLACES = [
     state:null, emoji:'🏰', photo:null, lat:45.7073, lng:13.7068, risk:'safe',
     address:'Viale Miramare, 34151 Trieste TS, Itália', score:4.6, reviews:412,
     tags:['Castelo','Vista Mar','Jardins','Seguro'],
-    scores:{beleza:5.0, seguranca:4.9, acessibilidade:4.0, custo_beneficio:4.6},
+    scores:{beleza:5.0, segurança:4.9, acessibilidade:4.0, custo_beneficio:4.6},
     tips:['Entrada custa 8€. Reserve online para evitar fila.','Os jardins ao redor são de acesso gratuito — igualmente lindos.'],
     photos:['🏰','🌊','🌺'],
     reviews_list:[
@@ -127,7 +127,7 @@ const PLACES = [
     state:null, emoji:'🛏', photo:null, lat:38.7223, lng:-9.1393, risk:'safe',
     address:'Rua da Alegria 45, Lisboa', score:4.5, reviews:210,
     tags:['Hostel','Centro','Seguro'],
-    scores:{localizacao:4.9, seguranca:4.7, limpeza:4.5, preco_justo:4.1},
+    scores:{localização:4.9, segurança:4.7, limpeza:4.5, preco_justo:4.1},
     tips:['Chegue cedo para conseguir cama de baixo no dorm.','Use o elétrico 28 apenas fora do pico para evitar furtos.'],
     photos:['🛏','☕','🏙️'],
     reviews_list:[
@@ -139,7 +139,7 @@ const PLACES = [
     state:null, emoji:'🍛', photo:null, lat:6.4654, lng:3.4064, risk:'caution',
     address:'Ikeja, Lagos', score:3.4, reviews:58,
     tags:['Comida Nigeriana','Popular','Movimentado'],
-    scores:{precos:3.5, qualidade:3.8, atendimento:3.0, seguranca:2.6},
+    scores:{precos:3.5, qualidade:3.8, atendimento:3.0, segurança:2.6},
     tips:['Prefira pagar em cartão ou transfer, evite notas grandes.','Peça preço antes de sentar. Região movimentada à noite.'],
     photos:['🍛','🌶️','🥤'],
     reviews_list:[
@@ -151,7 +151,7 @@ const PLACES = [
     state:'RJ', emoji:'⛰️', photo:null, lat:-22.9519, lng:-43.2105, risk:'safe',
     address:'Parque Nacional da Tijuca, Rio de Janeiro', score:4.8, reviews:2200,
     tags:['Iconico','Vista','Familiar'],
-    scores:{beleza:5.0, seguranca:4.2, acessibilidade:3.8, custo_beneficio:4.5},
+    scores:{beleza:5.0, segurança:4.2, acessibilidade:3.8, custo_beneficio:4.5},
     tips:['Compre ingresso online para evitar filas no trem do Corcovado.','Evite chegar de carro particular, prefira vans oficiais.'],
     photos:['⛰️','☀️','📸'],
     reviews_list:[
@@ -163,7 +163,7 @@ const PLACES = [
     state:null, emoji:'🍝', photo:null, lat:41.9028, lng:12.4964, risk:'caution',
     address:'Via Nazionale 120, Roma', score:3.0, reviews:95,
     tags:['Turístico','Preço alto','Massas'],
-    scores:{precos:2.1, qualidade:3.4, atendimento:3.0, seguranca:3.5},
+    scores:{precos:2.1, qualidade:3.4, atendimento:3.0, segurança:3.5},
     tips:['Peça menu com preços visíveis. Evite taxa de “coperto” abusiva.','Fique atento a garçons oferecendo vinho “casa” sem preço.'],
     photos:['🍝','🍷','💳'],
     reviews_list:[
@@ -175,7 +175,7 @@ const PLACES = [
     state:null, emoji:'🛏', photo:null, lat:52.5200, lng:13.4050, risk:'safe',
     address:'Kreuzberg, Berlin', score:4.4, reviews:310,
     tags:['Hostel','Cowork','Seguro'],
-    scores:{localizacao:4.7, seguranca:4.6, limpeza:4.3, preco_justo:4.0},
+    scores:{localização:4.7, segurança:4.6, limpeza:4.3, preco_justo:4.0},
     tips:['Lockers eletrônicos, leve adaptador europeu.','Mercados 24h por perto, região movimentada mas segura.'],
     photos:['🛏','💻','🍺'],
     reviews_list:[
@@ -187,7 +187,7 @@ const PLACES = [
     state:'NY', emoji:'🌳', photo:null, lat:40.7829, lng:-73.9654, risk:'safe',
     address:'Central Park, New York', score:4.7, reviews:3400,
     tags:['Parque','Caminhada','Fotografia'],
-    scores:{beleza:4.8, seguranca:4.3, acessibilidade:4.4, custo_beneficio:4.6},
+    scores:{beleza:4.8, segurança:4.3, acessibilidade:4.4, custo_beneficio:4.6},
     tips:['Evite áreas menos movimentadas à noite.','Bike-sharing é barato, mas prenda a bike com trava boa.'],
     photos:['🌳','🚴','🗽'],
     reviews_list:[
@@ -199,7 +199,7 @@ const PLACES = [
     state:'CDMX', emoji:'🌮', photo:null, lat:19.4326, lng:-99.1332, risk:'safe',
     address:'Roma Norte, CDMX', score:4.6, reviews:180,
     tags:['Tacos','Local','Barato'],
-    scores:{precos:4.8, qualidade:4.7, atendimento:4.2, seguranca:4.0},
+    scores:{precos:4.8, qualidade:4.7, atendimento:4.2, segurança:4.0},
     tips:['Pago só em dinheiro. Não aceite “taco especial” sem preço.','Pimenta forte, peça salsas separadas.'],
     photos:['🌮','🌶️','🥤'],
     reviews_list:[
@@ -211,7 +211,7 @@ const PLACES = [
     state:null, emoji:'⛰️', photo:null, lat:-33.9628, lng:18.4098, risk:'caution',
     address:'Table Mountain National Park, Cape Town', score:4.7, reviews:950,
     tags:['Trilha','Vista','Natureza'],
-    scores:{beleza:5.0, seguranca:3.5, acessibilidade:3.6, custo_beneficio:4.4},
+    scores:{beleza:5.0, segurança:3.5, acessibilidade:3.6, custo_beneficio:4.4},
     tips:['Suba de manhã cedo, leve casaco.','Evite trilhas isoladas sozinho; use grupos ou teleférico.'],
     photos:['⛰️','🚠','🌤️'],
     reviews_list:[
@@ -223,11 +223,11 @@ const PLACES = [
     state:null, emoji:'🛏', photo:null, lat:-1.2921, lng:36.8219, risk:'suspicious',
     address:'Westlands, Nairobi', score:3.6, reviews:140,
     tags:['Hostel','Próximo ao aeroporto','Básico'],
-    scores:{localizacao:4.0, seguranca:3.1, limpeza:3.5, preco_justo:3.8},
+    scores:{localização:4.0, segurança:3.1, limpeza:3.5, preco_justo:3.8},
     tips:['Use somente taxistas indicados pelo hostel.','Guarde passaporte no cofre da recepção.'],
     photos:['🛏','✈️','☕'],
     reviews_list:[
-      {user:'Aisha K.', avatar:'https://i.pravatar.cc/40?img=77', stars:3, date:'2 semanas', text:'Bom para uma noite. Regiao movimentada, fique atento a pickpockets.', risk:'suspicious', verified:false},
+      {user:'Aisha K.', avatar:'https://i.pravatar.cc/40?img=77', stars:3, date:'2 semanas', text:'Bom para uma noite. Região movimentada, fique atento a pickpockets.', risk:'suspicious', verified:false},
     ]
   },
   {
@@ -235,7 +235,7 @@ const PLACES = [
     state:null, emoji:'🥖', photo:null, lat:48.8566, lng:2.3522, risk:'safe',
     address:'Rue Vieille du Temple, Paris', score:4.2, reviews:260,
     tags:['Bistrô','Vinho','Clássico'],
-    scores:{precos:3.5, qualidade:4.5, atendimento:4.0, seguranca:4.4},
+    scores:{precos:3.5, qualidade:4.5, atendimento:4.0, segurança:4.4},
     tips:['Evite mesas externas com bolsa à mostra.','Gorjeta não é obrigatória, mas 5-10% é bem-vindo.'],
     photos:['🥖','🍷','🧀'],
     reviews_list:[
@@ -267,28 +267,28 @@ const POSTS = [
    tags:['Marrakech','GolpeTuristico','Marrocos'], likes:89, comments:34, friendsOnly:false},
   {id:3, user:'Pedro Alves', handle:'@pedroviaja', avatar:'https://i.pravatar.cc/80?img=33', verified:true,
    loc:'Ichiran Ramen, Shibuya', time:'1h', risk:'safe', placeId:'p7',
-   text:'Definitivamente a melhor refeicao da viagem! Toquio e absolutamente segura - deixei a mochila na mesa e fui ao banheiro sem preocupacao. O ramen no Ichiran e de outro mundo. Japao = recomendo para qualquer viajante.',
+   text:'Definitivamente a melhor refeicao da viagem! Toquio e absolutamente segura - deixei a mochila na mesa e fui ao banheiro sem preocupação. O ramen no Ichiran e de outro mundo. Japao = recomendo para qualquer viajante.',
    tags:['Tokyo','Japao','Seguro','Gastronomia'], likes:214, comments:58, friendsOnly:false},
   {id:4, user:'Fernanda Costa', handle:'@fer.nomade', avatar:'https://i.pravatar.cc/80?img=44', verified:true,
    loc:'La Boca, Buenos Aires', time:'3h', risk:'danger', placeId:'p4',
-   text:'ALERTA SERIO: Fui assaltada na Av. Pedro de Mendoza as 19h. Evitem La Boca a noite. O restaurante La Boca Parilla e uma armadilha de precos tambem. Visitem Caminito somente de dia e em grupo.',
-   tags:['BuenosAires','Argentina','ALERTA','Seguranca'], likes:302, comments:89, friendsOnly:false},
+   text:'ALERTA SERIO: Fui assaltada na Av. Pedro de Mendoza as 19h. Evitem La Boca a noite. O restaurante La Boca Parilla e uma armadilha de precos também. Visitem Caminito somente de dia e em grupo.',
+   tags:['BuenosAires','Argentina','ALERTA','Segurança'], likes:302, comments:89, friendsOnly:false},
   {id:5, user:'André Nômade Raiz', handle:'@nomaderaizofc', avatar:'https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp', verified:true,
    loc:'Medellin, Colombia', time:'5h', risk:'safe', placeId:'p5',
-   text:'Medellin tem uma energia muito viva na rua. Curti trocar ideia com a galera local, andar por El Poblado com atencao e mostrar o contraste real da cidade, sem filtro e sem roteiro engessado.',
+   text:'Medellin tem uma energia muito viva na rua. Curti trocar ideia com a galera local, andar por El Poblado com atenção e mostrar o contraste real da cidade, sem filtro e sem roteiro engessado.',
    tags:['Medellin','Colombia','Rua','VivenciaReal'], likes:178, comments:42, friendsOnly:false},
   {id:7, user:'André Nômade Raiz', handle:'@nomaderaizofc', avatar:'https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp', verified:true,
    loc:'Cairo, Egito', time:'8h', risk:'suspicious', placeId:null,
-   text:'No Cairo tentaram me puxar para um esquema de "ajuda" que terminava em cobranca forcada. O padrao e sempre o mesmo: muita simpatia no comeco e pressao no final. Da para circular, mas com atencao total a guia improvisado e preco combinado.',
+   text:'No Cairo tentaram me puxar para um esquema de "ajuda" que terminava em cobranca forcada. O padrao e sempre o mesmo: muita simpatia no comeco e pressao no final. Da para circular, mas com atenção total a guia improvisado e preco combinado.',
    tags:['Egito','Golpe','Cairo','SemFiltro'], likes:261, comments:67, friendsOnly:false},
   {id:8, user:'André Nômade Raiz', handle:'@nomaderaizofc', avatar:'https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp', verified:true,
    loc:'Caracas, Venezuela', time:'1d', risk:'caution', placeId:null,
-   text:'A Venezuela tem muito mais nuance do que o noticiario costuma mostrar. Tem calor humano, rua viva e tambem zonas onde vacilar custa caro. O segredo aqui e andar com contexto local e ouvir quem conhece o bairro de verdade.',
+   text:'A Venezuela tem muito mais nuance do que o noticiario costuma mostrar. Tem calor humano, rua viva e também zonas onde vacilar custa caro. O segredo aqui e andar com contexto local e ouvir quem conhece o bairro de verdade.',
    tags:['Venezuela','Caracas','Rua','ContextoLocal'], likes:304, comments:82, friendsOnly:false},
   {id:9, user:'André Nômade Raiz', handle:'@nomaderaizofc', avatar:'https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp', verified:true,
    loc:'San Salvador, El Salvador', time:'2d', risk:'caution', placeId:null,
-   text:'El Salvador passa uma sensacao de ordem muito diferente do que eu esperava. Ainda assim, viajar raiz aqui exige observar a rua, entender a dinamica de cada area e nao romantizar seguranca so porque o primeiro impacto foi bom.',
-   tags:['ElSalvador','SanSalvador','Seguranca','VivenciaReal'], likes:289, comments:74, friendsOnly:false},
+   text:'El Salvador passa uma sensação de ordem muito diferente do que eu esperava. Ainda assim, viajar raiz aqui exige observar a rua, entender a dinamica de cada área e não romantizar segurança so porque o primeiro impacto foi bom.',
+   tags:['ElSalvador','SanSalvador','Segurança','VivenciaReal'], likes:289, comments:74, friendsOnly:false},
   {id:6, user:'Carlos Menezes', handle:'@carlos.world', avatar:'https://i.pravatar.cc/80?img=12', verified:true,
    loc:'Somente para amigos', time:'6h', risk:'caution', placeId:null,
    text:'[Visivel so para amigos] Estou no mercado flutuante de Damnoen Saduak. Lugar lindo mas vendedores bem insistentes. Coordenadas compartilhadas com voces.',
@@ -297,7 +297,7 @@ const POSTS = [
 
 const NOTIFS = [
   {type:'info', text:'Seu relato sobre <strong>Cairo</strong> entrou entre os mais salvos da comunidade hoje.', time:'18min', unread:true, city:'Cairo'},
-  {type:'danger', text:'<strong>Perigo em La Boca</strong> - 3 novos relatos de assalto. Voce indicou interesse na Argentina.', time:'5min', unread:true, placeId:'p4', city:'Buenos Aires'},
+  {type:'danger', text:'<strong>Perigo em La Boca</strong> - 3 novos relatos de assalto. Você indicou interesse na Argentina.', time:'5min', unread:true, placeId:'p4', city:'Buenos Aires'},
   {type:'info', text:'<strong>Carlos Menezes</strong> começou a te seguir.', time:'12min', unread:true, page:'profile'},
   {type:'caution', text:'Área de <strong>atenção detectada</strong> próxima à Khaosan Road. Você está a 1.2km.', time:'45min', unread:true, placeId:'p1', city:'Bangkok'},
   {type:'safe', text:'Seu relato sobre Medellín recebeu <strong>178 curtidas</strong> 🔥', time:'2h', unread:false, placeId:'p5', city:'Medellín'},
@@ -314,8 +314,8 @@ const NEWS_POSTS = [
     time:'1h',
     type:'events',
     priority:'info',
-    title:'Festival Songkran tera reforco de seguranca em Bangkok',
-    text:'Autoridades anunciaram postos extras de atendimento ao turista e orientacoes em ingles nas areas de maior fluxo entre 12 e 16 de abril.',
+    title:'Festival Songkran terá reforco de segurança em Bangkok',
+    text:'Autoridades anunciaram postos extras de atendimento ao turista e orientações em ingles nas áreas de maior fluxo entre 12 e 16 de abril.',
     tags:['Oficial','Bangkok','Festival'],
     url:'https://www.tourismthailand.org'
   },
@@ -326,9 +326,9 @@ const NEWS_POSTS = [
     time:'3h',
     type:'safety',
     priority:'critical',
-    title:'Alerta sobre guias nao credenciados na Medina de Marrakech',
-    text:'Recomendacao para contratar passeios apenas por agencias registradas e evitar pagamentos antecipados em dinheiro para abordagens de rua.',
-    tags:['Consular','Seguranca','Marrakech'],
+    title:'Alerta sobre guias não credenciados na Medina de Marrakech',
+    text:'Recomendação para contratar passeios apenas por agencias registradas e evitar pagamentos antecipados em dinheiro para abordagens de rua.',
+    tags:['Consular','Segurança','Marrakech'],
     url:'https://www.gov.br/mre'
   },
   {
@@ -338,7 +338,7 @@ const NEWS_POSTS = [
     time:'5h',
     type:'mobility',
     priority:'warning',
-    title:'Mudanca temporaria em linhas noturnas na regiao de La Boca',
+    title:'Mudanca temporaria em linhas noturnas na região de La Boca',
     text:'Algumas linhas terao desvio apos 22h por obras urbanas. Turistas devem priorizar rotas oficiais de onibus e apps autorizados.',
     tags:['Transporte','La Boca','Servico'],
     url:'https://buenosaires.gob.ar'
@@ -351,8 +351,8 @@ const NEWS_POSTS = [
     type:'weather',
     priority:'warning',
     title:'Frente fria em Toquio com chuva intensa no fim de semana',
-    text:'Previsao de acumulado elevado entre sabado e domingo. Recomenda-se atencao em deslocamentos para areas com grande fluxo turistico.',
-    tags:['Clima','Toquio','Previsao'],
+    text:'Previsão de acumulado elevado entre sábado e domingo. Recomenda-se atenção em deslocamentos para áreas com grande fluxo turistico.',
+    tags:['Clima','Toquio','Previsão'],
     url:'https://www.jma.go.jp/jma/indexe.html'
   },
   {
@@ -363,8 +363,8 @@ const NEWS_POSTS = [
     type:'safety',
     priority:'info',
     title:'Novo canal WhatsApp para suporte ao viajante',
-    text:'Visitantes podem reportar ocorrencias e solicitar orientacao em tempo real por um canal dedicado com atendimento bilingue.',
-    tags:['Suporte','El Poblado','Seguranca'],
+    text:'Visitantes podem reportar ocorrências e solicitar orientação em tempo real por um canal dedicado com atendimento bilingue.',
+    tags:['Suporte','El Poblado','Segurança'],
     url:'https://www.medellin.gov.co'
   }
 ];
@@ -512,8 +512,8 @@ const COMMUNITY_PULSE = [
 
 const IMPACT_PILLARS = [
   {icon:'🤝', title:'Combate ao isolamento', text:'Grupos e conversas ajudam viajantes a encontrar companhia segura e rede de apoio real durante a viagem.'},
-  {icon:'🛡️', title:'Seguranca compartilhada', text:'Relatos confiaveis da comunidade reduzem golpes, desinformacao e decisao no escuro em destinos desconhecidos.'},
-  {icon:'🌍', title:'Valor social local', text:'O app estimula troca com moradores, economia local e deslocamentos mais conscientes com base em experiencia real.'},
+  {icon:'🛡️', title:'Segurança compartilhada', text:'Relatos confiáveis da comunidade reduzem golpes, desinformação e decisao no escuro em destinos desconhecidos.'},
+  {icon:'🌍', title:'Valor social local', text:'O app estimula troca com moradores, economia local e deslocamentos mais conscientes com base em experiência real.'},
 ];
 
 const IMPACT_STATS = {
@@ -695,7 +695,7 @@ const CURRENT_USER = {
   avatar:'https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//21272631/8603928c-a346-4ae6-9f59-1b5cb297694e.png&w=1024&h=1024&f=webp',
   verified:true,
   trustScore:98,
-  trustLabel:'Nomade raiz confiavel',
+  trustLabel:'Nomade raiz confiável',
   loc:'🌎 no mundo',
   age:41,
   mode:'explorador',
@@ -771,24 +771,24 @@ const EXPERIENCE_MODES = {
 };
 
 Object.assign(EXPERIENCE_MODES.explorador, {
-  journeyTitle:'Ritmo independente, comunidade forte e estrada sem enrolacao',
+  journeyTitle:'Ritmo independente, comunidade forte e estrada sem enrolação',
   contextCopy:'O Azimute vai priorizar mobilidade, encontros reais, alertas diretos e apoio da comunidade para viagens sem filtro.',
   groupsTitle:'Comunidade na estrada',
   groupsSub:'Conecte-se com viajantes que curtem improviso, autenticidade e apoio mutuo.',
   profileBio:'Criador de viagem com tom direto e raiz | Explora lugares intensos, conversa com moradores e prefere vivencia real a roteiro pronto',
   verifyTitle:'Perfil nomade verificado',
-  verifySub:'Identidade validada e historico de relatos confiaveis para grupos, alertas e apoio entre viajantes.',
+  verifySub:'Identidade validada e historico de relatos confiáveis para grupos, alertas e apoio entre viajantes.',
   dashTitle:'Painel do Nomade Raiz',
   dashSub:'Resumo de destinos, comunidade e vivencias em lugares como Venezuela, El Salvador, Colombia e Asia',
   badges:[
     {text:'Comunidade ativa', color:'var(--accent)'},
-    {text:'Relatos confiaveis', color:'var(--safe)'},
+    {text:'Relatos confiáveis', color:'var(--safe)'},
     {text:'Nomade raiz', color:'var(--caution)'},
   ],
   groups:[
     {name:'Nomades raiz America Latina', pace:'Mais livre', members:26, safety:'Encontros em pontos centrais e check-in coletivo', action:'Entrar no grupo'},
-    {name:'Hostel, rua e comida local', pace:'Social', members:19, safety:'Pontos publicos verificados pela comunidade', action:'Ver roteiro'},
-    {name:'Asia sem filtro', pace:'Bate e volta', members:14, safety:'Retorno combinado e apoio rapido no grupo', action:'Pedir convite'},
+    {name:'Hostel, rua e comida local', pace:'Social', members:19, safety:'Pontos públicos verificados pela comunidade', action:'Ver roteiro'},
+    {name:'Asia sem filtro', pace:'Bate e volta', members:14, safety:'Retorno combinado e apoio rápido no grupo', action:'Pedir convite'},
   ],
 });
 
@@ -820,7 +820,7 @@ function placeTrust(place) {
     confidence,
     verifiedCount,
     total,
-    communityLabel: verifiedCount >= 3 ? 'Comunidade confirma' : 'Ainda em validacao',
+    communityLabel: verifiedCount >= 3 ? 'Comunidade confirma' : 'Ainda em validação',
   };
 }
 
@@ -830,7 +830,7 @@ function postTrust(post) {
   return {
     score: Math.min(99, base),
     confirmations,
-    label: post.verified ? 'Relato verificado' : 'Aguardando confirmacoes',
+    label: post.verified ? 'Relato verificado' : 'Aguardando confirmações',
   };
 }
 
@@ -881,9 +881,9 @@ function modeNotifWeight(notif) {
 
 function modePlaceScore(place) {
   const acess = place.scores.acessibilidade ?? 3;
-  const segur = place.scores.seguranca ?? 3;
+  const segur = place.scores.segurança ?? 3;
   const beleza = place.scores.beleza ?? 3;
-  const local = place.scores.localizacao ?? 3;
+  const local = place.scores.localização ?? 3;
   const riskPenalty = {safe:0, caution:-.6, suspicious:-1.1, danger:-1.7}[place.risk] || 0;
   if (CURRENT_USER.mode === 'explorador') return (place.score * 1.5) + beleza + local + riskPenalty;
   if (CURRENT_USER.mode === 'conforto') return (segur * 1.8) + (acess * 1.8) + (place.score * 1.2) + riskPenalty;
@@ -896,7 +896,7 @@ function modePlaceHint(place) {
   }
   if (CURRENT_USER.mode === 'conforto') {
     const acess = place.scores.acessibilidade ?? 3;
-    const segur = place.scores.seguranca ?? 3;
+    const segur = place.scores.segurança ?? 3;
     return (acess >= 4 && segur >= 4)
       ? 'Boa opção para viagens mais confortáveis, com acessibilidade e ambiente seguro.'
       : 'Confira acessibilidade, deslocamento e horário antes de incluir no roteiro.';
@@ -907,8 +907,8 @@ function modePlaceHint(place) {
 }
 
 function placeDecisionCopy(place) {
-  if (place.risk === 'safe') return 'Pode visitar com boa confianca da comunidade.';
-  if (place.risk === 'caution') return 'Vale ir com atencao e verificando relatos recentes.';
+  if (place.risk === 'safe') return 'Pode visitar com boa confiança da comunidade.';
+  if (place.risk === 'caution') return 'Vale ir com atenção e verificando relatos recentes.';
   if (place.risk === 'suspicious') return 'Melhor redobrar cuidado antes de incluir no roteiro.';
   return 'Melhor evitar agora e procurar alternativa mais segura.';
 }
@@ -1005,7 +1005,7 @@ function renderMapFocus() {
     <div class="map-focus-metrics">
       <div class="map-focus-metric">
         <strong>${trust.confidence}%</strong>
-        <span>confianca</span>
+        <span>confiança</span>
       </div>
       <div class="map-focus-metric">
         <strong>${place.reviews}</strong>
@@ -1076,7 +1076,7 @@ function renderJourneyCard() {
       <div class="journey-top">
         <div>
           <div class="journey-title">Seu azimute agora</div>
-          <div class="journey-sub">${mode.journeyTitle}. Menos ruido, mais orientacao util para viajar com seguranca e apoio social.</div>
+          <div class="journey-sub">${mode.journeyTitle}. Menos ruído, mais orientação util para viajar com segurança e apoio social.</div>
         </div>
       </div>
       <div class="journey-actions">
@@ -1086,7 +1086,7 @@ function renderJourneyCard() {
         </button>
         <button class="journey-action" onclick="showPage('messages')">
           <strong>Grupos de viagem</strong>
-          <span>Companhia verificada e combinacao de roteiro.</span>
+          <span>Companhia verificada e combinação de roteiro.</span>
         </button>
         <button class="journey-action" onclick="openPost()">
           <strong>Novo relato</strong>
@@ -1131,7 +1131,7 @@ function renderSeniorHome() {
   wrap.innerHTML = `
     <div class="senior-home-top">
       <div>
-        <div class="senior-home-title">Viaje com confianca</div>
+        <div class="senior-home-title">Viaje com confiança</div>
         <div class="senior-home-sub">Passo a passo simples para descobrir se um local e seguro, ver alertas e falar com a comunidade quando precisar.</div>
       </div>
       <span class="crowd-pill lvl-low">60+</span>
@@ -1139,11 +1139,11 @@ function renderSeniorHome() {
     <div class="senior-home-grid">
       <button class="senior-home-action" onclick="openTrustCheck('${safest?.id || 'p1'}')">
         <strong>1. Consultar um local</strong>
-        <span>Abra o mapa ja centralizado em um ponto confiavel para entender risco e confianca da comunidade.</span>
+        <span>Abra o mapa ja centralizado em um ponto confiável para entender risco e confiança da comunidade.</span>
       </button>
       <button class="senior-home-action" onclick="openRiskAlerts('${riskiest?.id || 'p4'}')">
         <strong>2. Ver alertas importantes</strong>
-        <span>Leia apenas os avisos mais relevantes para evitar golpe, cobranca abusiva ou area perigosa.</span>
+        <span>Leia apenas os avisos mais relevantes para evitar golpe, cobranca abusiva ou área perigosa.</span>
       </button>
       <button class="senior-home-action" onclick="createImpactRequest('companhia')">
         <strong>3. Pedir companhia segura</strong>
@@ -1151,12 +1151,12 @@ function renderSeniorHome() {
       </button>
       <button class="senior-home-action" onclick="openCommunitySupport()">
         <strong>4. Falar com a rede de apoio</strong>
-        <span>Entre no grupo de ajuda para receber orientacao rapida e apoio humano durante a viagem.</span>
+        <span>Entre no grupo de ajuda para receber orientação rápida e apoio humano durante a viagem.</span>
       </button>
     </div>
     <div class="senior-home-note">
       <strong>Resumo simples do momento</strong>
-      ${safest ? `${safest.name} aparece como local mais confiavel agora, com ${trust.confidence}% de confianca da comunidade.` : 'A comunidade nao reportou risco alto para seu roteiro principal no momento.'}
+      ${safest ? `${safest.name} aparece como local mais confiável agora, com ${trust.confidence}% de confiança da comunidade.` : 'A comunidade não reportou risco alto para seu roteiro principal no momento.'}
       ${riskiest ? ` Evite ${riskiest.name} sem verificar alertas antes.` : ''}
     </div>
   `;
@@ -1170,14 +1170,14 @@ function renderObjectiveModule() {
     <div class="objective-head">
       <div>
         <div class="objective-title">Fluxo simples para viajar melhor</div>
-        <div class="objective-sub">O objetivo do app e unico: verificar confianca em locais, evitar golpes e fazer a comunidade ajudar outras pessoas em viagem.</div>
+        <div class="objective-sub">O objetivo do app e único: verificar confiança em locais, evitar golpes e fazer a comunidade ajudar outras pessoas em viagem.</div>
       </div>
       <span class="crowd-pill lvl-low">Comunidade</span>
     </div>
     <div class="objective-grid">
       <div class="objective-step">
         <strong>Verifique antes de ir</strong>
-        <span>Consulte risco, confianca da comunidade e relatos recentes antes de fechar um lugar ou rota.</span>
+        <span>Consulte risco, confiança da comunidade e relatos recentes antes de fechar um lugar ou rota.</span>
       </div>
       <div class="objective-step">
         <strong>Evite golpe e perigo</strong>
@@ -1189,7 +1189,7 @@ function renderObjectiveModule() {
       </div>
     </div>
     <div class="objective-cta">
-      <button class="impact-btn primary" onclick="showPage('explore')">Ver locais confiaveis</button>
+      <button class="impact-btn primary" onclick="showPage('explore')">Ver locais confiáveis</button>
       <button class="impact-btn" onclick="showPage('notifications')">Ler alertas</button>
       <button class="impact-btn" onclick="openCommunitySupport()">Abrir rede de apoio</button>
     </div>
@@ -1208,19 +1208,19 @@ function renderTrustHub() {
     <div class="trust-head">
       <div>
         <div class="trust-title">Ajuda para decidir com calma</div>
-        <div class="trust-sub">O Azimute resume o que e confiavel, o que pede cuidado e quem pode ajudar voce agora.</div>
+        <div class="trust-sub">O Azimute resume o que e confiável, o que pede cuidado e quem pode ajudar você agora.</div>
       </div>
       <span class="crowd-pill lvl-low">Assistido</span>
     </div>
     <div class="trust-grid senior">
       <button class="trust-card trust-safe" onclick="openTrustCheck('${safest?.id || 'p1'}')">
-        <div class="trust-card-label">Local confiavel</div>
+        <div class="trust-card-label">Local confiável</div>
         <strong>${safest?.name || 'Ponto seguro'}</strong>
-        <span>${safestTrust.confidence}% de confianca da comunidade.</span>
+        <span>${safestTrust.confidence}% de confiança da comunidade.</span>
       </button>
       <button class="trust-card trust-alert" onclick="openRiskAlerts('${riskiest?.id || 'p4'}')">
         <div class="trust-card-label">Evite agora</div>
-        <strong>${riskiest?.name || 'Area em atencao'}</strong>
+        <strong>${riskiest?.name || 'Área em atenção'}</strong>
         <span>Veja os alertas antes de decidir ir.</span>
       </button>
       <button class="trust-card trust-community" onclick="openCommunitySupport()">
@@ -1232,26 +1232,26 @@ function renderTrustHub() {
   ` : `
     <div class="trust-head">
       <div>
-        <div class="trust-title">Central de confianca da viagem</div>
-        <div class="trust-sub">Use a comunidade para decidir rapido: onde vale ir, o que evitar e como pedir ajuda quando precisar.</div>
+        <div class="trust-title">Central de confiança da viagem</div>
+        <div class="trust-sub">Use a comunidade para decidir rápido: onde vale ir, o que evitar e como pedir ajuda quando precisar.</div>
       </div>
       <span class="crowd-pill lvl-low">Nivel S</span>
     </div>
     <div class="trust-grid">
       <button class="trust-card trust-safe" onclick="openTrustCheck('${safest?.id || 'p1'}')">
-        <div class="trust-card-label">Mais confiavel</div>
+        <div class="trust-card-label">Mais confiável</div>
         <strong>${safest?.name || 'Ponto seguro'}</strong>
-        <span>${safestTrust.confidence}% de confianca e relatos positivos recentes.</span>
+        <span>${safestTrust.confidence}% de confiança e relatos positivos recentes.</span>
       </button>
       <button class="trust-card trust-alert" onclick="openRiskAlerts('${riskiest?.id || 'p4'}')">
         <div class="trust-card-label">Alerta principal</div>
-        <strong>${riskiest?.name || 'Area em atencao'}</strong>
-        <span>Golpes e riscos que merecem verificacao antes de ir.</span>
+        <strong>${riskiest?.name || 'Área em atenção'}</strong>
+        <span>Golpes e riscos que merecem verificação antes de ir.</span>
       </button>
       <button class="trust-card trust-community" onclick="openCommunitySupport()">
         <div class="trust-card-label">Comunidade ativa</div>
         <strong>Rede de apoio Azimute</strong>
-        <span>${IMPACT_REQUESTS.length} pedidos ativos para companhia, ajuda local e conexao entre viajantes.</span>
+        <span>${IMPACT_REQUESTS.length} pedidos ativos para companhia, ajuda local e conexão entre viajantes.</span>
       </button>
     </div>
     <div class="trust-actions">
@@ -1316,22 +1316,22 @@ function repairMojibakeText(value) {
 
   return value
     .replace(/·/g, '·')
-    .replace(/Atenção/g, 'Atencao')
-    .replace(/Segurança/g, 'Seguranca')
-    .replace(/Experiência/g, 'Experiencia')
-    .replace(/Atualizações/g, 'Atualizacoes')
-    .replace(/Notícias/g, 'Noticias')
+    .replace(/Atenção/g, 'Atenção')
+    .replace(/Segurança/g, 'Segurança')
+    .replace(/Experiência/g, 'Experiência')
+    .replace(/Atualizações/g, 'Atualizações')
+    .replace(/Notícias/g, 'Notícias')
     .replace(/Países/g, 'Paises')
-    .replace(/Confiança/g, 'Confianca')
+    .replace(/Confiança/g, 'Confiança')
     .replace(/Nível/g, 'Nivel')
-    .replace(/Avaliação/g, 'Avaliacao')
-    .replace(/Localização/g, 'Localizacao')
-    .replace(/Público/g, 'Publico')
+    .replace(/Avaliação/g, 'Avaliação')
+    .replace(/Localização/g, 'Localização')
+    .replace(/Público/g, 'Público')
     .replace(/usuários/g, 'usuarios')
-    .replace(/você/g, 'voce')
+    .replace(/você/g, 'você')
     .replace(/está/g, 'esta')
     .replace(/SÉRIO/g, 'SERIO')
-    .replace(/também/g, 'tambem')
+    .replace(/também/g, 'também')
     .replace(/preços/g, 'precos')
     .replace(/as 19h/g, 'as 19h')
     .replace(/✓/g, '')
@@ -1382,13 +1382,13 @@ function polishVisibleCopy() {
     if (el) el.textContent = text;
   };
 
-  setText('#splash .spl-sub', 'Experiencia adaptativa de viagem');
+  setText('#splash .spl-sub', 'Experiência adaptativa de viagem');
   setText('#page-map .crisis-title', 'Modo crise');
-  setText('#page-map .crisis-sub', 'Ative apenas se precisar de orientacao imediata.');
-  setText('#page-explore .ph-sub', 'Lugares confiaveis para sua viagem');
-  setText('#page-notifications .ph-sub', 'O que precisa da sua atencao agora');
+  setText('#page-map .crisis-sub', 'Ative apenas se precisar de orientação imediata.');
+  setText('#page-explore .ph-sub', 'Lugares confiáveis para sua viagem');
+  setText('#page-notifications .ph-sub', 'O que precisa da sua atenção agora');
   setText('#page-messages .ph-sub', 'Rede de apoio, grupos de viagem e ajuda entre viajantes');
-  setText('#page-more .ph-sub', 'Acessos secundarios e atalhos rapidos do Azimute');
+  setText('#page-more .ph-sub', 'Acessos secundarios e atalhos rápidos do Azimute');
 
   const search = document.querySelector('#page-explore .search-wrap input');
   if (search) search.placeholder = 'Restaurante, hostel, ponto turistico...';
@@ -1411,7 +1411,7 @@ function renderDesktopRail() {
     <article class="x-rail-item">
       <strong>${item.title}</strong>
       <span>${item.source} · ${item.country}</span>
-      <button class="mini-btn" onclick="showPage('news')">Abrir noticias</button>
+      <button class="mini-btn" onclick="showPage('news')">Abrir notícias</button>
     </article>
   `).join('');
 
@@ -1547,7 +1547,44 @@ const accessibilityPrefs = {
   highContrast: false,
   seniorMode: false,
   translateEn: false,
+  reduceMotion: false,
+  nightWarm: false,
+  fontScale: 0,
 };
+
+// ── 1. Slider de tamanho de fonte ──
+const FONT_SCALE_LABELS = ['Normal','Médio','Grande','Muito grande'];
+const FONT_SCALE_SIZES  = ['','1.12rem','1.24rem','1.38rem'];
+function setFontScale(level) {
+  accessibilityPrefs.fontScale = level;
+  document.body.style.fontSize = FONT_SCALE_SIZES[level] || '';
+  const badge = document.getElementById('fontScaleBadge');
+  if (badge) badge.textContent = FONT_SCALE_LABELS[level];
+  if (level > 0) showToast(`📝 Texto ${FONT_SCALE_LABELS[level]}`,'ts');
+  else showToast('📝 Texto tamanho normal','ts');
+}
+
+// ── 2. Reduzir animações ──
+function toggleReduceMotion() {
+  accessibilityPrefs.reduceMotion = !accessibilityPrefs.reduceMotion;
+  document.body.classList.toggle('no-motion', accessibilityPrefs.reduceMotion);
+  showToast(accessibilityPrefs.reduceMotion ? '⏸️ Animações reduzidas' : '▶️ Animações normais','ts');
+}
+
+// ── 5. Leitura em voz alta (Web Speech API) ──
+function speakText(text) {
+  if (!window.speechSynthesis) { showToast('Voz não suportada neste navegador',''); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim());
+  u.lang = 'pt-BR';
+  u.rate = 0.88;
+  u.pitch = 1.05;
+  window.speechSynthesis.speak(u);
+  showToast('🔊 Lendo em voz alta...','ts');
+}
+function stopSpeak() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+}
 
 function toggleLargeText() {
   accessibilityPrefs.largeText = !accessibilityPrefs.largeText;
@@ -1561,10 +1598,17 @@ function toggleHighContrast() {
   showToast(accessibilityPrefs.highContrast ? '⚡ Alto contraste ativo' : '⚡ Contraste padrão','ts');
 }
 
+// ── 9. Modo noite quente ──
+function toggleNightWarm() {
+  accessibilityPrefs.nightWarm = !accessibilityPrefs.nightWarm;
+  document.body.classList.toggle('warm-night', accessibilityPrefs.nightWarm);
+  showToast(accessibilityPrefs.nightWarm ? '🌙 Modo noite quente ativado' : '🌙 Modo noite desativado','ts');
+}
+
 function toggleSeniorMode() {
   accessibilityPrefs.seniorMode = !accessibilityPrefs.seniorMode;
   document.body.classList.toggle('senior-mode', accessibilityPrefs.seniorMode);
-  // forca modo conforto
+  document.body.classList.toggle('show-speak', accessibilityPrefs.seniorMode);
   CURRENT_USER.mode = accessibilityPrefs.seniorMode ? 'conforto' : (CURRENT_USER.mode || 'equilibrado');
   applyAdaptiveExperience();
   showToast(accessibilityPrefs.seniorMode ? '🧭 Modo idoso simplificado' : 'Modo padrão restabelecido','ts');
@@ -1574,6 +1618,183 @@ function toggleTranslate() {
   accessibilityPrefs.translateEn = !accessibilityPrefs.translateEn;
   document.body.classList.toggle('lang-en', accessibilityPrefs.translateEn);
   showToast(accessibilityPrefs.translateEn ? '🌐 Tradução simultânea simulada (PT → EN)' : '🌐 Tradução desativada','ts');
+}
+
+// ── 6. Modo foco ──
+let focusIdx = 0;
+let focusPosts = [];
+function openFocusMode() {
+  focusPosts = [...POSTS];
+  focusIdx = 0;
+  _renderFocusCard();
+  document.getElementById('focusModeOv').classList.add('open');
+}
+function closeFocusMode() {
+  stopSpeak();
+  document.getElementById('focusModeOv').classList.remove('open');
+}
+function _renderFocusCard() {
+  const p = focusPosts[focusIdx];
+  if (!p) return;
+  document.getElementById('focusCounter').textContent = `${focusIdx+1} de ${focusPosts.length}`;
+  document.getElementById('focusPrevBtn').disabled = focusIdx === 0;
+  document.getElementById('focusNextBtn').disabled = focusIdx === focusPosts.length - 1;
+  document.getElementById('focusCardArea').innerHTML = `
+    <div class="card">
+      <div class="tweet">
+        <img class="fc-avatar" src="${p.avatar}" alt="">
+        <div class="tweet-main">
+          <div class="tweet-head">
+            <span class="tweet-name">${p.user}</span>
+            ${p.verified?`<span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>`:''}
+            <span class="tweet-handle">${p.handle}</span>
+            <span class="risk-pill ${riskCls(p.risk)}">${riskLabel(p.risk)}</span>
+          </div>
+          <div class="fc-loc">${plainTextLocation(p.loc)}</div>
+          <div class="fc-body" style="padding:10px 0 4px">
+            <div class="fc-text">${p.text}</div>
+            ${p.placeId ? `<div class="fc-place-link" style="margin-top:8px" onclick="closeFocusMode();openPlace('${p.placeId}')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s-8-9.3-8-14a8 8 0 0 1 16 0c0 4.7-8 14-8 14z"/><circle cx="12" cy="8" r="3"/></svg>${PLACES.find(pl=>pl.id===p.placeId)?.name||'Ver local'}</div>` : ''}
+          </div>
+          <div class="fc-actions" style="padding:8px 0 0">
+            <button class="fc-act" onclick="likeFc(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>${p.likes}</button>
+            <button class="fc-act" onclick="showToast('Comentários em breve!','')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.comments}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function focusNext() { if (focusIdx < focusPosts.length-1){ stopSpeak(); focusIdx++; _renderFocusCard(); } }
+function focusPrev() { if (focusIdx > 0){ stopSpeak(); focusIdx--; _renderFocusCard(); } }
+function speakFocusCard() {
+  const p = focusPosts[focusIdx];
+  if (!p) return;
+  speakText(`${p.user} relata: ${p.text}`);
+}
+
+// ── 7. Contatos de emergência ──
+let emergContacts = JSON.parse(localStorage.getItem('az-emerg-contacts') || '[]');
+function openEmergModal() {
+  _renderEmergList();
+  document.getElementById('emergModal').classList.add('open');
+}
+function closeEmergModal() {
+  document.getElementById('emergModal').classList.remove('open');
+}
+function saveEmergContact() {
+  const name  = document.getElementById('emergName').value.trim();
+  const phone = document.getElementById('emergPhone').value.trim();
+  if (!name || !phone) { showToast('Preencha nome e telefone',''); return; }
+  emergContacts.push({id: Date.now(), name, phone});
+  localStorage.setItem('az-emerg-contacts', JSON.stringify(emergContacts));
+  document.getElementById('emergName').value = '';
+  document.getElementById('emergPhone').value = '';
+  _renderEmergList();
+  showToast('✅ Contato de emergência salvo!','ts');
+}
+function removeEmergContact(id) {
+  emergContacts = emergContacts.filter(c => c.id !== id);
+  localStorage.setItem('az-emerg-contacts', JSON.stringify(emergContacts));
+  _renderEmergList();
+}
+function _renderEmergList() {
+  const el = document.getElementById('emergContactList');
+  if (!el) return;
+  if (!emergContacts.length) {
+    el.innerHTML = `<div class="emerg-empty">Nenhum contato cadastrado ainda.</div>`;
+    return;
+  }
+  el.innerHTML = emergContacts.map(c => `
+    <div class="emerg-contact">
+      <div><div class="emerg-name">${c.name}</div><div class="emerg-phone">${c.phone}</div></div>
+      <button class="mini-btn danger" onclick="removeEmergContact(${c.id})">Remover</button>
+    </div>`).join('');
+}
+document.addEventListener('click', e => {
+  if (e.target === document.getElementById('emergModal')) closeEmergModal();
+});
+
+// ── 8. Onde estou? ──
+function openWhereAmI() {
+  const safePlace = PLACES.find(p => p.risk === 'safe') || PLACES[0];
+  const city = currentDestination || 'Destino atual';
+  const contactsHtml2 = emergContacts.length
+    ? `<div class="wai-contacts">
+        <div class="wai-contacts-label">Contatos de emergência</div>
+        ${emergContacts.map(c => `
+          <div class="wai-contact">
+            <div><div class="wai-contact-name">${c.name}</div><div class="wai-contact-phone">${c.phone}</div></div>
+            <a href="tel:${c.phone.replace(/\D/g,'')}" class="wai-call">Ligar</a>
+          </div>`).join('')}
+      </div>`
+    : `<div style="padding:12px 16px 0"><div class="wai-no-contacts">Nenhum contato cadastrado — configure nas ⚙️ Configurações.</div></div>`;
+
+  document.getElementById('whereAmiContent').innerHTML = `
+    <div class="wai-header">
+      <div class="wai-city">📍 ${city}</div>
+      <div class="wai-sub">Viagem monitorada pelo Azimute</div>
+    </div>
+    <div class="wai-safe">
+      <div class="wai-safe-label">Local seguro verificado</div>
+      <div class="wai-safe-name">${safePlace.name} ${safePlace.flag}</div>
+      <div class="wai-safe-addr">${safePlace.address}</div>
+    </div>
+    ${contactsHtml2}
+    <div class="wai-actions">
+      <button class="btn btn-danger" onclick="closeWhereAmI();showToast('SOS enviado com localização e contatos!','td')">🆘 Enviar SOS</button>
+      <button class="btn btn-g" onclick="closeWhereAmI();showPage('map')">🗺️ Ver no mapa</button>
+      <button class="btn btn-g" onclick="closeWhereAmI();openEmergModal()">👥 Gerenciar contatos</button>
+    </div>
+  `;
+  document.getElementById('whereAmiOv').classList.add('open');
+  document.getElementById('whereAmiPanel').classList.add('open');
+}
+function closeWhereAmI() {
+  document.getElementById('whereAmiOv')?.classList.remove('open');
+  document.getElementById('whereAmiPanel')?.classList.remove('open');
+}
+
+// ── 10. Cartão imprimível ──
+function printAccessCard() {
+  const safePlace = PLACES.find(p => p.risk === 'safe') || PLACES[0];
+  const city = currentDestination || 'Não informado';
+  const today = new Date().toLocaleDateString('pt-BR');
+  const contactsRows = emergContacts.length
+    ? emergContacts.map(c => `<div class="pc-row"><span class="pc-label">${c.name}:</span><span>${c.phone}</span></div>`).join('')
+    : '<div class="pc-row"><span>Nenhum contato cadastrado</span></div>';
+
+  document.getElementById('printCard').innerHTML = `
+    <div class="pc-inner">
+      <div class="pc-header">
+        <div class="pc-logo">AZIMUTE</div>
+        <div class="pc-title">Ficha de Viagem — Acessibilidade</div>
+        <div class="pc-date">Emitida em ${today}</div>
+      </div>
+      <div class="pc-section">
+        <div class="pc-section-title">Viajante</div>
+        <div class="pc-row"><span class="pc-label">Nome:</span><span>${CURRENT_USER.name}</span></div>
+        <div class="pc-row"><span class="pc-label">Destino:</span><span>${city}</span></div>
+      </div>
+      <div class="pc-section">
+        <div class="pc-section-title">Local seguro verificado</div>
+        <div class="pc-row"><span class="pc-label">Local:</span><span>${safePlace.name}</span></div>
+        <div class="pc-row"><span class="pc-label">Endereço:</span><span>${safePlace.address}</span></div>
+      </div>
+      <div class="pc-section">
+        <div class="pc-section-title">Números de emergência</div>
+        <div class="pc-emergency-num">Polícia: 190</div>
+        <div class="pc-emergency-num">SAMU: 192</div>
+        <div class="pc-emergency-num">Bombeiros: 193</div>
+        <div class="pc-emergency-num">Internacional: 112</div>
+      </div>
+      <div class="pc-section">
+        <div class="pc-section-title">Meus contatos de emergência</div>
+        ${contactsRows}
+      </div>
+      <div class="pc-footer">Gerado pelo Azimute — Viagem segura em comunidade · azimute.app</div>
+    </div>
+  `;
+  window.print();
 }
 
 // Sidebar toggle (mobile)
@@ -1655,7 +1876,7 @@ const STORIES = [
 ];
 
 function quickAddStory() {
-  const name = prompt('Usuário do story (@exemplo):', '@voce');
+  const name = prompt('Usuário do story (@exemplo):', '@você');
   if (!name) return;
   const status = prompt('Quando foi publicado?', 'agora') || 'agora';
   const img = `https://i.pravatar.cc/80?u=${encodeURIComponent(name)}`;
@@ -1713,30 +1934,30 @@ function renderImpactModule() {
     <div class="impact-head">
       <div>
         <div class="impact-title">Impacto social do Azimute</div>
-        <div class="impact-sub">Mais do que viagem: rede de apoio, informacao confiavel e incentivo a conexoes humanas e economia local.</div>
+        <div class="impact-sub">Mais do que viagem: rede de apoio, informação confiável e incentivo a conexoes humanas e economia local.</div>
       </div>
       <span class="crowd-pill lvl-low">Nivel S</span>
     </div>
     <div class="impact-grid">
       <div class="impact-stat"><strong>+${IMPACT_STATS.safeMeetups}</strong><span>encontros seguros facilitados entre viajantes</span></div>
       <div class="impact-stat"><strong>${IMPACT_STATS.avoidedRisks}%</strong><span>dos relatos ajudam outros usuarios a evitar risco ou golpe</span></div>
-      <div class="impact-stat"><strong>${IMPACT_STATS.activeGroups}</strong><span>grupos ativos com apoio mutuo e troca de experiencia</span></div>
+      <div class="impact-stat"><strong>${IMPACT_STATS.activeGroups}</strong><span>grupos ativos com apoio mutuo e troca de experiência</span></div>
     </div>
     <div class="transparency-row">
       <div class="transp-card">
         <div class="transp-title">Selo Local Verificado</div>
-        <div class="transp-copy">Emitido quando ha 3+ relatos verificados nos ultimos 30 dias e risco controlado.</div>
+        <div class="transp-copy">Emitido quando ha 3+ relatos verificados nos últimos 30 dias e risco controlado.</div>
         <div class="transp-pill">${PLACES.filter(p=>placeTrust(p).verifiedCount>=3).length} locais elegiveis</div>
       </div>
       <div class="transp-card">
         <div class="transp-title">Fontes oficiais</div>
-        <div class="transp-copy">Alertas consulares, clima, mobilidade e seguranca alimentam o painel automaticamente.</div>
+        <div class="transp-copy">Alertas consulares, clima, mobilidade e segurança alimentam o painel automaticamente.</div>
         <div class="transp-pill">Gov · Consular · Meteo · Policia</div>
       </div>
       <div class="transp-card">
         <div class="transp-title">LGPD by design</div>
-        <div class="transp-copy">Localizacao so sai com consentimento e vira dado agregado apos 24h.</div>
-        <div class="transp-pill">Anonimizacao ativa</div>
+        <div class="transp-copy">Localização so sai com consentimento e vira dado agregado apos 24h.</div>
+        <div class="transp-pill">Anonimização ativa</div>
       </div>
     </div>
     <div class="impact-actions">
@@ -1823,11 +2044,11 @@ function joinSupportNetwork() {
 function createImpactRequest(kind) {
   const request = kind === 'ajuda'
     ? {id:`ir${Date.now()}`, icon:'🙋', title:'Ajuda oferecida por André', text:'André se disponibilizou para orientar viajantes sobre deslocamento seguro e leitura de contexto local.', city:'Online', responses:1}
-    : {id:`ir${Date.now()}`, icon:'🧭', title:'André pediu companhia verificada', text:'Pedido de companhia para explorar a cidade com mais seguranca e trocar experiencia com a comunidade.', city:currentDestination, responses:0};
+    : {id:`ir${Date.now()}`, icon:'🧭', title:'André pediu companhia verificada', text:'Pedido de companhia para explorar a cidade com mais segurança e trocar experiência com a comunidade.', city:currentDestination, responses:0};
   IMPACT_REQUESTS.unshift(request);
   if (kind === 'companhia') IMPACT_STATS.safeMeetups += 1;
   const chat = ensureImpactChat();
-  chat.messages.push({from:'me', text: kind === 'ajuda' ? 'Posso ajudar outros viajantes com orientacao de rota e contexto local.' : 'Procuro companhia verificada para explorar a cidade com mais seguranca.', time:getTimeNow()});
+  chat.messages.push({from:'me', text: kind === 'ajuda' ? 'Posso ajudar outros viajantes com orientação de rota e contexto local.' : 'Procuro companhia verificada para explorar a cidade com mais segurança.', time:getTimeNow()});
   chat.last = chat.messages[chat.messages.length - 1].text;
   chat.time = 'agora';
   currentChatId = chat.id;
@@ -2023,7 +2244,7 @@ function toggleLocation() {
 // ════════════════════════════════
 let currentFeedCityFilter = 'all';
 let currentFeedRiskFilter = 'all';
-const riskLabel = r => ({safe:'Seguro', caution:'Atencao', suspicious:'Suspeito', danger:'Perigo'}[r]);
+const riskLabel = r => ({safe:'Seguro', caution:'Atenção', suspicious:'Suspeito', danger:'Perigo'}[r]);
 const riskCls = r => `rp-${r}`;
 
 function postCity(post) {
@@ -2076,7 +2297,7 @@ function renderFeed(container='feedCards', posts=POSTS) {
             return `
               <div class="trust-row">
                 <div class="trust-badge">${trust.label}</div>
-                <div class="trust-meta">${trust.score}% de confianca</div>
+                <div class="trust-meta">${trust.score}% de confiança</div>
               </div>
             `;
           })()}
@@ -2088,8 +2309,9 @@ function renderFeed(container='feedCards', posts=POSTS) {
           </div>
           <div class="fc-actions" style="padding:8px 0 0;border-top:none">
             <button class="fc-act" onclick="likeFc(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>${p.likes}</button>
-            <button class="fc-act" onclick="showToast('Comentarios em breve!','')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.comments}</button>
+            <button class="fc-act" onclick="showToast('Comentários em breve!','')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.comments}</button>
             ${p.placeId ? `<button class="fc-act" onclick="openPlace('${p.placeId}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-9.3-8-14a8 8 0 0 1 16 0c0 4.7-8 14-8 14z"/><circle cx="12" cy="8" r="3"/></svg>Local</button>` : ''}
+            <button class="fc-act fc-speak" onclick="speakText('${(p.user+' relata: '+p.text).replace(/'/g,' ').substring(0,220)}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>Ouvir</button>
             <button class="fc-act" onclick="openReportModal('${p.placeId || ''}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Reportar</button>
           </div>
         </div>
@@ -2139,7 +2361,7 @@ function renderExplore(places=PLACES) {
           <div class="pch-loc">${plainTextLocation(`${p.city}, ${p.country}`)}</div>
           <div class="pch-meta">
             <span class="risk-pill ${riskCls(p.risk)}">${riskLabel(p.risk)}</span>
-            ${(((p.scores.acessibilidade ?? 3) >= 4) && ((p.scores.seguranca ?? 3) >= 4)) ? `<span class="tag">Bom para 60+</span>` : ''}
+            ${(((p.scores.acessibilidade ?? 3) >= 4) && ((p.scores.segurança ?? 3) >= 4)) ? `<span class="tag">Bom para 60+</span>` : ''}
             ${p.tags.slice(0,1).map(t=>`<span class="tag">${t}</span>`).join('')}
           </div>
           <div class="place-adapt"><strong>${placeDecisionCopy(p)}</strong></div>
@@ -2261,8 +2483,8 @@ function openPlace(id) {
   const trust = placeTrust(p);
 
   const scoreLabels = {
-    precos:'Preços', qualidade:'Qualidade', atendimento:'Atendimento', seguranca:'Segurança',
-    localizacao:'Localização', limpeza:'Limpeza', preco_justo:'Preço Justo',
+    precos:'Preços', qualidade:'Qualidade', atendimento:'Atendimento', segurança:'Segurança',
+    localização:'Localização', limpeza:'Limpeza', preco_justo:'Preço Justo',
     beleza:'Beleza', acessibilidade:'Acesso', custo_beneficio:'Custo/Ben.',
   };
 
@@ -2325,7 +2547,7 @@ function openPlace(id) {
     <div class="trust-panel">
       <div class="trust-panel-score">${trust.confidence}%</div>
       <div class="trust-panel-copy">
-        <div class="trust-panel-title">Indice de confianca do local</div>
+        <div class="trust-panel-title">Indice de confiança do local</div>
         <div class="trust-panel-sub">${trust.communityLabel} · ${trust.verifiedCount} de ${trust.total} relatos com identidade verificada</div>
       </div>
     </div>
@@ -2711,7 +2933,7 @@ function renderNews(type='all') {
   };
   const priorityLabel = {
     critical:'Critico',
-    warning:'Atencao',
+    warning:'Atenção',
     info:'Informativo'
   };
   const list = NEWS_POSTS.filter(n => type === 'all' || n.type === type);
@@ -2838,7 +3060,7 @@ function renderChatWindow() {
       <div class="chat-head-name">${chat.name}</div>
       <div class="chat-head-sub">${chat.typing ? 'digitando...' : chat.status}</div>
     </div>
-    <button class="msg-new-group" onclick="showToast('📞 Ajuda rapida em breve','')">Ajuda</button>
+    <button class="msg-new-group" onclick="showToast('📞 Ajuda rápida em breve','')">Ajuda</button>
   `;
   document.getElementById('chatMessages').innerHTML = chat.messages.map(m => `
     <div class="chat-bubble ${m.from==='me'?'out':'in'}">
@@ -2982,10 +3204,28 @@ function updateAuthGate() {
 function openAuth(){
   updateAuthGate();
   document.getElementById('authOv').classList.add('open');
+  // reset to login tab when opening
+  const loginBtn = document.querySelector('.at-btn');
+  if (loginBtn && !loggedIn) authTab(loginBtn, 'login');
 }
 function closeAuth(){
   if (!loggedIn) return;
   document.getElementById('authOv').classList.remove('open');
+}
+// Called from landing page CTAs — switches tab and focuses auth column
+function lpFocusAuth(tab) {
+  const btns = document.querySelectorAll('.at-btn');
+  const idx = tab === 'reg' ? 1 : 0;
+  if (btns[idx]) authTab(btns[idx], tab);
+  // on mobile: scroll to auth col; on desktop: it's always visible
+  const authCol = document.getElementById('lpAuthCol');
+  if (authCol) {
+    authCol.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => {
+      const first = authCol.querySelector('input');
+      if (first) first.focus();
+    }, 350);
+  }
 }
 function authTab(btn, tab) {
   document.querySelectorAll('.at-btn').forEach(b=>b.classList.remove('act'));
@@ -3084,7 +3324,7 @@ function setStars(n, silent=false) {
   document.querySelectorAll('.star-btn').forEach((btn, idx) => {
     btn.classList.toggle('active', idx < n);
   });
-  if (!silent) showToast(`Avaliacao: ${n} estrela${n>1?'s':''}!`,'ts');
+  if (!silent) showToast(`Avaliação: ${n} estrela${n>1?'s':''}!`,'ts');
 }
 function submitPost() {
   const placeInput = document.getElementById('postPlaceInput');
@@ -3186,3 +3426,185 @@ function showToast(msg, type='') {
 const style = document.createElement('style');
 style.textContent = '@keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}';
 document.head.appendChild(style);
+
+// ════════════════════════════════
+//  AI GUIDE — GUIA AZI
+// ════════════════════════════════
+
+const AI_KB = [
+  {
+    keys: ['banheiro','wc','sanitario','toalete','lavabo','toilet','xixi','privada','necessidade'],
+    response: `🚻 <strong>Banheiros na rota</strong><br><br>Dicas essenciais para planejar as paradas:<br>• <strong>Postos de gasolina</strong> são os pontos mais confiáveis a cada 40–80 km em rodovias<br>• <strong>Shoppings e supermercados</strong> têm banheiros geralmente limpos e gratuitos<br>• <strong>Bares e restaurantes</strong>: peça um café ou água pequena e use sem constrangimento<br>• Leve sempre <strong>papel higiênico e álcool em gel</strong> — muitos banheiros públicos não fornecem<br>• Em museus e pontos turísticos, banheiros ficam na <strong>entrada ou saída</strong>, bem sinalizados<br>• Prefira usar o banheiro <strong>sempre que aparecer a oportunidade</strong>, não espere a urgência<br><br>💡 Dica de ouro: nunca passe por um banheiro sem usar, especialmente em viagens longas!`,
+    nav: null, navLabel: null
+  },
+  {
+    keys: ['pagamento','pagar','cartao','dinheiro','credito','debito','pix','aceita','moeda','troco','cambio','euro','dolar'],
+    response: `💳 <strong>Formas de pagamento aceitas</strong><br><br>O que você precisa saber antes de consumir:<br>• <strong>Cartão internacional</strong> Visa/Mastercard é aceito na maioria dos pontos turísticos<br>• <strong>Dinheiro em espécie</strong> é indispensável para: feiras, mercados locais e pequenos restaurantes<br>• <strong>Nunca troque dinheiro na rua</strong> — use bancos ou casas de câmbio oficiais<br>• Em locais remotos <strong>só aceitam dinheiro</strong> — retire antes de sair da cidade grande<br>• Sempre pergunte <strong>"aceita cartão?"</strong> antes de consumir, não depois<br>• Desconfie de máquinas com problema de "sinal" — pode ser golpe para forçar pagamento em dinheiro<br>• Guarde sempre uma <strong>reserva em espécie para emergências</strong>`,
+    nav: null, navLabel: null
+  },
+  {
+    keys: ['escada','degrau','rampa','cadeira de rodas','acessibilidade','barreira','mobilidade','muleta','bengala','deficiente'],
+    response: `♿ <strong>Acessibilidade e barreiras físicas</strong><br><br>Pontos de atenção antes de sair:<br>• <strong>Escadarias</strong>: muitos centros históricos têm escadas sem rampa alternativa — pesquise antes<br>• <strong>Ruas de paralelepípedo</strong>: muito comuns em centros históricos, dificultam cadeiras de rodas e carrinhos<br>• <strong>Calçadas esburacadas</strong>: frequentes no Brasil — use calçado fechado e de solado firme<br>• <strong>Ruas sem calçada</strong>: em algumas cidades é preciso caminhar na via<br>• <strong>Ruas estreitas</strong>: passagem limitada em vilas históricas e bairros antigos<br>• Procure o símbolo ♿ ou pergunte ao guia local sobre <strong>rotas acessíveis alternativas</strong><br><br>💡 Veja as avaliações de acessibilidade dos locais no mapa!`,
+    nav: 'map', navLabel: '🗺️ Ver Mapa de Acessibilidade'
+  },
+  {
+    keys: ['higiene','limpeza','sujo','limpo','sujeira','asseio','insalubre'],
+    response: `🧹 <strong>Higiene nos locais turísticos</strong><br><br>Como se precaver:<br>• <strong>Restaurantes</strong>: prefira os com fluxo constante de clientes locais — é sinal de confiança<br>• <strong>Banheiros públicos turísticos</strong> são geralmente monitorados e mais limpos<br>• <strong>Comida de rua</strong>: observe se o preparo é na hora, em superfície limpa, com utensílios trocados<br>• Sempre carregue <strong>álcool em gel e lenços umedecidos</strong> na bolsa<br>• Avaliações de higiene dos locais estão disponíveis pela comunidade Azimute<br>• Em caso de dúvida sobre a higiene: <strong>passe para o próximo local</strong>`,
+    nav: 'explore', navLabel: '📍 Ver Locais Verificados'
+  },
+  {
+    keys: ['pedra','paralelepipedo','terreno','rua','calçada','buraco','irregular','piso','caminho','trilha','escorregadio'],
+    response: `🛤️ <strong>Condições de terreno e ruas</strong><br><br>Prepare-se para diferentes tipos de piso:<br>• <strong>Paralelepípedo</strong>: charmoso mas traiçoeiro! Use calçado fechado com solado antiderrapante<br>• <strong>Calçadas esburacadas</strong>: preste muita atenção ao caminhar, especialmente em cidades brasileiras<br>• <strong>Ruas de terra</strong>: comuns próximas a atrativos naturais, ficam escorregadias com chuva<br>• <strong>Ladeiras íngremes</strong>: frequentes em cidades históricas como Ouro Preto, Olinda e Santa Teresa (RJ)<br>• <strong>Sem calçada</strong>: caminhe sempre de frente para o tráfego, próximo ao acostamento<br>• <strong>Centros históricos europeus</strong>: pedras lisas e molhadas são perigosas — cuidado com chuva<br><br>👟 Recomendação: calçado fechado, leve e de solado firme é indispensável em qualquer roteiro!`,
+    nav: null, navLabel: null
+  },
+  {
+    keys: ['distância','longe','perto','caminhada','a pe','próximo','intervalo','parada','parar'],
+    response: `📏 <strong>Distâncias e planejamento de paradas</strong><br><br>Para uma viagem confortável:<br>• Para idosos e pessoas com mobilidade reduzida: no máximo <strong>500m a pé entre paradas</strong><br>• <strong>Banheiros</strong>: verifique sempre onde fica o próximo antes de sair do atual — não improvise<br>• <strong>Pausa a cada 45–60 minutos</strong> é recomendada para grupos com pessoas idosas ou crianças<br>• Prefira <strong>táxi ou app de transporte</strong> em vez de longas caminhadas em dias quentes<br>• Em rodovias: <strong>postos de gasolina</strong> a cada 60–80 km são os pontos de pausa mais seguros<br>• Carregue sempre <strong>água</strong> — hidratação é fundamental em qualquer trajeto<br><br>💡 Planeje o roteiro com o Mapa do Azimute para visualizar pontos de parada!`,
+    nav: 'map', navLabel: '🗺️ Planejar no Mapa'
+  },
+  {
+    keys: ['mapa','localização','onde fica','ver no mapa','mostrar mapa','rota','direcao','navegar'],
+    response: `🗺️ <strong>Abrindo o Mapa do Azimute</strong><br><br>No mapa você encontra:<br>• Locais com <strong>indicação de segurança</strong> por cores (seguro, atenção, suspeito, perigo)<br>• Pontos turísticos <strong>verificados pela comunidade</strong><br>• Zonas de crise e áreas que exigem atenção especial<br>• Filtros por tipo de local e nível de segurança`,
+    nav: 'map', navLabel: '🗺️ Ir para o Mapa'
+  },
+  {
+    keys: ['explorar','lugares','pontos turisticos','o que visitar','onde ir','destinos','ver lugares','conhecer'],
+    response: `📍 <strong>Explorando destinos</strong><br><br>Na seção Explorar você encontra:<br>• <strong>15+ locais verificados</strong> em destinos ao redor do mundo<br>• Avaliações reais da comunidade de viajantes com badges verificados<br>• Dicas de segurança, preços e acessibilidade para cada local<br>• Filtros por país, cidade e tipo de local`,
+    nav: 'explore', navLabel: '📍 Ir para Explorar'
+  },
+  {
+    keys: ['ajuda','emergência','sos','socorro','perigo','me perdi','perdido','urgente'],
+    response: `🆘 <strong>Situação de emergência</strong><br><br>Mantenha a calma. Aqui está o que fazer:<br>• Pressione o <strong>botão SOS</strong> (triângulo laranja no canto inferior direito) para acionar ajuda<br>• Acesse o <strong>Modo Crise</strong> no Mapa para ativar check-ins de segurança automáticos<br>• Entre em contato com sua rede de apoio no <strong>Bate-papo</strong><br>• Se estiver no exterior: acione o <strong>consulado brasileiro</strong> do país<br><br>📞 <strong>Emergências Brasil:</strong> Polícia 190 | SAMU 192 | Bombeiros 193<br>🌍 <strong>Emergência internacional:</strong> 112 (funciona na maioria dos países)`,
+    nav: 'map', navLabel: '🚨 Ativar Modo Crise'
+  },
+  {
+    keys: ['comer','alimentação','restaurante','lanche','comida','refeicao','fome','almoco','jantar'],
+    response: `🍽️ <strong>Alimentação com segurança</strong><br><br>Dicas para comer bem sem cair em armadilhas:<br>• Prefira restaurantes com <strong>cardápio visível e com preços</strong> — evita cobranças surpresa<br>• <strong>Sempre pergunte o preço</strong> antes de pedir, especialmente em áreas turísticas<br>• <strong>Comida de rua</strong>: priorize barracas com fila de pessoas locais — é o melhor indicador de qualidade<br>• Para idosos: prefira locais com <strong>cadeiras confortáveis, cardápio legível e boa iluminação</strong><br>• Evite restaurantes que <strong>abordam ativamente</strong> na calçada — geralmente são armadilhas<br>• Leia as avaliações dos restaurantes na comunidade Azimute antes de entrar!`,
+    nav: 'explore', navLabel: '🍽️ Ver Restaurantes Avaliados'
+  },
+  {
+    keys: ['farmacia','médico','saúde','remedio','hospital','dor','mal estar','doente','medicamento'],
+    response: `💊 <strong>Saúde e cuidados médicos na viagem</strong><br><br>Essenciais, especialmente para viajantes seniores:<br>• <strong>Leve seus medicamentos</strong> em quantidade suficiente + reserva de 3 dias extra<br>• Mantenha os remédios na <strong>embalagem original com receita médica</strong> (exigido em aeroportos)<br>• <strong>Farmácias 24h</strong> estão presentes em todas as cidades com fluxo turístico<br>• Contrate um <strong>seguro viagem</strong> — cobre emergências médicas e hospitalização<br>• Em caso de mal-estar: <strong>sente, hidrate-se e avise alguém do grupo imediatamente</strong><br>• <strong>Cartão SUS</strong> é válido em todo território brasileiro. No exterior, acione o seguro viagem<br><br>📞 SAMU: 192 | Emergência internacional: 112`,
+    nav: null, navLabel: null
+  },
+  {
+    keys: ['alerta','aviso','golpe','fraude','segurança','cuidado','risco','perigo'],
+    response: `🔔 <strong>Alertas e avisos de segurança</strong><br><br>Fique atualizado e protegido:<br>• Confira os <strong>Alertas</strong> do Azimute para ver golpes e riscos reportados recentemente<br>• A seção <strong>Notícias</strong> traz comunicados oficiais de segurança, clima e mobilidade<br>• <strong>Golpes mais comuns em turismo:</strong><br>&nbsp;&nbsp;→ Cardápio sem preços (cobra depois o dobro)<br>&nbsp;&nbsp;→ Câmbio de dinheiro na rua (notas falsas)<br>&nbsp;&nbsp;→ Guias turísticos falsos sem credencial<br>&nbsp;&nbsp;→ Táxis sem taxímetro em aeroportos<br>• Em situação suspeita: <strong>não entre em pânico</strong>, mantenha o grupo junto e se afaste`,
+    nav: 'notifications', navLabel: '🔔 Ver Alertas Ativos'
+  },
+  {
+    keys: ['tempo','clima','chuva','frio','calor','sol','guarda-chuva','temperatura'],
+    response: `🌤️ <strong>Clima e como se preparar</strong><br><br>Dicas para qualquer tempo:<br>• <strong>Protetor solar</strong> é indispensável mesmo em dias nublados — use sempre que sair<br>• Leve um <strong>casaco leve</strong>: museus, ônibus e restaurantes com ar-condicionado podem ser gelados<br>• <strong>Guarda-chuva dobrável</strong>: pequeno, leve e salva em chuvas rápidas e inesperadas<br>• <strong>Chuva forte</strong>: evite áreas de alagamento, ruas de terra e ladeiras íngremes<br>• Para idosos: evite exposição ao sol entre <strong>10h e 16h</strong> em dias muito quentes<br>• Confira a previsão do tempo nas <strong>Notícias</strong> do Azimute antes de sair`,
+    nav: 'news', navLabel: '📰 Ver Notícias'
+  }
+];
+
+const AI_GREETING = `Olá! Sou o <strong>Guia Azi</strong> 🌟<br><br>Sou seu assistente pessoal de viagem do Azimute, criado para ajudar qualquer viajante — especialmente quem precisa de informações práticas e acessíveis durante a excursão.<br><br>Posso te ajudar com:<br>🚻 Localizar banheiros na rota<br>💳 Formas de pagamento aceitas<br>♿ Condições de acessibilidade<br>🧹 Higiene dos locais turísticos<br>🛤️ Terreno e condições das ruas<br>📏 Distâncias e planejamento de paradas<br>🆘 O que fazer em emergências<br><br>Use os botões abaixo ou escreva sua dúvida com suas próprias palavras!`;
+
+const AI_FALLBACK = `Hmm, não encontrei uma resposta exata para isso. 🤔<br><br>Tente reformular sua pergunta ou use os botões de atalho abaixo.<br><br>Posso te ajudar com: <strong>banheiros, pagamentos, acessibilidade, higiene, terreno, distâncias, emergências, mapa, restaurantes, clima e alertas de segurança</strong>.`;
+
+let aiGuideOpen = false;
+let aiMsgCount = 0;
+
+function toggleAIGuide() {
+  aiGuideOpen ? closeAIGuide() : openAIGuide();
+}
+
+function openAIGuide() {
+  aiGuideOpen = true;
+  document.getElementById('aiGuideOverlay').classList.add('open');
+  document.getElementById('aiGuidePanel').classList.add('open');
+  if (aiMsgCount === 0) {
+    setTimeout(() => addAIBotMsg(AI_GREETING), 180);
+  }
+  setTimeout(() => {
+    const inp = document.getElementById('aiGuideInput');
+    if (inp) inp.focus();
+  }, 350);
+}
+
+function closeAIGuide() {
+  aiGuideOpen = false;
+  document.getElementById('aiGuideOverlay').classList.remove('open');
+  document.getElementById('aiGuidePanel').classList.remove('open');
+}
+
+function addAIBotMsg(html, navPage, navLabel) {
+  const container = document.getElementById('aiGuideMessages');
+  const div = document.createElement('div');
+  div.className = 'ai-msg';
+  const navBtn = navPage ? `<br><button class="ai-nav-action" onclick="closeAIGuide();showPage('${navPage}')">${navLabel}</button>` : '';
+  div.innerHTML = `
+    <div class="ai-msg-avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+    </div>
+    <div class="ai-msg-bubble">${html}${navBtn}</div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  aiMsgCount++;
+}
+
+function addAIUserMsg(text) {
+  const container = document.getElementById('aiGuideMessages');
+  const div = document.createElement('div');
+  div.className = 'ai-msg ai-msg-user';
+  div.innerHTML = `<div class="ai-msg-bubble">${text}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  aiMsgCount++;
+}
+
+function showAITyping() {
+  const container = document.getElementById('aiGuideMessages');
+  const div = document.createElement('div');
+  div.className = 'ai-typing-wrap';
+  div.id = 'aiTyping';
+  div.innerHTML = `
+    <div class="ai-msg-avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+    </div>
+    <div class="ai-msg-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeAITyping() {
+  const el = document.getElementById('aiTyping');
+  if (el) el.remove();
+}
+
+function normalizeText(t) {
+  return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ');
+}
+
+function findAIResponse(text) {
+  const normalized = normalizeText(text);
+  for (const entry of AI_KB) {
+    if (entry.keys.some(k => normalized.includes(normalizeText(k)))) return entry;
+  }
+  return null;
+}
+
+function sendAIMessage(presetText) {
+  const input = document.getElementById('aiGuideInput');
+  const msg = presetText || (input ? input.value.trim() : '');
+  if (!msg) return;
+  if (input) input.value = '';
+
+  addAIUserMsg(msg);
+  showAITyping();
+
+  const delay = 850 + Math.random() * 550;
+  setTimeout(() => {
+    removeAITyping();
+    const found = findAIResponse(msg);
+    if (found) addAIBotMsg(found.response, found.nav, found.navLabel);
+    else addAIBotMsg(AI_FALLBACK);
+  }, delay);
+}

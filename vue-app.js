@@ -1,6 +1,6 @@
 (() => {
   if (!window.Vue) {
-    console.warn('Vue 3 nao foi carregado.');
+    console.warn('Vue 3 não foi carregado.');
     return;
   }
 
