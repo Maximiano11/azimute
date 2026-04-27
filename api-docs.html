@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1c">
+<title>Azimute API · Documentação</title>
+<link rel="icon" href="logo-mark.svg">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .docs{max-width:1100px;margin:0 auto;padding:2rem clamp(1rem,3vw,2rem)}
+  .docs-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
+  .docs-top .lnd-brand{display:flex;align-items:center;gap:.7rem;font-family:var(--ff-display);font-weight:700}
+  .docs-top img{width:32px;height:32px}
+  .docs-layout{display:grid;grid-template-columns:230px 1fr;gap:2rem}
+  @media(max-width:820px){.docs-layout{grid-template-columns:1fr}.docs-nav{position:static}}
+  .docs-nav{position:sticky;top:2rem;align-self:start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem}
+  .docs-nav h4{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:0 0 .5rem}
+  .docs-nav ul{list-style:none;padding:0;margin:0 0 1rem;display:flex;flex-direction:column;gap:.2rem}
+  .docs-nav a{color:var(--muted);font-size:.9rem;padding:.4rem .6rem;border-radius:6px;display:block}
+  .docs-nav a:hover{background:var(--surface-2);color:var(--text)}
+  .docs h1{font-size:2.4rem;margin-bottom:.3rem}
+  .docs h2{margin-top:3rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+  .docs h3{margin-top:2rem;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.1rem;display:flex;gap:.5rem;align-items:center}
+  .docs p{color:var(--muted);line-height:1.7}
+  .docs table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+  .docs th,.docs td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--border)}
+  .docs th{color:var(--muted);font-weight:600;font-size:.85rem}
+  .docs code{font-family:'JetBrains Mono',ui-monospace,monospace;background:var(--surface-2);padding:.1rem .4rem;border-radius:4px;font-size:.85em;color:var(--primary-2)}
+  .docs pre{background:#060a16;color:#d7e6ff;padding:1.4rem;border-radius:var(--radius);overflow:auto;border:1px solid var(--border);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.85rem;margin:1rem 0}
+  .docs pre code{background:transparent;padding:0;color:inherit}
+  .callout{background:rgba(55,167,255,.08);border-left:3px solid var(--primary);padding:1rem 1.2rem;border-radius:0 8px 8px 0;margin:1rem 0;color:var(--text)}
+  .callout.warn{background:rgba(255,181,71,.08);border-left-color:var(--warning)}
+  .endpoint-head{display:flex;align-items:center;gap:.6rem;font-size:1rem}
+  .method{font-weight:700;padding:3px 8px;border-radius:6px;font-size:.75rem}
+  .method.get{background:rgba(55,167,255,.2);color:var(--primary)}
+  .method.post{background:rgba(92,255,176,.2);color:var(--ok)}
+  .method.delete{background:rgba(255,92,119,.2);color:var(--danger)}
+  .try-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin:1rem 0;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:820px){.try-block{grid-template-columns:1fr}}
+  .try-block textarea{width:100%;min-height:160px;background:#060a16;color:#d7e6ff;border:1px solid var(--border);border-radius:8px;padding:.7rem;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.82rem;resize:vertical;outline:0}
+  .try-block pre{margin:0;min-height:160px}
+  .try-block .row{grid-column:1/-1;display:flex;gap:.5rem;align-items:center}
+  .docs-footer{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="docs">
+  <header class="docs-top">
+    <a href="index.html" class="lnd-brand"><img src="logo-mark.svg" alt=""><span>Azimute API</span></a>
+    <div class="lnd-actions">
+      <a href="index.html" class="btn btn-ghost">← Voltar ao site</a>
+      <a href="index.html#app" class="btn btn-primary" onclick="sessionStorage.setItem('az.open','1')">Abrir app</a>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-nav">
+      <h4>Começando</h4>
+      <ul>
+        <li><a href="#intro">Introdução</a></li>
+        <li><a href="#auth">Autenticação</a></li>
+        <li><a href="#rate">Rate limits</a></li>
+        <li><a href="#errors">Códigos de erro</a></li>
+      </ul>
+      <h4>Endpoints</h4>
+      <ul>
+        <li><a href="#route">Roteiro confiável</a></li>
+        <li><a href="#risk">Confiança por ponto</a></li>
+        <li><a href="#region">Confiança por destino</a></li>
+        <li><a href="#incidents">Alertas de turismo</a></li>
+        <li><a href="#ica">Índice de Confiança</a></li>
+        <li><a href="#report">Relato de viajante</a></li>
+        <li><a href="#webhooks">Webhooks</a></li>
+      </ul>
+      <h4>SDKs</h4>
+      <ul>
+        <li><a href="#sdks">JS · Python · Swift · Kotlin</a></li>
+      </ul>
+    </aside>
+
+    <main>
+      <section id="intro">
+        <h1>Documentação da API</h1>
+        <p>A API do Azimute expõe inteligência de viagem em tempo real para parceiros de turismo: roteiros confiáveis, índice de confiança por destino, alertas oficiais e relatos de viajantes, análise preditiva sazonal e webhooks anti-golpe.</p>
+        <div class="callout"><b>Base URL:</b> <code>https://api.azimute.app/v1</code> · <b>Formato:</b> JSON · <b>CORS:</b> habilitado</div>
+      </section>
+
+      <section id="auth">
+        <h2>Autenticação</h2>
+        <p>Todas as requisições exigem uma API key enviada no header <code>Authorization</code>.</p>
+        <pre><code>Authorization: Bearer sk_live_xxx</code></pre>
+        <p>Chave de demonstração disponível: <code>sk_demo_azimute_5f3a9c0b</code>.</p>
+      </section>
+
+      <section id="rate">
+        <h2>Rate limits</h2>
+        <table>
+          <tr><th>Plano</th><th>Requisições</th><th>Webhooks</th></tr>
+          <tr><td>Demo</td><td>1.000 / hora</td><td>1 URL</td></tr>
+          <tr><td>Partner</td><td>50.000 / hora</td><td>10 URLs</td></tr>
+          <tr><td>Enterprise</td><td>sob demanda</td><td>ilimitado</td></tr>
+        </table>
+      </section>
+
+      <section id="errors">
+        <h2>Códigos de erro</h2>
+        <table>
+          <tr><th>Código</th><th>Significado</th></tr>
+          <tr><td><code>400</code></td><td>Parâmetros inválidos</td></tr>
+          <tr><td><code>401</code></td><td>API key ausente ou inválida</td></tr>
+          <tr><td><code>429</code></td><td>Rate limit excedido</td></tr>
+          <tr><td><code>5xx</code></td><td>Falha no servidor — retry com backoff</td></tr>
+        </table>
+      </section>
+
+      <section id="route">
+        <h2>Roteiro confiável</h2>
+        <h3><span class="method get">GET</span><code>/v1/route/safe</code></h3>
+        <p>Retorna o roteiro com maior score de confiança para viajantes, ponderando alertas oficiais de turismo, relatos da comunidade, iluminação e horário.</p>
+        <table>
+          <tr><th>Param</th><th>Tipo</th><th>Descrição</th></tr>
+          <tr><td><code>from</code></td><td>[lat,lng]</td><td>Origem (hospedagem ou ponto atual)</td></tr>
+          <tr><td><code>to</code></td><td>[lat,lng]</td><td>Atração ou destino</td></tr>
+          <tr><td><code>profile</code></td><td>string</td><td><code>walk</code>, <code>bike</code>, <code>transit</code>, <code>tourist</code></td></tr>
+          <tr><td><code>time</code></td><td>ISO8601</td><td>Horário do passeio (default: agora)</td></tr>
+        </table>
+        <div class="try-block">
+          <textarea id="req-route">{
+  "from": [-23.5616, -46.6559],
+  "to":   [-23.5675, -46.6800],
+  "profile": "tourist",
+  "time": "2026-04-24T22:00:00Z"
+}</textarea>
+          <pre id="res-route"><code>// Clique em "Executar" para simular</code></pre>
+          <div class="row"><button class="btn btn-primary" onclick="runDoc('route')">Executar</button><small class="muted">Chamada simulada · dados mocados</small></div>
+        </div>
+      </section>
+
+      <section id="risk">
+        <h2>Confiança por ponto</h2>
+        <h3><span class="method get">GET</span><code>/v1/risk/point</code></h3>
+        <p>Retorna o score de confiança turística de um ponto específico (raio configurável).</p>
+        <div class="try-block">
+          <textarea id="req-risk">{ "lat": -23.5616, "lng": -46.6559, "radius_m": 250 }</textarea>
+          <pre id="res-risk"><code>// Clique em "Executar"</code></pre>
+          <div class="row"><button class="btn btn-primary" onclick="runDoc('risk')">Executar</button></div>
+        </div>
+      </section>
+
+      <section id="region">
+        <h2>Confiança por destino</h2>
+        <h3><span class="method get">GET</span><code>/v1/risk/region</code></h3>
+        <p>Retorna polígonos de bairros/destinos turísticos com score e tendência em tempo real.</p>
+        <pre><code>{
+  "regions": [
+    { "id": "sp-paulista", "name": "Paulista (atrações)",
+      "ica": 72, "trend": "up", "delta_24h": -4,
+      "polygon": [...],
+      "sources": { "official": 0.82, "community": 0.74, "predict": 0.71 }
+    }
+  ],
+  "updated_at": "2026-04-24T22:00:00Z"
+}</code></pre>
+      </section>
+
+      <section id="incidents">
+        <h2>Alertas de turismo</h2>
+        <h3><span class="method get">GET</span><code>/v1/incidents</code></h3>
+        <p>Lista alertas oficiais de turismo + relatos de viajantes dentro de uma bbox.</p>
+        <pre><code>GET /v1/incidents?bbox=-23.57,-46.68,-23.54,-46.63&since=24h&category=tourist_scam</code></pre>
+      </section>
+
+      <section id="ica">
+        <h2>Índice de Confiança Azimute (ICA)</h2>
+        <h3><span class="method get">GET</span><code>/v1/ica</code></h3>
+        <p>Score composto que reflete a confiabilidade de um destino para viajantes, com três pilares: fontes oficiais de turismo, comunidade de viajantes e análise preditiva sazonal.</p>
+        <pre><code>{
+  "ica": 78,
+  "classification": "bom",
+  "pillars": {
+    "official_sources": { "score": 0.82, "active": 27, "last_sync": "há 12s" },
+    "community_validation": { "score": 0.74, "validations_24h": 184 },
+    "predictive_model": { "score": 0.71, "confidence": 0.88 }
+  },
+  "forecast_2h": [
+    { "t": "+30min", "risk": 0.22 },
+    { "t": "+60min", "risk": 0.27 },
+    { "t": "+120min", "risk": 0.35 }
+  ]
+}</code></pre>
+      </section>
+
+      <section id="report">
+        <h2>Relato de viajante</h2>
+        <h3><span class="method post">POST</span><code>/v1/report</code></h3>
+        <p>Cria um relato de um viajante. Passa por validação cruzada de outros viajantes antes de entrar no mapa público.</p>
+        <div class="try-block">
+          <textarea id="req-report">{
+  "type": "tourist_scam",
+  "lat": -23.559,
+  "lng": -46.655,
+  "description": "Falso vendedor de ingressos abordando turistas",
+  "anonymous": true
+}</textarea>
+          <pre id="res-report"><code>// Clique em "Executar"</code></pre>
+          <div class="row"><button class="btn btn-primary" onclick="runDoc('report')">Executar</button></div>
+        </div>
+      </section>
+
+      <section id="webhooks">
+        <h2>Webhooks</h2>
+        <h3><span class="method post">POST</span><code>/v1/webhooks/alerts</code></h3>
+        <p>Receba alertas em tempo real em uma URL sua. Cada entrega é assinada com HMAC SHA-256 via header <code>X-Azimute-Signature</code>.</p>
+        <div class="callout warn">Eventos disponíveis: <code>tourist_scam</code>, <code>consular_advisory</code>, <code>community_validated</code>, <code>ica_drop</code>, <code>seasonal_alert</code>.</div>
+        <pre><code>{
+  "event": "ica_drop",
+  "region": "sp-paulista",
+  "ica_before": 78,
+  "ica_after": 64,
+  "triggered_at": "2026-04-14T22:03:11Z"
+}</code></pre>
+      </section>
+
+      <section id="sdks">
+        <h2>SDKs oficiais</h2>
+        <table>
+          <tr><th>Linguagem</th><th>Pacote</th><th>Repositório</th></tr>
+          <tr><td>JavaScript / Node</td><td><code>@azimute/sdk</code></td><td>github.com/azimute/sdk-js</td></tr>
+          <tr><td>Python</td><td><code>azimute</code></td><td>github.com/azimute/sdk-python</td></tr>
+          <tr><td>Swift</td><td><code>AzimuteKit</code></td><td>github.com/azimute/sdk-swift</td></tr>
+          <tr><td>Kotlin</td><td><code>azimute-android</code></td><td>github.com/azimute/sdk-kotlin</td></tr>
+        </table>
+      </section>
+
+      <footer class="docs-footer">
+        <span>Azimute API · v1 · protótipo com dados simulados</span>
+        <a href="index.html">← Voltar</a>
+      </footer>
+    </main>
+  </div>
+</div>
+<script>
+const MOCK = {
+  route: {trust_score:0.83,duration_min:14,distance_km:2.1,advisories:[{type:'tourist_scam',severity:'med'}],waypoints:[[-23.5616,-46.6559],[-23.5675,-46.6800]],generated_at:new Date().toISOString()},
+  risk: {score:0.31,bucket:'médio',breakdown:{official:0.18,community:0.09,seasonal:0.04},incidents_count_30d:42},
+  report:{id:'rpt_'+Math.random().toString(36).slice(2,7),status:'pending_validation',queued_validators:3,duplicates_found:1}
+};
+function runDoc(k){
+  const res = document.getElementById('res-'+k);
+  res.innerHTML = '<code>carregando…</code>';
+  setTimeout(()=>{ res.innerHTML = '<code>'+JSON.stringify(MOCK[k],null,2).replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</code>'; }, 350);
+}
+</script>
+</body>
+</html>

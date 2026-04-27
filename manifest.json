@@ -1,0 +1,12 @@
+{
+  "name": "Azimute — Segurança inteligente",
+  "short_name": "Azimute",
+  "description": "Rota mais segura, alertas em tempo real e API para parceiros.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0f1c",
+  "theme_color": "#0a0f1c",
+  "icons": [
+    { "src": "logo-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

@@ -83,11 +83,12 @@
 
   ## Diferenciais do Azimute
 
-  - foco em segurança comunitária em viagens
-  - rede social útil, não apenas entretenimento
-  - confiança em locais e relatos
-  - alertas de risco e prevenção de golpes
-  - experiência adaptativa por perfil e idade
+  - foco 100% em turismo e viajantes
+  - rede social útil de viagem, não entretenimento genérico
+  - roteiros confiáveis curados pela comunidade de viajantes
+  - alertas anti-golpe específicos para turistas (taxi pirata, agência falsa, cobranças abusivas)
+  - integração com fontes oficiais de turismo (Embratur, ministérios, Itamaraty)
+  - experiência adaptativa por perfil de viagem (mochileiro, família, solo, cultural, aventura)
   - modo acessível para idosos
   - forte componente de impacto social
 
