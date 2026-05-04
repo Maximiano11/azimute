@@ -13,7 +13,7 @@ const state = {
   senior: localStorage.getItem('az.senior') === 'on',
   lang: localStorage.getItem('az.lang') || 'pt',
   time: -1, // -1 = agora; 0..23 hora
-  layers: { heat:true, regions:true, official:true, community:true, lighting:false, safe:false },
+  layers: { heat:true, regions:false, official:true, community:false, lighting:false, safe:true },
   map: null,
   layerGroups: {},
   heatLayer: null,
@@ -21,8 +21,11 @@ const state = {
   routeLayer: null,
   altLayer: null,
   avoidedLayer: null,
+  routeOverlay: null,
   isoLayer: null,
   userMarker: null,
+  routeStartMarker: null,
+  routeEndMarker: null,
   fromCoord: [-25.4398, -49.2892],
   toCoord: [-25.3792, -49.2773],
   routeGeo: null,
@@ -45,11 +48,11 @@ const state = {
 const DATA = {
   incidents: [
     {id:'o1', type:'official', severity:'med', lat:-25.4385, lng:-49.2731, title:'Fluxo intenso no Jardim Botânico', src:'Setur Curitiba', srcUrl:'https://turismo.curitiba.pr.gov.br/', when:'Há 20min', hour:19, desc:'Entrada principal com filas de excursão no fim da tarde. Comprar ingresso antecipado agiliza o acesso.', breakdown:{official:.48,community:.12,env:.06}},
-    {id:'o2', type:'official', severity:'med', lat:-25.4410, lng:-54.4402, title:'Alerta de chuva nas Cataratas', src:'Defesa Civil PR', srcUrl:'https://www.defesacivil.pr.gov.br/', when:'Há 45min', hour:16, desc:'Trilhas próximas às passarelas podem ficar escorregadias. Levar capa e calçado com aderência.', breakdown:{official:.46,community:.05,env:.22}},
-    {id:'o3', type:'official', severity:'high', lat:-25.4284, lng:-49.2733, title:'Furto a turista registrado no Centro Histórico', src:'Polícia de Turismo', srcUrl:'https://www.policiacivil.pr.gov.br/', when:'Hoje 14:20', hour:14, desc:'Visitante argentino relatou furto de mochila em área de grande circulação na feira do Largo da Ordem.', breakdown:{official:.58,community:.11,env:.05}},
-    {id:'o4', type:'official', severity:'med', lat:-25.4416, lng:-49.2765, title:'Fila elevada no Museu Oscar Niemeyer', src:'Setur Curitiba', srcUrl:'https://turismo.curitiba.pr.gov.br/', when:'Há 35min', hour:15, desc:'Movimento alto na bilheteria e estacionamento. Compra antecipada reduz espera no MON.', breakdown:{official:.42,community:.09,env:.05}},
+    {id:'o2', type:'official', severity:'med', lat:-25.4410, lng:-54.4402, title:'Alerta de chuva nas Cataratas', src:'Defesa Civil PR', srcUrl:'https://www.defesacivil.pr.gov.br/', when:'Há 45min', hour:16, desc:'Trilhas próximas às passarelas podem ficar escorregadias. Levar capa e calçado com aderência.', photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Cataratas_do_Igua%C3%A7u_%2818%29.JPG', breakdown:{official:.46,community:.05,env:.22}},
+    {id:'o3', type:'official', severity:'high', lat:-25.4284, lng:-49.2733, title:'Furto a turista registrado no Centro Histórico', src:'Polícia de Turismo', srcUrl:'https://www.policiacivil.pr.gov.br/', when:'Hoje 14:20', hour:14, desc:'Visitante argentino relatou furto de mochila em área de grande circulação na feira do Largo da Ordem.', photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Largo_da_Ordem_%2829538659621%29.jpg', breakdown:{official:.58,community:.11,env:.05}},
+    {id:'o4', type:'official', severity:'med', lat:-25.4416, lng:-49.2765, title:'Fila elevada no Museu Oscar Niemeyer', src:'Setur Curitiba', srcUrl:'https://turismo.curitiba.pr.gov.br/', when:'Há 35min', hour:15, desc:'Movimento alto na bilheteria e estacionamento. Compra antecipada reduz espera no MON.', photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/MON_Museu_Oscar_Niemeyer.jpg', breakdown:{official:.42,community:.09,env:.05}},
     {id:'o5', type:'official', severity:'med', lat:-25.5107, lng:-54.5854, title:'Operação reforçada na entrada da Itaipu', src:'Itaipu Binacional', srcUrl:'https://www.turismoitaipu.com.br/', when:'Há 50min', hour:11, desc:'Controle extra de acesso e revista leve no circuito turístico da usina. Chegar com antecedência.', breakdown:{official:.44,community:.06,env:.04}},
-    {id:'o6', type:'official', severity:'low', lat:-25.4299, lng:-49.2679, title:'Rua XV com apoio ampliado ao visitante', src:'Instituto Municipal de Turismo', srcUrl:'https://turismo.curitiba.pr.gov.br/', when:'Hoje 10:10', hour:10, desc:'Agentes de turismo e sinalização bilíngue reforçada no eixo da Rua das Flores.', breakdown:{official:.18,community:.04,env:.02}},
+    {id:'o6', type:'official', severity:'low', lat:-25.4299, lng:-49.2679, title:'Rua XV com apoio ampliado ao visitante', src:'Instituto Municipal de Turismo', srcUrl:'https://turismo.curitiba.pr.gov.br/', when:'Hoje 10:10', hour:10, desc:'Agentes de turismo e sinalização bilíngue reforçada no eixo da Rua das Flores.', photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Rua_XV_em_Curitiba.jpg', breakdown:{official:.18,community:.04,env:.02}},
     {id:'c1', type:'community', severity:'med', lat:-25.4424, lng:-49.2789, title:'Falso guia oferecendo city tour', src:'Viajante verificado', srcUrl:'https://azimute.app/comunidade', when:'Há 10min', hour:13, desc:'Abordagem informal perto da Rua XV com cobrança antecipada e sem credencial visível.', breakdown:{official:.08,community:.44,env:.08}},
     {id:'c2', type:'community', severity:'high', lat:-25.5163, lng:-48.5225, title:'Golpe de passeio superfaturado', src:'4 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 1h', hour:23, desc:'Turistas em Paranaguá relataram cobrança abusiva por traslado até a Ilha do Mel sem confirmação de embarque.', breakdown:{official:.1,community:.62,env:.14}},
     {id:'c3', type:'community', severity:'low', lat:-25.5478, lng:-48.5592, title:'Cais de Morretes recomendado para passeio', src:'18 relatos', srcUrl:'https://azimute.app/comunidade', when:'Hoje', hour:18, desc:'Movimento tranquilo no fim da tarde, boa opção para provar barreado e caminhar pelo centro histórico.', breakdown:{official:.05,community:.15,env:.03}},
@@ -60,7 +63,7 @@ const DATA = {
     {id:'c8', type:'community', severity:'med', lat:-25.4323, lng:-49.2712, title:'Cobrança confusa em feira de artesanato', src:'3 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 1h', hour:17, desc:'Estrangeiros relataram dificuldade com preços sem etiqueta no entorno do Largo da Ordem.', breakdown:{official:.05,community:.33,env:.04}},
     {id:'c9', type:'community', severity:'high', lat:-25.4397, lng:-49.2748, title:'Tentativa de furto de celular perto do Jardim Botânico', src:'7 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 18min', hour:18, desc:'Turistas relataram abordagem rápida em área de foto na saída do Jardim Botânico.', breakdown:{official:.09,community:.51,env:.07}},
     {id:'c10', type:'community', severity:'high', lat:-25.4412, lng:-49.2761, title:'Roubo de mochila no entorno do MON', src:'5 relatos', srcUrl:'https://azimute.app/comunidade', when:'Hoje 15:10', hour:15, desc:'Visitantes relatam distração durante fila e subtração de pertences próximos ao museu.', breakdown:{official:.08,community:.49,env:.06}},
-    {id:'c11', type:'community', severity:'high', lat:-25.4305, lng:-49.2688, title:'Golpe de falsa doação na Rua XV', src:'11 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 22min', hour:16, desc:'Abordagem em grupo usando prancheta para distrair turistas e pedir contribuição em dinheiro.', breakdown:{official:.07,community:.53,env:.05}},
+    {id:'c11', type:'community', severity:'high', lat:-25.4305, lng:-49.2688, title:'Golpe de falsa doação na Rua XV', src:'11 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 22min', hour:16, desc:'Abordagem em grupo usando prancheta para distrair turistas e pedir contribuição em dinheiro.', photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Rua_XV_em_Curitiba.jpg', breakdown:{official:.07,community:.53,env:.05}},
     {id:'c12', type:'community', severity:'high', lat:-25.4423, lng:-54.4407, title:'Furto de carteira nas passarelas das Cataratas', src:'4 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 55min', hour:13, desc:'Mochilas abertas em pontos de maior aglomeração perto das quedas principais.', breakdown:{official:.08,community:.47,env:.06}},
     {id:'c13', type:'community', severity:'high', lat:-25.5109, lng:-54.5846, title:'Golpe com ingresso falso na Itaipu', src:'3 relatos', srcUrl:'https://azimute.app/comunidade', when:'Hoje 11:20', hour:11, desc:'Turistas relataram oferta de entrada sem fila por vendedores sem vínculo oficial.', breakdown:{official:.08,community:.46,env:.05}},
     {id:'c14', type:'community', severity:'high', lat:-25.5454, lng:-54.5888, title:'Assalto após corrida irregular no aeroporto', src:'2 relatos', srcUrl:'https://azimute.app/comunidade', when:'Hoje 09:40', hour:9, desc:'Viajantes desceram fora do trajeto combinado e relataram perda de bagagem e objetos pessoais.', breakdown:{official:.1,community:.55,env:.07}},
@@ -74,7 +77,7 @@ const DATA = {
     {id:'c22', type:'community', severity:'high', lat:-25.4116, lng:-49.2798, title:'Golpe de falso flanelinha perto do Centro Cívico', src:'6 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 45min', hour:16, desc:'Motoristas foram pressionados a pagar por vaga em rua lateral, fora do eixo principal recomendado para seguir ao norte.', breakdown:{official:.08,community:.47,env:.05}},
     {id:'c23', type:'community', severity:'high', lat:-25.3948, lng:-49.2839, title:'Tentativa de roubo em rua de acesso ao Tanguá', src:'3 relatos', srcUrl:'https://azimute.app/comunidade', when:'Hoje 18:20', hour:18, desc:'Ocorrência registrada em acesso secundário e mais vazio ao parque. Viajantes recomendam chegada pela via principal.', breakdown:{official:.09,community:.48,env:.06}},
     {id:'c24', type:'community', severity:'med', lat:-25.3789, lng:-49.2768, title:'Mirante do Tanguá com fluxo tranquilo no fim da tarde', src:'12 relatos', srcUrl:'https://azimute.app/comunidade', when:'Há 12min', hour:17, desc:'Visitantes relatam boa presença de famílias e sensação de segurança na área principal do parque e mirante.', breakdown:{official:.05,community:.24,env:.04}},
-    {id:'o7', type:'official', severity:'low', lat:-25.3792, lng:-49.2773, title:'Parque Tanguá com apoio e patrulha turística no pôr do sol', src:'Curitiba Turismo', srcUrl:'https://turismo.curitiba.pr.gov.br/', when:'Hoje 17:10', hour:17, desc:'Guarda municipal e equipe de apoio reforçam a área principal do parque nos horários de maior visitação.', breakdown:{official:.2,community:.04,env:.02}},
+    {id:'o7', type:'official', severity:'low', lat:-25.3792, lng:-49.2773, title:'Parque Tanguá com apoio e patrulha turística no pôr do sol', src:'Curitiba Turismo', srcUrl:'https://turismo.curitiba.pr.gov.br/', when:'Hoje 17:10', hour:17, desc:'Guarda municipal e equipe de apoio reforçam a área principal do parque nos horários de maior visitação.', photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Parque_Tangu%C3%A1_Curitiba.jpg', breakdown:{official:.2,community:.04,env:.02}},
     {id:'l1', type:'lighting', severity:'med', lat:-25.4409, lng:-49.2767, title:'Iluminação reduzida após o fechamento do museu', src:'Sensor + comunidade', srcUrl:'https://azimute.app/comunidade', when:'Após 20h', hour:21, desc:'Trecho lateral do Jardim Botânico fica mais vazio à noite. Prefira transporte por app no retorno.', breakdown:{official:.04,community:.12,env:.31}},
     {id:'l2', type:'lighting', severity:'med', lat:-27.5954, lng:-48.5480, title:'Saída da orla com baixa iluminação', src:'Comunidade', srcUrl:'https://azimute.app/comunidade', when:'Noite', hour:22, desc:'Na volta do pôr do sol na Beira-Mar Norte, alguns quarteirões laterais têm pouca movimentação.', breakdown:{official:.03,community:.17,env:.27}},
     {id:'l3', type:'lighting', severity:'med', lat:-25.4306, lng:-49.2701, title:'Trecho lateral do Centro Histórico escurece cedo', src:'Comunidade', srcUrl:'https://azimute.app/comunidade', when:'Após 19h', hour:20, desc:'Ruas menores perto do Largo ficam com baixa circulação depois do fechamento das lojas.', breakdown:{official:.03,community:.14,env:.26}},
@@ -219,65 +222,242 @@ const DEMO_CURITIBA_ROUTE = {
   waypoint: [-25.4199, -49.2766]
 };
 
+const DEMO_JOURNEYS = {
+  'curitiba-safe': {
+    fromLabel:'Qoya Hotel Curitiba, Batel',
+    toLabel:'Parque Tanguá, Curitiba',
+    from:[-25.4398, -49.2892],
+    to:[-25.3792, -49.2773],
+    profile:'car',
+    hour:17
+  },
+  'foz-family': {
+    fromLabel:'Aeroporto de Foz do Iguaçu',
+    toLabel:'Cataratas do Iguaçu',
+    from:[-25.5451, -54.5882],
+    to:[-25.4410, -54.4402],
+    profile:'car',
+    hour:9
+  },
+  'morretes-day': {
+    fromLabel:'Estação Ferroviária de Morretes',
+    toLabel:'Centro Histórico de Morretes',
+    from:[-25.4767, -48.8359],
+    to:[-25.4761, -48.8346],
+    profile:'walk',
+    hour:13
+  }
+};
+
+const DESTINATION_GUIDES = [
+  {
+    match:['Parque Tanguá', 'Tanguá'],
+    title:'Parque Tanguá',
+    best:'17h a 18h30',
+    support:'apoio no acesso principal',
+    alert:'evite ruas secundárias após 19h',
+    photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Parque_Tangu%C3%A1_Curitiba.jpg',
+    tip:'chegue e retorne pela via principal'
+  },
+  {
+    match:['Cataratas', 'Iguaçu'],
+    title:'Cataratas do Iguaçu',
+    best:'8h a 10h',
+    support:'base do visitante no parque',
+    alert:'atenção a furtos em aglomeração',
+    photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Cataratas_do_Igua%C3%A7u_%2818%29.JPG',
+    tip:'use o ônibus interno e guarde documentos'
+  },
+  {
+    match:['Morretes'],
+    title:'Centro Histórico de Morretes',
+    best:'11h a 15h',
+    support:'apoio turístico no eixo central',
+    alert:'cuidado com pacotes informais',
+    photo:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Esta%C3%A7%C3%A3o_Ferrovi%C3%A1ria_de_Morretes.jpg',
+    tip:'prefira vendas com cardápio e preço claro'
+  }
+];
+
 /* ----- i18n ----- */
 const I18N = {
   pt: {
-    'lnd.nav.platform':'Plataforma','lnd.nav.partners':'Para viajantes','lnd.nav.api':'API','lnd.nav.community':'Comunidade',
-    'lnd.login':'Entrar','lnd.openMap':'Explorar destinos',
-    'lnd.tag':'Rede social de viagem segura',
-    'lnd.hero.title':'Viaje com confiança. Conecte-se com viajantes reais.',
-    'lnd.hero.lede':'O Azimute reúne relatos verificados de viajantes, alertas oficiais de turismo e mapas de confiança para que você descubra destinos, evite golpes e encontre comunidade no mundo todo.',
-    'lnd.hero.cta1':'Explorar destinos','lnd.hero.cta2':'Para parceiros de turismo',
-    'lnd.stats.routes':'roteiros consultados','lnd.stats.reports':'relatos de viajantes','lnd.stats.sources':'países cobertos',
-    'lnd.mapcard.title':'Roteiro recomendado','lnd.mapcard.risk':'confiança',
-    'lnd.legend.safe':'Roteiro confiável','lnd.legend.risk':'Zona de alerta',
-    'lnd.features.title':'Tudo o que o viajante precisa, em um só app',
-    'lnd.feat.route.t':'Roteiros confiáveis','lnd.feat.route.d':'Caminhos avaliados pela comunidade que evitam armadilhas para turistas.',
-    'lnd.feat.official.t':'Fontes oficiais de turismo','lnd.feat.official.d':'Embratur, ministérios, consulados e órgãos locais sempre atualizados.',
-    'lnd.feat.community.t':'Rede de viajantes','lnd.feat.community.d':'Conheça pessoas no destino, troque dicas e ajude outros viajantes.',
-    'lnd.feat.alerts.t':'Alertas anti-golpe','lnd.feat.alerts.d':'Avisos sobre golpes, taxistas piratas e cobranças abusivas a turistas.',
-    'lnd.partners.title':'Feito para cada tipo de viajante',
+    'lnd.nav.map':'Mapa','lnd.nav.forTravelers':'Para quem viaja','lnd.nav.diff':'Diferencial','lnd.nav.community':'Comunidade',
+    'lnd.login':'Entrar','lnd.openMap':'Ver mapa em ação',
+    'lnd.tag':'Dados confiáveis para quem está viajando',
+    'lnd.hero.title':'Viaje com mais confiança em qualquer destino.',
+    'lnd.hero.lede':'O Azimute cruza comunidade, alertas oficiais e contexto do lugar para transformar risco em decisão rápida para o viajante.',
+    'lnd.hero.scale':'Começa com mocks no Paraná, mas escala por cidade, rota e destino turístico sem refazer a base.',
+    'lnd.hero.problemLabel':'O problema','lnd.hero.problem':'Decisão sem contexto',
+    'lnd.hero.solutionLabel':'A resposta','lnd.hero.solution':'Risco vira ação',
+    'lnd.hero.cta1':'Abrir mapa confiável','lnd.hero.cta2':'Entender o diferencial',
+    'lnd.proof.map':'Mapa funcional','lnd.proof.support':'Apoio perto','lnd.proof.fast':'Leitura rápida','lnd.proof.scale':'Escala por destino',
+    'lnd.stats.pilot':'Piloto local','lnd.stats.pilotSub':'mocks no Paraná','lnd.stats.sources':'3 fontes','lnd.stats.sourcesSub':'oficial, comunidade e contexto','lnd.stats.scale':'Escala fácil','lnd.stats.scaleSub':'por cidade, rota e destino',
+    'lnd.mapcard.title':'Rota mais confiável','lnd.mapcard.risk':'+38% confiança','lnd.mapcard.insight1':'Golpes recentes','lnd.mapcard.insight2':'Pontos de apoio','lnd.mapcard.insight3':'Janela mais segura','lnd.mapcard.reading':'Leitura do trajeto','lnd.mapcard.signals':'Sinais no entorno','lnd.mapcard.signalsValue':'3 áreas de atenção',
+    'lnd.legend.safe':'Rota recomendada','lnd.legend.risk':'Áreas de atenção',
+    'lnd.features.title':'Mapa, sinal e ação',
+    'lnd.feat.route.t':'Deslocamento confiável','lnd.feat.route.d':'Mostra a rota mais coerente e o caminho que faz mais sentido para quem está fora de casa.',
+    'lnd.feat.official.t':'Leitura de risco simples','lnd.feat.official.d':'Transforma sinais dispersos em alerta claro, apoio próximo e contexto útil.',
+    'lnd.feat.community.t':'Comunidade útil','lnd.feat.community.d':'Relatos curtos por lugar para orientar o próximo viajante sem ruído social.',
+    'lnd.feat.alerts.t':'Acessível desde a origem','lnd.feat.alerts.d':'Fluxo guiado, linguagem direta e contraste alto para idosos, PCD e leigos.',
+    'lnd.partners.title':'Feito para quem viaja de verdade',
+    'lnd.persona.tourists.t':'Turistas em férias','lnd.persona.tourists.d':'Saem do hotel, escolhem o destino e entendem rápido por onde ir e o que evitar.',
+    'lnd.persona.family.t':'Famílias e 60+','lnd.persona.family.d':'Ganham leitura mais calma, apoio próximo e trajetos que evitam confusão desnecessária.',
+    'lnd.persona.solo.t':'Viajantes solo','lnd.persona.solo.d':'Contam com sinais recentes da comunidade, apoio local e mais contexto antes de se deslocar.',
+    'lnd.diff.title':'Uma camada de confiança.','lnd.diff.lede':'O Azimute não substitui transporte, reserva ou navegação. Ele entrega a leitura que falta para decidir com mais segurança.',
+    'lnd.diff.card1.k':'O que o sistema cruza','lnd.diff.card1.t':'Comunidade + fonte oficial + contexto do lugar','lnd.diff.card1.d':'O mapa combina sinais diferentes para orientar a decisão em segundos.',
+    'lnd.diff.card2.k':'O que o viajante recebe','lnd.diff.card2.t':'Ir, evitar, pedir apoio','lnd.diff.card2.d':'Em vez de excesso de tela, o app entrega ação curta e direta.',
+    'lnd.diff.card3.k':'O que vira produto','lnd.diff.card3.t':'Leitura territorial para turismo','lnd.diff.card3.d':'O valor está nos sinais, na confiança por área e no contexto útil para turismo.',
+    'lnd.community.title':'Comunidade ligada ao lugar, não ao algoritmo','lnd.community.lede':'Cada relato nasce no mapa, ajuda no deslocamento e reforça a leitura do destino com utilidade imediata.','lnd.community.cta':'Ver protótipo',
+    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Protótipo com dados simulados','lnd.footer.privacy':'Privacidade & LGPD',
+    'app.search.placeholder':'Buscar lugar, apoio ou alerta...',
+    'nav.map.title':'Mapa confiável','nav.map.sub':'Ir, evitar, pedir apoio',
+    'nav.trip.title':'Ir agora','nav.trip.sub':'Acompanhar meu trajeto',
+    'nav.alerts.title':'Alertas do lugar','nav.alerts.sub':'Golpes, furtos e atenção',
+    'nav.news.title':'Contexto oficial','nav.news.sub':'Turismo e orientação local',
+    'nav.community.title':'Comunidade','nav.community.sub':'Relatos úteis no destino',
+    'nav.chat.title':'Conversas','nav.chat.sub':'Combinar e confirmar',
+    'nav.partners.title':'Dados para turismo','nav.partners.sub':'Hotéis, guias e destinos',
+    'nav.ica.title':'Índice do destino','nav.ica.sub':'Leitura territorial',
+    'nav.profile.title':'Perfil','nav.profile.sub':'Sua conta',
+    'nav.privacy.title':'Privacidade','nav.privacy.sub':'LGPD & dados',
+    'sidebar.score.title':'Leitura do destino','sidebar.score.label':'Contexto atual:','sidebar.back':'← Voltar ao site',
+    'route.panel.title':'Para onde você quer ir?',
+    'route.from.label':'Onde você está','route.from.placeholder':'Onde você está agora',
+    'route.to.label':'Destino','route.to.placeholder':'Para onde você quer ir',
+    'route.safe.cta':'Ver caminho mais confiável','route.moreOptions':'Mais opções',
+    'route.assist.arriving':'Cheguei','route.assist.now':'Sair agora','route.assist.calm':'Calmo','route.assist.easy':'Modo fácil',
+    'route.examples':'Exemplos','route.journey.curitiba':'Hotel → Tanguá','route.journey.foz':'Aeroporto → Cataratas','route.journey.morretes':'Morretes',
+    'route.profile.walk':'🚶 Caminhando','route.profile.bike':'🚴 Bike','route.profile.car':'🚗 Carro ou app','route.profile.tour':'🧳 Com apoio',
+    'route.time.label':'Horário da saída:',
+    'route.result.label':'Caminho sugerido','route.edit':'Editar',
+    'route.metric.trust':'Confiança','route.metric.time':'Duração','route.metric.distance':'Distância',
+    'route.destination.label':'Chegada ao destino','route.destination.best':'Melhor momento','route.destination.support':'Ponto de apoio','route.destination.alert':'Alerta recente','route.destination.tip':'Dica rápida',
+    'route.actions.steps':'Ver passo a passo','route.actions.compare':'Comparar rota direta','route.actions.sensitive':'Ver áreas sensíveis','route.actions.start':'▶ Iniciar passeio','route.actions.layers':'Camadas',
+    'route.steps.title':'Passo a passo do passeio',
+    'map.layers.title':'O que ver no mapa','map.layer.regions':'Confiança por área','map.layer.heat':'Áreas com mais atenção','map.layer.official':'Avisos oficiais','map.layer.community':'Relatos da comunidade','map.layer.lighting':'Baixa iluminação','map.layer.safe':'Pontos de apoio','map.layer.walk':'Onde dá para ir a pé em 15 min','map.layer.legend.risk':'Evite','map.layer.legend.med':'Atenção','map.layer.legend.ok':'Recomendado',
   },
   en: {
-    'lnd.nav.platform':'Platform','lnd.nav.partners':'For travelers','lnd.nav.api':'API','lnd.nav.community':'Community',
-    'lnd.login':'Sign in','lnd.openMap':'Explore destinations',
-    'lnd.tag':'A social network for safe travel',
-    'lnd.hero.title':'Travel with confidence. Connect with real travelers.',
-    'lnd.hero.lede':'Azimute brings together verified traveler reports, official tourism alerts and trust maps so you can discover destinations, avoid scams and find community anywhere in the world.',
-    'lnd.hero.cta1':'Explore destinations','lnd.hero.cta2':'For tourism partners',
-    'lnd.stats.routes':'itineraries consulted','lnd.stats.reports':'traveler reports','lnd.stats.sources':'countries covered',
-    'lnd.mapcard.title':'Recommended itinerary','lnd.mapcard.risk':'trust',
-    'lnd.legend.safe':'Trusted itinerary','lnd.legend.risk':'Alert zone',
-    'lnd.features.title':'Everything a traveler needs, in one app',
-    'lnd.feat.route.t':'Trusted itineraries','lnd.feat.route.d':'Community-rated routes that avoid tourist traps and risky areas.',
-    'lnd.feat.official.t':'Official tourism sources','lnd.feat.official.d':'Tourism boards, ministries and consulates kept up to date.',
-    'lnd.feat.community.t':'Traveler network','lnd.feat.community.d':'Meet people on the ground, swap tips, help fellow travelers.',
-    'lnd.feat.alerts.t':'Anti-scam alerts','lnd.feat.alerts.d':'Real-time warnings about scams, fake taxis and overcharging.',
-    'lnd.partners.title':'Built for every kind of traveler',
+    'lnd.nav.map':'Map','lnd.nav.forTravelers':'For travelers','lnd.nav.diff':'Differentiator','lnd.nav.community':'Community',
+    'lnd.login':'Sign in','lnd.openMap':'Open live map',
+    'lnd.tag':'Reliable data for travelers',
+    'lnd.hero.title':'Travel with more confidence in any destination.',
+    'lnd.hero.lede':'Azimute combines community reports, official alerts and local context to turn risk into fast decisions for travelers.',
+    'lnd.hero.scale':'Starts with mocked data in Paraná, but scales by city, route and destination without reworking the base.',
+    'lnd.hero.problemLabel':'Problem','lnd.hero.problem':'Decision without context',
+    'lnd.hero.solutionLabel':'Response','lnd.hero.solution':'Risk becomes action',
+    'lnd.hero.cta1':'Open trusted map','lnd.hero.cta2':'Understand the differentiator',
+    'lnd.proof.map':'Functional map','lnd.proof.support':'Nearby support','lnd.proof.fast':'Fast reading','lnd.proof.scale':'Scales by destination',
+    'lnd.stats.pilot':'Local pilot','lnd.stats.pilotSub':'mock data in Paraná','lnd.stats.sources':'3 sources','lnd.stats.sourcesSub':'official, community and context','lnd.stats.scale':'Easy to scale','lnd.stats.scaleSub':'by city, route and destination',
+    'lnd.mapcard.title':'Trusted route','lnd.mapcard.risk':'+38% trust','lnd.mapcard.insight1':'Recent scams','lnd.mapcard.insight2':'Support points','lnd.mapcard.insight3':'Safer window','lnd.mapcard.reading':'Trip reading','lnd.mapcard.signals':'Signals nearby','lnd.mapcard.signalsValue':'3 alert areas',
+    'lnd.legend.safe':'Recommended route','lnd.legend.risk':'Alert zones',
+    'lnd.features.title':'Map, signal and action',
+    'lnd.feat.route.t':'Reliable movement','lnd.feat.route.d':'Shows the most coherent route and the path that makes the most sense when you are away from home.',
+    'lnd.feat.official.t':'Simple risk reading','lnd.feat.official.d':'Turns scattered signals into clear alerts, nearby support and useful context.',
+    'lnd.feat.community.t':'Useful community','lnd.feat.community.d':'Short place-based reports that guide the next traveler without social noise.',
+    'lnd.feat.alerts.t':'Accessible from the start','lnd.feat.alerts.d':'Guided flow, direct language and high contrast for seniors, PCD and first-time users.',
+    'lnd.partners.title':'Made for real travelers',
+    'lnd.persona.tourists.t':'Vacation tourists','lnd.persona.tourists.d':'Leave the hotel, choose the destination and quickly understand where to go and what to avoid.',
+    'lnd.persona.family.t':'Families and 60+','lnd.persona.family.d':'Get calmer reading, nearby support and routes that avoid unnecessary confusion.',
+    'lnd.persona.solo.t':'Solo travelers','lnd.persona.solo.d':'Count on recent community signals, local support and more context before moving.',
+    'lnd.diff.title':'A layer of trust.','lnd.diff.lede':'Azimute does not replace transport, booking or navigation. It provides the missing reading needed to decide with more confidence.',
+    'lnd.diff.card1.k':'What the system combines','lnd.diff.card1.t':'Community + official source + local context','lnd.diff.card1.d':'The map combines different signals to guide decisions in seconds.',
+    'lnd.diff.card2.k':'What the traveler gets','lnd.diff.card2.t':'Go, avoid, ask for support','lnd.diff.card2.d':'Instead of screen overload, the app gives short and direct actions.',
+    'lnd.diff.card3.k':'What becomes product','lnd.diff.card3.t':'Territorial reading for tourism','lnd.diff.card3.d':'The value is in the signals, area trust and tourism-ready context.',
+    'lnd.community.title':'Community tied to place, not to the algorithm','lnd.community.lede':'Every report starts on the map, helps movement and strengthens destination reading with immediate utility.','lnd.community.cta':'View prototype',
+    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Prototype with simulated data','lnd.footer.privacy':'Privacy & LGPD',
+    'app.search.placeholder':'Search place, support or alert...',
+    'nav.map.title':'Trusted map','nav.map.sub':'Go, avoid, ask for support',
+    'nav.trip.title':'Go now','nav.trip.sub':'Track my trip',
+    'nav.alerts.title':'Place alerts','nav.alerts.sub':'Scams, theft and caution',
+    'nav.news.title':'Official context','nav.news.sub':'Tourism and local guidance',
+    'nav.community.title':'Community','nav.community.sub':'Useful destination reports',
+    'nav.chat.title':'Chats','nav.chat.sub':'Arrange and confirm',
+    'nav.partners.title':'Tourism data','nav.partners.sub':'Hotels, guides and destinations',
+    'nav.ica.title':'Destination index','nav.ica.sub':'Territorial reading',
+    'nav.profile.title':'Profile','nav.profile.sub':'Your account',
+    'nav.privacy.title':'Privacy','nav.privacy.sub':'LGPD & data',
+    'sidebar.score.title':'Destination reading','sidebar.score.label':'Current context:','sidebar.back':'← Back to site',
+    'route.panel.title':'Where do you want to go?',
+    'route.from.label':'Where are you','route.from.placeholder':'Where are you now',
+    'route.to.label':'Destination','route.to.placeholder':'Where do you want to go',
+    'route.safe.cta':'See safest route','route.moreOptions':'More options',
+    'route.assist.arriving':'Arrived','route.assist.now':'Leave now','route.assist.calm':'Calm','route.assist.easy':'Easy mode',
+    'route.examples':'Examples','route.journey.curitiba':'Hotel → Tanguá','route.journey.foz':'Airport → Falls','route.journey.morretes':'Morretes',
+    'route.profile.walk':'🚶 Walking','route.profile.bike':'🚴 Bike','route.profile.car':'🚗 Car or app','route.profile.tour':'🧳 With support',
+    'route.time.label':'Departure time:',
+    'route.result.label':'Suggested route','route.edit':'Edit',
+    'route.metric.trust':'Trust','route.metric.time':'Duration','route.metric.distance':'Distance',
+    'route.destination.label':'Arriving at destination','route.destination.best':'Best time','route.destination.support':'Support point','route.destination.alert':'Recent alert','route.destination.tip':'Quick tip',
+    'route.actions.steps':'Step by step','route.actions.compare':'Compare direct route','route.actions.sensitive':'See sensitive areas','route.actions.start':'▶ Start trip','route.actions.layers':'Layers',
+    'route.steps.title':'Trip step-by-step',
+    'map.layers.title':'What to see on the map','map.layer.regions':'Area trust','map.layer.heat':'More attention areas','map.layer.official':'Official alerts','map.layer.community':'Community reports','map.layer.lighting':'Low lighting','map.layer.safe':'Support points','map.layer.walk':'Where you can walk in 15 min','map.layer.legend.risk':'Avoid','map.layer.legend.med':'Caution','map.layer.legend.ok':'Recommended',
   },
   es: {
-    'lnd.nav.platform':'Plataforma','lnd.nav.partners':'Para viajeros','lnd.nav.api':'API','lnd.nav.community':'Comunidad',
-    'lnd.login':'Entrar','lnd.openMap':'Explorar destinos',
-    'lnd.tag':'Red social de viaje seguro',
-    'lnd.hero.title':'Viaja con confianza. Conéctate con viajeros reales.',
-    'lnd.hero.lede':'Azimute reúne relatos verificados de viajeros, alertas oficiales de turismo y mapas de confianza para descubrir destinos, evitar estafas y encontrar comunidad en cualquier parte del mundo.',
-    'lnd.hero.cta1':'Explorar destinos','lnd.hero.cta2':'Para socios de turismo',
-    'lnd.stats.routes':'itinerarios consultados','lnd.stats.reports':'relatos de viajeros','lnd.stats.sources':'países cubiertos',
-    'lnd.mapcard.title':'Itinerario recomendado','lnd.mapcard.risk':'confianza',
-    'lnd.legend.safe':'Itinerario confiable','lnd.legend.risk':'Zona de alerta',
-    'lnd.features.title':'Todo lo que un viajero necesita, en una sola app',
-    'lnd.feat.route.t':'Itinerarios confiables','lnd.feat.route.d':'Rutas evaluadas por la comunidad que evitan trampas para turistas.',
-    'lnd.feat.official.t':'Fuentes oficiales de turismo','lnd.feat.official.d':'Organismos, ministerios y consulados siempre actualizados.',
-    'lnd.feat.community.t':'Red de viajeros','lnd.feat.community.d':'Conoce gente en el destino, intercambia consejos y ayuda a otros.',
-    'lnd.feat.alerts.t':'Alertas anti-estafa','lnd.feat.alerts.d':'Avisos sobre estafas, taxis piratas y cobros abusivos.',
-    'lnd.partners.title':'Hecho para cada tipo de viajero',
+    'lnd.nav.map':'Mapa','lnd.nav.forTravelers':'Para viajeros','lnd.nav.diff':'Diferencial','lnd.nav.community':'Comunidad',
+    'lnd.login':'Entrar','lnd.openMap':'Ver mapa en acción',
+    'lnd.tag':'Datos confiables para quienes están viajando',
+    'lnd.hero.title':'Viaja con más confianza en cualquier destino.',
+    'lnd.hero.lede':'Azimute combina comunidad, alertas oficiales y contexto del lugar para convertir el riesgo en una decisión rápida para el viajero.',
+    'lnd.hero.scale':'Empieza con datos simulados en Paraná, pero escala por ciudad, ruta y destino turístico sin rehacer la base.',
+    'lnd.hero.problemLabel':'El problema','lnd.hero.problem':'Decisión sin contexto',
+    'lnd.hero.solutionLabel':'La respuesta','lnd.hero.solution':'El riesgo se convierte en acción',
+    'lnd.hero.cta1':'Abrir mapa confiable','lnd.hero.cta2':'Entender el diferencial',
+    'lnd.proof.map':'Mapa funcional','lnd.proof.support':'Apoyo cerca','lnd.proof.fast':'Lectura rápida','lnd.proof.scale':'Escala por destino',
+    'lnd.stats.pilot':'Piloto local','lnd.stats.pilotSub':'datos simulados en Paraná','lnd.stats.sources':'3 fuentes','lnd.stats.sourcesSub':'oficial, comunidad y contexto','lnd.stats.scale':'Escala fácil','lnd.stats.scaleSub':'por ciudad, ruta y destino',
+    'lnd.mapcard.title':'Ruta más confiable','lnd.mapcard.risk':'+38% confianza','lnd.mapcard.insight1':'Estafas recientes','lnd.mapcard.insight2':'Puntos de apoyo','lnd.mapcard.insight3':'Ventana más segura','lnd.mapcard.reading':'Lectura del trayecto','lnd.mapcard.signals':'Señales alrededor','lnd.mapcard.signalsValue':'3 zonas de atención',
+    'lnd.legend.safe':'Ruta recomendada','lnd.legend.risk':'Zonas de alerta',
+    'lnd.features.title':'Mapa, señal y acción',
+    'lnd.feat.route.t':'Desplazamiento confiable','lnd.feat.route.d':'Muestra la ruta más coherente y el camino que tiene más sentido cuando estás fuera de casa.',
+    'lnd.feat.official.t':'Lectura de riesgo simple','lnd.feat.official.d':'Convierte señales dispersas en alertas claras, apoyo cercano y contexto útil.',
+    'lnd.feat.community.t':'Comunidad útil','lnd.feat.community.d':'Relatos cortos por lugar para orientar al siguiente viajero sin ruido social.',
+    'lnd.feat.alerts.t':'Accesible desde el inicio','lnd.feat.alerts.d':'Flujo guiado, lenguaje directo y alto contraste para mayores, PCD y principiantes.',
+    'lnd.partners.title':'Hecho para viajeros reales',
+    'lnd.persona.tourists.t':'Turistas de vacaciones','lnd.persona.tourists.d':'Salen del hotel, eligen el destino y entienden rápido por dónde ir y qué evitar.',
+    'lnd.persona.family.t':'Familias y 60+','lnd.persona.family.d':'Obtienen una lectura más calma, apoyo cercano y trayectos que evitan confusión innecesaria.',
+    'lnd.persona.solo.t':'Viajeros solos','lnd.persona.solo.d':'Cuentan con señales recientes de la comunidad, apoyo local y más contexto antes de moverse.',
+    'lnd.diff.title':'Una capa de confianza.','lnd.diff.lede':'Azimute no reemplaza transporte, reservas o navegación. Entrega la lectura que falta para decidir con más seguridad.',
+    'lnd.diff.card1.k':'Lo que cruza el sistema','lnd.diff.card1.t':'Comunidad + fuente oficial + contexto del lugar','lnd.diff.card1.d':'El mapa combina señales distintas para orientar la decisión en segundos.',
+    'lnd.diff.card2.k':'Lo que recibe el viajero','lnd.diff.card2.t':'Ir, evitar, pedir apoyo','lnd.diff.card2.d':'En vez de exceso de pantalla, la app entrega acciones cortas y directas.',
+    'lnd.diff.card3.k':'Lo que se vuelve producto','lnd.diff.card3.t':'Lectura territorial para turismo','lnd.diff.card3.d':'El valor está en las señales, la confianza por área y el contexto útil para turismo.',
+    'lnd.community.title':'Comunidad conectada al lugar, no al algoritmo','lnd.community.lede':'Cada reporte nace en el mapa, ayuda en el desplazamiento y refuerza la lectura del destino con utilidad inmediata.','lnd.community.cta':'Ver prototipo',
+    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Prototipo con datos simulados','lnd.footer.privacy':'Privacidad & LGPD',
+    'app.search.placeholder':'Buscar lugar, apoyo o alerta...',
+    'nav.map.title':'Mapa confiable','nav.map.sub':'Ir, evitar, pedir apoyo',
+    'nav.trip.title':'Ir ahora','nav.trip.sub':'Seguir mi trayecto',
+    'nav.alerts.title':'Alertas del lugar','nav.alerts.sub':'Estafas, robos y atención',
+    'nav.news.title':'Contexto oficial','nav.news.sub':'Turismo y orientación local',
+    'nav.community.title':'Comunidad','nav.community.sub':'Reportes útiles del destino',
+    'nav.chat.title':'Conversaciones','nav.chat.sub':'Coordinar y confirmar',
+    'nav.partners.title':'Datos para turismo','nav.partners.sub':'Hoteles, guías y destinos',
+    'nav.ica.title':'Índice del destino','nav.ica.sub':'Lectura territorial',
+    'nav.profile.title':'Perfil','nav.profile.sub':'Tu cuenta',
+    'nav.privacy.title':'Privacidad','nav.privacy.sub':'LGPD y datos',
+    'sidebar.score.title':'Lectura del destino','sidebar.score.label':'Contexto actual:','sidebar.back':'← Volver al sitio',
+    'route.panel.title':'¿A dónde quieres ir?',
+    'route.from.label':'Dónde estás','route.from.placeholder':'Dónde estás ahora',
+    'route.to.label':'Destino','route.to.placeholder':'A dónde quieres ir',
+    'route.safe.cta':'Ver camino más confiable','route.moreOptions':'Más opciones',
+    'route.assist.arriving':'Llegué','route.assist.now':'Salir ahora','route.assist.calm':'Calmo','route.assist.easy':'Modo fácil',
+    'route.examples':'Ejemplos','route.journey.curitiba':'Hotel → Tanguá','route.journey.foz':'Aeropuerto → Cataratas','route.journey.morretes':'Morretes',
+    'route.profile.walk':'🚶 Caminando','route.profile.bike':'🚴 Bici','route.profile.car':'🚗 Auto o app','route.profile.tour':'🧳 Con apoyo',
+    'route.time.label':'Hora de salida:',
+    'route.result.label':'Camino sugerido','route.edit':'Editar',
+    'route.metric.trust':'Confianza','route.metric.time':'Duración','route.metric.distance':'Distancia',
+    'route.destination.label':'Llegada al destino','route.destination.best':'Mejor momento','route.destination.support':'Punto de apoyo','route.destination.alert':'Alerta reciente','route.destination.tip':'Consejo rápido',
+    'route.actions.steps':'Ver paso a paso','route.actions.compare':'Comparar ruta directa','route.actions.sensitive':'Ver áreas sensibles','route.actions.start':'▶ Iniciar paseo','route.actions.layers':'Capas',
+    'route.steps.title':'Paso a paso del paseo',
+    'map.layers.title':'Qué ver en el mapa','map.layer.regions':'Confianza por área','map.layer.heat':'Áreas con más atención','map.layer.official':'Avisos oficiales','map.layer.community':'Reportes de la comunidad','map.layer.lighting':'Baja iluminación','map.layer.safe':'Puntos de apoyo','map.layer.walk':'Dónde se puede ir a pie en 15 min','map.layer.legend.risk':'Evita','map.layer.legend.med':'Atención','map.layer.legend.ok':'Recomendado',
   }
 };
 function applyI18n(){
   const t = I18N[state.lang] || I18N.pt;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
-    if (t[k]) el.textContent = t[k];
+    if (!t[k]) return;
+    const attr = el.getAttribute('data-i18n-attr');
+    if (attr) el.setAttribute(attr, t[k]);
+    else el.textContent = t[k];
   });
   document.documentElement.lang = state.lang === 'pt' ? 'pt-BR' : state.lang;
   const a = document.getElementById('langSwitch'); if (a) a.value = state.lang;
@@ -296,7 +476,14 @@ function toast(msg, ms=2800){
 function debounce(fn, ms=300){ let t; return (...a)=>{ clearTimeout(t); t = setTimeout(()=>fn(...a), ms); }; }
 
 /* ----- Tema & Acessibilidade ----- */
-function applyTheme(){ document.documentElement.setAttribute('data-theme', state.theme); const p = qs('#prefDark'); if (p) p.checked = state.theme === 'dark'; }
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', state.theme);
+  const p = qs('#prefDark'); if (p) p.checked = state.theme === 'dark';
+  const label = qs('[data-theme-label]');
+  if (label) label.textContent = state.theme === 'dark' ? 'Modo claro' : 'Modo escuro';
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', state.theme === 'dark' ? '#0a0f1c' : '#f5f7fb');
+}
 function toggleTheme(){ state.theme = state.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('az.theme', state.theme); applyTheme(); updateMapTheme(); }
 function applySenior(){ document.documentElement.setAttribute('data-senior', state.senior ? 'on' : 'off'); const p = qs('#prefSenior'); if (p) p.checked = state.senior; }
 function toggleSenior(){ state.senior = !state.senior; localStorage.setItem('az.senior', state.senior ? 'on' : 'off'); applySenior(); toast(state.senior ? 'Modo fácil ativado' : 'Modo padrão restaurado'); }
@@ -305,7 +492,7 @@ function toggleSenior(){ state.senior = !state.senior; localStorage.setItem('az.
 function enterApp(target){
   qs('#landing').hidden = true;
   qs('#app').hidden = false;
-  const routes = {app:'map', login:'profile', api:'api', privacy:'privacy'};
+  const routes = {app:'map', login:'profile', privacy:'privacy'};
   showPage(routes[target] || 'map');
   if (!state.map) setTimeout(initMap, 40);
   if (!localStorage.getItem('az.onb')) setTimeout(openOnboarding, 350);
@@ -347,8 +534,124 @@ function toggleSidebar(){
 function togglePanel(id){
   const el = qs('#'+id);
   if (!el) return;
+  if (el.hidden){
+    el.hidden = false;
+    el.classList.remove('collapsed');
+    qsa('[data-panel-body]', el).forEach(b => b.style.display = '');
+    return;
+  }
   const collapsed = el.classList.toggle('collapsed');
   qsa('[data-panel-body]', el).forEach(b => b.style.display = collapsed ? 'none' : '');
+  if (collapsed && id === 'layerPanel') el.hidden = true;
+}
+function openRouteBuilder(){
+  qs('#routeMinimal')?.setAttribute('hidden', '');
+  qs('#routeBuilder')?.removeAttribute('hidden');
+  qs('#routePanel')?.classList.remove('compact');
+  qs('#routeResult').hidden = true;
+  qs('#routeFrom')?.focus();
+}
+function toggleRouteAdvanced(){
+  const box = qs('#routeAdvanced');
+  if (!box) return;
+  box.hidden = !box.hidden;
+}
+function applyJourney(id){
+  const journey = DEMO_JOURNEYS[id];
+  if (!journey) return;
+  qsa('.journey-actions .chip').forEach(c => c.classList.toggle('active', c.dataset.journey === id));
+  state.fromCoord = [...journey.from];
+  state.toCoord = [...journey.to];
+  state.profile = journey.profile;
+  qs('#routeFrom').value = journey.fromLabel;
+  qs('#routeTo').value = journey.toLabel;
+  qs('#timeRange').value = String(journey.hour);
+  qsa('.rp-profile .chip').forEach(c => c.classList.toggle('active', c.dataset.prof === journey.profile));
+  onTimeChange(journey.hour);
+  qs('#routePanel')?.classList.remove('compact');
+  qs('#routeResult').hidden = true;
+  if (state.userMarker) state.userMarker.setLatLng(journey.from);
+  if (state.map) state.map.setView(journey.from, id === 'foz-family' ? 13 : 15, {animate:true});
+  toast('Jornada pronta aplicada');
+}
+function setAssistMode(mode, text){
+  qsa('.route-helper-actions .chip').forEach(c => c.classList.toggle('active', c.dataset.assist === mode));
+  const helper = qs('#routeHelperText');
+  if (helper) helper.textContent = text;
+  syncLayerControls();
+}
+function applyAssistMode(mode){
+  if (mode === 'arriving'){
+    state.layers.official = true;
+    state.layers.community = true;
+    state.layers.safe = true;
+    state.layers.heat = false;
+    state.layers.regions = true;
+    state.layers.lighting = false;
+    state.profile = 'car';
+    qsa('.rp-profile .chip').forEach(c => c.classList.toggle('active', c.dataset.prof === 'car'));
+    qs('#timeRange').value = '16';
+    onTimeChange(16);
+    setAssistMode(mode, 'Mostra apoio, avisos oficiais e contexto útil para quem acabou de chegar e quer se orientar com calma.');
+    rebuildHeat();
+    rebuildIncidentMarkers();
+    rebuildRegions();
+    toast('Modo chegada ativado');
+    return;
+  }
+  if (mode === 'now'){
+    applyNowMode();
+    setAssistMode(mode, 'Destaca o que merece atenção neste momento e prepara o mapa para saída imediata.');
+    return;
+  }
+  if (mode === 'calm'){
+    state.profile = 'tour';
+    state.layers.official = true;
+    state.layers.community = true;
+    state.layers.safe = true;
+    state.layers.heat = false;
+    state.layers.regions = true;
+    state.layers.lighting = false;
+    qsa('.rp-profile .chip').forEach(c => c.classList.toggle('active', c.dataset.prof === 'tour'));
+    qs('#timeRange').value = '15';
+    onTimeChange(15);
+    rebuildHeat();
+    rebuildIncidentMarkers();
+    rebuildRegions();
+    setAssistMode(mode, 'Prioriza leitura simples, apoio próximo e horário mais confortável para um passeio tranquilo.');
+    toast('Modo passeio calmo ativado');
+    return;
+  }
+  if (mode === 'easy'){
+    if (!state.senior) toggleSenior();
+    state.layers.official = true;
+    state.layers.community = true;
+    state.layers.safe = true;
+    state.layers.regions = false;
+    state.layers.heat = false;
+    state.layers.lighting = false;
+    rebuildHeat();
+    rebuildIncidentMarkers();
+    rebuildRegions();
+    setAssistMode(mode, 'Aumenta legibilidade e deixa o mapa mais limpo para quem prefere menos informação ao mesmo tempo.');
+    toast('Modo fácil ativado');
+  }
+}
+function applyNowMode(){
+  const now = new Date().getHours();
+  qs('#timeRange').value = String(now);
+  onTimeChange(now);
+  state.layers.heat = true;
+  state.layers.community = true;
+  state.layers.official = true;
+  state.layers.regions = false;
+  state.layers.lighting = now >= 19 || now <= 5;
+  rebuildHeat();
+  rebuildIncidentMarkers();
+  rebuildRegions();
+  if (state.routeGeo) calcSafeRoute(true);
+  setAssistMode('now', 'Destaca o que merece atenção neste momento e prepara o mapa para saída imediata.');
+  toast('Modo agora ativado');
 }
 
 /* ----- Score por horário ----- */
@@ -376,27 +679,94 @@ function initMap(){
   state.map.createPane('routePane');
   state.map.getPane('heatPane').style.zIndex = 260;
   state.map.getPane('regionPane').style.zIndex = 320;
-  state.map.getPane('routePane').style.zIndex = 430;
+  state.map.getPane('routePane').style.zIndex = 635;
   ['official','community','lighting','safe'].forEach(k => state.layerGroups[k] = L.layerGroup());
   addIncidentMarkers();
   rebuildHeat();
   rebuildRegions();
+  syncLayerControls();
   addUserMarker();
   startLiveTick();
-  const panel = qs('#layerPanel');
-  panel?.classList.add('collapsed');
-  qsa('[data-panel-body]', panel).forEach(b => b.style.display = 'none');
   state.map.on('zoomend', () => {
     rebuildIncidentMarkers();
     if (state.layers.heat) rebuildHeat();
     if (state.layers.regions) rebuildRegions();
+    updateRouteOverlay();
   });
+  state.map.on('move zoom resize', updateRouteOverlay);
   // Click no mapa: popup com score do ponto (apenas em área vazia)
   state.map.on('click', e => {
     if (e.originalEvent && e.originalEvent.target && e.originalEvent.target.closest('.leaflet-marker-icon, .leaflet-interactive')) return;
     const score = computePointScore(e.latlng.lat, e.latlng.lng);
     if (!score.nearest || score.total <= 0) return;
     L.popup({closeButton:true}).setLatLng(e.latlng).setContent(scorePopupHtml(score)).openOn(state.map);
+  });
+}
+function updateRouteOverlay(){
+  const el = qs('#routeOverlay');
+  if (!el || !state.map || !state.routeGeo?.latlngs?.length){
+    if (el) el.innerHTML = '';
+    return;
+  }
+  const size = state.map.getSize();
+  let canvas = el.querySelector('canvas');
+  if (!canvas){
+    canvas = document.createElement('canvas');
+    el.innerHTML = '';
+    el.appendChild(canvas);
+  }
+  const ratio = window.devicePixelRatio || 1;
+  canvas.width = Math.max(1, Math.round(size.x * ratio));
+  canvas.height = Math.max(1, Math.round(size.y * ratio));
+  canvas.style.width = `${size.x}px`;
+  canvas.style.height = `${size.y}px`;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  ctx.clearRect(0, 0, size.x, size.y);
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  const pts = state.routeGeo.latlngs.map(ll => state.map.latLngToContainerPoint(ll));
+  if (!pts.length) return;
+  const drawPath = points => {
+    ctx.beginPath();
+    points.forEach((p, idx) => {
+      const x = p.x;
+      const y = p.y;
+      if (idx === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+  };
+  const avoid = state.routeGeo.avoidedLatlngs?.length
+    ? state.routeGeo.avoidedLatlngs.map(ll => state.map.latLngToContainerPoint(ll))
+    : null;
+  if (avoid?.length){
+    ctx.save();
+    ctx.strokeStyle = 'rgba(163,174,196,.9)';
+    ctx.lineWidth = 6;
+    ctx.setLineDash([10, 10]);
+    drawPath(avoid);
+    ctx.stroke();
+    ctx.restore();
+  }
+  ctx.save();
+  ctx.strokeStyle = 'rgba(9,14,26,.96)';
+  ctx.lineWidth = 16;
+  drawPath(pts);
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.shadowColor = 'rgba(92,255,176,.45)';
+  ctx.shadowBlur = 12;
+  ctx.strokeStyle = '#63ffba';
+  ctx.lineWidth = 9;
+  drawPath(pts);
+  ctx.stroke();
+  ctx.restore();
+}
+function syncLayerControls(){
+  qsa('[data-layer-toggle]').forEach(input => {
+    input.checked = !!state.layers[input.dataset.layerToggle];
   });
 }
 function mapTileUrl(){
@@ -427,6 +797,7 @@ function popupHtml(i){
   const total = (b.official + b.community + b.env);
   const pct = Math.round(total*100);
   return `<div style="min-width:220px">
+    ${i.photo ? `<img class="pop-photo" src="${i.photo}" alt="${i.title}" loading="lazy">` : ''}
     <div class="pop-title">${i.title}</div>
     <div>${i.desc||''}</div>
     <div class="pop-meta"><span class="src-chip">${i.src}</span> · ${i.when}</div>
@@ -438,6 +809,10 @@ function popupHtml(i){
       <div class="bar"><span style="width:${b.community*100}%;background:var(--warning)"></span></div>
       <div class="row"><span>Ambiental</span><span>${Math.round(b.env*100)}</span></div>
       <div class="bar"><span style="width:${b.env*100}%;background:var(--ok)"></span></div>
+    </div>
+    <div class="pop-actions">
+      <button type="button" onclick="setDestinationFromIncident('${i.id}')">Traçar até aqui</button>
+      <button type="button" onclick="focusSupportNearIncident('${i.id}')">Ver apoio</button>
     </div>
     <div class="pop-meta" style="margin-top:.4rem"><a href="${i.srcUrl}" target="_blank" rel="noopener">Ver fonte →</a></div>
   </div>`;
@@ -579,6 +954,91 @@ function startLiveTick(){
   }, 5000);
 }
 function centerOnUser(){ if(state.map) state.map.setView(state.fromCoord, 16, {animate:true}); }
+function focusNearestSupportToUser(){
+  const support = nearestSupport(state.fromCoord[0], state.fromCoord[1], 2500);
+  state.layers.safe = true;
+  rebuildIncidentMarkers();
+  syncLayerControls();
+  if (!support) return toast('Nenhum apoio próximo encontrado agora.');
+  focusMapLocation(support.lat, support.lng, support.title, 16);
+  toast('Mostrando o apoio mais próximo');
+}
+function showAttentionAroundUser(){
+  state.layers.heat = true;
+  state.layers.community = true;
+  state.layers.official = true;
+  rebuildHeat();
+  rebuildIncidentMarkers();
+  syncLayerControls();
+  if (state.map) state.map.setView(state.fromCoord, 15, {animate:true});
+  toast('Áreas de atenção destacadas no mapa');
+}
+function incidentById(id){
+  return DATA.incidents.find(i => i.id === id);
+}
+function nearestSupport(lat, lng, radiusMeters=1200){
+  const supports = DATA.incidents.filter(i => i.type === 'safe');
+  let chosen = null;
+  let bestDist = Infinity;
+  supports.forEach(i => {
+    const d = distanceMeters(lat, lng, i.lat, i.lng);
+    if (d <= radiusMeters && d < bestDist){
+      chosen = i;
+      bestDist = d;
+    }
+  });
+  return chosen;
+}
+function areaToCoord(label=''){
+  const text = label.toLowerCase();
+  if (text.includes('tangu')) return [-25.3792, -49.2773];
+  if (text.includes('cataratas')) return [-25.4410, -54.4402];
+  if (text.includes('foz')) return [-25.5451, -54.5882];
+  if (text.includes('morretes')) return [-25.4767, -48.8345];
+  if (text.includes('largo') || text.includes('histórico')) return [-25.4284, -49.2733];
+  if (text.includes('rua xv')) return [-25.4302, -49.2680];
+  if (text.includes('mon') || text.includes('centro cívico')) return [-25.4416, -49.2765];
+  if (text.includes('curitiba')) return [-25.4398, -49.2892];
+  return null;
+}
+function focusMapLocation(lat, lng, title='Ponto no mapa', zoom=15){
+  showPage('map');
+  setTimeout(() => {
+    if (!state.map) return;
+    state.map.setView([lat, lng], zoom, {animate:true});
+    L.popup({closeButton:true}).setLatLng([lat, lng]).setContent(`<div class="pop-title">${title}</div>`).openOn(state.map);
+  }, 90);
+}
+function setDestinationFromIncident(id){
+  const incident = incidentById(id);
+  if (!incident) return;
+  state.toCoord = [incident.lat, incident.lng];
+  qs('#routeTo').value = incident.title;
+  showPage('map');
+  editRoute();
+  calcSafeRoute();
+}
+function focusSupportNearIncident(id){
+  const incident = incidentById(id);
+  if (!incident) return;
+  const support = nearestSupport(incident.lat, incident.lng);
+  if (!support) return toast('Nenhum apoio próximo encontrado.');
+  focusMapLocation(support.lat, support.lng, support.title, 15);
+}
+function focusAlert(id){
+  const alert = DATA.alerts.find(a => a.id === id);
+  const coord = areaToCoord(alert?.area || '');
+  if (!coord) return showPage('map');
+  focusMapLocation(coord[0], coord[1], alert.title, coord[1] < -50 ? 13 : 15);
+}
+function focusAreaOnMap(area, title){
+  const coord = areaToCoord(area || '');
+  if (!coord) return showPage('map');
+  focusMapLocation(coord[0], coord[1], title || area, coord[1] < -50 ? 13 : 15);
+}
+function destinationGuideFor(label=''){
+  return DESTINATION_GUIDES.find(g => g.match.some(m => label.includes(m))) || null;
+}
 function distanceMeters(aLat, aLng, bLat, bLng){
   const toRad = Math.PI / 180;
   const x = (bLng - aLng) * toRad * Math.cos(((aLat + bLat) / 2) * toRad);
@@ -697,6 +1157,52 @@ function combineRoutes(routes){
     legs
   };
 }
+function buildFallbackRoute(from, to, profile, via=null){
+  const points = via ? [from, via, to] : [from, to];
+  const coords = [];
+  const pushSegment = (a, b, segments=18) => {
+    const [lat1, lng1] = a;
+    const [lat2, lng2] = b;
+    const dLat = lat2 - lat1;
+    const dLng = lng2 - lng1;
+    const midLat = (lat1 + lat2) / 2;
+    const midLng = (lng1 + lng2) / 2;
+    const bend = Math.min(0.012, Math.hypot(dLat, dLng) * 0.45) * (profile === 'tour' ? 0.45 : profile === 'walk' ? 0.75 : 0.55);
+    const perpLat = -dLng * bend;
+    const perpLng = dLat * bend;
+    for (let i = 0; i <= segments; i++){
+      const t = i / segments;
+      const q1 = (1 - t) * (1 - t);
+      const q2 = 2 * (1 - t) * t;
+      const q3 = t * t;
+      const lat = q1 * lat1 + q2 * (midLat + perpLat) + q3 * lat2;
+      const lng = q1 * lng1 + q2 * (midLng + perpLng) + q3 * lng2;
+      if (!coords.length || coords[coords.length - 1][0] !== lng || coords[coords.length - 1][1] !== lat){
+        coords.push([lng, lat]);
+      }
+    }
+  };
+  for (let i = 0; i < points.length - 1; i++) pushSegment(points[i], points[i+1], 18);
+  const meters = points.slice(1).reduce((acc, p, idx) => acc + distanceMeters(points[idx][0], points[idx][1], p[0], p[1]), 0);
+  const speed = profile === 'bike' ? 14 : profile === 'walk' ? 4.5 : profile === 'tour' ? 20 : 32;
+  const duration = (meters / 1000) / speed * 3600;
+  const steps = coords.slice(1).map((c, idx) => {
+    const prev = coords[idx];
+    const d = distanceMeters(prev[1], prev[0], c[1], c[0]);
+    return {
+      maneuver: { type: idx === 0 ? 'depart' : 'continue', modifier: idx === 0 ? 'straight' : null },
+      name: idx === 0 ? 'vias principais' : idx === coords.length - 2 ? 'destino' : 'trajeto contínuo',
+      distance: d,
+      duration: (d / 1000) / speed * 3600
+    };
+  }).slice(0, 8);
+  return {
+    distance: meters,
+    duration,
+    geometry: { type:'LineString', coordinates: coords },
+    legs: [{ steps }]
+  };
+}
 function routeRisk(coords, hour){
   let sum = 0;
   const step = Math.max(1, Math.floor(coords.length/20));
@@ -729,7 +1235,17 @@ async function calcSafeRoute(silent){
       route = await osrmRoute(state.fromCoord, state.toCoord, state.profile);
     }
   } catch(e){
-    return toast('Não foi possível calcular a rota. Verifique conexão.');
+    if (isCuritibaHotelDemo() && state.profile !== 'bike'){
+      avoidedRoute = buildFallbackRoute(state.fromCoord, state.toCoord, state.profile);
+      const legA = buildFallbackRoute(state.fromCoord, DEMO_CURITIBA_ROUTE.waypoint, state.profile);
+      const legB = buildFallbackRoute(DEMO_CURITIBA_ROUTE.waypoint, state.toCoord, state.profile);
+      route = combineRoutes([legA, legB]);
+      usedSafeDetour = true;
+      if (!silent) toast('Rota estimada exibida sem conexão com o motor externo.');
+    } else {
+      route = buildFallbackRoute(state.fromCoord, state.toCoord, state.profile);
+      if (!silent) toast('Rota estimada exibida sem conexão com o motor externo.');
+    }
   }
   const coords = route.geometry.coordinates; // [lng,lat]
   const latlngs = coords.map(c => [c[1], c[0]]);
@@ -741,25 +1257,49 @@ async function calcSafeRoute(silent){
   if (state.routeLayer) state.map.removeLayer(state.routeLayer);
   if (state.altLayer) { state.map.removeLayer(state.altLayer); state.altLayer = null; }
   if (state.avoidedLayer) { state.map.removeLayer(state.avoidedLayer); state.avoidedLayer = null; }
+  if (state.routeStartMarker) { state.map.removeLayer(state.routeStartMarker); state.routeStartMarker = null; }
+  if (state.routeEndMarker) { state.map.removeLayer(state.routeEndMarker); state.routeEndMarker = null; }
 
   const avoidedLatlngs = avoidedRoute?.geometry?.coordinates?.map(c => [c[1], c[0]]) || null;
   if (usedSafeDetour && avoidedLatlngs?.length){
     state.avoidedLayer = L.polyline(avoidedLatlngs, {
       pane:'routePane',
-      color:'rgba(163,174,196,.72)',
-      weight:4,
-      opacity:.75,
+      color:'rgba(163,174,196,.88)',
+      weight:5,
+      opacity:.92,
       dashArray:'10 10',
-      lineCap:'round'
+      lineCap:'round',
+      lineJoin:'round',
+      className:'az-route-avoid'
     }).addTo(state.map);
+    state.avoidedLayer.bringToFront();
   }
 
-  state.routeLayer = L.layerGroup([
-    L.polyline(latlngs, {pane:'routePane', color:'rgba(9,14,26,.55)', weight:10, opacity:.95, lineCap:'round', lineJoin:'round'}),
-    L.polyline(latlngs, {pane:'routePane', color:'#5cffb0', weight:6, opacity:.96, lineCap:'round', lineJoin:'round'})
-  ]).addTo(state.map);
+  const routeBase = L.polyline(latlngs, {pane:'routePane', color:'rgba(9,14,26,.9)', weight:14, opacity:1, lineCap:'round', lineJoin:'round', className:'az-route-base'});
+  const routeMain = L.polyline(latlngs, {pane:'routePane', color:'#63ffba', weight:8, opacity:1, lineCap:'round', lineJoin:'round', className:'az-route-main'});
+  state.routeLayer = L.layerGroup([routeBase, routeMain]).addTo(state.map);
+  routeBase.bringToBack();
+  routeMain.bringToFront();
+  const startIcon = L.divIcon({
+    className:'route-pin start',
+    html:'<span>1</span>',
+    iconSize:[28,28],
+    iconAnchor:[14,14]
+  });
+  const endIcon = L.divIcon({
+    className:'route-pin end',
+    html:'<span>2</span>',
+    iconSize:[28,28],
+    iconAnchor:[14,14]
+  });
+  state.routeStartMarker = L.marker(latlngs[0], {pane:'routePane', icon:startIcon, interactive:false}).addTo(state.map);
+  state.routeEndMarker = L.marker(latlngs[latlngs.length - 1], {pane:'routePane', icon:endIcon, interactive:false}).addTo(state.map);
+  state.routeStartMarker.bringToFront();
+  state.routeEndMarker.bringToFront();
   state.routeGeo = { latlngs, route, nearbyIncidents, avoidedLatlngs, usedSafeDetour };
   state.map.fitBounds(L.latLngBounds(latlngs), {padding:[60,60]});
+  requestAnimationFrame(() => updateRouteOverlay());
+  setTimeout(() => updateRouteOverlay(), 60);
 
   const km = (route.distance/1000).toFixed(1);
   const mins = Math.round(route.duration/60);
@@ -783,6 +1323,30 @@ async function calcSafeRoute(silent){
     {ico:'⚠️', txt: usedSafeDetour ? 'Desvio aplicado para evitar trechos laterais da Alameda Doutor Carlos de Carvalho, Rua Brigadeiro Franco, Rua Mateus Leme e acessos secundários ao Tanguá, onde houve relatos de golpes, furtos e roubos.' : highRiskHits.length ? `${highRiskHits.length} ponto(s) sensível(is) exigem atenção ao longo do caminho.` : 'Nenhum ponto crítico identificado no corredor imediato da rota.'}
   ];
   qs('#rResAdvisory').innerHTML = adv.map(a=>`<li><span>${a.ico}</span> ${a.txt}</li>`).join('');
+  const guide = destinationGuideFor(qs('#routeTo').value);
+  const destGuidePhoto = qs('#destGuidePhoto');
+  if (guide){
+    qs('#routeDestination').hidden = false;
+    if (guide.photo){
+      destGuidePhoto.hidden = false;
+      destGuidePhoto.src = guide.photo;
+      destGuidePhoto.alt = guide.title;
+    } else {
+      destGuidePhoto.hidden = true;
+      destGuidePhoto.removeAttribute('src');
+      destGuidePhoto.alt = '';
+    }
+    qs('#destGuideTitle').textContent = guide.title;
+    qs('#destGuideBest').textContent = guide.best;
+    qs('#destGuideSupport').textContent = guide.support;
+    qs('#destGuideAlert').textContent = guide.alert;
+    qs('#destGuideTip').textContent = guide.tip;
+  } else {
+    qs('#routeDestination').hidden = true;
+    destGuidePhoto.hidden = true;
+    destGuidePhoto.removeAttribute('src');
+    destGuidePhoto.alt = '';
+  }
 
   // Passos
   const steps = (route.legs[0]?.steps || []).map(s => ({
@@ -806,6 +1370,10 @@ async function calcSafeRoute(silent){
 function editRoute(){
   qs('#routePanel')?.classList.remove('compact');
   qs('#rpSteps').hidden = true;
+  qs('#routeMinimal')?.setAttribute('hidden', '');
+  qs('#routeBuilder')?.removeAttribute('hidden');
+  qs('#routeResult').hidden = true;
+  updateRouteOverlay();
 }
 function toggleRouteDetails(){
   const steps = qs('#rpSteps');
@@ -832,6 +1400,15 @@ function compareAlt(){
   if (sensitive.length < 2) return toast('Nenhum trecho sensível relevante nesse trajeto.');
   state.altLayer = L.polyline(sensitive, {pane:'routePane', color:'#ff5c77', weight:4, opacity:.88, dashArray:'6 8', lineCap:'round'}).addTo(state.map);
   toast('Trechos sensíveis destacados em vermelho');
+}
+function toggleDirectRoute(){
+  if (!state.routeGeo?.usedSafeDetour || !state.avoidedLayer) return toast('Nenhuma rota direta relevante para comparar.');
+  if (state.map.hasLayer(state.avoidedLayer)){
+    state.map.removeLayer(state.avoidedLayer);
+    return toast('Rota direta ocultada');
+  }
+  state.avoidedLayer.addTo(state.map);
+  toast('Rota direta exibida em cinza');
 }
 
 /* ----- Isócrona segura (simulada: círculos concêntricos tintados por risco) ----- */
@@ -921,6 +1498,7 @@ function renderAlerts(){
     el.innerHTML = list.map(a => {
       const badge = a.severity === 'alto' ? 'alto' : a.src === 'oficial' ? 'oficial' : 'comunidade';
       const ico = a.src === 'oficial' ? '🏛' : '⚑';
+      const sevLabel = a.severity === 'alto' ? 'Atenção alta' : a.severity === 'med' ? 'Atenção moderada' : 'Baixa atenção';
       const v = state.validations[a.id] || {up: Math.floor(Math.random()*8+2), down: Math.floor(Math.random()*3), here: Math.floor(Math.random()*4), my:null};
       state.validations[a.id] = v;
       const val = a.src === 'comunidade' ? `
@@ -940,12 +1518,13 @@ function renderAlerts(){
           <p style="margin:.2rem 0;color:var(--muted)">${a.desc}</p>
           <div class="alert-meta">
             <span class="src-chip">${a.src === 'oficial' ? 'Fonte oficial' : 'Comunidade'}</span>
+            <span class="src-chip">${sevLabel}</span>
             <span>📍 ${a.area}</span>
             <span>⏱ ${a.when}</span>
           </div>
           ${val}
         </div>
-        <button class="btn btn-ghost sm" onclick="showPage('map')">Ver no mapa</button>
+        <button class="btn btn-ghost sm" onclick="focusAlert(${a.id})">Abrir no mapa</button>
       </li>`;
     }).join('');
   }
@@ -958,7 +1537,7 @@ function renderNews(){
   qs('#newsGrid').innerHTML = DATA.news.map(n => `
     <article class="news-card"><div class="news-thumb">${n.icon}</div>
       <div class="news-body"><span class="news-src">${n.src}</span>
-        <div class="news-title">${n.title}</div><span class="news-date">${n.date}</span></div>
+        <div class="news-title">${n.title}</div><span class="news-date">${n.date}</span><span class="src-chip">Impacta deslocamento e passeio</span></div>
     </article>`).join('');
 }
 function renderCommunity(){
@@ -996,7 +1575,7 @@ function renderCommunity(){
         <time>${p.when}</time>
       </div>
       <div class="post-body">${p.body}</div>
-      <div class="post-footer"><button>♡ ${p.likes}</button><button>💬 ${p.comments}</button><button>Salvar</button></div>
+      <div class="post-footer"><button>♡ ${p.likes}</button><button>💬 ${p.comments}</button><button onclick="focusAreaOnMap('${p.area}','${p.user} · ${p.area}')">Abrir no mapa</button></div>
     </article>`).join('');
 }
 function openChat(id){
@@ -1253,15 +1832,13 @@ function showPartner(kind){
     <article class="dash-card">
       <h4>Integração ativa</h4>
       <ul class="dash-list">
-        <li><span>API calls (24h)</span><b>1.247</b></li>
-        <li><span>Latência média</span><b>142ms</b></li>
-        <li><span>Webhooks</span><b>2 ativos</b></li>
+        <li><span>Fontes conectadas</span><b>8 ativas</b></li>
+        <li><span>Atualização média</span><b>142ms</b></li>
+        <li><span>Relatórios ao dia</span><b>24</b></li>
       </ul>
-      <button class="btn btn-primary sm" onclick="showPage('api')">Abrir Playground</button>
+      <button class="btn btn-primary sm" onclick="toast('Módulo institucional em evolução')">Ver visão do parceiro</button>
     </article>`;
 }
-
-/* API Playground removido — agora em api-docs.html */
 
 /* ----- Onboarding ----- */
 function openOnboarding(){ state.onbStep = 0; showOnbStep(0); qs('#onbModal').hidden = false; }
@@ -1338,8 +1915,9 @@ window.addEventListener('DOMContentLoaded', () => {
 Object.assign(window, {
   enterApp, leaveApp, showPage, toggleSidebar, togglePanel,
   toggleTheme, toggleSenior, toggleLayer, toggleIsochrone,
-  openCommunityReport, draftStory,
-  centerOnUser, calcSafeRoute, editRoute, toggleRouteDetails, compareAlt, startTrip, stopTrip,
+  openCommunityReport, draftStory, openRouteBuilder, applyJourney, toggleRouteAdvanced, applyAssistMode, applyNowMode,
+  centerOnUser, focusNearestSupportToUser, showAttentionAroundUser, calcSafeRoute, editRoute, toggleRouteDetails, toggleDirectRoute, compareAlt, startTrip, stopTrip,
+  focusAlert, focusAreaOnMap, setDestinationFromIncident, focusSupportNearIncident,
   switchTab, submitReport, sosAlert, closeModal, confirmSos,
   openChat, openChatFromCommunity, draftNewChat, sendChatMessage,
   validate, showPartner,

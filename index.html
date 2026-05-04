@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0f1c">
-<meta name="description" content="Azimute — rede social de viagem segura. Rotas, alertas e relatos verificados para viajantes, mochileiros, famílias e turistas no mundo todo.">
-<title>Azimute · Viaje com segurança e comunidade</title>
+<meta name="description" content="Azimute — mapa confiável para viajantes. Dados de risco, apoio e contexto local para turistas no Paraná, com comunidade útil e linguagem acessível.">
+<title>Azimute · Mapa confiável para viajantes</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="logo-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,9 +26,9 @@
       <span>Azimute</span>
     </div>
     <nav class="lnd-nav" aria-label="Seções">
-      <a href="#features" data-i18n="lnd.nav.platform">Plataforma</a>
-      <a href="#partners" data-i18n="lnd.nav.partners">Para viajantes</a>
-      <a href="#api" data-i18n="lnd.nav.api">API</a>
+      <a href="#features" data-i18n="lnd.nav.map">Mapa</a>
+      <a href="#partners" data-i18n="lnd.nav.forTravelers">Para quem viaja</a>
+      <a href="#difference" data-i18n="lnd.nav.diff">Diferencial</a>
       <a href="#community" data-i18n="lnd.nav.community">Comunidade</a>
     </nav>
     <div class="lnd-actions">
@@ -37,24 +37,48 @@
         <option value="en">🇺🇸 EN</option>
         <option value="es">🇪🇸 ES</option>
       </select>
+      <button class="btn btn-ghost" onclick="toggleTheme()" aria-label="Alternar modo claro e escuro" title="Alternar tema">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+        <span data-theme-label>Modo claro</span>
+      </button>
       <button class="btn btn-ghost" onclick="enterApp('login')" data-i18n="lnd.login">Entrar</button>
-      <button class="btn btn-primary" onclick="enterApp('app')" data-i18n="lnd.openMap">Explorar destinos</button>
+      <button class="btn btn-primary" onclick="enterApp('app')" data-i18n="lnd.openMap">Ver mapa em ação</button>
     </div>
   </header>
 
   <div class="lnd-hero">
+    <div class="lnd-blob lnd-blob-1" aria-hidden="true"></div>
+    <div class="lnd-blob lnd-blob-2" aria-hidden="true"></div>
+    <div class="lnd-blob lnd-blob-3" aria-hidden="true"></div>
     <div class="lnd-hero-copy">
-      <span class="lnd-tag" data-i18n="lnd.tag">Rede social de viagem segura</span>
-      <h1 data-i18n="lnd.hero.title">Viaje com confiança. Conecte-se com viajantes reais.</h1>
-      <p class="lnd-lede" data-i18n="lnd.hero.lede">O Azimute reúne relatos verificados de viajantes, alertas oficiais de turismo e mapas de confiança para que você descubra destinos, evite golpes e encontre comunidade em qualquer canto do mundo.</p>
+      <span class="lnd-tag" data-i18n="lnd.tag">Dados confiáveis para quem está viajando</span>
+      <h1 data-i18n="lnd.hero.title">Viaje com mais confiança em qualquer destino.</h1>
+      <p class="lnd-lede" data-i18n="lnd.hero.lede">O Azimute cruza comunidade, alertas oficiais e contexto do lugar para transformar risco em decisão rápida para o viajante.</p>
+      <p class="lnd-scale-note" data-i18n="lnd.hero.scale">Começa com mocks no Paraná, mas escala por cidade, rota e destino turístico sem refazer a base.</p>
+      <div class="lnd-hero-summary">
+        <article>
+          <small data-i18n="lnd.hero.problemLabel">O problema</small>
+          <strong data-i18n="lnd.hero.problem">Decisão sem contexto</strong>
+        </article>
+        <article>
+          <small data-i18n="lnd.hero.solutionLabel">A resposta</small>
+          <strong data-i18n="lnd.hero.solution">Risco vira ação</strong>
+        </article>
+      </div>
+      <div class="lnd-proof" aria-label="Diferenciais do Azimute">
+        <span data-i18n="lnd.proof.map">Mapa funcional</span>
+        <span data-i18n="lnd.proof.support">Apoio perto</span>
+        <span data-i18n="lnd.proof.fast">Leitura rápida</span>
+        <span data-i18n="lnd.proof.scale">Escala por destino</span>
+      </div>
       <div class="lnd-cta">
-        <button class="btn btn-primary btn-lg" onclick="enterApp('app')" data-i18n="lnd.hero.cta1">Explorar destinos</button>
-        <button class="btn btn-ghost btn-lg" onclick="document.getElementById('api').scrollIntoView({behavior:'smooth'})" data-i18n="lnd.hero.cta2">Para parceiros de turismo</button>
+        <button class="btn btn-primary btn-lg" onclick="enterApp('app')" data-i18n="lnd.hero.cta1">Abrir mapa confiável</button>
+        <button class="btn btn-ghost btn-lg" onclick="document.getElementById('difference').scrollIntoView({behavior:'smooth'})" data-i18n="lnd.hero.cta2">Entender o diferencial</button>
       </div>
       <ul class="lnd-stats" aria-label="Indicadores">
-        <li><strong>1.2M</strong><span data-i18n="lnd.stats.routes">roteiros consultados</span></li>
-        <li><strong>340k</strong><span data-i18n="lnd.stats.reports">relatos de viajantes</span></li>
-        <li><strong>62</strong><span data-i18n="lnd.stats.sources">países cobertos</span></li>
+        <li><strong data-i18n="lnd.stats.pilot">Piloto local</strong><span data-i18n="lnd.stats.pilotSub">mocks no Paraná</span></li>
+        <li><strong data-i18n="lnd.stats.sources">3 fontes</strong><span data-i18n="lnd.stats.sourcesSub">oficial, comunidade e contexto</span></li>
+        <li><strong data-i18n="lnd.stats.scale">Escala fácil</strong><span data-i18n="lnd.stats.scaleSub">por cidade, rota e destino</span></li>
       </ul>
     </div>
     <div class="lnd-hero-map" aria-hidden="true">
@@ -62,8 +86,8 @@
       <div class="lnd-map-card">
         <div class="lnd-map-head">
           <span class="lnd-dot ok"></span>
-          <strong data-i18n="lnd.mapcard.title">Roteiro recomendado</strong>
-          <em>+38% <span data-i18n="lnd.mapcard.risk">confiança</span></em>
+          <strong data-i18n="lnd.mapcard.title">Rota mais confiável</strong>
+          <em data-i18n="lnd.mapcard.risk">+38% confiança</em>
         </div>
         <svg viewBox="0 0 320 180" class="lnd-map-svg" role="img" aria-label="Ilustração de rota segura">
           <defs>
@@ -72,98 +96,105 @@
               <stop offset="1" stop-color="#37a7ff"/>
             </linearGradient>
           </defs>
-          <rect width="320" height="180" fill="#0d1528"/>
+          <rect width="320" height="180" fill="#0b1322"/>
           <path d="M10 150 C 60 120, 90 100, 140 90 S 240 60, 310 30" stroke="url(#lg)" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M10 150 C 80 140, 140 150, 200 130 S 290 90, 310 30" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4 6" fill="none" opacity=".6"/>
+          <path d="M10 150 C 80 140, 140 150, 200 130 S 290 90, 310 30" stroke="#ff5c77" stroke-width="2" stroke-dasharray="4 6" fill="none" opacity=".6"/>
           <circle cx="10" cy="150" r="6" fill="#5cffb0"/>
           <circle cx="310" cy="30" r="6" fill="#37a7ff"/>
         </svg>
         <div class="lnd-map-legend">
-          <span><i class="sq ok"></i> <span data-i18n="lnd.legend.safe">Roteiro confiável</span></span>
-          <span><i class="sq risk"></i> <span data-i18n="lnd.legend.risk">Zona de alerta</span></span>
+          <span><i class="sq ok"></i> <span data-i18n="lnd.legend.safe">Rota recomendada</span></span>
+          <span><i class="sq risk"></i> <span data-i18n="lnd.legend.risk">Áreas de atenção</span></span>
+        </div>
+        <div class="lnd-map-insights">
+          <span data-i18n="lnd.mapcard.insight1">Golpes recentes</span>
+          <span data-i18n="lnd.mapcard.insight2">Pontos de apoio</span>
+          <span data-i18n="lnd.mapcard.insight3">Janela mais segura</span>
+        </div>
+        <div class="lnd-map-footer">
+          <div>
+            <small data-i18n="lnd.mapcard.reading">Leitura do trajeto</small>
+            <strong>72/100</strong>
+          </div>
+          <div>
+            <small data-i18n="lnd.mapcard.signals">Sinais no entorno</small>
+            <strong data-i18n="lnd.mapcard.signalsValue">3 áreas de atenção</strong>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <section class="lnd-section" id="features">
-    <h2 data-i18n="lnd.features.title">Tudo o que o viajante precisa, em um só app</h2>
+  <section class="lnd-section lnd-section-soft" id="features">
+    <h2 data-i18n="lnd.features.title">Mapa, sinal e ação</h2>
     <div class="lnd-grid">
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:#1b2a4a">🧭</div>
-        <h3 data-i18n="lnd.feat.route.t">Roteiros confiáveis</h3>
-        <p data-i18n="lnd.feat.route.d">Caminhos avaliados pela comunidade que evitam armadilhas para turistas, áreas de risco e atrações com má reputação.</p>
+        <div class="lnd-ico" style="background:rgba(15,110,168,.12)">🧭</div>
+        <h3 data-i18n="lnd.feat.route.t">Deslocamento confiável</h3>
+        <p data-i18n="lnd.feat.route.d">Mostra a rota mais coerente e o caminho que faz mais sentido para quem está fora de casa.</p>
       </article>
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:#123a2a">🛰️</div>
-        <h3 data-i18n="lnd.feat.official.t">Fontes oficiais de turismo</h3>
-        <p data-i18n="lnd.feat.official.d">Dados de Embratur, ministérios do turismo, consulados e órgãos locais — alertas de viagem sempre atualizados.</p>
+        <div class="lnd-ico" style="background:rgba(16,185,129,.12)">🛰️</div>
+        <h3 data-i18n="lnd.feat.official.t">Leitura de risco simples</h3>
+        <p data-i18n="lnd.feat.official.d">Transforma sinais dispersos em alerta claro, apoio próximo e contexto útil.</p>
       </article>
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:#3a1b2a">👥</div>
-        <h3 data-i18n="lnd.feat.community.t">Rede de viajantes</h3>
-        <p data-i18n="lnd.feat.community.d">Conheça pessoas que estão na mesma cidade, troque dicas, encontre companhia para passeios e ajude outros viajantes.</p>
+        <div class="lnd-ico" style="background:rgba(244,114,182,.12)">👥</div>
+        <h3 data-i18n="lnd.feat.community.t">Comunidade útil</h3>
+        <p data-i18n="lnd.feat.community.d">Relatos curtos por lugar para orientar o próximo viajante sem ruído social.</p>
       </article>
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:#2a2a12">⚡</div>
-        <h3 data-i18n="lnd.feat.alerts.t">Alertas anti-golpe</h3>
-        <p data-i18n="lnd.feat.alerts.d">Avisos em tempo real sobre golpes, taxistas piratas, falsas agências e práticas abusivas no destino que você está visitando.</p>
+        <div class="lnd-ico" style="background:rgba(251,191,36,.14)">⚡</div>
+        <h3 data-i18n="lnd.feat.alerts.t">Acessível desde a origem</h3>
+        <p data-i18n="lnd.feat.alerts.d">Fluxo guiado, linguagem direta e contraste alto para idosos, PCD e leigos.</p>
       </article>
     </div>
   </section>
 
   <section class="lnd-section" id="partners">
-    <h2 data-i18n="lnd.partners.title">Feito para cada tipo de viajante</h2>
+    <h2 data-i18n="lnd.partners.title">Feito para quem viaja de verdade</h2>
     <div class="lnd-persona-grid">
-      <article class="lnd-persona"><span>🎒</span><h3>Mochileiros</h3><p>Hostels avaliados, transporte de confiança, dicas de economia e companhia para trechos longos.</p></article>
-      <article class="lnd-persona"><span>🧳</span><h3>Turistas em férias</h3><p>Atrações verificadas, restaurantes sem armadilha turística e roteiros prontos pela comunidade.</p></article>
-      <article class="lnd-persona"><span>👨‍👩‍👧</span><h3>Famílias em viagem</h3><p>Bairros tranquilos, atividades para crianças, hospedagens family-friendly e alertas locais.</p></article>
-      <article class="lnd-persona"><span>🌍</span><h3>Viajantes solo</h3><p>Comunidade ativa para encontrar pessoas na mesma cidade, grupos de passeios e apoio em qualquer fuso.</p></article>
+      <article class="lnd-persona"><span>🧳</span><h3 data-i18n="lnd.persona.tourists.t">Turistas em férias</h3><p data-i18n="lnd.persona.tourists.d">Saem do hotel, escolhem o destino e entendem rápido por onde ir e o que evitar.</p></article>
+      <article class="lnd-persona"><span>👨‍👩‍👧</span><h3 data-i18n="lnd.persona.family.t">Famílias e 60+</h3><p data-i18n="lnd.persona.family.d">Ganham leitura mais calma, apoio próximo e trajetos que evitam confusão desnecessária.</p></article>
+      <article class="lnd-persona"><span>🌍</span><h3 data-i18n="lnd.persona.solo.t">Viajantes solo</h3><p data-i18n="lnd.persona.solo.d">Contam com sinais recentes da comunidade, apoio local e mais contexto antes de se deslocar.</p></article>
     </div>
   </section>
 
-  <section class="lnd-section lnd-api" id="api">
-    <div>
-      <h2>API Azimute para Turismo</h2>
-      <p>Para agências de viagem, hospedagens, guias turísticos e plataformas de booking que querem entregar uma experiência mais segura e confiável aos viajantes.</p>
-      <ul class="lnd-check">
-        <li>Endpoints de roteiros confiáveis, score de destino e alertas locais</li>
-        <li>Webhooks de eventos turísticos e avisos consulares em tempo real</li>
-        <li>SDKs em JavaScript, Python, Swift e Kotlin</li>
-      </ul>
-      <a class="btn btn-primary" href="api-docs.html" target="_blank" rel="noopener">Abrir documentação da API ↗</a>
+  <section class="lnd-section lnd-difference lnd-section-soft" id="difference">
+    <div class="lnd-diff-copy">
+      <h2 data-i18n="lnd.diff.title">Uma camada de confiança.</h2>
+      <p data-i18n="lnd.diff.lede">O Azimute não substitui transporte, reserva ou navegação. Ele entrega a leitura que falta para decidir com mais segurança.</p>
     </div>
-    <pre class="lnd-code"><code>GET /v1/route/safe
-{
-  "from": [-23.561, -46.656],
-  "to":   [-23.545, -46.639],
-  "profile": "tourist",
-  "time": "2026-04-24T22:00:00Z"
-}
-
-200 OK
-{
-  "trust_score": 0.83,
-  "duration_min": 14,
-  "waypoints": [...],
-  "advisories": [
-    {"type":"tourist_scam","severity":"med"},
-    {"type":"low_light","severity":"low"}
-  ]
-}</code></pre>
+    <div class="lnd-diff-grid">
+      <article class="lnd-diff-card">
+        <small data-i18n="lnd.diff.card1.k">O que o sistema cruza</small>
+        <strong data-i18n="lnd.diff.card1.t">Comunidade + fonte oficial + contexto do lugar</strong>
+        <p data-i18n="lnd.diff.card1.d">O mapa combina sinais diferentes para orientar a decisão em segundos.</p>
+      </article>
+      <article class="lnd-diff-card">
+        <small data-i18n="lnd.diff.card2.k">O que o viajante recebe</small>
+        <strong data-i18n="lnd.diff.card2.t">Ir, evitar, pedir apoio</strong>
+        <p data-i18n="lnd.diff.card2.d">Em vez de excesso de tela, o app entrega ação curta e direta.</p>
+      </article>
+      <article class="lnd-diff-card">
+        <small data-i18n="lnd.diff.card3.k">O que vira produto</small>
+        <strong data-i18n="lnd.diff.card3.t">Leitura territorial para turismo</strong>
+        <p data-i18n="lnd.diff.card3.d">O valor está nos sinais, na confiança por área e no contexto útil para turismo.</p>
+      </article>
+    </div>
   </section>
 
   <section class="lnd-section" id="community">
-    <h2>Uma rede social de viajantes que ajuda viajantes</h2>
-    <p class="lnd-muted">Compartilhe roteiros, alerte sobre golpes, encontre companhia para passeios e ajude quem está chegando agora no destino. Aqui, cada relato vira proteção para o próximo viajante.</p>
+    <h2 data-i18n="lnd.community.title">Comunidade ligada ao lugar, não ao algoritmo</h2>
+    <p class="lnd-muted" data-i18n="lnd.community.lede">Cada relato nasce no mapa, ajuda no deslocamento e reforça a leitura do destino com utilidade imediata.</p>
     <div class="lnd-cta">
-      <button class="btn btn-primary btn-lg" onclick="enterApp('app')">Entrar no Azimute</button>
+      <button class="btn btn-primary btn-lg" onclick="enterApp('app')" data-i18n="lnd.community.cta">Ver protótipo</button>
     </div>
   </section>
 
   <footer class="lnd-footer">
-    <div><img src="logo-mark.svg" alt="" aria-hidden="true"><span>Azimute © 2026</span></div>
-    <small>Protótipo com dados simulados · <a href="#" onclick="enterApp('privacy');return false;">Privacidade & LGPD</a></small>
+    <div><img src="logo-mark.svg" alt="" aria-hidden="true"><span data-i18n="lnd.footer.brand">Azimute © 2026</span></div>
+    <small><span data-i18n="lnd.footer.note">Protótipo com dados simulados</span> · <a href="#" onclick="enterApp('privacy');return false;" data-i18n="lnd.footer.privacy">Privacidade & LGPD</a></small>
   </footer>
 </section>
 
@@ -180,7 +211,7 @@
     </div>
     <div class="topbar-search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input id="globalSearch" placeholder="Buscar destino, atração ou alerta de viagem..." aria-label="Buscar">
+      <input id="globalSearch" placeholder="Buscar lugar, apoio ou alerta..." aria-label="Buscar" data-i18n-attr="placeholder" data-i18n="app.search.placeholder">
     </div>
     <div class="topbar-actions">
       <select class="lang-switch sm" id="langSwitchApp" aria-label="Idioma">
@@ -208,52 +239,52 @@
       <nav>
         <button class="nav-item active" data-page="map" onclick="showPage('map')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          <div><strong>Mapa do destino</strong><small>Roteiros confiáveis</small></div>
+          <div><strong data-i18n="nav.map.title">Mapa confiável</strong><small data-i18n="nav.map.sub">Ir, evitar, pedir apoio</small></div>
         </button>
         <button class="nav-item" data-page="trip" onclick="showPage('trip')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l3 7-7 3 7 3-3 7-3-7 7-3-7-3z"/></svg>
-          <div><strong>Viagem ativa</strong><small>Acompanhe seu passeio</small></div>
+          <div><strong data-i18n="nav.trip.title">Ir agora</strong><small data-i18n="nav.trip.sub">Acompanhar meu trajeto</small></div>
         </button>
         <button class="nav-item" data-page="alerts" onclick="showPage('alerts')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-          <div><strong>Alertas de viagem</strong><small>Golpes e zonas a evitar</small></div>
+          <div><strong data-i18n="nav.alerts.title">Alertas do lugar</strong><small data-i18n="nav.alerts.sub">Golpes, furtos e atenção</small></div>
         </button>
         <button class="nav-item" data-page="news" onclick="showPage('news')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg>
-          <div><strong>Notícias do destino</strong><small>Turismo e dicas oficiais</small></div>
+          <div><strong data-i18n="nav.news.title">Contexto oficial</strong><small data-i18n="nav.news.sub">Turismo e orientação local</small></div>
         </button>
         <button class="nav-item" data-page="community" onclick="showPage('community')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <div><strong>Comunidade</strong><small>Viajantes no destino</small></div>
+          <div><strong data-i18n="nav.community.title">Comunidade</strong><small data-i18n="nav.community.sub">Relatos úteis no destino</small></div>
         </button>
         <button class="nav-item" data-page="chat" onclick="showPage('chat')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <div><strong>Bate-papo</strong><small>Conversas e grupos</small></div>
+          <div><strong data-i18n="nav.chat.title">Conversas</strong><small data-i18n="nav.chat.sub">Combinar e confirmar</small></div>
         </button>
         <button class="nav-item" data-page="partners" onclick="showPage('partners')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-          <div><strong>Parceiros de turismo</strong><small>Guias, hospedagens, agências</small></div>
+          <div><strong data-i18n="nav.partners.title">Dados para turismo</strong><small data-i18n="nav.partners.sub">Hotéis, guias e destinos</small></div>
         </button>
         <button class="nav-item" data-page="ica" onclick="showPage('ica')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <div><strong>Índice Azimute</strong><small>Confiança do destino</small></div>
+          <div><strong data-i18n="nav.ica.title">Índice do destino</strong><small data-i18n="nav.ica.sub">Leitura territorial</small></div>
         </button>
         <button class="nav-item" data-page="profile" onclick="showPage('profile')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <div><strong>Perfil</strong><small>Sua conta</small></div>
+          <div><strong data-i18n="nav.profile.title">Perfil</strong><small data-i18n="nav.profile.sub">Sua conta</small></div>
         </button>
         <button class="nav-item" data-page="privacy" onclick="showPage('privacy')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/></svg>
-          <div><strong>Privacidade</strong><small>LGPD & dados</small></div>
+          <div><strong data-i18n="nav.privacy.title">Privacidade</strong><small data-i18n="nav.privacy.sub">LGPD & dados</small></div>
         </button>
       </nav>
 
       <div class="sb-card">
-        <strong>Confiança do destino</strong>
+        <strong data-i18n="sidebar.score.title">Leitura do destino</strong>
         <div class="score-bar"><span id="sidebarScore" style="width:72%"></span></div>
-        <small>Roteiro atual: <b id="sidebarScoreText">72/100</b></small>
+        <small><span data-i18n="sidebar.score.label">Contexto atual:</span> <b id="sidebarScoreText">72/100</b></small>
       </div>
-      <button class="btn btn-ghost sm" onclick="leaveApp()">← Voltar ao site</button>
+      <button class="btn btn-ghost sm" onclick="leaveApp()" data-i18n="sidebar.back">← Voltar ao site</button>
     </aside>
 
     <!-- Pages -->
@@ -262,88 +293,129 @@
       <!-- MAP / Core -->
       <section class="page active" id="page-map">
         <div class="map-wrap">
-          <div id="map" role="application" aria-label="Mapa interativo"></div>
+          <div id="map" role="application" aria-label="Mapa confiável interativo"></div>
+          <div class="route-overlay" id="routeOverlay" aria-hidden="true"></div>
 
           <div class="map-left-stack">
             <!-- Route planner -->
             <div class="route-panel" id="routePanel">
               <div class="rp-head">
-                <strong>Monte seu roteiro confiável</strong>
+                <strong data-i18n="route.panel.title">Para onde você quer ir?</strong>
                 <button class="icon-btn sm" onclick="togglePanel('routePanel')" aria-label="Recolher">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
               </div>
-              <div class="rp-body" data-panel-body>
+              <div class="route-minimal" id="routeMinimal" data-panel-body>
+                <button class="btn btn-primary btn-block" type="button" onclick="focusNearestSupportToUser()">🛟 Apoio perto</button>
+                <button class="btn btn-ghost btn-block" type="button" onclick="showAttentionAroundUser()">⚠️ Áreas de atenção</button>
+                <button class="btn btn-ghost btn-block" type="button" onclick="openRouteBuilder()">🧭 Traçar rota</button>
+                <button class="btn btn-ghost btn-block" type="button" onclick="togglePanel('layerPanel')">🗂️ O que ver no mapa</button>
+              </div>
+              <div class="rp-body" id="routeBuilder" data-panel-body hidden>
+                <label class="rp-stack-label" for="routeFrom" data-i18n="route.from.label">Onde você está</label>
                 <div class="geo-field">
                   <span class="rp-dot ok"></span>
-                  <input id="routeFrom" placeholder="Onde você está hospedado" autocomplete="off" value="Qoya Hotel Curitiba, Batel">
+                  <input id="routeFrom" placeholder="Onde você está agora" autocomplete="off" value="Qoya Hotel Curitiba, Batel" data-i18n-attr="placeholder" data-i18n="route.from.placeholder">
                   <ul class="geo-suggest" id="sugFrom" hidden></ul>
                 </div>
+                <label class="rp-stack-label" for="routeTo" data-i18n="route.to.label">Destino</label>
                 <div class="geo-field">
                   <span class="rp-dot end"></span>
-                  <input id="routeTo" placeholder="Atração ou destino" autocomplete="off" value="Parque Tanguá, Curitiba">
+                  <input id="routeTo" placeholder="Para onde você quer ir" autocomplete="off" value="Parque Tanguá, Curitiba" data-i18n-attr="placeholder" data-i18n="route.to.placeholder">
                   <ul class="geo-suggest" id="sugTo" hidden></ul>
                 </div>
-                <div class="rp-profile" role="radiogroup" aria-label="Tipo de viajante">
-                  <button data-prof="walk" class="chip">🚶 A pé</button>
-                  <button data-prof="bike" class="chip">🚴 Bike</button>
-                  <button data-prof="car" class="chip active">🚗 Carro / app</button>
-                  <button data-prof="tour" class="chip">🧳 Passeio guiado</button>
+                <button class="btn btn-primary btn-block" onclick="calcSafeRoute()" data-i18n="route.safe.cta">Ver caminho mais confiável</button>
+                <button class="btn btn-ghost btn-block sm" type="button" onclick="toggleRouteAdvanced()" data-i18n="route.moreOptions">Mais opções</button>
+                <div class="route-advanced" id="routeAdvanced" hidden>
+                  <div class="route-helper-actions" aria-label="Situações de uso">
+                    <button class="chip active" type="button" data-assist="arriving" onclick="applyAssistMode('arriving')" data-i18n="route.assist.arriving">Cheguei</button>
+                    <button class="chip" type="button" data-assist="now" onclick="applyAssistMode('now')" data-i18n="route.assist.now">Sair agora</button>
+                    <button class="chip" type="button" data-assist="calm" onclick="applyAssistMode('calm')" data-i18n="route.assist.calm">Calmo</button>
+                    <button class="chip" type="button" data-assist="easy" onclick="applyAssistMode('easy')" data-i18n="route.assist.easy">Modo fácil</button>
+                  </div>
+                  <div class="journey-strip">
+                    <small data-i18n="route.examples">Exemplos</small>
+                    <div class="journey-actions">
+                      <button class="chip active" type="button" data-journey="curitiba-safe" onclick="applyJourney('curitiba-safe')" data-i18n="route.journey.curitiba">Hotel → Tanguá</button>
+                      <button class="chip" type="button" data-journey="foz-family" onclick="applyJourney('foz-family')" data-i18n="route.journey.foz">Aeroporto → Cataratas</button>
+                      <button class="chip" type="button" data-journey="morretes-day" onclick="applyJourney('morretes-day')" data-i18n="route.journey.morretes">Morretes</button>
+                    </div>
+                  </div>
+                  <div class="rp-profile" role="radiogroup" aria-label="Tipo de viajante">
+                    <button data-prof="walk" class="chip" data-i18n="route.profile.walk">🚶 Caminhando</button>
+                    <button data-prof="bike" class="chip" data-i18n="route.profile.bike">🚴 Bike</button>
+                    <button data-prof="car" class="chip active" data-i18n="route.profile.car">🚗 Carro ou app</button>
+                    <button data-prof="tour" class="chip" data-i18n="route.profile.tour">🧳 Com apoio</button>
+                  </div>
+                  <div class="time-slider">
+                    <label data-i18n="route.time.label">Horário da saída: <b id="timeLabel">agora</b></label>
+                    <input type="range" id="timeRange" min="-1" max="23" value="-1" step="1">
+                  </div>
                 </div>
-              <div class="time-slider">
-                <label>Horário do passeio: <b id="timeLabel">agora</b></label>
-                <input type="range" id="timeRange" min="-1" max="23" value="-1" step="1">
               </div>
-              <button class="btn btn-primary btn-block" onclick="calcSafeRoute()">Calcular roteiro confiável</button>
-            </div>
-            <div class="rp-result" id="routeResult" hidden data-panel-body>
+              <div class="rp-result" id="routeResult" hidden data-panel-body>
               <div class="rp-result-head">
                 <div>
-                  <small>Roteiro calculado</small>
+                  <small data-i18n="route.result.label">Caminho sugerido</small>
                   <strong id="rResTitle">—</strong>
                 </div>
-                <button class="chip" type="button" onclick="editRoute()">Editar</button>
+                <button class="chip" type="button" onclick="editRoute()" data-i18n="route.edit">Editar</button>
               </div>
               <div class="rp-metric">
-                <div><small>Confiança</small><strong id="rResRisk">—</strong></div>
-                <div><small>Duração</small><strong id="rResTime">—</strong></div>
-                <div><small>Distância</small><strong id="rResDist">—</strong></div>
+                <div><small data-i18n="route.metric.trust">Confiança</small><strong id="rResRisk">—</strong></div>
+                <div><small data-i18n="route.metric.time">Duração</small><strong id="rResTime">—</strong></div>
+                <div><small data-i18n="route.metric.distance">Distância</small><strong id="rResDist">—</strong></div>
               </div>
               <ul id="rResAdvisory" class="rp-advisory"></ul>
+              <div class="route-destination" id="routeDestination" hidden>
+                <img id="destGuidePhoto" class="route-destination-photo" alt="" hidden>
+                <div class="route-destination-head">
+                  <small data-i18n="route.destination.label">Chegada ao destino</small>
+                  <strong id="destGuideTitle">—</strong>
+                </div>
+                <div class="route-destination-grid">
+                  <article><small data-i18n="route.destination.best">Melhor momento</small><strong id="destGuideBest">—</strong></article>
+                  <article><small data-i18n="route.destination.support">Ponto de apoio</small><strong id="destGuideSupport">—</strong></article>
+                  <article><small data-i18n="route.destination.alert">Alerta recente</small><strong id="destGuideAlert">—</strong></article>
+                  <article><small data-i18n="route.destination.tip">Dica rápida</small><strong id="destGuideTip">—</strong></article>
+                </div>
+              </div>
               <div class="rp-alt">
-                <button class="chip" type="button" onclick="toggleRouteDetails()">Passo a passo</button>
-                <button class="chip" type="button" onclick="compareAlt()">Trechos sensíveis</button>
-                <button class="chip" type="button" onclick="startTrip()">▶ Iniciar passeio</button>
+                <button class="chip" type="button" onclick="toggleRouteDetails()" data-i18n="route.actions.steps">Ver passo a passo</button>
+                <button class="chip" type="button" onclick="toggleDirectRoute()" data-i18n="route.actions.compare">Comparar rota direta</button>
+                <button class="chip" type="button" onclick="compareAlt()" data-i18n="route.actions.sensitive">Ver áreas sensíveis</button>
+                <button class="chip" type="button" onclick="startTrip()" data-i18n="route.actions.start">▶ Iniciar passeio</button>
+                <button class="chip" type="button" onclick="togglePanel('layerPanel')" data-i18n="route.actions.layers">Camadas</button>
               </div>
               <div class="rp-steps" id="rpSteps" hidden>
-                <strong>Passo a passo do passeio</strong>
+                <strong data-i18n="route.steps.title">Passo a passo do passeio</strong>
                 <ol id="rpStepsList"></ol>
               </div>
+              </div>
             </div>
-          </div>
           </div>
 
           <div class="map-right-stack">
             <!-- Layers -->
-            <div class="layer-panel" id="layerPanel">
+            <div class="layer-panel" id="layerPanel" hidden>
               <div class="layer-head">
-                <strong>Camadas</strong>
+                <strong data-i18n="map.layers.title">O que ver no mapa</strong>
                 <button class="icon-btn sm" onclick="togglePanel('layerPanel')" aria-label="Alternar camadas">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
               </div>
               <div class="layer-body" data-panel-body>
-                <label><input type="checkbox" checked onchange="toggleLayer('regions',this.checked)"> Confiança por bairro <span class="live-dot sm" title="ao vivo"></span></label>
-                <label><input type="checkbox" checked onchange="toggleLayer('heat',this.checked)"> Heatmap de alerta</label>
-                <label><input type="checkbox" checked onchange="toggleLayer('official',this.checked)"> Avisos oficiais de turismo</label>
-                <label><input type="checkbox" checked onchange="toggleLayer('community',this.checked)"> Relatos de viajantes</label>
-                <label><input type="checkbox" onchange="toggleLayer('lighting',this.checked)"> Baixa iluminação</label>
-                <label><input type="checkbox" onchange="toggleLayer('safe',this.checked)"> Pontos de apoio ao turista</label>
-                <label><input type="checkbox" onchange="toggleIsochrone(this.checked)"> Raio caminhável 15 min</label>
+                <label><input type="checkbox" data-layer-toggle="regions" onchange="toggleLayer('regions',this.checked)"> <span data-i18n="map.layer.regions">Confiança por área</span> <span class="live-dot sm" title="ao vivo"></span></label>
+                <label><input type="checkbox" data-layer-toggle="heat" onchange="toggleLayer('heat',this.checked)"> <span data-i18n="map.layer.heat">Áreas com mais atenção</span></label>
+                <label><input type="checkbox" data-layer-toggle="official" onchange="toggleLayer('official',this.checked)"> <span data-i18n="map.layer.official">Avisos oficiais</span></label>
+                <label><input type="checkbox" data-layer-toggle="community" onchange="toggleLayer('community',this.checked)"> <span data-i18n="map.layer.community">Relatos da comunidade</span></label>
+                <label><input type="checkbox" data-layer-toggle="lighting" onchange="toggleLayer('lighting',this.checked)"> <span data-i18n="map.layer.lighting">Baixa iluminação</span></label>
+                <label><input type="checkbox" data-layer-toggle="safe" onchange="toggleLayer('safe',this.checked)"> <span data-i18n="map.layer.safe">Pontos de apoio</span></label>
+                <label><input type="checkbox" onchange="toggleIsochrone(this.checked)"> <span data-i18n="map.layer.walk">Onde dá para ir a pé em 15 min</span></label>
                 <div class="layer-legend">
-                  <span><i class="sq risk"></i>Evite</span>
-                  <span><i class="sq med"></i>Atenção</span>
-                  <span><i class="sq ok"></i>Recomendado</span>
+                  <span><i class="sq risk"></i><span data-i18n="map.layer.legend.risk">Evite</span></span>
+                  <span><i class="sq med"></i><span data-i18n="map.layer.legend.med">Atenção</span></span>
+                  <span><i class="sq ok"></i><span data-i18n="map.layer.legend.ok">Recomendado</span></span>
                 </div>
               </div>
             </div>
@@ -352,7 +424,7 @@
           <!-- Quick actions -->
           <div class="fab-stack">
             <button class="fab danger" onclick="sosAlert()" title="SOS">SOS</button>
-            <button class="fab" onclick="togglePanel('layerPanel')" title="Camadas">☰</button>
+            <button class="fab" onclick="focusNearestSupportToUser()" title="Apoio perto">🛟</button>
             <button class="fab" onclick="centerOnUser()" title="Minha localização">◎</button>
           </div>
         </div>
@@ -407,27 +479,35 @@
       <!-- ALERTS -->
       <section class="page" id="page-alerts">
         <header class="page-head">
-          <h1>Alertas de viagem</h1>
-          <p>Cruzamento de avisos consulares, alertas de turismo oficiais e relatos verificados da comunidade de viajantes.</p>
+          <h1>Alertas do lugar</h1>
+          <p>Veja rápido o que pede atenção agora e abra o ponto direto no mapa.</p>
         </header>
         <div class="page-stack">
           <div class="summary-strip">
             <article class="summary-card">
-              <small>Em monitoramento</small>
+              <small>Em atenção</small>
               <strong id="sumAlertsTotal">—</strong>
-              <span>alertas ativos no destino</span>
+              <span>sinais ativos no destino</span>
             </article>
             <article class="summary-card">
               <small>Fontes oficiais</small>
               <strong id="sumAlertsOfficial">—</strong>
-              <span>avisos publicados por órgãos e turismo</span>
+              <span>avisos confirmados por órgãos e turismo</span>
             </article>
             <article class="summary-card">
-              <small>Comunidade</small>
+              <small>Relatos locais</small>
               <strong id="sumAlertsCommunity">—</strong>
-              <span>relatos validados por viajantes</span>
+              <span>ajuda compartilhada por viajantes</span>
             </article>
           </div>
+          <section class="guide-panel">
+            <strong>Como ler esta página</strong>
+            <div class="guide-grid">
+              <span>Comece pelos alertas mais recentes</span>
+              <span>Abra no mapa para ver o entorno</span>
+              <span>Confirme ou conteste relatos da comunidade</span>
+            </div>
+          </section>
           <div class="content-panel">
             <div class="tabs" role="tablist">
               <button class="tab active" data-tab="todos" onclick="switchTab('alerts','todos')">Todos</button>
@@ -442,20 +522,20 @@
       <!-- NEWS -->
       <section class="page" id="page-news">
         <header class="page-head">
-          <h1>Notícias do destino</h1>
-          <p>Agregadas de portais de turismo, ministérios e órgãos oficiais.</p>
+          <h1>Contexto do destino</h1>
+          <p>Atualizações oficiais e sinais do entorno que podem mudar seu passeio.</p>
         </header>
         <div class="page-stack">
           <div class="summary-strip">
             <article class="summary-card">
               <small>Curadoria</small>
               <strong>Fontes confiáveis</strong>
-              <span>Conteúdo pensado para decisão rápida durante a viagem.</span>
+              <span>Leitura rápida para decidir antes de sair.</span>
             </article>
             <article class="summary-card">
               <small>Foco</small>
               <strong>Impacto no passeio</strong>
-              <span>Clima, mobilidade, segurança e operações turísticas.</span>
+              <span>Clima, mobilidade, segurança e operação turística.</span>
             </article>
           </div>
           <div class="content-panel">
@@ -468,24 +548,32 @@
       <section class="page" id="page-community">
         <header class="page-head">
           <h1>Comunidade de viajantes</h1>
-          <p>Grupos por destino, dicas em tempo real e gente real em viagem disposta a ajudar.</p>
+          <p>Relatos geográficos, ajuda rápida e contexto local para quem está no destino agora.</p>
         </header>
         <div class="community-shell">
           <section class="community-hero">
             <div>
               <span class="community-kicker">Comunidade ao vivo</span>
-              <h2>Relatos úteis, pessoas reais e menos ruído.</h2>
-              <p>Veja o que está acontecendo no destino, publique um alerta em segundos e encontre viajantes com contexto parecido com o seu.</p>
+              <h2>Comunidade feita para orientar o próximo viajante.</h2>
+              <p>Menos feed genérico, mais relatos úteis por local, tempo e contexto real de viagem.</p>
             </div>
             <div class="community-toolbar">
               <div class="community-toolbar-main">
                 <button class="chip active">Todos</button>
                 <button class="chip">Paraná</button>
-                <button class="chip">Alertas úteis</button>
-                <button class="chip">Dicas positivas</button>
-                <button class="chip">Viajantes solo</button>
+                  <button class="chip">Alertas úteis</button>
+                  <button class="chip">Dicas positivas</button>
+                  <button class="chip">Cheguei agora</button>
               </div>
               <button class="btn btn-primary sm" type="button" onclick="openCommunityReport()">Novo relato</button>
+            </div>
+          </section>
+          <section class="guide-panel">
+            <strong>Como esta comunidade ajuda</strong>
+            <div class="guide-grid">
+              <span>Relatos presos ao lugar e ao horário</span>
+              <span>Dicas curtas para decidir rápido</span>
+              <span>Menos conversa solta, mais contexto útil</span>
             </div>
           </section>
           <div class="community-layout">
@@ -493,8 +581,8 @@
               <section class="community-card stories-card">
                 <div class="section-head">
                   <div>
-                    <h3>Stories</h3>
-                    <p>Atualizações rápidas de quem está no destino.</p>
+                    <h3>Atualizações rápidas</h3>
+                    <p>Sinais curtos de quem está circulando pelo destino.</p>
                   </div>
                   <button class="btn btn-ghost sm" type="button" onclick="draftStory()">Adicionar</button>
                 </div>
@@ -504,7 +592,7 @@
                 <div class="section-head">
                   <div>
                     <h3>Compartilhe um relato</h3>
-                    <p>Descreva só o essencial para ajudar outras pessoas rápido.</p>
+                    <p>Escreva de forma simples para ajudar outra pessoa a decidir rápido.</p>
                   </div>
                   <button class="btn btn-ghost sm" type="button" onclick="draftStory()">Story</button>
                 </div>
@@ -556,7 +644,7 @@
                 <div class="section-head">
                   <div>
                     <h3>Atualizações recentes</h3>
-                    <p>Feed enxuto com os relatos mais úteis da comunidade.</p>
+                    <p>Relatos recentes com valor prático para quem vai circular no destino.</p>
                   </div>
                 </div>
                 <div class="comm-feed" id="commFeed"></div>
@@ -567,7 +655,7 @@
                 <div class="section-head">
                   <div>
                     <h3>Grupos ativos</h3>
-                    <p>Entre em comunidades por perfil e destino.</p>
+                    <p>Junte-se por destino, perfil e tipo de passeio.</p>
                   </div>
                 </div>
                 <div class="aside-list" id="groupList"></div>
@@ -576,7 +664,7 @@
                 <div class="section-head">
                   <div>
                     <h3>Pessoas no destino</h3>
-                    <p>Viajantes com contexto parecido com o seu.</p>
+                    <p>Pessoas com contexto parecido com o seu.</p>
                   </div>
                 </div>
                 <div class="aside-list" id="peopleList"></div>
@@ -588,22 +676,30 @@
 
       <section class="page" id="page-chat">
         <header class="page-head">
-          <h1>Bate-papo</h1>
-          <p>Converse com viajantes, combine passeios e troque alertas rápidos sobre o destino.</p>
+          <h1>Conversas rápidas</h1>
+          <p>Use para combinar deslocamentos, confirmar relatos e pedir contexto antes de sair.</p>
         </header>
         <div class="page-stack">
           <div class="summary-strip">
             <article class="summary-card">
               <small>Conversas ativas</small>
               <strong id="chatCount">3 chats</strong>
-              <span>Contato direto com viajantes e grupos.</span>
+              <span>Contato direto com viajantes e grupos úteis.</span>
             </article>
             <article class="summary-card">
-              <small>Mais usado para</small>
+              <small>Mais usado em</small>
               <strong>Dividir passeios</strong>
-              <span>Transfer, dicas rápidas e aviso de risco.</span>
+              <span>Transfer, contexto rápido e confirmação de rota.</span>
             </article>
           </div>
+          <section class="guide-panel">
+            <strong>Bom uso do chat</strong>
+            <div class="guide-grid">
+              <span>Pergunte sobre o local antes de sair</span>
+              <span>Confirme se alguém passou por ali hoje</span>
+              <span>Use o mapa para validar o contexto</span>
+            </div>
+          </section>
           <div class="chat-layout">
             <aside class="chat-list" id="chatList"></aside>
             <section class="chat-panel">
@@ -616,7 +712,7 @@
               </div>
               <div class="chat-messages" id="chatMessages"></div>
               <div class="chat-input">
-                <input id="chatInput" placeholder="Mensagem de teste..." aria-label="Mensagem">
+                <input id="chatInput" placeholder="Ex.: alguém passou por esse trajeto hoje?" aria-label="Mensagem">
                 <button class="btn btn-primary sm" type="button" onclick="sendChatMessage()">Enviar</button>
               </div>
             </section>
@@ -627,22 +723,30 @@
       <!-- PARTNERS -->
       <section class="page" id="page-partners">
         <header class="page-head">
-          <h1>Azimute para parceiros de turismo</h1>
-          <p>Painéis dedicados para quem trabalha com viajantes todos os dias.</p>
+          <h1>Dados para turismo</h1>
+          <p>O valor está na leitura territorial e nos sinais do destino, não em recurso isolado.</p>
         </header>
         <div class="page-stack">
           <div class="summary-strip">
             <article class="summary-card">
-              <small>Operação</small>
-              <strong>Visão em tempo real</strong>
-              <span>Indicadores para quem cuida de turistas e destinos.</span>
+              <small>Produto</small>
+              <strong>Leitura em tempo real</strong>
+              <span>Indicadores para quem opera com turistas e destinos.</span>
             </article>
             <article class="summary-card">
-              <small>Integração</small>
-              <strong>API + alertas</strong>
-              <span>Roteiros confiáveis, webhooks e sinais de risco.</span>
+              <small>Entrega</small>
+              <strong>Sinais e leitura</strong>
+              <span>Confiança por área, alertas e contexto de deslocamento.</span>
             </article>
           </div>
+          <section class="guide-panel">
+            <strong>O que um parceiro compra</strong>
+            <div class="guide-grid">
+              <span>Leitura de confiança por área e horário</span>
+              <span>Sinais de golpe, apoio e pressão no destino</span>
+              <span>Contexto para operar melhor com viajantes</span>
+            </div>
+          </section>
           <div class="content-panel">
             <div class="partner-tabs">
               <button class="partner-tab active" data-kind="guide" onclick="showPartner('guide')">🧳 Guia turístico</button>
@@ -818,11 +922,11 @@
 
   <!-- Mobile bottom nav -->
   <nav class="bottom-nav" aria-label="Navegação rápida">
-    <button onclick="showPage('map')" data-page="map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg><span>Mapa</span></button>
-    <button onclick="showPage('alerts')" data-page="alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span>Alertas</span></button>
-    <button class="fab-center" onclick="openCommunityReport()" aria-label="Relatar na comunidade"><span>＋</span></button>
-    <button onclick="showPage('community')" data-page="community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/></svg><span>Rede</span></button>
-    <button onclick="showPage('chat')" data-page="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Chat</span></button>
+    <button onclick="showPage('map')" data-page="map" aria-label="Mapa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg><span>Mapa</span></button>
+    <button onclick="showPage('alerts')" data-page="alerts" aria-label="Alertas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span>Alertas</span></button>
+    <button class="fab-center" onclick="focusNearestSupportToUser()" aria-label="Encontrar apoio perto"><span>🛟</span></button>
+    <button onclick="showPage('community')" data-page="community" aria-label="Comunidade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/></svg><span>Comunidade</span></button>
+    <button onclick="showPage('trip')" data-page="trip" aria-label="Ir agora"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l3 7-7 3 7 3-3 7-3-7 7-3-7-3z"/></svg><span>Ir agora</span></button>
   </nav>
 
   <!-- Toast -->
