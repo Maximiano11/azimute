@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0a0f1c">
+<meta name="theme-color" content="#071216">
 <meta name="description" content="Azimute — mapa confiável para viajantes. Dados de risco, apoio e contexto local para turistas no Paraná, com comunidade útil e linguagem acessível.">
 <title>Azimute · Mapa confiável para viajantes</title>
 <link rel="manifest" href="manifest.json">
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js" defer></script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -92,15 +92,15 @@
         <svg viewBox="0 0 320 180" class="lnd-map-svg" role="img" aria-label="Ilustração de rota segura">
           <defs>
             <linearGradient id="lg" x1="0" x2="1">
-              <stop offset="0" stop-color="#5cffb0"/>
-              <stop offset="1" stop-color="#37a7ff"/>
+              <stop offset="0" stop-color="#43f3b0"/>
+              <stop offset="1" stop-color="#5b8def"/>
             </linearGradient>
           </defs>
-          <rect width="320" height="180" fill="#0b1322"/>
+          <rect width="320" height="180" fill="#0d1b21"/>
           <path d="M10 150 C 60 120, 90 100, 140 90 S 240 60, 310 30" stroke="url(#lg)" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M10 150 C 80 140, 140 150, 200 130 S 290 90, 310 30" stroke="#ff5c77" stroke-width="2" stroke-dasharray="4 6" fill="none" opacity=".6"/>
-          <circle cx="10" cy="150" r="6" fill="#5cffb0"/>
-          <circle cx="310" cy="30" r="6" fill="#37a7ff"/>
+          <path d="M10 150 C 80 140, 140 150, 200 130 S 290 90, 310 30" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4 6" fill="none" opacity=".6"/>
+          <circle cx="10" cy="150" r="6" fill="#43f3b0"/>
+          <circle cx="310" cy="30" r="6" fill="#5b8def"/>
         </svg>
         <div class="lnd-map-legend">
           <span><i class="sq ok"></i> <span data-i18n="lnd.legend.safe">Rota recomendada</span></span>
@@ -129,22 +129,22 @@
     <h2 data-i18n="lnd.features.title">Mapa, sinal e ação</h2>
     <div class="lnd-grid">
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:rgba(15,110,168,.12)">🧭</div>
+        <div class="lnd-ico" style="background:rgba(91,141,239,.13)">🧭</div>
         <h3 data-i18n="lnd.feat.route.t">Deslocamento confiável</h3>
         <p data-i18n="lnd.feat.route.d">Mostra a rota mais coerente e o caminho que faz mais sentido para quem está fora de casa.</p>
       </article>
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:rgba(16,185,129,.12)">🛰️</div>
+        <div class="lnd-ico" style="background:rgba(39,199,184,.13)">🛰️</div>
         <h3 data-i18n="lnd.feat.official.t">Leitura de risco simples</h3>
         <p data-i18n="lnd.feat.official.d">Transforma sinais dispersos em alerta claro, apoio próximo e contexto útil.</p>
       </article>
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:rgba(244,114,182,.12)">👥</div>
+        <div class="lnd-ico" style="background:rgba(255,107,107,.12)">👥</div>
         <h3 data-i18n="lnd.feat.community.t">Comunidade útil</h3>
         <p data-i18n="lnd.feat.community.d">Relatos curtos por lugar para orientar o próximo viajante sem ruído social.</p>
       </article>
       <article class="lnd-card">
-        <div class="lnd-ico" style="background:rgba(251,191,36,.14)">⚡</div>
+        <div class="lnd-ico" style="background:rgba(244,196,93,.16)">⚡</div>
         <h3 data-i18n="lnd.feat.alerts.t">Acessível desde a origem</h3>
         <p data-i18n="lnd.feat.alerts.d">Fluxo guiado, linguagem direta e contraste alto para idosos, PCD e leigos.</p>
       </article>
@@ -980,6 +980,6 @@
 
 </div>
 
-<script src="script.js" defer></script>
+<script src="script.js?v=5" defer></script>
 </body>
 </html>

@@ -44,6 +44,20 @@ const state = {
   activeChatId: 'chat1',
 };
 
+const UI_COLORS = {
+  bg:'#071216',
+  bgLight:'#f6f8f7',
+  route:'#43f3b0',
+  routeBase:'rgba(3,10,13,.86)',
+  routeAvoid:'rgba(159,180,185,.88)',
+  primary:'#5b8def',
+  primary2:'#27c7b8',
+  ok:'#43d98f',
+  warning:'#f4c45d',
+  danger:'#ff6b6b',
+  mapPinBorder:'rgba(255,255,255,.88)'
+};
+
 /* ----- Dados mocados ----- */
 const DATA = {
   incidents: [
@@ -118,14 +132,14 @@ const DATA = {
     {name:'Foodies em Morretes e Antonina', members:'56 ativos', emoji:'🍽️'}
   ],
   stories: [
-    {name:'Seu story', area:'Curitiba agora', avatar:'https://i.pravatar.cc/80?img=12', cover:'linear-gradient(180deg, rgba(10,15,28,.15), rgba(10,15,28,.92)), linear-gradient(135deg, #37a7ff, #6c5ce7)', mine:true},
-    {name:'Lívia C.', area:'Cataratas', avatar:'https://i.pravatar.cc/80?img=32', cover:'linear-gradient(180deg, rgba(10,15,28,.1), rgba(10,15,28,.92)), linear-gradient(135deg, #0fb9b1, #1dd1a1)', seen:false},
-    {name:'Rafa M.', area:'Jardim Botânico', avatar:'https://i.pravatar.cc/80?img=5', cover:'linear-gradient(180deg, rgba(10,15,28,.12), rgba(10,15,28,.92)), linear-gradient(135deg, #feca57, #ff9f43)', seen:true},
-    {name:'Beatriz O.', area:'MON', avatar:'https://i.pravatar.cc/80?img=47', cover:'linear-gradient(180deg, rgba(10,15,28,.12), rgba(10,15,28,.92)), linear-gradient(135deg, #ff6b6b, #ee5253)', seen:false},
-    {name:'Carlos R.', area:'Itaipu', avatar:'https://i.pravatar.cc/80?img=15', cover:'linear-gradient(180deg, rgba(10,15,28,.12), rgba(10,15,28,.92)), linear-gradient(135deg, #48dbfb, #00d2d3)', seen:true},
-    {name:'Maya T.', area:'Marco das Três Fronteiras', avatar:'https://i.pravatar.cc/80?img=11', cover:'linear-gradient(180deg, rgba(10,15,28,.12), rgba(10,15,28,.92)), linear-gradient(135deg, #10ac84, #1dd1a1)', seen:false},
-    {name:'João P.', area:'Rua XV', avatar:'https://i.pravatar.cc/80?img=20', cover:'linear-gradient(180deg, rgba(10,15,28,.12), rgba(10,15,28,.92)), linear-gradient(135deg, #54a0ff, #2e86de)', seen:true},
-    {name:'Nina S.', area:'Pelourinho', avatar:'https://i.pravatar.cc/80?img=25', cover:'linear-gradient(180deg, rgba(10,15,28,.12), rgba(10,15,28,.92)), linear-gradient(135deg, #ff9ff3, #f368e0)', seen:false}
+    {name:'Seu story', area:'Curitiba agora', avatar:'https://i.pravatar.cc/80?img=12', cover:'linear-gradient(180deg, rgba(7,18,22,.12), rgba(7,18,22,.92)), linear-gradient(135deg, #5b8def, #27c7b8)', mine:true},
+    {name:'Lívia C.', area:'Cataratas', avatar:'https://i.pravatar.cc/80?img=32', cover:'linear-gradient(180deg, rgba(7,18,22,.1), rgba(7,18,22,.92)), linear-gradient(135deg, #27c7b8, #43d98f)', seen:false},
+    {name:'Rafa M.', area:'Jardim Botânico', avatar:'https://i.pravatar.cc/80?img=5', cover:'linear-gradient(180deg, rgba(7,18,22,.12), rgba(7,18,22,.92)), linear-gradient(135deg, #f4c45d, #d98f43)', seen:true},
+    {name:'Beatriz O.', area:'MON', avatar:'https://i.pravatar.cc/80?img=47', cover:'linear-gradient(180deg, rgba(7,18,22,.12), rgba(7,18,22,.92)), linear-gradient(135deg, #ff8a6b, #ff6b6b)', seen:false},
+    {name:'Carlos R.', area:'Itaipu', avatar:'https://i.pravatar.cc/80?img=15', cover:'linear-gradient(180deg, rgba(7,18,22,.12), rgba(7,18,22,.92)), linear-gradient(135deg, #58b7d8, #27c7b8)', seen:true},
+    {name:'Maya T.', area:'Marco das Três Fronteiras', avatar:'https://i.pravatar.cc/80?img=11', cover:'linear-gradient(180deg, rgba(7,18,22,.12), rgba(7,18,22,.92)), linear-gradient(135deg, #43d98f, #27c7b8)', seen:false},
+    {name:'João P.', area:'Rua XV', avatar:'https://i.pravatar.cc/80?img=20', cover:'linear-gradient(180deg, rgba(7,18,22,.12), rgba(7,18,22,.92)), linear-gradient(135deg, #5b8def, #58b7d8)', seen:true},
+    {name:'Nina S.', area:'Pelourinho', avatar:'https://i.pravatar.cc/80?img=25', cover:'linear-gradient(180deg, rgba(7,18,22,.12), rgba(7,18,22,.92)), linear-gradient(135deg, #8b7cf6, #ff8a6b)', seen:false}
   ],
   people: [
     {name:'Rafa M.', role:'Mochileiro · em Curitiba', avatar:'https://i.pravatar.cc/80?img=5'},
@@ -482,7 +496,7 @@ function applyTheme(){
   const label = qs('[data-theme-label]');
   if (label) label.textContent = state.theme === 'dark' ? 'Modo claro' : 'Modo escuro';
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', state.theme === 'dark' ? '#0a0f1c' : '#f5f7fb');
+  if (meta) meta.setAttribute('content', state.theme === 'dark' ? UI_COLORS.bg : UI_COLORS.bgLight);
 }
 function toggleTheme(){ state.theme = state.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('az.theme', state.theme); applyTheme(); updateMapTheme(); }
 function applySenior(){ document.documentElement.setAttribute('data-senior', state.senior ? 'on' : 'off'); const p = qs('#prefSenior'); if (p) p.checked = state.senior; }
@@ -691,9 +705,8 @@ function initMap(){
     rebuildIncidentMarkers();
     if (state.layers.heat) rebuildHeat();
     if (state.layers.regions) rebuildRegions();
-    updateRouteOverlay();
+    refreshRouteDrawing();
   });
-  state.map.on('move zoom resize', updateRouteOverlay);
   // Click no mapa: popup com score do ponto (apenas em área vazia)
   state.map.on('click', e => {
     if (e.originalEvent && e.originalEvent.target && e.originalEvent.target.closest('.leaflet-marker-icon, .leaflet-interactive')) return;
@@ -709,6 +722,8 @@ function updateRouteOverlay(){
     return;
   }
   const size = state.map.getSize();
+  el.style.width = `${size.x}px`;
+  el.style.height = `${size.y}px`;
   let canvas = el.querySelector('canvas');
   if (!canvas){
     canvas = document.createElement('canvas');
@@ -742,7 +757,7 @@ function updateRouteOverlay(){
     : null;
   if (avoid?.length){
     ctx.save();
-    ctx.strokeStyle = 'rgba(163,174,196,.9)';
+    ctx.strokeStyle = UI_COLORS.routeAvoid;
     ctx.lineWidth = 6;
     ctx.setLineDash([10, 10]);
     drawPath(avoid);
@@ -750,19 +765,26 @@ function updateRouteOverlay(){
     ctx.restore();
   }
   ctx.save();
-  ctx.strokeStyle = 'rgba(9,14,26,.96)';
+  ctx.strokeStyle = UI_COLORS.routeBase;
   ctx.lineWidth = 16;
   drawPath(pts);
   ctx.stroke();
   ctx.restore();
   ctx.save();
-  ctx.shadowColor = 'rgba(92,255,176,.45)';
+  ctx.shadowColor = 'rgba(67,243,176,.42)';
   ctx.shadowBlur = 12;
-  ctx.strokeStyle = '#63ffba';
+  ctx.strokeStyle = UI_COLORS.route;
   ctx.lineWidth = 9;
   drawPath(pts);
   ctx.stroke();
   ctx.restore();
+}
+function refreshRouteDrawing(){
+  if (!state.map || !state.routeGeo?.latlngs?.length) return;
+  state.avoidedLayer?.bringToFront?.();
+  state.routeLayer?.eachLayer?.(layer => layer.bringToFront?.());
+  state.routeStartMarker?.setZIndexOffset?.(1000);
+  state.routeEndMarker?.setZIndexOffset?.(1000);
 }
 function syncLayerControls(){
   qsa('[data-layer-toggle]').forEach(input => {
@@ -866,10 +888,10 @@ function rebuildHeat(){
       ? {radius:22, blur:18, minOpacity:.16}
       : {radius:28, blur:22, minOpacity:.25};
   state.heatLayer = L.heatLayer(pts, { ...heatOptions, maxZoom:17, pane:'heatPane',
-    gradient:{0.3:'#5cffb0', 0.6:'#ffb547', 0.9:'#ff5c77'} }).addTo(state.map);
+    gradient:{0.3:UI_COLORS.ok, 0.6:UI_COLORS.warning, 0.9:UI_COLORS.danger} }).addTo(state.map);
 }
 function addUserMarker(){
-  const icon = L.divIcon({className:'', html:'<div class="risk-marker" style="background:#37a7ff;border:3px solid rgba(255,255,255,.9)">•</div>', iconSize:[28,28], iconAnchor:[14,14]});
+  const icon = L.divIcon({className:'', html:`<div class="risk-marker" style="background:${UI_COLORS.primary};border:3px solid ${UI_COLORS.mapPinBorder}">•</div>`, iconSize:[28,28], iconAnchor:[14,14]});
   state.userMarker = L.marker(state.fromCoord, {icon}).addTo(state.map).bindPopup('Você está aqui');
 }
 function toggleLayer(name, on){
@@ -881,7 +903,7 @@ function toggleLayer(name, on){
   on ? g.addTo(state.map) : state.map.removeLayer(g);
 }
 
-function regionColor(ica){ return ica >= 75 ? '#5cffb0' : ica >= 55 ? '#ffb547' : '#ff5c77'; }
+function regionColor(ica){ return ica >= 75 ? UI_COLORS.ok : ica >= 55 ? UI_COLORS.warning : UI_COLORS.danger; }
 function regionClass(ica){ return ica >= 75 ? 'ok' : ica >= 55 ? 'warn' : 'bad'; }
 function rebuildRegions(){
   if (state.regionLayer){ state.map.removeLayer(state.regionLayer); state.regionLayer = null; }
@@ -1157,6 +1179,25 @@ function combineRoutes(routes){
     legs
   };
 }
+function densifyLatLngs(latlngs, minPoints=32){
+  if (!Array.isArray(latlngs) || latlngs.length < 2) return latlngs || [];
+  if (latlngs.length >= minPoints) return latlngs;
+  const out = [];
+  for (let i = 0; i < latlngs.length - 1; i++){
+    const [lat1, lng1] = latlngs[i];
+    const [lat2, lng2] = latlngs[i + 1];
+    const segmentPoints = Math.max(2, Math.ceil(minPoints / (latlngs.length - 1)));
+    for (let step = 0; step < segmentPoints; step++){
+      const t = step / segmentPoints;
+      out.push([
+        lat1 + (lat2 - lat1) * t,
+        lng1 + (lng2 - lng1) * t
+      ]);
+    }
+  }
+  out.push(latlngs[latlngs.length - 1]);
+  return out;
+}
 function buildFallbackRoute(from, to, profile, via=null){
   const points = via ? [from, via, to] : [from, to];
   const coords = [];
@@ -1248,7 +1289,7 @@ async function calcSafeRoute(silent){
     }
   }
   const coords = route.geometry.coordinates; // [lng,lat]
-  const latlngs = coords.map(c => [c[1], c[0]]);
+  const latlngs = densifyLatLngs(coords.map(c => [c[1], c[0]]));
   const hour = state.time;
   const nearbyIncidents = routeIncidents(coords);
   const highRiskHits = nearbyIncidents.filter(i => i.severity === 'high' && i.type !== 'safe');
@@ -1264,7 +1305,7 @@ async function calcSafeRoute(silent){
   if (usedSafeDetour && avoidedLatlngs?.length){
     state.avoidedLayer = L.polyline(avoidedLatlngs, {
       pane:'routePane',
-      color:'rgba(163,174,196,.88)',
+      color:UI_COLORS.routeAvoid,
       weight:5,
       opacity:.92,
       dashArray:'10 10',
@@ -1275,8 +1316,8 @@ async function calcSafeRoute(silent){
     state.avoidedLayer.bringToFront();
   }
 
-  const routeBase = L.polyline(latlngs, {pane:'routePane', color:'rgba(9,14,26,.9)', weight:14, opacity:1, lineCap:'round', lineJoin:'round', className:'az-route-base'});
-  const routeMain = L.polyline(latlngs, {pane:'routePane', color:'#63ffba', weight:8, opacity:1, lineCap:'round', lineJoin:'round', className:'az-route-main'});
+  const routeBase = L.polyline(latlngs, {pane:'routePane', color:UI_COLORS.routeBase, weight:14, opacity:1, lineCap:'round', lineJoin:'round', className:'az-route-base'});
+  const routeMain = L.polyline(latlngs, {pane:'routePane', color:UI_COLORS.route, weight:8, opacity:1, lineCap:'round', lineJoin:'round', className:'az-route-main'});
   state.routeLayer = L.layerGroup([routeBase, routeMain]).addTo(state.map);
   routeBase.bringToBack();
   routeMain.bringToFront();
@@ -1294,12 +1335,11 @@ async function calcSafeRoute(silent){
   });
   state.routeStartMarker = L.marker(latlngs[0], {pane:'routePane', icon:startIcon, interactive:false}).addTo(state.map);
   state.routeEndMarker = L.marker(latlngs[latlngs.length - 1], {pane:'routePane', icon:endIcon, interactive:false}).addTo(state.map);
-  state.routeStartMarker.bringToFront();
-  state.routeEndMarker.bringToFront();
+  state.routeStartMarker.setZIndexOffset(1000);
+  state.routeEndMarker.setZIndexOffset(1000);
   state.routeGeo = { latlngs, route, nearbyIncidents, avoidedLatlngs, usedSafeDetour };
-  state.map.fitBounds(L.latLngBounds(latlngs), {padding:[60,60]});
-  requestAnimationFrame(() => updateRouteOverlay());
-  setTimeout(() => updateRouteOverlay(), 60);
+  state.map.fitBounds(L.latLngBounds(latlngs), {padding:[60,60], animate:false});
+  refreshRouteDrawing();
 
   const km = (route.distance/1000).toFixed(1);
   const mins = Math.round(route.duration/60);
@@ -1398,7 +1438,7 @@ function compareAlt(){
     return state.routeGeo.nearbyIncidents?.some(inc => inc.severity === 'high' && distanceMeters(lat, lng, inc.lat, inc.lng) <= 110);
   });
   if (sensitive.length < 2) return toast('Nenhum trecho sensível relevante nesse trajeto.');
-  state.altLayer = L.polyline(sensitive, {pane:'routePane', color:'#ff5c77', weight:4, opacity:.88, dashArray:'6 8', lineCap:'round'}).addTo(state.map);
+  state.altLayer = L.polyline(sensitive, {pane:'routePane', color:UI_COLORS.danger, weight:4, opacity:.88, dashArray:'6 8', lineCap:'round'}).addTo(state.map);
   toast('Trechos sensíveis destacados em vermelho');
 }
 function toggleDirectRoute(){
@@ -1415,7 +1455,7 @@ function toggleDirectRoute(){
 function toggleIsochrone(on){
   if (!on){ if (state.isoLayer){ state.map.removeLayer(state.isoLayer); state.isoLayer=null; } return; }
   state.isoLayer = L.layerGroup();
-  const colors = ['#5cffb0','#7ddf64','#ffb547','#ff5c77'];
+  const colors = [UI_COLORS.ok, UI_COLORS.primary2, UI_COLORS.warning, UI_COLORS.danger];
   [200, 400, 700, 1100].forEach((r, idx) => {
     L.circle(state.fromCoord, {radius:r, color:colors[idx], fillColor:colors[idx], fillOpacity:.08, weight:1}).addTo(state.isoLayer);
   });
@@ -1761,7 +1801,7 @@ function submitReport(ev){
     name:'Seu story',
     area: place,
     avatar:'https://i.pravatar.cc/80?img=12',
-    cover:'linear-gradient(180deg, rgba(10,15,28,.15), rgba(10,15,28,.92)), linear-gradient(135deg, #37a7ff, #6c5ce7)',
+    cover:'linear-gradient(180deg, rgba(7,18,22,.15), rgba(7,18,22,.92)), linear-gradient(135deg, #5b8def, #27c7b8)',
     mine:true
   };
   renderCommunity();
