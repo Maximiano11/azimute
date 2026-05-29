@@ -54,7 +54,7 @@
       <span class="lnd-tag" data-i18n="lnd.tag">Dados confiáveis para quem está viajando</span>
       <h1 data-i18n="lnd.hero.title">Viaje com mais confiança em qualquer destino.</h1>
       <p class="lnd-lede" data-i18n="lnd.hero.lede">O Azimute cruza comunidade, alertas oficiais e contexto do lugar para transformar risco em decisão rápida para o viajante.</p>
-      <p class="lnd-scale-note" data-i18n="lnd.hero.scale">Começa com mocks no Paraná, mas escala por cidade, rota e destino turístico sem refazer a base.</p>
+      <p class="lnd-scale-note" data-i18n="lnd.hero.scale">Funciona em qualquer destino: a mesma leitura de confiança se adapta a cada cidade, rota e país que você visita.</p>
       <div class="lnd-hero-summary">
         <article>
           <small data-i18n="lnd.hero.problemLabel">O problema</small>
@@ -76,7 +76,7 @@
         <button class="btn btn-ghost btn-lg" onclick="document.getElementById('difference').scrollIntoView({behavior:'smooth'})" data-i18n="lnd.hero.cta2">Entender o diferencial</button>
       </div>
       <ul class="lnd-stats" aria-label="Indicadores">
-        <li><strong data-i18n="lnd.stats.pilot">Piloto local</strong><span data-i18n="lnd.stats.pilotSub">mocks no Paraná</span></li>
+        <li><strong data-i18n="lnd.stats.pilot">Qualquer destino</strong><span data-i18n="lnd.stats.pilotSub">cidades, rotas e países</span></li>
         <li><strong data-i18n="lnd.stats.sources">3 fontes</strong><span data-i18n="lnd.stats.sourcesSub">oficial, comunidade e contexto</span></li>
         <li><strong data-i18n="lnd.stats.scale">Escala fácil</strong><span data-i18n="lnd.stats.scaleSub">por cidade, rota e destino</span></li>
       </ul>
@@ -87,7 +87,7 @@
         <div class="lnd-map-head">
           <span class="lnd-dot ok"></span>
           <strong data-i18n="lnd.mapcard.title">Rota mais confiável</strong>
-          <em data-i18n="lnd.mapcard.risk">+38% confiança</em>
+          <em data-i18n="lnd.mapcard.risk">Recomendado</em>
         </div>
         <svg viewBox="0 0 320 180" class="lnd-map-svg" role="img" aria-label="Ilustração de rota segura">
           <defs>
@@ -114,7 +114,7 @@
         <div class="lnd-map-footer">
           <div>
             <small data-i18n="lnd.mapcard.reading">Leitura do trajeto</small>
-            <strong>72/100</strong>
+            <strong style="color:var(--ok)" data-i18n="lnd.mapcard.readingValue">Recomendado</strong>
           </div>
           <div>
             <small data-i18n="lnd.mapcard.signals">Sinais no entorno</small>
@@ -188,13 +188,13 @@
     <h2 data-i18n="lnd.community.title">Comunidade ligada ao lugar, não ao algoritmo</h2>
     <p class="lnd-muted" data-i18n="lnd.community.lede">Cada relato nasce no mapa, ajuda no deslocamento e reforça a leitura do destino com utilidade imediata.</p>
     <div class="lnd-cta">
-      <button class="btn btn-primary btn-lg" onclick="enterApp('app')" data-i18n="lnd.community.cta">Ver protótipo</button>
+      <button class="btn btn-primary btn-lg" onclick="enterApp('app')" data-i18n="lnd.community.cta">Abrir o mapa</button>
     </div>
   </section>
 
   <footer class="lnd-footer">
     <div><img src="logo-mark.svg" alt="" aria-hidden="true"><span data-i18n="lnd.footer.brand">Azimute © 2026</span></div>
-    <small><span data-i18n="lnd.footer.note">Protótipo com dados simulados</span> · <a href="#" onclick="enterApp('privacy');return false;" data-i18n="lnd.footer.privacy">Privacidade & LGPD</a></small>
+    <small><span data-i18n="lnd.footer.note">Demonstração com dados de exemplo de fontes públicas e da comunidade</span> · <a href="#" onclick="enterApp('privacy');return false;" data-i18n="lnd.footer.privacy">Privacidade & LGPD</a></small>
   </footer>
 </section>
 
@@ -281,8 +281,8 @@
 
       <div class="sb-card">
         <strong data-i18n="sidebar.score.title">Leitura do destino</strong>
-        <div class="score-bar"><span id="sidebarScore" style="width:72%"></span></div>
-        <small><span data-i18n="sidebar.score.label">Contexto atual:</span> <b id="sidebarScoreText">72/100</b></small>
+        <div class="score-bar"><span id="sidebarScore" style="width:78%"></span></div>
+        <small><span data-i18n="sidebar.score.label">Contexto atual:</span> <b id="sidebarScoreText">Recomendado · 78</b></small>
       </div>
       <button class="btn btn-ghost sm" onclick="leaveApp()" data-i18n="sidebar.back">← Voltar ao site</button>
     </aside>
@@ -305,24 +305,23 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
               </div>
-              <div class="route-minimal" id="routeMinimal" data-panel-body>
-                <button class="btn btn-primary btn-block" type="button" onclick="focusNearestSupportToUser()">🛟 Apoio perto</button>
-                <button class="btn btn-ghost btn-block" type="button" onclick="showAttentionAroundUser()">⚠️ Áreas de atenção</button>
-                <button class="btn btn-ghost btn-block" type="button" onclick="openRouteBuilder()">🧭 Traçar rota</button>
-                <button class="btn btn-ghost btn-block" type="button" onclick="togglePanel('layerPanel')">🗂️ O que ver no mapa</button>
-              </div>
-              <div class="rp-body" id="routeBuilder" data-panel-body hidden>
-                <label class="rp-stack-label" for="routeFrom" data-i18n="route.from.label">Onde você está</label>
-                <div class="geo-field">
-                  <span class="rp-dot ok"></span>
-                  <input id="routeFrom" placeholder="Onde você está agora" autocomplete="off" value="Qoya Hotel Curitiba, Batel" data-i18n-attr="placeholder" data-i18n="route.from.placeholder">
-                  <ul class="geo-suggest" id="sugFrom" hidden></ul>
-                </div>
-                <label class="rp-stack-label" for="routeTo" data-i18n="route.to.label">Destino</label>
-                <div class="geo-field">
-                  <span class="rp-dot end"></span>
-                  <input id="routeTo" placeholder="Para onde você quer ir" autocomplete="off" value="Parque Tanguá, Curitiba" data-i18n-attr="placeholder" data-i18n="route.to.placeholder">
-                  <ul class="geo-suggest" id="sugTo" hidden></ul>
+              <div class="rp-body" id="routeBuilder" data-panel-body>
+                <div class="rp-directions">
+                  <div class="rp-directions-fields">
+                    <div class="geo-field">
+                      <span class="rp-dot ok"></span>
+                      <input id="routeFrom" placeholder="Onde você está agora" autocomplete="off" value="Qoya Hotel Curitiba, Batel" data-i18n-attr="placeholder" data-i18n="route.from.placeholder">
+                      <ul class="geo-suggest" id="sugFrom" hidden></ul>
+                    </div>
+                    <div class="geo-field">
+                      <span class="rp-dot end"></span>
+                      <input id="routeTo" placeholder="Para onde você quer ir" autocomplete="off" value="Parque Tanguá, Curitiba" data-i18n-attr="placeholder" data-i18n="route.to.placeholder">
+                      <ul class="geo-suggest" id="sugTo" hidden></ul>
+                    </div>
+                  </div>
+                  <button class="rp-swap" type="button" onclick="swapRoutePoints()" aria-label="Inverter origem e destino" title="Inverter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4v13M4.5 14.5 7 17l2.5-2.5"/><path d="M17 20V7M14.5 9.5 17 7l2.5 2.5"/></svg>
+                  </button>
                 </div>
                 <button class="btn btn-primary btn-block" onclick="calcSafeRoute()" data-i18n="route.safe.cta">Ver caminho mais confiável</button>
                 <button class="btn btn-ghost btn-block sm" type="button" onclick="toggleRouteAdvanced()" data-i18n="route.moreOptions">Mais opções</button>
@@ -348,7 +347,7 @@
                     <button data-prof="tour" class="chip" data-i18n="route.profile.tour">🧳 Com apoio</button>
                   </div>
                   <div class="time-slider">
-                    <label data-i18n="route.time.label">Horário da saída: <b id="timeLabel">agora</b></label>
+                    <label><span data-i18n="route.time.label">Horário da saída:</span> <b id="timeLabel">agora</b></label>
                     <input type="range" id="timeRange" min="-1" max="23" value="-1" step="1">
                   </div>
                 </div>
@@ -366,6 +365,7 @@
                 <div><small data-i18n="route.metric.time">Duração</small><strong id="rResTime">—</strong></div>
                 <div><small data-i18n="route.metric.distance">Distância</small><strong id="rResDist">—</strong></div>
               </div>
+              <div class="rp-why" id="routeWhy"></div>
               <ul id="rResAdvisory" class="rp-advisory"></ul>
               <div class="route-destination" id="routeDestination" hidden>
                 <img id="destGuidePhoto" class="route-destination-photo" alt="" hidden>
@@ -382,10 +382,8 @@
               </div>
               <div class="rp-alt">
                 <button class="chip" type="button" onclick="toggleRouteDetails()" data-i18n="route.actions.steps">Ver passo a passo</button>
-                <button class="chip" type="button" onclick="toggleDirectRoute()" data-i18n="route.actions.compare">Comparar rota direta</button>
                 <button class="chip" type="button" onclick="compareAlt()" data-i18n="route.actions.sensitive">Ver áreas sensíveis</button>
                 <button class="chip" type="button" onclick="startTrip()" data-i18n="route.actions.start">▶ Iniciar passeio</button>
-                <button class="chip" type="button" onclick="togglePanel('layerPanel')" data-i18n="route.actions.layers">Camadas</button>
               </div>
               <div class="rp-steps" id="rpSteps" hidden>
                 <strong data-i18n="route.steps.title">Passo a passo do passeio</strong>
@@ -396,6 +394,9 @@
           </div>
 
           <div class="map-right-stack">
+            <button class="map-gear icon-btn" type="button" onclick="togglePanel('layerPanel')" aria-label="O que ver no mapa" title="O que ver no mapa">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
             <!-- Layers -->
             <div class="layer-panel" id="layerPanel" hidden>
               <div class="layer-head">
@@ -424,7 +425,7 @@
           <!-- Quick actions -->
           <div class="fab-stack">
             <button class="fab danger" onclick="sosAlert()" title="SOS">SOS</button>
-            <button class="fab" onclick="focusNearestSupportToUser()" title="Apoio perto">🛟</button>
+            <button class="fab fab-support" onclick="focusNearestSupportToUser()" title="Apoio perto">🛟</button>
             <button class="fab" onclick="centerOnUser()" title="Minha localização">◎</button>
           </div>
         </div>
@@ -930,7 +931,7 @@
   </nav>
 
   <!-- Toast -->
-  <div id="toast" class="toast" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <!-- SOS modal -->
   <div id="sosModal" class="modal" hidden>

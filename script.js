@@ -9,11 +9,12 @@
 const state = {
   page: 'map',
   profile: 'car',
+  travelerType: localStorage.getItem('az.type') || null,
   theme: localStorage.getItem('az.theme') || 'dark',
   senior: localStorage.getItem('az.senior') === 'on',
   lang: localStorage.getItem('az.lang') || 'pt',
   time: -1, // -1 = agora; 0..23 hora
-  layers: { heat:true, regions:false, official:true, community:false, lighting:false, safe:true },
+  layers: { heat:true, regions:true, official:true, community:true, lighting:true, safe:true },
   map: null,
   layerGroups: {},
   heatLayer: null,
@@ -301,13 +302,13 @@ const I18N = {
     'lnd.tag':'Dados confiáveis para quem está viajando',
     'lnd.hero.title':'Viaje com mais confiança em qualquer destino.',
     'lnd.hero.lede':'O Azimute cruza comunidade, alertas oficiais e contexto do lugar para transformar risco em decisão rápida para o viajante.',
-    'lnd.hero.scale':'Começa com mocks no Paraná, mas escala por cidade, rota e destino turístico sem refazer a base.',
+    'lnd.hero.scale':'Funciona em qualquer destino: a mesma leitura de confiança se adapta a cada cidade, rota e país que você visita.',
     'lnd.hero.problemLabel':'O problema','lnd.hero.problem':'Decisão sem contexto',
     'lnd.hero.solutionLabel':'A resposta','lnd.hero.solution':'Risco vira ação',
     'lnd.hero.cta1':'Abrir mapa confiável','lnd.hero.cta2':'Entender o diferencial',
     'lnd.proof.map':'Mapa funcional','lnd.proof.support':'Apoio perto','lnd.proof.fast':'Leitura rápida','lnd.proof.scale':'Escala por destino',
-    'lnd.stats.pilot':'Piloto local','lnd.stats.pilotSub':'mocks no Paraná','lnd.stats.sources':'3 fontes','lnd.stats.sourcesSub':'oficial, comunidade e contexto','lnd.stats.scale':'Escala fácil','lnd.stats.scaleSub':'por cidade, rota e destino',
-    'lnd.mapcard.title':'Rota mais confiável','lnd.mapcard.risk':'+38% confiança','lnd.mapcard.insight1':'Golpes recentes','lnd.mapcard.insight2':'Pontos de apoio','lnd.mapcard.insight3':'Janela mais segura','lnd.mapcard.reading':'Leitura do trajeto','lnd.mapcard.signals':'Sinais no entorno','lnd.mapcard.signalsValue':'3 áreas de atenção',
+    'lnd.stats.pilot':'Qualquer destino','lnd.stats.pilotSub':'cidades, rotas e países','lnd.stats.sources':'3 fontes','lnd.stats.sourcesSub':'oficial, comunidade e contexto','lnd.stats.scale':'Escala fácil','lnd.stats.scaleSub':'por cidade, rota e destino',
+    'lnd.mapcard.title':'Rota mais confiável','lnd.mapcard.risk':'Recomendado','lnd.mapcard.insight1':'Golpes recentes','lnd.mapcard.insight2':'Pontos de apoio','lnd.mapcard.insight3':'Janela mais segura','lnd.mapcard.reading':'Leitura do trajeto','lnd.mapcard.readingValue':'Recomendado','lnd.mapcard.signals':'Sinais no entorno','lnd.mapcard.signalsValue':'3 áreas de atenção',
     'lnd.legend.safe':'Rota recomendada','lnd.legend.risk':'Áreas de atenção',
     'lnd.features.title':'Mapa, sinal e ação',
     'lnd.feat.route.t':'Deslocamento confiável','lnd.feat.route.d':'Mostra a rota mais coerente e o caminho que faz mais sentido para quem está fora de casa.',
@@ -322,8 +323,8 @@ const I18N = {
     'lnd.diff.card1.k':'O que o sistema cruza','lnd.diff.card1.t':'Comunidade + fonte oficial + contexto do lugar','lnd.diff.card1.d':'O mapa combina sinais diferentes para orientar a decisão em segundos.',
     'lnd.diff.card2.k':'O que o viajante recebe','lnd.diff.card2.t':'Ir, evitar, pedir apoio','lnd.diff.card2.d':'Em vez de excesso de tela, o app entrega ação curta e direta.',
     'lnd.diff.card3.k':'O que vira produto','lnd.diff.card3.t':'Leitura territorial para turismo','lnd.diff.card3.d':'O valor está nos sinais, na confiança por área e no contexto útil para turismo.',
-    'lnd.community.title':'Comunidade ligada ao lugar, não ao algoritmo','lnd.community.lede':'Cada relato nasce no mapa, ajuda no deslocamento e reforça a leitura do destino com utilidade imediata.','lnd.community.cta':'Ver protótipo',
-    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Protótipo com dados simulados','lnd.footer.privacy':'Privacidade & LGPD',
+    'lnd.community.title':'Comunidade ligada ao lugar, não ao algoritmo','lnd.community.lede':'Cada relato nasce no mapa, ajuda no deslocamento e reforça a leitura do destino com utilidade imediata.','lnd.community.cta':'Abrir o mapa',
+    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Demonstração com dados de exemplo de fontes públicas e da comunidade','lnd.footer.privacy':'Privacidade & LGPD',
     'app.search.placeholder':'Buscar lugar, apoio ou alerta...',
     'nav.map.title':'Mapa confiável','nav.map.sub':'Ir, evitar, pedir apoio',
     'nav.trip.title':'Ir agora','nav.trip.sub':'Acompanhar meu trajeto',
@@ -337,8 +338,8 @@ const I18N = {
     'nav.privacy.title':'Privacidade','nav.privacy.sub':'LGPD & dados',
     'sidebar.score.title':'Leitura do destino','sidebar.score.label':'Contexto atual:','sidebar.back':'← Voltar ao site',
     'route.panel.title':'Para onde você quer ir?',
-    'route.from.label':'Onde você está','route.from.placeholder':'Onde você está agora',
-    'route.to.label':'Destino','route.to.placeholder':'Para onde você quer ir',
+    'route.from.placeholder':'Onde você está agora',
+    'route.to.placeholder':'Para onde você quer ir',
     'route.safe.cta':'Ver caminho mais confiável','route.moreOptions':'Mais opções',
     'route.assist.arriving':'Cheguei','route.assist.now':'Sair agora','route.assist.calm':'Calmo','route.assist.easy':'Modo fácil',
     'route.examples':'Exemplos','route.journey.curitiba':'Hotel → Tanguá','route.journey.foz':'Aeroporto → Cataratas','route.journey.morretes':'Morretes',
@@ -347,7 +348,7 @@ const I18N = {
     'route.result.label':'Caminho sugerido','route.edit':'Editar',
     'route.metric.trust':'Confiança','route.metric.time':'Duração','route.metric.distance':'Distância',
     'route.destination.label':'Chegada ao destino','route.destination.best':'Melhor momento','route.destination.support':'Ponto de apoio','route.destination.alert':'Alerta recente','route.destination.tip':'Dica rápida',
-    'route.actions.steps':'Ver passo a passo','route.actions.compare':'Comparar rota direta','route.actions.sensitive':'Ver áreas sensíveis','route.actions.start':'▶ Iniciar passeio','route.actions.layers':'Camadas',
+    'route.actions.steps':'Ver passo a passo','route.actions.sensitive':'Ver áreas sensíveis','route.actions.start':'▶ Iniciar passeio',
     'route.steps.title':'Passo a passo do passeio',
     'map.layers.title':'O que ver no mapa','map.layer.regions':'Confiança por área','map.layer.heat':'Áreas com mais atenção','map.layer.official':'Avisos oficiais','map.layer.community':'Relatos da comunidade','map.layer.lighting':'Baixa iluminação','map.layer.safe':'Pontos de apoio','map.layer.walk':'Onde dá para ir a pé em 15 min','map.layer.legend.risk':'Evite','map.layer.legend.med':'Atenção','map.layer.legend.ok':'Recomendado',
   },
@@ -357,13 +358,13 @@ const I18N = {
     'lnd.tag':'Reliable data for travelers',
     'lnd.hero.title':'Travel with more confidence in any destination.',
     'lnd.hero.lede':'Azimute combines community reports, official alerts and local context to turn risk into fast decisions for travelers.',
-    'lnd.hero.scale':'Starts with mocked data in Paraná, but scales by city, route and destination without reworking the base.',
+    'lnd.hero.scale':'Works in any destination: the same trust reading adapts to every city, route and country you visit.',
     'lnd.hero.problemLabel':'Problem','lnd.hero.problem':'Decision without context',
     'lnd.hero.solutionLabel':'Response','lnd.hero.solution':'Risk becomes action',
     'lnd.hero.cta1':'Open trusted map','lnd.hero.cta2':'Understand the differentiator',
     'lnd.proof.map':'Functional map','lnd.proof.support':'Nearby support','lnd.proof.fast':'Fast reading','lnd.proof.scale':'Scales by destination',
-    'lnd.stats.pilot':'Local pilot','lnd.stats.pilotSub':'mock data in Paraná','lnd.stats.sources':'3 sources','lnd.stats.sourcesSub':'official, community and context','lnd.stats.scale':'Easy to scale','lnd.stats.scaleSub':'by city, route and destination',
-    'lnd.mapcard.title':'Trusted route','lnd.mapcard.risk':'+38% trust','lnd.mapcard.insight1':'Recent scams','lnd.mapcard.insight2':'Support points','lnd.mapcard.insight3':'Safer window','lnd.mapcard.reading':'Trip reading','lnd.mapcard.signals':'Signals nearby','lnd.mapcard.signalsValue':'3 alert areas',
+    'lnd.stats.pilot':'Any destination','lnd.stats.pilotSub':'cities, routes and countries','lnd.stats.sources':'3 sources','lnd.stats.sourcesSub':'official, community and context','lnd.stats.scale':'Easy to scale','lnd.stats.scaleSub':'by city, route and destination',
+    'lnd.mapcard.title':'Trusted route','lnd.mapcard.risk':'Recommended','lnd.mapcard.insight1':'Recent scams','lnd.mapcard.insight2':'Support points','lnd.mapcard.insight3':'Safer window','lnd.mapcard.reading':'Trip reading','lnd.mapcard.readingValue':'Recommended','lnd.mapcard.signals':'Signals nearby','lnd.mapcard.signalsValue':'3 alert areas',
     'lnd.legend.safe':'Recommended route','lnd.legend.risk':'Alert zones',
     'lnd.features.title':'Map, signal and action',
     'lnd.feat.route.t':'Reliable movement','lnd.feat.route.d':'Shows the most coherent route and the path that makes the most sense when you are away from home.',
@@ -378,8 +379,8 @@ const I18N = {
     'lnd.diff.card1.k':'What the system combines','lnd.diff.card1.t':'Community + official source + local context','lnd.diff.card1.d':'The map combines different signals to guide decisions in seconds.',
     'lnd.diff.card2.k':'What the traveler gets','lnd.diff.card2.t':'Go, avoid, ask for support','lnd.diff.card2.d':'Instead of screen overload, the app gives short and direct actions.',
     'lnd.diff.card3.k':'What becomes product','lnd.diff.card3.t':'Territorial reading for tourism','lnd.diff.card3.d':'The value is in the signals, area trust and tourism-ready context.',
-    'lnd.community.title':'Community tied to place, not to the algorithm','lnd.community.lede':'Every report starts on the map, helps movement and strengthens destination reading with immediate utility.','lnd.community.cta':'View prototype',
-    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Prototype with simulated data','lnd.footer.privacy':'Privacy & LGPD',
+    'lnd.community.title':'Community tied to place, not to the algorithm','lnd.community.lede':'Every report starts on the map, helps movement and strengthens destination reading with immediate utility.','lnd.community.cta':'Open the map',
+    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Demo with sample data from public sources and the community','lnd.footer.privacy':'Privacy & LGPD',
     'app.search.placeholder':'Search place, support or alert...',
     'nav.map.title':'Trusted map','nav.map.sub':'Go, avoid, ask for support',
     'nav.trip.title':'Go now','nav.trip.sub':'Track my trip',
@@ -393,8 +394,8 @@ const I18N = {
     'nav.privacy.title':'Privacy','nav.privacy.sub':'LGPD & data',
     'sidebar.score.title':'Destination reading','sidebar.score.label':'Current context:','sidebar.back':'← Back to site',
     'route.panel.title':'Where do you want to go?',
-    'route.from.label':'Where are you','route.from.placeholder':'Where are you now',
-    'route.to.label':'Destination','route.to.placeholder':'Where do you want to go',
+    'route.from.placeholder':'Where are you now',
+    'route.to.placeholder':'Where do you want to go',
     'route.safe.cta':'See safest route','route.moreOptions':'More options',
     'route.assist.arriving':'Arrived','route.assist.now':'Leave now','route.assist.calm':'Calm','route.assist.easy':'Easy mode',
     'route.examples':'Examples','route.journey.curitiba':'Hotel → Tanguá','route.journey.foz':'Airport → Falls','route.journey.morretes':'Morretes',
@@ -403,7 +404,7 @@ const I18N = {
     'route.result.label':'Suggested route','route.edit':'Edit',
     'route.metric.trust':'Trust','route.metric.time':'Duration','route.metric.distance':'Distance',
     'route.destination.label':'Arriving at destination','route.destination.best':'Best time','route.destination.support':'Support point','route.destination.alert':'Recent alert','route.destination.tip':'Quick tip',
-    'route.actions.steps':'Step by step','route.actions.compare':'Compare direct route','route.actions.sensitive':'See sensitive areas','route.actions.start':'▶ Start trip','route.actions.layers':'Layers',
+    'route.actions.steps':'Step by step','route.actions.sensitive':'See sensitive areas','route.actions.start':'▶ Start trip',
     'route.steps.title':'Trip step-by-step',
     'map.layers.title':'What to see on the map','map.layer.regions':'Area trust','map.layer.heat':'More attention areas','map.layer.official':'Official alerts','map.layer.community':'Community reports','map.layer.lighting':'Low lighting','map.layer.safe':'Support points','map.layer.walk':'Where you can walk in 15 min','map.layer.legend.risk':'Avoid','map.layer.legend.med':'Caution','map.layer.legend.ok':'Recommended',
   },
@@ -413,13 +414,13 @@ const I18N = {
     'lnd.tag':'Datos confiables para quienes están viajando',
     'lnd.hero.title':'Viaja con más confianza en cualquier destino.',
     'lnd.hero.lede':'Azimute combina comunidad, alertas oficiales y contexto del lugar para convertir el riesgo en una decisión rápida para el viajero.',
-    'lnd.hero.scale':'Empieza con datos simulados en Paraná, pero escala por ciudad, ruta y destino turístico sin rehacer la base.',
+    'lnd.hero.scale':'Funciona en cualquier destino: la misma lectura de confianza se adapta a cada ciudad, ruta y país que visitas.',
     'lnd.hero.problemLabel':'El problema','lnd.hero.problem':'Decisión sin contexto',
     'lnd.hero.solutionLabel':'La respuesta','lnd.hero.solution':'El riesgo se convierte en acción',
     'lnd.hero.cta1':'Abrir mapa confiable','lnd.hero.cta2':'Entender el diferencial',
     'lnd.proof.map':'Mapa funcional','lnd.proof.support':'Apoyo cerca','lnd.proof.fast':'Lectura rápida','lnd.proof.scale':'Escala por destino',
-    'lnd.stats.pilot':'Piloto local','lnd.stats.pilotSub':'datos simulados en Paraná','lnd.stats.sources':'3 fuentes','lnd.stats.sourcesSub':'oficial, comunidad y contexto','lnd.stats.scale':'Escala fácil','lnd.stats.scaleSub':'por ciudad, ruta y destino',
-    'lnd.mapcard.title':'Ruta más confiable','lnd.mapcard.risk':'+38% confianza','lnd.mapcard.insight1':'Estafas recientes','lnd.mapcard.insight2':'Puntos de apoyo','lnd.mapcard.insight3':'Ventana más segura','lnd.mapcard.reading':'Lectura del trayecto','lnd.mapcard.signals':'Señales alrededor','lnd.mapcard.signalsValue':'3 zonas de atención',
+    'lnd.stats.pilot':'Cualquier destino','lnd.stats.pilotSub':'ciudades, rutas y países','lnd.stats.sources':'3 fuentes','lnd.stats.sourcesSub':'oficial, comunidad y contexto','lnd.stats.scale':'Escala fácil','lnd.stats.scaleSub':'por ciudad, ruta y destino',
+    'lnd.mapcard.title':'Ruta más confiable','lnd.mapcard.risk':'Recomendada','lnd.mapcard.insight1':'Estafas recientes','lnd.mapcard.insight2':'Puntos de apoyo','lnd.mapcard.insight3':'Ventana más segura','lnd.mapcard.reading':'Lectura del trayecto','lnd.mapcard.readingValue':'Recomendada','lnd.mapcard.signals':'Señales alrededor','lnd.mapcard.signalsValue':'3 zonas de atención',
     'lnd.legend.safe':'Ruta recomendada','lnd.legend.risk':'Zonas de alerta',
     'lnd.features.title':'Mapa, señal y acción',
     'lnd.feat.route.t':'Desplazamiento confiable','lnd.feat.route.d':'Muestra la ruta más coherente y el camino que tiene más sentido cuando estás fuera de casa.',
@@ -434,8 +435,8 @@ const I18N = {
     'lnd.diff.card1.k':'Lo que cruza el sistema','lnd.diff.card1.t':'Comunidad + fuente oficial + contexto del lugar','lnd.diff.card1.d':'El mapa combina señales distintas para orientar la decisión en segundos.',
     'lnd.diff.card2.k':'Lo que recibe el viajero','lnd.diff.card2.t':'Ir, evitar, pedir apoyo','lnd.diff.card2.d':'En vez de exceso de pantalla, la app entrega acciones cortas y directas.',
     'lnd.diff.card3.k':'Lo que se vuelve producto','lnd.diff.card3.t':'Lectura territorial para turismo','lnd.diff.card3.d':'El valor está en las señales, la confianza por área y el contexto útil para turismo.',
-    'lnd.community.title':'Comunidad conectada al lugar, no al algoritmo','lnd.community.lede':'Cada reporte nace en el mapa, ayuda en el desplazamiento y refuerza la lectura del destino con utilidad inmediata.','lnd.community.cta':'Ver prototipo',
-    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Prototipo con datos simulados','lnd.footer.privacy':'Privacidad & LGPD',
+    'lnd.community.title':'Comunidad conectada al lugar, no al algoritmo','lnd.community.lede':'Cada reporte nace en el mapa, ayuda en el desplazamiento y refuerza la lectura del destino con utilidad inmediata.','lnd.community.cta':'Abrir el mapa',
+    'lnd.footer.brand':'Azimute © 2026','lnd.footer.note':'Demo con datos de ejemplo de fuentes públicas y la comunidad','lnd.footer.privacy':'Privacidad & LGPD',
     'app.search.placeholder':'Buscar lugar, apoyo o alerta...',
     'nav.map.title':'Mapa confiable','nav.map.sub':'Ir, evitar, pedir apoyo',
     'nav.trip.title':'Ir ahora','nav.trip.sub':'Seguir mi trayecto',
@@ -449,8 +450,8 @@ const I18N = {
     'nav.privacy.title':'Privacidad','nav.privacy.sub':'LGPD y datos',
     'sidebar.score.title':'Lectura del destino','sidebar.score.label':'Contexto actual:','sidebar.back':'← Volver al sitio',
     'route.panel.title':'¿A dónde quieres ir?',
-    'route.from.label':'Dónde estás','route.from.placeholder':'Dónde estás ahora',
-    'route.to.label':'Destino','route.to.placeholder':'A dónde quieres ir',
+    'route.from.placeholder':'Dónde estás ahora',
+    'route.to.placeholder':'A dónde quieres ir',
     'route.safe.cta':'Ver camino más confiable','route.moreOptions':'Más opciones',
     'route.assist.arriving':'Llegué','route.assist.now':'Salir ahora','route.assist.calm':'Calmo','route.assist.easy':'Modo fácil',
     'route.examples':'Ejemplos','route.journey.curitiba':'Hotel → Tanguá','route.journey.foz':'Aeropuerto → Cataratas','route.journey.morretes':'Morretes',
@@ -459,7 +460,7 @@ const I18N = {
     'route.result.label':'Camino sugerido','route.edit':'Editar',
     'route.metric.trust':'Confianza','route.metric.time':'Duración','route.metric.distance':'Distancia',
     'route.destination.label':'Llegada al destino','route.destination.best':'Mejor momento','route.destination.support':'Punto de apoyo','route.destination.alert':'Alerta reciente','route.destination.tip':'Consejo rápido',
-    'route.actions.steps':'Ver paso a paso','route.actions.compare':'Comparar ruta directa','route.actions.sensitive':'Ver áreas sensibles','route.actions.start':'▶ Iniciar paseo','route.actions.layers':'Capas',
+    'route.actions.steps':'Ver paso a paso','route.actions.sensitive':'Ver áreas sensibles','route.actions.start':'▶ Iniciar paseo',
     'route.steps.title':'Paso a paso del paseo',
     'map.layers.title':'Qué ver en el mapa','map.layer.regions':'Confianza por área','map.layer.heat':'Áreas con más atención','map.layer.official':'Avisos oficiales','map.layer.community':'Reportes de la comunidad','map.layer.lighting':'Baja iluminación','map.layer.safe':'Puntos de apoyo','map.layer.walk':'Dónde se puede ir a pie en 15 min','map.layer.legend.risk':'Evita','map.layer.legend.med':'Atención','map.layer.legend.ok':'Recomendado',
   }
@@ -558,17 +559,19 @@ function togglePanel(id){
   qsa('[data-panel-body]', el).forEach(b => b.style.display = collapsed ? 'none' : '');
   if (collapsed && id === 'layerPanel') el.hidden = true;
 }
-function openRouteBuilder(){
-  qs('#routeMinimal')?.setAttribute('hidden', '');
-  qs('#routeBuilder')?.removeAttribute('hidden');
-  qs('#routePanel')?.classList.remove('compact');
-  qs('#routeResult').hidden = true;
-  qs('#routeFrom')?.focus();
-}
 function toggleRouteAdvanced(){
   const box = qs('#routeAdvanced');
   if (!box) return;
   box.hidden = !box.hidden;
+}
+function swapRoutePoints(){
+  const from = qs('#routeFrom'), to = qs('#routeTo');
+  if (from && to){ const v = from.value; from.value = to.value; to.value = v; }
+  if (state.fromCoord && state.toCoord){
+    const c = state.fromCoord; state.fromCoord = state.toCoord; state.toCoord = c;
+  }
+  if (state.userMarker && state.fromCoord) state.userMarker.setLatLng(state.fromCoord);
+  if (state.routeGeo) calcSafeRoute(true);
 }
 function applyJourney(id){
   const journey = DEMO_JOURNEYS[id];
@@ -781,7 +784,7 @@ function updateRouteOverlay(){
 }
 function refreshRouteDrawing(){
   if (!state.map || !state.routeGeo?.latlngs?.length) return;
-  state.avoidedLayer?.bringToFront?.();
+  if (state.avoidedLayer && state.map.hasLayer(state.avoidedLayer)) state.avoidedLayer.bringToFront();
   state.routeLayer?.eachLayer?.(layer => layer.bringToFront?.());
   state.routeStartMarker?.setZIndexOffset?.(1000);
   state.routeEndMarker?.setZIndexOffset?.(1000);
@@ -801,36 +804,78 @@ function updateMapTheme(){
   if (state.baseLayer) state.map.removeLayer(state.baseLayer);
   state.baseLayer = L.tileLayer(mapTileUrl(), {maxZoom:19, subdomains:'abcd'}).addTo(state.map);
 }
+/* ----- Identidade visual das 3 fontes (ícone + cor + rótulo, reusado em todo o app) ----- */
+const SOURCE_META = {
+  official:  { label:'Oficial',        color:'var(--primary)',   svg:'<path d="M3 21h18M5 21V9l7-5 7 5v12M9.5 21v-6h5v6"/>' },
+  community: { label:'Comunidade',     color:'var(--warning)',   svg:'<path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>' },
+  env:       { label:'Contexto local', color:'var(--ok)',        svg:'<polyline points="22 12 18 12 15 20 9 4 6 12 2 12"/>' },
+};
+const MARKER_SVG = {
+  official:  '<path d="M3 21h18M5 21V9l7-5 7 5v12M9.5 21v-6h5v6"/>',
+  community: '<path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.4"/>',
+  lighting:  '<path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>',
+  safe:      '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+};
+function markerSvg(kind, px){
+  const d = MARKER_SVG[kind] || '<circle cx="12" cy="12" r="3"/>';
+  return `<svg viewBox="0 0 24 24" width="${px}" height="${px}" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+}
+function srcChip(kind){
+  const m = SOURCE_META[kind]; if (!m) return '';
+  return `<span class="source-chip ${kind}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${m.svg}</svg>${m.label}</span>`;
+}
+/* Identidade dos sinais da rota (superset das fontes: inclui apoio e iluminação) */
+const SIGNAL_META = {
+  official:  SOURCE_META.official,
+  community: SOURCE_META.community,
+  safe:      { label:'Apoio',      color:'var(--primary-2)', svg:MARKER_SVG.safe },
+  lighting:  { label:'Iluminação', color:'var(--info)',      svg:MARKER_SVG.lighting },
+};
+function signalChip(kind){
+  const m = SIGNAL_META[kind]; if (!m) return '';
+  return `<span class="source-chip ${kind}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${m.svg}</svg>${m.label}</span>`;
+}
+/* Perfil de viagem (do onboarding): ajusta a leitura de risco da rota e a voz do aviso.
+   mult > 1 = mais cauteloso (lê o mesmo trajeto como mais arriscado). */
+const TRAVELER_META = {
+  backpacker: { emoji:'🎒', label:'Mochileiro', mult:1.0,  voice:'Trajeto equilibrado, com flexibilidade para ajustes ao longo do caminho.' },
+  tourist:    { emoji:'🧳', label:'Turista',    mult:1.05, voice:'Priorizamos vias movimentadas e pontos turísticos sinalizados.' },
+  family:     { emoji:'👨‍👩‍👧', label:'Família', mult:1.28, voice:'Leitura mais cautelosa: priorizamos iluminação, apoio próximo e menos imprevistos.' },
+  solo:       { emoji:'🌍', label:'Viajante solo', mult:1.18, voice:'Atenção reforçada a trechos vazios e ao horário, com apoio sempre por perto.' },
+  cultural:   { emoji:'🏛️', label:'Cultural', mult:1.0,  voice:'Caminho conecta pontos históricos e culturais com leitura simples.' },
+  adventure:  { emoji:'🏔️', label:'Aventura', mult:0.85, voice:'Mais tolerante a trajetos alternativos; foco em autonomia.' },
+};
+function travelerMult(){ return TRAVELER_META[state.travelerType]?.mult ?? 1; }
 function markerIcon(kind, sev){
-  const symbols = {official:'🏛', community:'⚑', lighting:'💡', safe:'🛡'};
   const cls = kind === 'official' ? 'official' : kind === 'safe' ? 'safe' : (sev==='high'?'high':sev==='med'?'med':'low');
   const zoom = state.map?.getZoom?.() || 15;
   const size = zoom <= 11 ? 18 : zoom <= 13 ? 22 : 28;
-  const font = zoom <= 11 ? 10 : zoom <= 13 ? 12 : 14;
+  const px = Math.round(size * 0.56);
   return L.divIcon({
     className:'',
-    html:`<div class="risk-marker ${cls}" style="width:${size}px;height:${size}px;font-size:${font}px">${symbols[kind]||'•'}</div>`,
+    html:`<div class="risk-marker ${cls}" style="width:${size}px;height:${size}px">${markerSvg(kind, px)}</div>`,
     iconSize:[size,size],
     iconAnchor:[Math.round(size/2),Math.round(size/2)]
   });
 }
+function sourceRow(kind, val){
+  const m = SOURCE_META[kind]; if (!m) return '';
+  const pct = Math.round(val*100);
+  return `<div class="row"><span class="src-name"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="${m.color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${m.svg}</svg>${m.label}</span><span>${pct}</span></div>
+      <div class="bar"><span style="width:${val*100}%;background:${m.color}"></span></div>`;
+}
 function popupHtml(i){
   const b = i.breakdown;
-  const total = (b.official + b.community + b.env);
-  const pct = Math.round(total*100);
   return `<div style="min-width:220px">
     ${i.photo ? `<img class="pop-photo" src="${i.photo}" alt="${i.title}" loading="lazy">` : ''}
     <div class="pop-title">${i.title}</div>
     <div>${i.desc||''}</div>
     <div class="pop-meta"><span class="src-chip">${i.src}</span> · ${i.when}</div>
     <div class="score-breakdown">
-      <div class="row"><b>Score do ponto</b><b>${pct}/100</b></div>
-      <div class="row"><span>Oficial</span><span>${Math.round(b.official*100)}</span></div>
-      <div class="bar"><span style="width:${b.official*100}%;background:var(--primary)"></span></div>
-      <div class="row"><span>Comunidade</span><span>${Math.round(b.community*100)}</span></div>
-      <div class="bar"><span style="width:${b.community*100}%;background:var(--warning)"></span></div>
-      <div class="row"><span>Ambiental</span><span>${Math.round(b.env*100)}</span></div>
-      <div class="bar"><span style="width:${b.env*100}%;background:var(--ok)"></span></div>
+      <div class="sb-head">De onde vem este sinal</div>
+      ${sourceRow('official', b.official)}
+      ${sourceRow('community', b.community)}
+      ${sourceRow('env', b.env)}
     </div>
     <div class="pop-actions">
       <button type="button" onclick="setDestinationFromIncident('${i.id}')">Traçar até aqui</button>
@@ -905,6 +950,71 @@ function toggleLayer(name, on){
 
 function regionColor(ica){ return ica >= 75 ? UI_COLORS.ok : ica >= 55 ? UI_COLORS.warning : UI_COLORS.danger; }
 function regionClass(ica){ return ica >= 75 ? 'ok' : ica >= 55 ? 'warn' : 'bad'; }
+/* Confiança em 3 níveis acionáveis (leitura do viajante). Número fica só no ICA. */
+function trustLevel(score){
+  if (score >= 75) return { key:'ok',   label:'Recomendado', color:'var(--ok)' };
+  if (score >= 55) return { key:'warn', label:'Atenção',     color:'var(--warning)' };
+  return                  { key:'bad',  label:'Evite',       color:'var(--danger)' };
+}
+function trustBadge(score){
+  const t = trustLevel(score);
+  return `<span class="trust-badge ${t.key}" title="Confiança ${score}/100"><i></i>${t.label}</span>`;
+}
+function routeSegments(coords, hour, parts=3){
+  const labels = ['Início', 'Meio', 'Chegada'];
+  const len = coords.length;
+  const segs = [];
+  for (let p = 0; p < parts; p++){
+    const a = Math.floor(p * len / parts);
+    const b = Math.max(a + 1, Math.floor((p + 1) * len / parts));
+    const trust = 100 - Math.round(routeRisk(coords.slice(a, b), hour) * 100);
+    segs.push({ label: labels[p] || `Trecho ${p+1}`, trust, level: trustLevel(trust) });
+  }
+  return segs;
+}
+function avoidedCount(directCoords, safeCoords){
+  if (!directCoords?.length) return 0;
+  const safeIds = new Set(routeIncidents(safeCoords).map(i => i.id));
+  return routeIncidents(directCoords).filter(i =>
+    i.type !== 'safe' && (i.severity === 'high' || i.severity === 'med') && !safeIds.has(i.id)
+  ).length;
+}
+function renderRouteWhy({ coords, hour, nearbyIncidents, usedSafeDetour, avoidedRoute }){
+  const el = qs('#routeWhy');
+  if (!el) return;
+  const segs = routeSegments(coords, hour);
+  const segHtml = segs.map(s => `
+    <div class="seg ${s.level.key}">
+      <span class="seg-dot" style="background:${s.level.color}"></span>
+      <b>${s.label}</b>
+      <small style="color:${s.level.color}">${s.level.label}</small>
+    </div>`).join('');
+
+  const order = ['official', 'community', 'lighting', 'safe'];
+  const counts = {};
+  (nearbyIncidents || []).forEach(i => { counts[i.type] = (counts[i.type] || 0) + 1; });
+  const sigHtml = order.filter(k => counts[k]).map(k =>
+    `<span class="why-sig">${signalChip(k)}<b>${counts[k]}</b></span>`).join('');
+
+  let tradeHtml = '';
+  if (usedSafeDetour && avoidedRoute?.geometry?.coordinates?.length){
+    const avoided = avoidedCount(avoidedRoute.geometry.coordinates, coords);
+    const label = avoided > 0
+      ? `Evita ${avoided} ${avoided === 1 ? 'área' : 'áreas'} de atenção`
+      : 'Ajustado para vias principais';
+    tradeHtml = `<button type="button" class="why-tradeoff" onclick="toggleDirectRoute()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+      ${label} · <span class="why-tradeoff-cta">ver rota direta</span>
+    </button>`;
+  }
+
+  el.innerHTML = `
+    <div class="why-head">Por que este caminho</div>
+    <div class="why-segments">${segHtml}</div>
+    ${sigHtml ? `<div class="why-sources"><span class="why-sources-label">Sinais lidos no trajeto</span><div class="why-sigs">${sigHtml}</div></div>` : ''}
+    ${tradeHtml}`;
+  el.hidden = false;
+}
 function rebuildRegions(){
   if (state.regionLayer){ state.map.removeLayer(state.regionLayer); state.regionLayer = null; }
   if (!state.layers.regions) return;
@@ -984,16 +1094,6 @@ function focusNearestSupportToUser(){
   if (!support) return toast('Nenhum apoio próximo encontrado agora.');
   focusMapLocation(support.lat, support.lng, support.title, 16);
   toast('Mostrando o apoio mais próximo');
-}
-function showAttentionAroundUser(){
-  state.layers.heat = true;
-  state.layers.community = true;
-  state.layers.official = true;
-  rebuildHeat();
-  rebuildIncidentMarkers();
-  syncLayerControls();
-  if (state.map) state.map.setView(state.fromCoord, 15, {animate:true});
-  toast('Áreas de atenção destacadas no mapa');
 }
 function incidentById(id){
   return DATA.incidents.find(i => i.id === id);
@@ -1126,6 +1226,15 @@ function onTimeChange(v){
 }
 
 /* ----- Geocoder (Nominatim) ----- */
+async function geocodeOnce(q){
+  if (!q || q.trim().length < 3) return null;
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(q)}`, {headers:{'Accept-Language': state.lang}});
+    const j = await r.json();
+    if (j?.length) return [parseFloat(j[0].lat), parseFloat(j[0].lon)];
+  } catch(e){}
+  return null;
+}
 const geocode = debounce(async (q, targetListId, kind) => {
   if (!q || q.length < 3){ qs('#'+targetListId).hidden = true; return; }
   try {
@@ -1258,7 +1367,7 @@ function routeRisk(coords, hour){
     });
     n++;
   }
-  return Math.max(0, Math.min(1, sum / Math.max(1,n) * 0.9));
+  return Math.max(0, Math.min(1, sum / Math.max(1,n) * 0.9 * travelerMult()));
 }
 async function calcSafeRoute(silent){
   if (!state.map) return;
@@ -1312,8 +1421,7 @@ async function calcSafeRoute(silent){
       lineCap:'round',
       lineJoin:'round',
       className:'az-route-avoid'
-    }).addTo(state.map);
-    state.avoidedLayer.bringToFront();
+    });
   }
 
   const routeBase = L.polyline(latlngs, {pane:'routePane', color:UI_COLORS.routeBase, weight:14, opacity:1, lineCap:'round', lineJoin:'round', className:'az-route-base'});
@@ -1346,17 +1454,21 @@ async function calcSafeRoute(silent){
   const risk = routeRisk(coords, hour);
   const trust = 100 - Math.round(risk*100);
   qs('#rResTitle').textContent = `${qs('#routeFrom').value} → ${qs('#routeTo').value}`;
-  qs('#rResRisk').textContent = `${trust}/100`;
+  qs('#rResRisk').innerHTML = trustBadge(trust);
   qs('#rResTime').textContent = `${mins} min`;
   qs('#rResDist').textContent = `${km} km`;
   qs('#routeResult').hidden = false;
   qs('#rpSteps').hidden = true;
   qs('#routePanel')?.classList.add('compact');
 
+  renderRouteWhy({ coords, hour, nearbyIncidents, usedSafeDetour, avoidedRoute });
+
   // Avisos
   const timeAdv = hour < 0 ? '' : (hour >= 19 || hour <= 5) ? 'Passeio inclui horário noturno · prefira vias bem iluminadas e retorno por app se necessário' : '';
   const profileAdv = state.profile === 'car' ? 'Trajeto pensado para carro ou aplicativo, priorizando vias principais.' : state.profile === 'bike' ? 'Percurso de bike exige atenção redobrada em cruzamentos e trechos úmidos.' : state.profile === 'tour' ? 'Passeio guiado prioriza leitura simples e pontos turísticos pelo caminho.' : 'Trajeto caminhável priorizando leitura simples e contexto turístico.';
+  const traveler = TRAVELER_META[state.travelerType];
   const adv = [
+    ...(traveler ? [{ico: traveler.emoji, txt:`Ajustado ao seu perfil <b>${traveler.label}</b>: ${traveler.voice}`}] : []),
     {ico:'🧭', txt: usedSafeDetour ? 'Rota demonstrativa priorizando Batel → Centro Cívico → Parque Tanguá, mantendo o trajeto nas vias principais e evitando atalhos laterais com pior histórico recente.' : profileAdv},
     {ico:'🕒', txt: timeAdv || 'Horário favorável para passeio, com melhor leitura do entorno.'},
     {ico:'🛡️', txt: supportHits.length ? `Há ${supportHits.length} ponto(s) de apoio próximos ao trajeto.` : 'Não há base de apoio próxima ao trajeto inicial.'},
@@ -1404,13 +1516,15 @@ async function calcSafeRoute(silent){
   state._fastLatlngs = latlngs;
   if (!silent) toast('Roteiro confiável calculado');
   // Update sidebar score
-  qs('#sidebarScore').style.width = trust + '%';
-  qs('#sidebarScoreText').textContent = trust + '/100';
+  const lvl = trustLevel(trust);
+  const bar = qs('#sidebarScore');
+  bar.style.width = trust + '%';
+  bar.style.background = lvl.color;
+  qs('#sidebarScoreText').innerHTML = `${lvl.label} · <b>${trust}</b>`;
 }
 function editRoute(){
   qs('#routePanel')?.classList.remove('compact');
   qs('#rpSteps').hidden = true;
-  qs('#routeMinimal')?.setAttribute('hidden', '');
   qs('#routeBuilder')?.removeAttribute('hidden');
   qs('#routeResult').hidden = true;
   updateRouteOverlay();
@@ -1448,6 +1562,7 @@ function toggleDirectRoute(){
     return toast('Rota direta ocultada');
   }
   state.avoidedLayer.addTo(state.map);
+  state.avoidedLayer.bringToFront();
   toast('Rota direta exibida em cinza');
 }
 
@@ -1537,7 +1652,8 @@ function renderAlerts(){
   } else {
     el.innerHTML = list.map(a => {
       const badge = a.severity === 'alto' ? 'alto' : a.src === 'oficial' ? 'oficial' : 'comunidade';
-      const ico = a.src === 'oficial' ? '🏛' : '⚑';
+      const srcKind = a.src === 'oficial' ? 'official' : 'community';
+      const ico = markerSvg(srcKind, 19);
       const sevLabel = a.severity === 'alto' ? 'Atenção alta' : a.severity === 'med' ? 'Atenção moderada' : 'Baixa atenção';
       const v = state.validations[a.id] || {up: Math.floor(Math.random()*8+2), down: Math.floor(Math.random()*3), here: Math.floor(Math.random()*4), my:null};
       state.validations[a.id] = v;
@@ -1557,7 +1673,7 @@ function renderAlerts(){
           <strong>${a.title}</strong>
           <p style="margin:.2rem 0;color:var(--muted)">${a.desc}</p>
           <div class="alert-meta">
-            <span class="src-chip">${a.src === 'oficial' ? 'Fonte oficial' : 'Comunidade'}</span>
+            ${srcChip(srcKind)}
             <span class="src-chip">${sevLabel}</span>
             <span>📍 ${a.area}</span>
             <span>⏱ ${a.when}</span>
@@ -1781,10 +1897,26 @@ function renderIca(){
 }
 
 /* ----- Reportar ----- */
-function submitReport(ev){
+const REPORT_INCIDENT = {
+  'golpe-turista':    { type:'community', severity:'high', title:'Golpe contra turistas' },
+  'taxi-pirata':      { type:'community', severity:'high', title:'Táxi pirata / transporte abusivo' },
+  'agencia-falsa':    { type:'community', severity:'med',  title:'Agência ou guia não credenciado' },
+  'atracao-cilada':   { type:'community', severity:'med',  title:'Atração turística ruim / armadilha' },
+  'cobranca-abusiva': { type:'community', severity:'med',  title:'Preço abusivo a estrangeiros' },
+  'zona-perigosa':    { type:'community', severity:'high', title:'Zona perigosa para turistas' },
+  'apoio':            { type:'safe',      severity:'low',  title:'Ponto de apoio ao viajante' },
+  'dica':             { type:'community', severity:'low',  title:'Dica positiva da comunidade' },
+  'outro':            { type:'community', severity:'med',  title:'Relato da comunidade' },
+};
+function reportBreakdown(type, severity){
+  if (type === 'safe') return {official:.02, community:.06, env:.02};
+  const c = severity === 'high' ? .55 : severity === 'med' ? .36 : .16;
+  return {official:.05, community:c, env:.06};
+}
+async function submitReport(ev){
   ev.preventDefault();
-  const type = qs('#repType').value;
-  const place = qs('#repPlace').value || 'não informado';
+  const typeKey = qs('#repType').value;
+  const place = qs('#repPlace').value.trim() || 'não informado';
   const when = qs('#repWhen').value;
   const desc = qs('#repDesc').value.trim() || 'Relato enviado para ajudar outros viajantes no destino.';
   const anon = qs('#repAnon').checked;
@@ -1792,7 +1924,7 @@ function submitReport(ev){
     user: anon ? 'Viajante anônimo' : 'João Vitor',
     avatar: anon ? 'https://i.pravatar.cc/80?img=68' : 'https://i.pravatar.cc/80?img=12',
     when: 'agora',
-    body: `${desc} (${type.replaceAll('-', ' ')})`,
+    body: `${desc} (${typeKey.replaceAll('-', ' ')})`,
     likes: 0,
     comments: 0,
     area: place
@@ -1805,9 +1937,39 @@ function submitReport(ev){
     mine:true
   };
   renderCommunity();
-  toast(`Relato publicado · ${type} em ${place} (${when.toLowerCase()}).`);
   ev.target.reset();
-  showPage('community');
+
+  // Fecha o loop: o relato vira um sinal de comunidade no mapa.
+  const meta = REPORT_INCIDENT[typeKey] || REPORT_INCIDENT.outro;
+  const coord = (place !== 'não informado' && await geocodeOnce(place))
+    || (state.map ? [state.map.getCenter().lat, state.map.getCenter().lng] : state.fromCoord);
+  const incident = {
+    id: 'u' + Date.now(),
+    type: meta.type,
+    severity: meta.severity,
+    lat: coord[0],
+    lng: coord[1],
+    title: meta.title,
+    src: anon ? 'Você · relato anônimo' : 'Você · relato',
+    srcUrl: 'https://azimute.app/comunidade',
+    when: 'agora',
+    hour: state.time >= 0 ? state.time : new Date().getHours(),
+    desc,
+    mine: true,
+    breakdown: reportBreakdown(meta.type, meta.severity)
+  };
+  DATA.incidents.push(incident);
+
+  if (state.map){
+    if (!state.layers[meta.type]){ state.layers[meta.type] = true; syncLayerControls(); }
+    addIncidentMarkers();
+    if (state.layers.heat) rebuildHeat();
+    const added = state.incidentMarkers.find(m => m.data.id === incident.id);
+    state.map.setView([incident.lat, incident.lng], 16, {animate:true});
+    if (added) setTimeout(() => added.marker.openPopup(), 250);
+  }
+  showPage('map');
+  toast('Seu relato agora está no mapa, ajudando outros viajantes.');
 }
 
 /* ----- SOS ----- */
@@ -1881,7 +2043,10 @@ function showPartner(kind){
 }
 
 /* ----- Onboarding ----- */
-function openOnboarding(){ state.onbStep = 0; showOnbStep(0); qs('#onbModal').hidden = false; }
+function openOnboarding(){
+  state.onbStep = 0; showOnbStep(0); qs('#onbModal').hidden = false;
+  qsa('.onb-profile .chip').forEach(c => c.classList.toggle('active', c.dataset.onp === state.travelerType));
+}
 function showOnbStep(n){
   state.onbStep = n;
   qsa('.onb-step').forEach(s => s.hidden = parseInt(s.dataset.step,10) !== n);
@@ -1891,13 +2056,15 @@ function showOnbStep(n){
 function onbNext(){
   if (state.onbStep === 1){
     const sel = qs('.onb-profile .chip.active');
-    if (sel) state.profile = sel.dataset.onp;
+    if (sel){ state.travelerType = sel.dataset.onp; localStorage.setItem('az.type', state.travelerType); }
   }
   if (state.onbStep === 2){
     localStorage.setItem('az.onb','1');
     localStorage.setItem('az.area', qs('#onbArea').value || '');
     closeModal('onbModal');
-    toast('Perfil configurado. Boas vindas!');
+    const t = TRAVELER_META[state.travelerType];
+    toast(t ? `Perfil ${t.label} configurado. As rotas vão se adaptar a você.` : 'Perfil configurado. Boas vindas!');
+    if (state.routeGeo) calcSafeRoute(true);
     return;
   }
   showOnbStep(state.onbStep + 1);
@@ -1955,8 +2122,8 @@ window.addEventListener('DOMContentLoaded', () => {
 Object.assign(window, {
   enterApp, leaveApp, showPage, toggleSidebar, togglePanel,
   toggleTheme, toggleSenior, toggleLayer, toggleIsochrone,
-  openCommunityReport, draftStory, openRouteBuilder, applyJourney, toggleRouteAdvanced, applyAssistMode, applyNowMode,
-  centerOnUser, focusNearestSupportToUser, showAttentionAroundUser, calcSafeRoute, editRoute, toggleRouteDetails, toggleDirectRoute, compareAlt, startTrip, stopTrip,
+  openCommunityReport, draftStory, swapRoutePoints, applyJourney, toggleRouteAdvanced, applyAssistMode, applyNowMode,
+  centerOnUser, focusNearestSupportToUser, calcSafeRoute, editRoute, toggleRouteDetails, toggleDirectRoute, compareAlt, startTrip, stopTrip,
   focusAlert, focusAreaOnMap, setDestinationFromIncident, focusSupportNearIncident,
   switchTab, submitReport, sosAlert, closeModal, confirmSos,
   openChat, openChatFromCommunity, draftNewChat, sendChatMessage,
