@@ -815,60 +815,86 @@
       </section>
 
 
-      <!-- PROFILE -->
+      <!-- PROFILE / CONTA -->
       <section class="page" id="page-profile">
         <header class="page-head">
-          <h1>Seu perfil</h1>
-          <p>Personalize sua experiência e contribuição com a plataforma.</p>
+          <h1>Sua conta</h1>
+          <p>Cadastre-se, faça login e gerencie seu perfil e seus relatos de locais.</p>
         </header>
         <div class="page-stack">
-          <div class="profile-card">
-            <img src="https://i.pravatar.cc/160?img=12" alt="">
-            <div>
-              <h2>João Vitor</h2>
-              <p class="muted">Viajante desde mar/2025 · 14 países visitados</p>
-              <div class="profile-badges">
-                <span class="badge"><b>38</b> relatos de viagem</span>
-                <span class="badge"><b>4.8★</b> confiança</span>
-                <span class="badge"><b>Top 5%</b> exploradora</span>
+
+          <!-- AUTH (visível quando deslogado) -->
+          <div class="auth-gate" id="authGate" hidden>
+            <div class="auth-card">
+              <div class="auth-tabs">
+                <button class="auth-tab active" type="button" data-auth="login" onclick="azAuthTab('login')">Entrar</button>
+                <button class="auth-tab" type="button" data-auth="register" onclick="azAuthTab('register')">Criar conta</button>
+              </div>
+              <form class="az-form auth-form" id="loginForm" onsubmit="azLogin(event)">
+                <label>E-mail<input type="email" id="loginEmail" placeholder="voce@email.com" autocomplete="username" required></label>
+                <label>Senha<input type="password" id="loginPass" placeholder="••••••" autocomplete="current-password" required></label>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                <p class="auth-hint">Conta de demonstração: <b>demo@azimute.app</b> · senha <b>123456</b></p>
+              </form>
+              <form class="az-form auth-form" id="registerForm" hidden onsubmit="azRegister(event)">
+                <label>Nome<input id="regName" placeholder="Como quer ser chamado(a)" required></label>
+                <label>E-mail<input type="email" id="regEmail" placeholder="voce@email.com" required></label>
+                <label>Senha<input type="password" id="regPass" placeholder="mínimo 4 caracteres" minlength="4" required></label>
+                <button type="submit" class="btn btn-primary btn-block">Criar conta e entrar</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- CONTA (visível quando logado) -->
+          <div id="accountArea" hidden>
+            <div class="profile-card">
+              <img id="accAvatar" src="https://i.pravatar.cc/160?img=12" alt="">
+              <div>
+                <h2 id="accName">—</h2>
+                <p class="muted" id="accMeta">—</p>
+                <p class="muted" id="accBio"></p>
+                <div class="profile-badges">
+                  <span class="badge"><b id="accRelatoCount">0</b> relatos</span>
+                  <span class="badge" id="accTypeBadge">🧳 Turista</span>
+                </div>
+                <div class="account-actions">
+                  <button class="btn btn-primary sm" type="button" onclick="azOpenProfileEdit()">Editar perfil</button>
+                  <button class="btn btn-ghost sm" type="button" onclick="azLogout()">Sair</button>
+                  <button class="btn btn-ghost sm" type="button" onclick="azDeleteAccount()">Apagar conta</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="summary-strip">
-            <article class="summary-card">
-              <small>Contribuição</small>
-              <strong>38 relatos</strong>
-              <span>Histórico útil para outros viajantes.</span>
-            </article>
-            <article class="summary-card">
-              <small>Confiabilidade</small>
-              <strong>4.8 de 5</strong>
-              <span>Boa reputação na comunidade.</span>
-            </article>
-            <article class="summary-card">
-              <small>Perfil</small>
-              <strong>Explorador frequente</strong>
-              <span>Uso ativo em destinos urbanos e culturais.</span>
-            </article>
-          </div>
-          <div class="profile-grid">
-            <div class="prof-block">
-              <h3>Preferências</h3>
-              <label class="toggle"><span>Modo fácil (idoso)</span><input type="checkbox" id="prefSenior" onchange="toggleSenior()"></label>
-              <label class="toggle"><span>Tema escuro</span><input type="checkbox" id="prefDark" checked onchange="toggleTheme()"></label>
-              <label class="toggle"><span>Alertas por voz</span><input type="checkbox" id="prefVoice"></label>
-              <label class="toggle"><span>Compartilhar dados agregados com órgãos oficiais</span><input type="checkbox" checked></label>
-              <label class="toggle"><span>Instalar como app (PWA)</span><button class="btn btn-ghost sm" onclick="installPwa()" id="installBtn">Instalar</button></label>
-            </div>
-            <div class="prof-block">
-              <h3>Segurança em viagem</h3>
-              <p>Contatos de emergência, consulado e acionamento SOS no destino.</p>
-              <ul class="contact-list">
-                <li>Família (Maria) <span>+55 11 9****-1234</span></li>
-                <li>Amigo (João) <span>+55 11 9****-5678</span></li>
-                <li>Consulado do Brasil <span>+ definir no destino</span></li>
-              </ul>
-              <button class="btn btn-ghost sm">Adicionar contato</button>
+
+            <section class="content-panel">
+              <div class="section-head">
+                <div>
+                  <h3>Meus relatos</h3>
+                  <p>Crie, edite e exclua seus relatos de locais.</p>
+                </div>
+                <button class="btn btn-primary sm" type="button" onclick="azOpenRelatoNew()">Novo relato</button>
+              </div>
+              <div class="relato-list" id="myRelatosList"></div>
+            </section>
+
+            <div class="profile-grid">
+              <div class="prof-block">
+                <h3>Preferências</h3>
+                <label class="toggle"><span>Modo fácil (idoso)</span><input type="checkbox" id="prefSenior" onchange="toggleSenior()"></label>
+                <label class="toggle"><span>Tema escuro</span><input type="checkbox" id="prefDark" checked onchange="toggleTheme()"></label>
+                <label class="toggle"><span>Alertas por voz</span><input type="checkbox" id="prefVoice"></label>
+                <label class="toggle"><span>Compartilhar dados agregados com órgãos oficiais</span><input type="checkbox" checked></label>
+                <label class="toggle"><span>Instalar como app (PWA)</span><button class="btn btn-ghost sm" onclick="installPwa()" id="installBtn">Instalar</button></label>
+              </div>
+              <div class="prof-block">
+                <h3>Segurança em viagem</h3>
+                <p>Contatos de emergência, consulado e acionamento SOS no destino.</p>
+                <ul class="contact-list">
+                  <li>Família (Maria) <span>+55 11 9****-1234</span></li>
+                  <li>Amigo (João) <span>+55 11 9****-5678</span></li>
+                  <li>Consulado do Brasil <span>+ definir no destino</span></li>
+                </ul>
+                <button class="btn btn-ghost sm">Adicionar contato</button>
+              </div>
             </div>
           </div>
         </div>
@@ -979,8 +1005,52 @@
     </div>
   </div>
 
+  <!-- Editar perfil -->
+  <div id="profileModal" class="modal" hidden>
+    <div class="modal-body">
+      <h2>Editar perfil</h2>
+      <form class="az-form" onsubmit="azSaveProfile(event)">
+        <label>Nome<input id="pfName" required></label>
+        <label>Bio<textarea id="pfBio" rows="2" placeholder="Conte algo sobre suas viagens"></textarea></label>
+        <label>Tipo de viajante<select id="pfType"></select></label>
+        <span class="az-label">Avatar</span>
+        <div class="avatar-pick" id="pfAvatars" data-value=""></div>
+        <div class="row">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('profileModal')">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Novo / Editar relato -->
+  <div id="relatoModal" class="modal" hidden>
+    <div class="modal-body">
+      <h2 id="relatoModalTitle">Novo relato</h2>
+      <form class="az-form" onsubmit="azSaveRelato(event)">
+        <input type="hidden" id="relatoId">
+        <label>Tipo de relato<select id="relatoType"></select></label>
+        <label>Local<input id="relatoPlace" placeholder="Ex.: Jardim Botânico, Curitiba"></label>
+        <label>Descrição<textarea id="relatoDesc" rows="3" placeholder="Ex.: lugar seguro, preço abusivo, dica útil..."></textarea></label>
+        <label>Quando aconteceu?
+          <select id="relatoWhen">
+            <option>Agora há pouco</option>
+            <option>Hoje</option>
+            <option>Nesta semana</option>
+            <option>Nesta viagem</option>
+          </select>
+        </label>
+        <div class="row">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('relatoModal')">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar relato</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </div>
 
 <script src="script.js?v=5" defer></script>
+<script src="crud.js?v=1" defer></script>
 </body>
 </html>

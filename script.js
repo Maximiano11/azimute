@@ -1920,9 +1920,11 @@ async function submitReport(ev){
   const when = qs('#repWhen').value;
   const desc = qs('#repDesc').value.trim() || 'Relato enviado para ajudar outros viajantes no destino.';
   const anon = qs('#repAnon').checked;
+  const _sessionUser = window.AZAuth?.current();
+  window.AZRelatos?.add({ type: typeKey, place, desc, when, anon });
   DATA.posts.unshift({
-    user: anon ? 'Viajante anônimo' : 'João Vitor',
-    avatar: anon ? 'https://i.pravatar.cc/80?img=68' : 'https://i.pravatar.cc/80?img=12',
+    user: anon ? 'Viajante anônimo' : (_sessionUser?.name || 'João Vitor'),
+    avatar: anon ? 'https://i.pravatar.cc/80?img=68' : (_sessionUser?.avatar || 'https://i.pravatar.cc/80?img=12'),
     when: 'agora',
     body: `${desc} (${typeKey.replaceAll('-', ' ')})`,
     likes: 0,

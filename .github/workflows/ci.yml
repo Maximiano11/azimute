@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    name: Backend (migrate + seed + smoke)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: azimute
+          POSTGRES_PASSWORD: azimute
+          POSTGRES_DB: azimute
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U azimute -d azimute"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://azimute:azimute@localhost:5432/azimute
+      JWT_SECRET: ci-secret-azimute-suficientemente-longo
+      PORT: 4100
+      CORS_ORIGIN: http://localhost:5181
+      NODE_ENV: test
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - run: npm ci
+      - run: npm run migrate:ci
+      - run: npm run seed
+      - name: Start API and run smoke tests
+        run: |
+          node src/index.js &
+          API_PID=$!
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:4100/api/health > /dev/null; then echo "API up"; break; fi
+            sleep 1
+          done
+          npm test
+          kill $API_PID
+
+  frontend:
+    name: Frontend (build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: azimute-react
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: azimute-react/package-lock.json
+      - run: npm ci
+      - run: npm run build

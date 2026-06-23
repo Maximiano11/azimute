@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: azimute-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: azimute
+      POSTGRES_PASSWORD: azimute
+      POSTGRES_DB: azimute
+    ports:
+      - "5544:5432"
+    volumes:
+      - azimute-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U azimute -d azimute"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  adminer:
+    image: adminer:4
+    container_name: azimute-adminer
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8090:8080"
+
+  # API dockerizada. Só sobe no modo "full": docker compose --profile full up -d
+  # (no dia a dia roda-se a API localmente com `npm run dev`).
+  api:
+    build: ./server
+    container_name: azimute-api
+    restart: unless-stopped
+    profiles: ["full"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://azimute:azimute@db:5432/azimute
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-azimute-troque-em-producao}
+      PORT: 4100
+      CORS_ORIGIN: http://localhost:5181
+      NODE_ENV: production
+      COOKIE_SECURE: "false" # demo local servida em http
+    ports:
+      - "4100:4100"
+
+volumes:
+  azimute-pgdata:
