@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "installCommand": "npm ci --prefix azimute-react",
+  "installCommand": "npm ci --prefix azimute-react && npm ci --prefix server",
   "buildCommand": "npm run build --prefix azimute-react",
   "outputDirectory": "azimute-react/dist",
   "rewrites": [

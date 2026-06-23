@@ -93,16 +93,24 @@
   - Netlify: `netlify.toml` usa `azimute-react` como base, roda o build e publica
     `dist`.
 
-  Para login, perfil, relatos e CRUD funcionarem em produção, publique também a
-  API (`server/`) em um host Node com PostgreSQL e configure no painel do Vercel
-  e do Netlify:
+  A API (`server/`) também é exposta em `/api/*` nos deploys por funções
+  serverless:
+
+  - Vercel: `api/[...path].js`
+  - Netlify: `netlify/functions/api.mjs` + redirect de `/api/*`
+
+  Configure estas variáveis no painel do Vercel e do Netlify:
 
   ```bash
-  VITE_API_URL=https://sua-api-publica.example.com/api
+  DATABASE_URL=postgres://usuario:senha@host:5432/banco
+  JWT_SECRET=um-segredo-longo-e-forte
+  CORS_ORIGIN=https://seu-dominio-vercel.vercel.app,https://seu-dominio-netlify.netlify.app
+  NODE_ENV=production
+  COOKIE_SECURE=true
   ```
 
-  Na API em produção, configure `DATABASE_URL`, `JWT_SECRET`, `CORS_ORIGIN` com
-  os domínios do Vercel/Netlify, `NODE_ENV=production` e `COOKIE_SECURE=true`.
+  `VITE_API_URL` pode ficar vazio nesses deploys, porque o front-end usa `/api`
+  no mesmo domínio.
 
   ## Fluxo principal do protótipo
 

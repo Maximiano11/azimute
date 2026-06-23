@@ -1,7 +1,15 @@
 [build]
-  base = "azimute-react"
-  command = "npm ci && npm run build"
-  publish = "dist"
+  command = "npm ci --prefix azimute-react && npm ci --prefix server && npm run build --prefix azimute-react"
+  publish = "azimute-react/dist"
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
