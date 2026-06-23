@@ -53,21 +53,56 @@
 
   ## Como executar localmente
 
-  Como este projeto é um protótipo front-end estático, basta abrir com um servidor local simples.
+  A versão atual do projeto está em **React + Vite** dentro de `azimute-react/`,
+  com API em `server/` e PostgreSQL via Docker.
 
-  ### Opção 1: usando Python
+  ### Stack completa
 
-  No terminal, dentro da pasta do projeto, rode:
+  ```bash
+  # 1) Banco de dados
+  docker compose up -d
 
-  python -m http.server 8000
+  # 2) API
+  cd server
+  cp .env.example .env
+  npm install
+  npm run setup
+  npm run dev
 
-  Ou, se necessário:
+  # 3) Front-end, em outro terminal
+  cd azimute-react
+  npm install
+  npm run dev
+  ```
 
-  py -m http.server 8000
+  Acesse:
 
-  Depois acesse no navegador:
+  - Front-end: http://localhost:5181
+  - API: http://localhost:4100
+  - Adminer: http://localhost:8090
 
-  http://localhost:8000
+  Conta de demonstração: `demo@azimute.app` / `123456`.
+
+  ## Deploy
+
+  O repositório já inclui configuração para publicar o front-end no **Vercel** e
+  no **Netlify** a partir da raiz do repo:
+
+  - Vercel: `vercel.json` usa `azimute-react` como app Vite e publica
+    `azimute-react/dist`.
+  - Netlify: `netlify.toml` usa `azimute-react` como base, roda o build e publica
+    `dist`.
+
+  Para login, perfil, relatos e CRUD funcionarem em produção, publique também a
+  API (`server/`) em um host Node com PostgreSQL e configure no painel do Vercel
+  e do Netlify:
+
+  ```bash
+  VITE_API_URL=https://sua-api-publica.example.com/api
+  ```
+
+  Na API em produção, configure `DATABASE_URL`, `JWT_SECRET`, `CORS_ORIGIN` com
+  os domínios do Vercel/Netlify, `NODE_ENV=production` e `COOKIE_SECURE=true`.
 
   ## Fluxo principal do protótipo
 

@@ -1,0 +1,12 @@
+{
+  "framework": "vite",
+  "installCommand": "npm ci --prefix azimute-react",
+  "buildCommand": "npm run build --prefix azimute-react",
+  "outputDirectory": "azimute-react/dist",
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
